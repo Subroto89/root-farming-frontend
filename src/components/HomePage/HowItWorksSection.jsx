@@ -11,7 +11,6 @@ const HowItWorksSection = () => {
       </p>
 
       <HowItsWorksCards></HowItsWorksCards>
-      {/* <OurGrowingImpactSection></OurGrowingImpactSection> */}
     </div>
   );
 };

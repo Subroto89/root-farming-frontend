@@ -5,6 +5,7 @@ const OurGrowingImpactSection = () => {
   const stats = [
     {
       icon: <Users className="w-10 h-10 text-white" />,
+      image: "https://cdn-icons-png.flaticon.com/128/13558/13558477.png",
       value: "15,000+",
       label: "Happy Farmers",
       desc: "Farmers trust our solutions",
@@ -12,6 +13,7 @@ const OurGrowingImpactSection = () => {
     },
     {
       icon: <Users className="w-10 h-10 text-white" />,
+      image: "https://cdn-icons-png.flaticon.com/128/3137/3137941.png",
       value: "50,000+",
       label: "Satisfied Customers",
       desc: "Customers served nationwide",
@@ -19,6 +21,7 @@ const OurGrowingImpactSection = () => {
     },
     {
       icon: <Award className="w-10 h-10 text-white" />,
+      image: "https://cdn-icons-png.flaticon.com/128/17387/17387837.png",
       value: "200+",
       label: "Agricultural Specialists",
       desc: "Expert consultants available",
@@ -26,6 +29,7 @@ const OurGrowingImpactSection = () => {
     },
     {
       icon: <TrendingUp className="w-10 h-10 text-white" />,
+      image:"https://cdn-icons-png.flaticon.com/128/10112/10112502.png",
       value: "2,500,000+",
       label: "Products Sold",
       desc: "Quality products delivered",
@@ -47,12 +51,14 @@ const OurGrowingImpactSection = () => {
         {stats.map((stat, index) => (
           <div
             key={index}
-            className={`rounded-xl p-6 text-center bg-gradient-to-r ${stat.bg} shadow-lg`}
+            className={`rounded-xl p-6 text-center bg-gradient-to-r bg-white/10 shadow-lg`}
           >
-            <div className="flex justify-center mb-4">{stat.icon}</div>
+            <div className="flex mx-auto mb-4 p-4 rounded-full bg-white/10 w-fit">
+              <img src={stat.image} width={50} alt="" />
+            </div>
             <h3 className="text-2xl font-bold">{stat.value}</h3>
             <p className="font-semibold">{stat.label}</p>
-            <p className="text-sm text-gray-100">{stat.desc}</p>
+            <p className="text-sm text-gray-200">{stat.desc}</p>
           </div>
         ))}
       </div>
