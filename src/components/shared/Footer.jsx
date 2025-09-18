@@ -71,7 +71,9 @@ const Footer = () => {
         <div>
           <div className="flex items-center space-x-3 mb-6">
             <img src={logo} alt="Root Farming Logo" className="h-10 w-10" />
-            <span className="text-2xl font-bold">Root Farming</span>
+            <div className="h-10 flex items-center">
+              <h2 className="text-2xl font-bold">Root Farming</h2>
+            </div>
           </div>
 
           <p className="text-gray-300 mb-6 leading-relaxed">
