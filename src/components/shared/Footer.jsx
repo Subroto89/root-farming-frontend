@@ -25,6 +25,37 @@ const Footer = () => {
       setAgreed(false);
     }
   };
+  const productLinks = [
+    { name: 'Fresh Vegetables', path: '#' },
+    { name: 'Organic Fruits', path: '#' },
+    { name: 'Grains & Cereals', path: '#' },
+    { name: 'Herbs & Spices', path: '#' },
+    { name: 'Dairy Products', path: '#' },
+  ];
+
+  const serviceLinks = [
+    { name: 'Crop Management', path: '#' },
+    { name: 'Market Analytics', path: '#' },
+    { name: 'Weather Forecasting', path: '#' },
+    { name: 'Expert Consultation', path: '#' },
+    { name: 'Payment Processing', path: '#' },
+  ];
+
+  const companyLinks = [
+    { name: 'About Us', path: '#' },
+    { name: 'Our Story', path: '#' },
+    { name: 'Careers', path: '#' },
+    { name: 'Press & Media', path: '#' },
+    { name: 'Investor Relations', path: '#' },
+  ];
+
+  const resourceLinks = [
+    { name: 'Farming Guides', path: '#' },
+    { name: 'Best Practices', path: '#' },
+    { name: 'Success Stories', path: '#' },
+    { name: 'Research & Reports', path: '#' },
+    { name: 'Community Forum', path: '#' },
+  ];
 
   const socialLinks = [
     { icon: Facebook, path: '#', label: 'Facebook' },
@@ -129,6 +160,76 @@ const Footer = () => {
               })}
             </div>
           </div>
+        </div>
+      </div>
+
+      <div className="grid lg:grid-cols-4 gap-8 border-t border-gray-800 mt-12 pt-12">
+        {/* Products */}
+        <div>
+          <h3 className="text-lg font-bold mb-6">Products</h3>
+          <ul className="space-y-3">
+            {productLinks.map((link, index) => (
+              <li key={index}>
+                <Link
+                  path={link.path}
+                  className="text-gray-300 hover:text-green-400 transition-colors"
+                >
+                  {link.name}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Services */}
+        <div>
+          <h3 className="text-lg font-bold mb-6">Services</h3>
+          <ul className="space-y-3">
+            {serviceLinks.map((link, index) => (
+              <li key={index}>
+                <Link
+                  path={link.path}
+                  className="text-gray-300 hover:text-green-400 transition-colors"
+                >
+                  {link.name}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Company */}
+        <div>
+          <h3 className="text-lg font-bold mb-6">Company</h3>
+          <ul className="space-y-3">
+            {companyLinks.map((link, index) => (
+              <li key={index}>
+                <Link
+                  path={link.path}
+                  className="text-gray-300 hover:text-green-400 transition-colors"
+                >
+                  {link.name}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Resources */}
+        <div>
+          <h3 className="text-lg font-bold mb-6">Resources</h3>
+          <ul className="space-y-3">
+            {resourceLinks.map((link, index) => (
+              <li key={index}>
+                <Link
+                  path={link.path}
+                  className="text-gray-300 hover:text-green-400 transition-colors"
+                >
+                  {link.name}
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </div>
