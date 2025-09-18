@@ -42,3 +42,24 @@ const features = [
     icon: <Award className="w-10 h-10 text-green-500" />,
   },
 ];
+const WhyChooseRFSection = () => {
+  return (
+    <section className="py-16 bg-gray-100">
+      <div className="max-w-6xl mx-auto px-4 text-center">
+        <motion.h2
+          className="text-3xl md:text-4xl font-bold mb-4"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          Why Choose <span className="text-green-600">Root Farming?</span>
+        </motion.h2>
+        <motion.p
+          className="text-gray-600 mb-12 max-w-2xl mx-auto"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.2 }}
+        >
+          Discover the powerful features that make Root Farming the preferred choice for modern farmers worldwide.
+        </motion.p>
+
