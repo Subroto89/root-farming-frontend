@@ -9,6 +9,7 @@ import HowItWorksSection from '../../components/HomePage/HowItWorksSection';
 import OurGrowingImpactSection from '../../components/HomePage/OurGrowingImpactSection';
 import FarmerSuccessStoriesSection from '../../components/HomePage/FarmerSuccessStoriesSection';
 import OurTrustedPartnersSection from '../../components/HomePage/OurTrustedPartnersSection';
+import IndustryRecognition from 'c:/Users/Subroto\'s PC/Desktop/practice/practice/practice/src/App';
 
 
 const Home = () => {
@@ -24,6 +25,7 @@ const Home = () => {
             <OurGrowingImpactSection/>
             <FarmerSuccessStoriesSection/>
             <OurTrustedPartnersSection/>
+            <IndustryRecognition/>
         </>
     );
 };
