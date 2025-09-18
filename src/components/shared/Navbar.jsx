@@ -1,34 +1,78 @@
 // src/components/Navbar.jsx
 import React, { useState } from "react";
-import { Link } from "react-router";
+import { Link, NavLink } from "react-router";
 import { Leaf, Menu, X } from "lucide-react";
 
 export default function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState(false);
 
-  return (
-    <nav className="bg-white shadow-sm px-5 md:px-10 lg:px-16">
-      <div className="mx-auto px-4">
-        <div className="flex justify-between items-center py-3">
-          {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2">
-            <Leaf className="text-green-600" />
-            <span className="text-green-700 font-semibold text-lg">
-              Root Farming
-            </span>
-          </Link>
-
-          {/* Hamburger for mobile */}
-          <div className="md:hidden flex items-center">
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="text-black focus:outline-none"
+    const links = (
+        <>
+            <NavLink
+                to="/"
+                className={({ isActive }) =>
+                    `font-medium ${isActive ? "text-green-600" : "text-gray-700 hover:text-green-600"}`
+                }
             >
-              {isOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
-          </div>
-        </div>
-      </div>
-    </nav>
-  );
+                Home
+            </NavLink>
+            <NavLink
+                to="/about"
+                className={({ isActive }) =>
+                    `font-medium ${isActive ? "text-green-600" : "text-gray-700 hover:text-green-600"}`
+                }
+            >
+                About
+            </NavLink>
+            <NavLink
+                to="/contact"
+                className={({ isActive }) =>
+                    `font-medium ${isActive ? "text-green-600" : "text-gray-700 hover:text-green-600"}`
+                }
+            >
+                Contact
+            </NavLink>
+        </>
+    );
+
+    return (
+        <nav className="bg-white shadow-sm px-5 md:px-10 lg:px-16">
+            <div className="mx-auto px-4">
+                <div className="flex justify-between items-center py-3">
+                    {/* Logo */}
+                    <Link to="/" className="flex items-center space-x-2">
+                        <Leaf className="text-green-600" />
+                        <span className="text-green-700 font-semibold text-lg">
+                            Root Farming
+                        </span>
+                    </Link>
+
+                    {/* Desktop Nav links */}
+                    <div className="hidden md:flex space-x-6">{links}</div>
+
+                    {/* Hamburger for mobile */}
+                    <div className="md:hidden flex items-center">
+                        <button
+                            onClick={() => setIsOpen(!isOpen)}
+                            className="text-black focus:outline-none"
+                        >
+                            {isOpen ? <X size={24} /> : <Menu size={24} />}
+                        </button>
+                    </div>
+                </div>
+
+                {/* Mobile Menu NavLinks */}
+                {isOpen && (
+                    <div className="md:hidden mt-2 space-y-2 pb-3">
+                        <div
+                            className="flex flex-col space-y-2 w-20"
+                            onClick={() => setIsOpen(false)}
+                        >
+                            {links}
+                        </div>
+                    </div>
+                )}
+            </div>
+        </nav>
+    );
 }
