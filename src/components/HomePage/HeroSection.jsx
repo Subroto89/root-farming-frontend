@@ -1,5 +1,6 @@
 // src/components/HeroSection.jsx
 import React from "react";
+import { Link } from "react-router";
 
 const HeroSection = () => {
     return (
@@ -28,6 +29,28 @@ const HeroSection = () => {
                                 ▶ Watch Demo
                             </button>
                         </Link>
+                    </div>
+                    <div className="flex flex-wrap gap-8 pt-6">
+                        <div>
+                            <p className="text-2xl font-bold text-green-600">
+                                <CountUp end={10000} duration={2} separator="," />+
+                            </p>
+                            <p className="text-sm text-gray-600">Happy Farmers</p>
+                        </div>
+
+                        <div>
+                            <p className="text-2xl font-bold text-yellow-500">
+                                <CountUp end={500} duration={2} />+
+                            </p>
+                            <p className="text-sm text-gray-600">Products</p>
+                        </div>
+
+                        <div>
+                            <p className="text-2xl font-bold text-green-600">
+                                <CountUp end={99} duration={2} />%
+                            </p>
+                            <p className="text-sm text-gray-600">Success Rate</p>
+                        </div>
                     </div>
 
                 </div>
