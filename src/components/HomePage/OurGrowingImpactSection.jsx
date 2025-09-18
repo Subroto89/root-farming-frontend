@@ -63,6 +63,25 @@ const OurGrowingImpactSection = () => {
         ))}
       </div>
 
+
+       <div className="bg-white/10 rounded-2xl p-8 text-center">
+        <h3 className="text-2xl font-semibold mb-2">
+          Ready to Join Our Success Story?
+        </h3>
+        <p className="mb-6 text-gray-200">
+          Become part of the farming revolution that's changing lives and
+          communities
+        </p>
+        <div className="flex justify-center gap-4">
+            <button className="bg-green-600 hover:bg-green-700  transition duration-600 ease-in-out cursor-pointer text-white px-6 py-3 rounded-full shadow-md">
+                Start Your Journey
+              </button>
+          <button className="border border-white text-white  duration-600 ease-in-out cursor-pointer px-6 py-3 rounded-full font-medium hover:bg-white hover:text-green-600 transition">
+            Learn More
+          </button>
+        </div>
+      </div>
+
       
     </section>
   </div>;
