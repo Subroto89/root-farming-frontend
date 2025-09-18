@@ -10,7 +10,7 @@ import {
   Linkedin,
   ArrowRight,
 } from 'lucide-react';
-// import logo from '../../assets/Logo/Rootfarming.png';
+import logo from '../../assets/Logo/Rootfarming.png';
 import { Link } from 'react-router';
 
 const Footer = () => {
@@ -35,8 +35,39 @@ const Footer = () => {
 
   return (
     <div className="max-w-11/12 mx-auto  px-4 sm:px-6 lg:px-8 pt-12 pb-8">
-      {/* Newsletter Subscription */}
-      <div className="grid lg:grid-cols-2 gap-8 items-center">
+      <div className="grid lg:grid-cols-2 gap-8 items-start">
+        {/* Company Information */}
+        <div>
+          <div className="flex items-center space-x-3 mb-6">
+            <img src={logo} alt="" className="h-10 w-10" />
+            <span className="text-2xl font-bold">Root Farming</span>
+          </div>
+
+          <p className="text-gray-300 mb-6 leading-relaxed">
+            Empowering farmers and connecting communities through innovative
+            agricultural technology. From seed to market, we're your trusted
+            partner in sustainable farming.
+          </p>
+
+          <div className="space-y-3">
+            <div className="flex items-center space-x-3">
+              <MapPin className="h-5 w-5 text-green-400" />
+              <span className="text-gray-300">
+                1234 Farming Ave, Farm City, FC 12345
+              </span>
+            </div>
+            <div className="flex items-center space-x-3">
+              <Phone className="h-5 w-5 text-green-400" />
+              <span className="text-gray-300">+1 (555) 123-FARM</span>
+            </div>
+            <div className="flex items-center space-x-3">
+              <Mail className="h-5 w-5 text-green-400" />
+              <span className="text-gray-300">hello@rootfarming.com</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Newsletter + Social */}
         <div>
           <div>
             <h3 className="text-2xl font-bold mb-4">Stay Updated</h3>
@@ -69,12 +100,7 @@ const Footer = () => {
                   type="checkbox"
                   checked={agreed}
                   onChange={e => setAgreed(e.target.checked)}
-                  className="mt-1 w-4 h-4 
-               text-white 
-               accent-green-700 
-               border-gray-700 
-               rounded 
-               focus:ring-green-700"
+                  className="mt-1 w-4 h-4 accent-green-700 border-gray-700 rounded focus:ring-green-700"
                   required
                 />
                 <span className="text-sm text-gray-300">
@@ -93,7 +119,7 @@ const Footer = () => {
                 return (
                   <Link
                     key={index}
-                    path={social.path}
+                    to={social.path}
                     aria-label={social.label}
                     className="bg-gray-800 hover:bg-green-600 p-3 rounded-full transition-colors"
                   >
