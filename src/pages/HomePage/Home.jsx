@@ -9,23 +9,24 @@ import HowItWorksSection from '../../components/HomePage/HowItWorksSection';
 import OurGrowingImpactSection from '../../components/HomePage/OurGrowingImpactSection';
 import FarmerSuccessStoriesSection from '../../components/HomePage/FarmerSuccessStoriesSection';
 import OurTrustedPartnersSection from '../../components/HomePage/OurTrustedPartnersSection';
-
+import BecomePartner from '../../components/HomePage/BecomePartner';
 
 const Home = () => {
-    return (
-        <>
-            <MarqueeSection/>
-            <HeroSection/>
-            <WeatherForecastSection/>
-            <WhyChooseRFSection/>
-            <BestSellingProductsSection/>
-            <OurProductsSection/>
-            <HowItWorksSection/>    
-            <OurGrowingImpactSection/>
-            <FarmerSuccessStoriesSection/>
-            <OurTrustedPartnersSection/>
-        </>
-    );
+  return (
+    <>
+      <MarqueeSection />
+      <HeroSection />
+      <WeatherForecastSection />
+      <WhyChooseRFSection />
+      <BestSellingProductsSection />
+      <OurProductsSection />
+      <HowItWorksSection />
+      <OurGrowingImpactSection />
+      <FarmerSuccessStoriesSection />
+      <OurTrustedPartnersSection />
+      <BecomePartner />
+    </>
+  );
 };
 
 export default Home;
