@@ -4,7 +4,7 @@ import React from 'react';
 const Navbar = () => {
     return (
         <div>
-            this is navbar <Vegan />
+            This is navbar <Vegan />
         </div>
     );
 };
