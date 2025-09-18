@@ -1,11 +1,17 @@
-import React from 'react';
+import React from "react";
+import HowItsWorksCards from "./HowItsWorksCards";
 
 const HowItWorksSection = () => {
-    return (
-        <div>
-            How It Works Section
-        </div>
-    );
+  return (
+    <div className="text-center pt-9 bg-gradient-to-b from-green-50 to-white ">
+      <h2 className="text-3xl font-black my-3 ">How It Works</h2>
+      <p className="text-gray-500">
+        Simple steps to transform your farming experience with Root Farming
+      </p>
+
+      <HowItsWorksCards></HowItsWorksCards>
+    </div>
+  );
 };
 
 export default HowItWorksSection;
