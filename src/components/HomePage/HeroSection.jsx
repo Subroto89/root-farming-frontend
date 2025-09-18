@@ -1,5 +1,6 @@
 // src/components/HeroSection.jsx
 import React from "react";
+import CountUp from "react-countup";
 import { Link } from "react-router";
 
 const HeroSection = () => {
@@ -57,7 +58,11 @@ const HeroSection = () => {
 
                 {/* Right Image */}
                 <div className="flex justify-center md:justify-end">
-
+                    <img
+                        src="https://agrisa.org.za/wp-content/uploads/2024/07/pexels-tomfisk-4784072-1024x855.jpg"
+                        alt="Smart Farming"
+                        className="rounded-2xl shadow-xl w-[90%] md:w-[85%]"
+                    />
                 </div>
             </div>
         </section>
