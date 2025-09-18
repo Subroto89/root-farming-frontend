@@ -1,5 +1,6 @@
 import React from "react";
 import HowItsWorksCards from "./HowItsWorksCards";
+import OurGrowingImpactSection from "./OurGrowingImpactSection";
 
 const HowItWorksSection = () => {
   return (
@@ -10,6 +11,7 @@ const HowItWorksSection = () => {
       </p>
 
       <HowItsWorksCards></HowItsWorksCards>
+      {/* <OurGrowingImpactSection></OurGrowingImpactSection> */}
     </div>
   );
 };
