@@ -78,6 +78,25 @@ const BestSellingProductsSection = () => {
                   successful farmers
                </p>
             </div>
+
+            {/* Products Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+               {products.map((product) => (
+                  <div
+                     key={product.id}
+                     className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
+                  >
+                     {/* Product Image Container */}
+                     <div className="relative h-48 overflow-hidden">
+                        <img
+                           src={product.image}
+                           alt={product.title}
+                           className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                        />
+                     </div>
+                  </div>
+               ))}
+            </div>
          </div>
       </section>
    );
