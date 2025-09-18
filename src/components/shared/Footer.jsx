@@ -36,8 +36,8 @@ const Footer = () => {
   return (
     <div className="max-w-11/12 mx-auto  px-4 sm:px-6 lg:px-8 pt-12 pb-8">
       {/* Newsletter Subscription */}
-      <div>
-        <div className="grid lg:grid-cols-2 gap-8 items-center">
+      <div className="grid lg:grid-cols-2 gap-8 items-center">
+        <div>
           <div>
             <h3 className="text-2xl font-bold mb-4">Stay Updated</h3>
             <p className="text-gray-300 mb-6">
@@ -85,9 +85,9 @@ const Footer = () => {
             </form>
           </div>
 
-          <div className="text-center lg:text-right">
-            <h4 className="text-lg font-semibold mb-4">Follow Us</h4>
-            <div className="flex justify-center lg:justify-end space-x-4">
+          <div className="text-center lg:text-start py-4">
+            <h3 className="text-2xl font-bold mb-4">Follow Us</h3>
+            <div className="flex justify-center lg:justify-start space-x-4">
               {socialLinks.map((social, index) => {
                 const IconComponent = social.icon;
                 return (
