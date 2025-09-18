@@ -39,7 +39,7 @@ const BestSellingProductsSection = () => {
          description:
             "All-natural organic fertilizer that boosts plant growth and soil health.",
          price: 39.99,
-         image: "https://images.pexels.com/photos/416978/pexels-photo-416978.jpeg?auto=compress&cs=tinysrgb&w=800",
+         image: "https://i.ibb.co.com/yFNPbv0j/planting-trees-as-part-reforestation-process-23-2149409995.jpg",
          badge: {
             text: "Eco-Friendly",
             color: "bg-green-500",
