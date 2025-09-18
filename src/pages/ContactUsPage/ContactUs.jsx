@@ -57,6 +57,11 @@ const ContactUs = () => {
             </div>
           </div>
         </div>
+
+        {/* Right Side: Contact Form */}
+        <div>
+          <form className="space-y-5"></form>
+        </div>
       </div>
     </div>
   );
