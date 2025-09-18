@@ -1,9 +1,16 @@
-import { Mail, MapPin, Phone } from "lucide-react";
 import React from "react";
+import {
+  BookText,
+  Mail,
+  MapPin,
+  MessageSquare,
+  Phone,
+  User,
+} from "lucide-react";
 
 const ContactUs = () => {
   return (
-    <div className="bg-green-50/50 font-sans p-4 sm:p-8">
+    <div className="bg-gray-100 font-sans p-4 sm:p-8">
       <div className="max-w-6xl mx-auto bg-white p-6 sm:p-10 rounded-2xl shadow-lg">
         {/* Heading Section */}
         <div className="text-center mb-10">
@@ -56,11 +63,62 @@ const ContactUs = () => {
               </div>
             </div>
           </div>
-        </div>
+          {/* Right Side: Contact Form */}
+          <div>
+            <form className="space-y-5">
+              {/* Name Input */}
+              <div className="relative">
+                <User className="w-5 h-5 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" />
+                <input
+                  type="text"
+                  name="fullName"
+                  placeholder="Full Name"
+                  className="w-full p-3 pl-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition"
+                />
+              </div>
 
-        {/* Right Side: Contact Form */}
-        <div>
-          <form className="space-y-5"></form>
+              {/* Email Input */}
+              <div className="relative">
+                <Mail className="w-5 h-5 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" />
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="Email Address"
+                  className="w-full p-3 pl-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition"
+                />
+              </div>
+
+              {/* Subject Input */}
+              <div className="relative">
+                <BookText className="w-5 h-5 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" />
+                <input
+                  type="text"
+                  name="subject"
+                  placeholder="Subject"
+                  className="w-full p-3 pl-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition"
+                />
+              </div>
+
+              {/* Message Textarea */}
+              <div className="relative">
+                <MessageSquare className="w-5 h-5 text-gray-400 absolute left-3 top-4" />
+                <textarea
+                  name="message"
+                  placeholder="Write your message..."
+                  rows="5"
+                  className="w-full p-3 pl-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition resize-none"
+                ></textarea>
+              </div>
+
+              {/* Submit Button */}
+              <button
+                type="button"
+                className="w-full py-3 px-6 bg-green-700 text-white font-semibold rounded-lg hover:bg-green-800 transition-colors duration-300"
+              >
+                Send Message
+              </button>
+            </form>
+          </div>
         </div>
       </div>
     </div>
