@@ -9,7 +9,7 @@ const OurProductsSection = () => {
          description:
             "Automated watering system with smartphone control for efficient water management.",
          price: 89.99,
-         image: "https://images.pexels.com/photos/1301856/pexels-photo-1301856.jpeg?auto=compress&cs=tinysrgb&w=800",
+         image: "https://i.ibb.co.com/23DSv1cs/2149409969.jpg",
          badge: { text: "Popular", color: "bg-blue-500" },
          rating: 4.8,
          reviewCount: 890,
@@ -21,7 +21,7 @@ const OurProductsSection = () => {
          description:
             "Energy-efficient LED lights powered by solar panels, perfect for outdoor decoration.",
          price: 39.99,
-         image: "https://images.pexels.com/photos/1166413/pexels-photo-1166413.jpeg?auto=compress&cs=tinysrgb&w=800",
+         image: "https://i.ibb.co.com/QvjcbzyV/2149409996.jpg",
          badge: { text: "Best Seller", color: "bg-green-500" },
          rating: 4.6,
          reviewCount: 1200,
@@ -33,7 +33,7 @@ const OurProductsSection = () => {
          description:
             "Track soil moisture, light, and temperature to keep your plants healthy.",
          price: 49.5,
-         image: "https://images.pexels.com/photos/4750274/pexels-photo-4750274.jpeg?auto=compress&cs=tinysrgb&w=800",
+         image: "https://i.ibb.co.com/7xfzrt1h/planting-trees-as-part-reforestation-process-1.jpg",
          badge: { text: "Trending", color: "bg-purple-500" },
          rating: 4.7,
          reviewCount: 640,
@@ -45,7 +45,7 @@ const OurProductsSection = () => {
          description:
             "Water-saving drip irrigation system for gardens and flower beds.",
          price: 59.99,
-         image: "https://images.pexels.com/photos/2962305/pexels-photo-2962305.jpeg?auto=compress&cs=tinysrgb&w=800",
+         image: "https://i.ibb.co.com/XrqX4NCP/planting-trees-as-part-reforestation-process-23-2149409958.jpg",
          badge: { text: "Eco Friendly", color: "bg-teal-500" },
          rating: 4.5,
          reviewCount: 410,
@@ -57,7 +57,7 @@ const OurProductsSection = () => {
          description:
             "Durable and ergonomic tools for easy planting, weeding, and pruning.",
          price: 29.99,
-         image: "https://images.pexels.com/photos/1301858/pexels-photo-1301858.jpeg?auto=compress&cs=tinysrgb&w=800",
+         image: "https://i.ibb.co.com/ZRTz3pCF/planting-trees-as-part-reforestation-process-23-2149409970.jpg",
          badge: { text: "Hot", color: "bg-red-500" },
          rating: 4.4,
          reviewCount: 560,
@@ -69,7 +69,7 @@ const OurProductsSection = () => {
          description:
             "Smart fertilizer dispenser that syncs with your watering schedule.",
          price: 75.0,
-         image: "https://images.pexels.com/photos/1301855/pexels-photo-1301855.jpeg?auto=compress&cs=tinysrgb&w=800",
+         image: "https://i.ibb.co.com/JWkdkJKs/planting-trees-as-part-reforestation-process-23-2149409981.jpg",
          badge: { text: "New", color: "bg-yellow-500" },
          rating: 4.3,
          reviewCount: 300,
@@ -81,7 +81,7 @@ const OurProductsSection = () => {
          description:
             "Eco-friendly rainwater collection barrel with tap for reuse in gardening.",
          price: 120.99,
-         image: "https://images.pexels.com/photos/1301857/pexels-photo-1301857.jpeg?auto=compress&cs=tinysrgb&w=800",
+         image: "https://i.ibb.co.com/S2FDLmx/planting-trees-as-part-reforestation-process-23-2149409987.jpg",
          badge: { text: "Limited", color: "bg-orange-500" },
          rating: 4.9,
          reviewCount: 210,
@@ -93,7 +93,7 @@ const OurProductsSection = () => {
          description:
             "Grow fresh herbs indoors with a compact, self-watering hydroponic system.",
          price: 99.99,
-         image: "https://images.pexels.com/photos/1301859/pexels-photo-1301859.jpeg?auto=compress&cs=tinysrgb&w=800",
+         image: "https://i.ibb.co.com/yFNPbv0j/planting-trees-as-part-reforestation-process-23-2149409995.jpg",
          badge: { text: "Editor's Choice", color: "bg-indigo-500" },
          rating: 4.8,
          reviewCount: 780,
@@ -104,7 +104,7 @@ const OurProductsSection = () => {
    const handleAddToCart = (product) => {};
 
    return (
-      <section className="py-16 px-4 bg-gray-50">
+      <section className="py-16 px-4 bg-green-50">
          <div className="max-w-7xl mx-auto">
             {/* Header */}
             <div className="text-center mb-12">
@@ -158,6 +158,12 @@ const OurProductsSection = () => {
                      </div>
                   </div>
                ))}
+            </div>
+            {/* View All Products Button */}
+            <div className="text-center">
+               <button className="bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-full text-lg font-semibold transition-all duration-200 hover:shadow-lg transform hover:scale-105">
+                  Learn more product
+               </button>
             </div>
          </div>
       </section>
