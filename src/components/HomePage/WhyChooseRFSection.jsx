@@ -1,8 +1,6 @@
-
 import React from "react";
 import { motion } from "framer-motion";
 import { Smartphone, BarChart3, Shield, Zap, Users, Award } from "lucide-react";
-
 
 const features = [
     {
@@ -42,7 +40,9 @@ const features = [
         icon: <Award className="w-10 h-10 text-green-500" />,
     },
 ];
-export const WhyChooseRFSection = () => {
+
+// Correct export
+const WhyChooseRFSection = () => {
     return (
         <section className="py-16 bg-gray-100">
             <div className="max-w-6xl mx-auto px-4 text-center">
@@ -83,3 +83,5 @@ export const WhyChooseRFSection = () => {
     );
 };
 
+// Correct default export
+export default WhyChooseRFSection;
