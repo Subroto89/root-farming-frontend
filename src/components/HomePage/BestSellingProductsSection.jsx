@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { Heart, ShoppingCart, Star } from "lucide-react";
 
 const BestSellingProductsSection = () => {
+   const [favorites, setFavorites] = useState(new Set());
    const products = [
       {
-         id: 1,
+         _id: 1,
          title: "Organic Tomato Seeds",
          description:
             "High-yield organic tomato seeds perfect for home gardens and commercial farming.",
@@ -19,7 +20,7 @@ const BestSellingProductsSection = () => {
          isFavorite: false,
       },
       {
-         id: 2,
+         _id: 2,
          title: "Smart Irrigation Kit",
          description:
             "Automated watering system with smartphone control for efficient water management.",
@@ -34,7 +35,7 @@ const BestSellingProductsSection = () => {
          isFavorite: false,
       },
       {
-         id: 3,
+         _id: 3,
          title: "Premium Fertilizer",
          description:
             "All-natural organic fertilizer that boosts plant growth and soil health.",
@@ -49,7 +50,7 @@ const BestSellingProductsSection = () => {
          isFavorite: false,
       },
       {
-         id: 4,
+         _id: 4,
          title: "Garden Tool Set",
          description:
             "Complete set of professional-grade gardening tools for serious gardening.",
@@ -64,6 +65,18 @@ const BestSellingProductsSection = () => {
          isFavorite: false,
       },
    ];
+
+   const toggleFavorite = (productId) => {
+      setFavorites((prev) => {
+         const newFavorites = new Set(prev);
+         if (newFavorites.has(productId)) {
+            newFavorites.delete(productId);
+         } else {
+            newFavorites.add(productId);
+         }
+         return newFavorites;
+      });
+   };
 
    return (
       <section className="py-16 px-4 bg-gray-50">
@@ -83,7 +96,7 @@ const BestSellingProductsSection = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
                {products.map((product) => (
                   <div
-                     key={product.id}
+                     key={product._id}
                      className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
                   >
                      {/* Product Image Container */}
@@ -93,6 +106,27 @@ const BestSellingProductsSection = () => {
                            alt={product.title}
                            className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
                         />
+
+                        {/* Badge */}
+                        <div
+                           className={`absolute top-3 left-3 ${product.badge.color} text-white px-3 py-1 rounded-full text-sm font-semibold`}
+                        >
+                           {product.badge.text}
+                        </div>
+
+                        {/* Favorite Button */}
+                        <button
+                           onClick={() => toggleFavorite(product._id)}
+                           className="absolute top-3 right-3 p-2 bg-white rounded-full shadow-md hover:shadow-lg transition-all duration-200 hover:scale-110"
+                        >
+                           <Heart
+                              className={`w-5 h-5 transition-colors duration-200 ${
+                                 favorites.has(product._id)
+                                    ? "fill-red-500 text-red-500"
+                                    : "text-gray-400 hover:text-red-500"
+                              }`}
+                           />
+                        </button>
                      </div>
                   </div>
                ))}
