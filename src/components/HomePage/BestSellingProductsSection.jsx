@@ -152,7 +152,7 @@ const BestSellingProductsSection = () => {
 
                      {/* Product Content */}
                      <div className="p-6">
-                        <h3 className="text-xl font-bold text-gray-900 mb-2">
+                        <h3 className="text-xl font-bold text-gray-900 mb-2 line-clamp-1">
                            {product.title}
                         </h3>
                         <p className="text-gray-600 mb-4 text-sm leading-relaxed line-clamp-2">
