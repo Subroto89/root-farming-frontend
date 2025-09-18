@@ -50,6 +50,16 @@ export default function Navbar() {
                     {/* Desktop Nav links */}
                     <div className="hidden md:flex space-x-6">{links}</div>
 
+                    {/* Desktop Button */}
+                    <div className="hidden md:block">
+                        <Link
+                            to="/get-started"
+                            className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition"
+                        >
+                            Get Started
+                        </Link>
+                    </div>
+
                     {/* Hamburger for mobile */}
                     <div className="md:hidden flex items-center">
                         <button
@@ -61,15 +71,25 @@ export default function Navbar() {
                     </div>
                 </div>
 
-                {/* Mobile Menu NavLinks */}
+                {/* Mobile Menu */}
                 {isOpen && (
                     <div className="md:hidden mt-2 space-y-2 pb-3">
+                        {/* Mobile NavLinks */}
                         <div
                             className="flex flex-col space-y-2 w-20"
                             onClick={() => setIsOpen(false)}
                         >
                             {links}
                         </div>
+
+                        {/* Mobile Button */}
+                        <Link
+                            to="/get-started"
+                            onClick={() => setIsOpen(false)}
+                            className="block bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition w-28"
+                        >
+                            Get Started
+                        </Link>
                     </div>
                 )}
             </div>
