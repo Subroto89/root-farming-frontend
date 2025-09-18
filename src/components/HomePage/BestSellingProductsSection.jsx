@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { Heart, ShoppingCart, Star } from "lucide-react";
 
 const BestSellingProductsSection = () => {
-   const [favorites, setFavorites] = useState(new Set());
    const products = [
       {
          _id: 1,
@@ -66,16 +65,38 @@ const BestSellingProductsSection = () => {
       },
    ];
 
-   const toggleFavorite = (productId) => {
-      setFavorites((prev) => {
-         const newFavorites = new Set(prev);
-         if (newFavorites.has(productId)) {
-            newFavorites.delete(productId);
-         } else {
-            newFavorites.add(productId);
-         }
-         return newFavorites;
-      });
+   const toggleFavorite = (productId) => {};
+
+   const handleAddToCart = (product) => {};
+
+   const renderStars = (rating) => {
+      const stars = [];
+      const fullStars = Math.floor(rating);
+      const hasHalfStar = rating % 1 !== 0;
+
+      for (let i = 0; i < fullStars; i++) {
+         stars.push(
+            <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+         );
+      }
+
+      if (hasHalfStar) {
+         stars.push(
+            <Star
+               key="half"
+               className="w-4 h-4 fill-yellow-400 text-yellow-400 opacity-50"
+            />
+         );
+      }
+
+      const emptyStars = 5 - Math.ceil(rating);
+      for (let i = 0; i < emptyStars; i++) {
+         stars.push(
+            <Star key={`empty-${i}`} className="w-4 h-4 text-gray-300" />
+         );
+      }
+
+      return stars;
    };
 
    return (
@@ -121,12 +142,49 @@ const BestSellingProductsSection = () => {
                         >
                            <Heart
                               className={`w-5 h-5 transition-colors duration-200 ${
-                                 favorites.has(product._id)
+                                 product.isFavorite === true
                                     ? "fill-red-500 text-red-500"
                                     : "text-gray-400 hover:text-red-500"
                               }`}
                            />
                         </button>
+                     </div>
+
+                     {/* Product Content */}
+                     <div className="p-6">
+                        <h3 className="text-xl font-bold text-gray-900 mb-2">
+                           {product.title}
+                        </h3>
+                        <p className="text-gray-600 mb-4 text-sm leading-relaxed line-clamp-2">
+                           {product.description}
+                        </p>
+
+                        {/* Rating */}
+                        <div className="flex items-center mb-4">
+                           <div className="flex items-center mr-2">
+                              {renderStars(product.rating)}
+                           </div>
+                           <span className="text-sm font-medium text-gray-700">
+                              {product.rating}
+                           </span>
+                           <span className="text-sm text-gray-500 ml-1">
+                              ({product.reviewCount} reviews)
+                           </span>
+                        </div>
+
+                        {/* Price and Add to Cart */}
+                        <div className="flex items-center justify-between">
+                           <span className="text-2xl font-bold text-green-600">
+                              ${product.price}
+                           </span>
+                           <button
+                              onClick={() => handleAddToCart(product)}
+                              className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-all duration-200 hover:shadow-md transform hover:scale-105"
+                           >
+                              <ShoppingCart className="w-4 h-4" />
+                              Add to Cart
+                           </button>
+                        </div>
                      </div>
                   </div>
                ))}
