@@ -189,6 +189,13 @@ const BestSellingProductsSection = () => {
                   </div>
                ))}
             </div>
+
+            {/* View All Products Button */}
+            <div className="text-center">
+               <button className="bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-full text-lg font-semibold transition-all duration-200 hover:shadow-lg transform hover:scale-105">
+                  View All Products
+               </button>
+            </div>
          </div>
       </section>
    );
