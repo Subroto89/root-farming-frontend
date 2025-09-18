@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import {
-  Sprout,
   Mail,
   Phone,
   MapPin,
@@ -25,6 +24,7 @@ const Footer = () => {
       setAgreed(false);
     }
   };
+
   const productLinks = [
     { name: 'Fresh Vegetables', path: '#' },
     { name: 'Organic Fruits', path: '#' },
@@ -65,12 +65,12 @@ const Footer = () => {
   ];
 
   return (
-    <div className="max-w-11/12 mx-auto  px-4 sm:px-6 lg:px-8 pt-12 pb-8">
+    <div className="max-w-11/12 mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-8">
       <div className="grid lg:grid-cols-2 gap-8 items-start">
         {/* Company Information */}
         <div>
           <div className="flex items-center space-x-3 mb-6">
-            <img src={logo} alt="" className="h-10 w-10" />
+            <img src={logo} alt="Root Farming Logo" className="h-10 w-10" />
             <span className="text-2xl font-bold">Root Farming</span>
           </div>
 
@@ -143,7 +143,7 @@ const Footer = () => {
           </div>
 
           <div className="text-center lg:text-start py-4">
-            <h3 className="text-2xl font-bold mb-4">Follow Us</h3>
+            <h3 className="text-2xl font-bold my-4">Follow Us</h3>
             <div className="flex justify-center lg:justify-start space-x-4">
               {socialLinks.map((social, index) => {
                 const IconComponent = social.icon;
@@ -163,15 +163,15 @@ const Footer = () => {
         </div>
       </div>
 
+      {/* Quick Links */}
       <div className="grid lg:grid-cols-4 gap-8 border-t border-gray-800 mt-12 pt-12">
-        {/* Products */}
         <div>
           <h3 className="text-lg font-bold mb-6">Products</h3>
           <ul className="space-y-3">
             {productLinks.map((link, index) => (
               <li key={index}>
                 <Link
-                  path={link.path}
+                  to={link.path}
                   className="text-gray-300 hover:text-green-400 transition-colors"
                 >
                   {link.name}
@@ -181,14 +181,13 @@ const Footer = () => {
           </ul>
         </div>
 
-        {/* Services */}
         <div>
           <h3 className="text-lg font-bold mb-6">Services</h3>
           <ul className="space-y-3">
             {serviceLinks.map((link, index) => (
               <li key={index}>
                 <Link
-                  path={link.path}
+                  to={link.path}
                   className="text-gray-300 hover:text-green-400 transition-colors"
                 >
                   {link.name}
@@ -198,14 +197,13 @@ const Footer = () => {
           </ul>
         </div>
 
-        {/* Company */}
         <div>
           <h3 className="text-lg font-bold mb-6">Company</h3>
           <ul className="space-y-3">
             {companyLinks.map((link, index) => (
               <li key={index}>
                 <Link
-                  path={link.path}
+                  to={link.path}
                   className="text-gray-300 hover:text-green-400 transition-colors"
                 >
                   {link.name}
@@ -215,14 +213,13 @@ const Footer = () => {
           </ul>
         </div>
 
-        {/* Resources */}
         <div>
           <h3 className="text-lg font-bold mb-6">Resources</h3>
           <ul className="space-y-3">
             {resourceLinks.map((link, index) => (
               <li key={index}>
                 <Link
-                  path={link.path}
+                  to={link.path}
                   className="text-gray-300 hover:text-green-400 transition-colors"
                 >
                   {link.name}
@@ -233,7 +230,7 @@ const Footer = () => {
         </div>
       </div>
 
-      {/* Copyright & Legal */}
+      {/* Copyright */}
       <div className="border-t border-gray-800 mt-12 pt-8">
         <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
           <p className="text-gray-400 text-sm">
@@ -242,23 +239,23 @@ const Footer = () => {
 
           <div className="flex flex-wrap justify-center md:justify-end space-x-6 text-sm">
             <Link
-              path="#"
+              to="#"
               className="text-gray-400 hover:text-green-400 transition-colors"
             >
               Privacy Policy
             </Link>
-            <a
-              path="#"
+            <Link
+              to="#"
               className="text-gray-400 hover:text-green-400 transition-colors"
             >
               Terms of Service
-            </a>
-            <a
-              path="#"
+            </Link>
+            <Link
+              to="#"
               className="text-gray-400 hover:text-green-400 transition-colors"
             >
               Cookie Policy
-            </a>
+            </Link>
           </div>
         </div>
       </div>
