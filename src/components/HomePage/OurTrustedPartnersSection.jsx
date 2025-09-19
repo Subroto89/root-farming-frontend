@@ -4,33 +4,33 @@ const OurTrustedPartnersSection = () => {
     const partners = [
   {
     name: 'John Deere',
-    logo: 'https://brandfetch.com/deere.com/logo/download',
+    logo: 'https://i.ibb.co.com/PGxjcYcJ/john-Deere.png',
     description: 'Global leader in agricultural machinery and technology.',
   },
   {
     name: 'Bayer Crop Science',
-    logo: 'https://brandfetch.com/bayer.com/logo.png',
+    logo: 'https://i.ibb.co.com/F4y0PYB4/bayer.png',
     description:
       'Innovative solutions in seeds, crop protection, and sustainability.',
   },
   {
     name: 'Corteva Agriscience',
-    logo: 'https://upload.wikimedia.org/wikipedia/commons/6/6a/Corteva_Agriscience_logo.svg',
+    logo: 'https://i.ibb.co.com/6c5VxqvR/corteva.png',
     description: 'Advancing agriculture with biotechnology and research.',
   },
   {
     name: 'Syngenta',
-    logo: 'https://upload.wikimedia.org/wikipedia/commons/6/6c/Syngenta_logo.svg',
+    logo: 'https://i.ibb.co.com/hJ0M7MvK/Syngenta-Logo.jpg',
     description: 'Global company dedicated to sustainable agriculture.',
   },
   {
     name: 'AGCO',
-    logo: 'https://upload.wikimedia.org/wikipedia/commons/0/0b/AGCO_logo.svg',
+    logo: 'https://i.ibb.co.com/zWPNzyL5/Agco.png',
     description: 'Manufacturer of innovative agricultural solutions worldwide.',
   },
   {
     name: 'CNH Industrial',
-    logo: 'https://upload.wikimedia.org/wikipedia/commons/0/0f/CNH_Industrial_logo.svg',
+    logo: 'https://i.ibb.co.com/CKBb28V9/cnhi.png',
     description: 'Agricultural and construction equipment leader.',
   },
 ];
