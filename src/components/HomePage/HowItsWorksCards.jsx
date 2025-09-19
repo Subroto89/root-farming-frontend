@@ -63,7 +63,7 @@ const HowItWorkCards = () => {
         </div>
 
         {/* Why Choose Us */}
-        <div className="bg-white rounded-2xl shadow-lg p-8 flex flex-col md:flex-row md:items-center text-start  gap-8">
+        <div className="bg-white rounded-2xl shadow-[0_0_20px_rgba(0,0,0,0.1)] p-8 flex flex-col md:flex-row md:items-center text-start  gap-8">
           <div className="flex-1">
             <h2 className="text-2xl text-start font-bold mb-4">
               Why Choose Our Process?
@@ -84,7 +84,7 @@ const HowItWorkCards = () => {
               className="rounded-xl shadow-md"
             />
             <div className="mt-8 text-center">
-              <button className="bg-green-600 hover:bg-green-700 cursor-pointer text-white px-6 py-3 rounded-full shadow-md">
+              <button className="bg-green-600 text-white hover:scale-108 font-semibold  transition duration-400 ease-in-out transform active:scale-95 active:rotate-2 cursor-pointer px-6 py-3 rounded-full shadow-md">
                 Get Started Today
               </button>
             </div>

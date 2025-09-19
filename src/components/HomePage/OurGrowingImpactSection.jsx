@@ -1,6 +1,7 @@
 import React from "react";
 import { Users, Award, TrendingUp } from "lucide-react";
 
+
 const OurGrowingImpactSection = () => {
   const stats = [
     {
@@ -75,10 +76,10 @@ const OurGrowingImpactSection = () => {
             communities
           </p>
           <div className="flex justify-center gap-4">
-            <button className="bg-green-600 hover:bg-green-700  transition duration-500 ease-in-out transform active:scale-95 active:rotate-2 cursor-pointer text-white px-6 py-3 rounded-full shadow-md">
+            <button className="bg-white text-green-600 hover:scale-108 font-semibold  transition duration-400 ease-in-out transform active:scale-95 active:rotate-2 cursor-pointer px-6 py-3 rounded-full shadow-md">
               Start Your Journey
             </button>
-            <button className="border border-white text-white  duration-500 ease-in-out cursor-pointer transform active:scale-95 active:rotate-2 px-6 py-3 rounded-full font-medium hover:bg-white hover:text-green-600 transition">
+            <button className="border border-white hover:scale-108 text-white  duration-400 ease-in-out cursor-pointer transform active:scale-95 active:rotate-2 px-6 py-3 rounded-full font-medium hover:bg-white hover:text-green-600 transition">
               Learn More
             </button>
           </div>
