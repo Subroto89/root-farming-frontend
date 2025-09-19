@@ -49,14 +49,14 @@ const OurGrowingImpactSection = () => {
         </div>
 
         {/* Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
+        <div className="grid grid-cols-1  sm:grid-cols-2 md:grid-cols-4 gap-6 mb-12">
           {stats.map((stat, index) => (
             <div
               key={index}
               className={`rounded-xl transition-transform duration-300 
-           hover:scale-105 hover:shadow-xl cursor-pointer p-6 text-center bg-gradient-to-r bg-white/10 shadow-lg`}
+           hover:scale-105 hover:shadow-xl cursor-pointer p-6 text-center bg-gradient-to-r bg-white/10 border border-white/20`}
             >
-              <div className="flex mx-auto mb-4 p-4 rounded-full bg-white/10 w-fit">
+              <div className="flex mx-auto mb-4 p-4 rounded-full bg-white/10 w-fit border-1 border-white/20">
                 <img src={stat.image} width={50} alt="" />
               </div>
               <h3 className="text-2xl font-bold">{stat.value}</h3>
@@ -66,7 +66,7 @@ const OurGrowingImpactSection = () => {
           ))}
         </div>
 
-        <div className="bg-white/10 rounded-2xl p-8 text-center">
+        <div className="bg-white/10 rounded-2xl p-8 text-center border border-white/20">
           <h3 className="text-2xl font-semibold mb-2">
             Ready to Join Our Success Story?
           </h3>
