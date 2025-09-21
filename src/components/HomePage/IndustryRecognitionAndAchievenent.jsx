@@ -5,7 +5,7 @@ const IndustryRecognitionAndAchievenent = () => {
    const achievements = [
       {
          icon: Award,
-         title: "Best AgriTech 2023",
+         title: "Best AgriTech 2024",
          description:
             "Recognized as the leading AgriTech innovation of the year.",
       },
