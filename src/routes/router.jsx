@@ -10,6 +10,10 @@ import FieldRegistration from '../pages/DashboardPage/FarmerDashboardPage/FieldR
 import ActivityLoggingScheduling from '../pages/DashboardPage/FarmerDashboardPage/ActivityLoggingScheduling';
 import ChatwithAgriSpecialist from '../pages/DashboardPage/FarmerDashboardPage/ChatwithAgriSpecialist';
 import ResourceManagement from '../pages/DashboardPage/FarmerDashboardPage/ResourceManagement';
+import AuthLayout from '../layouts/AuthLayout';
+import LogInPage from '../pages/AuthenticationPage/LogInPage';
+import RegisterPage from '../pages/AuthenticationPage/RegisterPage';
+import WeatherForecast from '../pages/DashboardPage/FarmerDashboardPage/WeatherForecast';
 
 const router = createBrowserRouter([
   // -------------------------------------------
@@ -69,13 +73,30 @@ const router = createBrowserRouter([
         path: 'resource-management',
         Component: ResourceManagement,
       },
+      {
+        path: 'weather-forecast',
+        Component: WeatherForecast,
+      },
     ],
   },
 
   // -------------------------------------------
   // Auth Layout
   // -------------------------------------------
-  {},
+  {
+    path: '/',
+    Component: AuthLayout,
+    children: [
+      {
+        path: 'login',
+        Component: LogInPage,
+      },
+      {
+        path: 'register',
+        Component: RegisterPage,
+      },
+    ],
+  },
   // -------------------------------------------
 ]);
 
