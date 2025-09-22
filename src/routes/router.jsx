@@ -10,6 +10,7 @@ import FieldRegistration from '../pages/DashboardPage/FarmerDashboardPage/FieldR
 import ActivityLoggingScheduling from '../pages/DashboardPage/FarmerDashboardPage/ActivityLoggingScheduling';
 import ResourceManagement from '../pages/DashboardPage/FarmerDashboardPage/ResourceManagement';
 import ChatwithAgriSpecialist from '../pages/DashboardPage/FarmerDashboardPage/ChatwithAgriSpecialist';
+import WeatherForecast from '../pages/DashboardPage/FarmerDashboardPage/WeatherForecast';
 
 const router = createBrowserRouter([
   // -------------------------------------------
@@ -73,6 +74,10 @@ const router = createBrowserRouter([
       {
         path: '/chat-specialist',
         Component: ChatwithAgriSpecialist,
+      },
+      {
+        path: '/weather-forecast',
+        Component: WeatherForecast,
       },
     ],
   },
