@@ -1,5 +1,13 @@
 import React, { useState } from 'react';
-import { Cloud, Sun, CloudRain, Droplets, Wind, Eye } from 'lucide-react';
+import {
+  Cloud,
+  Sun,
+  CloudRain,
+  Droplets,
+  Wind,
+  Eye,
+  CloudSun,
+} from 'lucide-react';
 
 const WeatherForecast = () => {
   const [weeklyForecast] = useState([
@@ -64,20 +72,30 @@ const WeatherForecast = () => {
   const getWeatherIcon = condition => {
     switch (condition) {
       case 'sunny':
-        return <Sun className="h-10 w-10 text-yellow-500 drop-shadow-lg" />;
+        return (
+          <Sun className="h-16 w-16 text-yellow-500 drop-shadow-md animate-pulse" />
+        );
       case 'cloudy':
-        return <Cloud className="h-10 w-10 text-gray-500 drop-shadow-lg" />;
+        return (
+          <Cloud className="h-16 w-16 text-gray-500 drop-shadow-md animate-pulse" />
+        );
       case 'rainy':
-        return <CloudRain className="h-10 w-10 text-blue-500 drop-shadow-lg" />;
+        return (
+          <CloudRain className="h-16 w-16 text-blue-500 drop-shadow-md animate-pulse" />
+        );
       default:
-        return <Sun className="h-10 w-10 text-yellow-500" />;
+        return <Sun className="h-16 w-16 text-yellow-500" />;
     }
   };
 
   return (
-    <div className=" max-w-11/12 mx-auto py-20 bg-gradient-to-br from-blue-50 via-green-50 to-teal-100 rounded-xl mt-16">
-      <div className="text-center mb-16 px-6">
-        <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4">
+    <div className="w-11/12 mx-auto py-20 px-6 bg-gradient-to-br from-sky-50 via-teal-50 to-emerald-100 rounded-3xl mt-16 shadow-2xl border border-gray-200/40">
+      {/* Heading */}
+      <div className="text-center mb-14">
+        <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4 drop-shadow-sm flex items-center justify-center gap-3">
+          <div className="w-14 h-14 rounded-full bg-white/20 flex items-center justify-center backdrop-blur-[5px] border border-white/30 shadow-[0_4px_30px_rgba(0,0,0,0.1)]">
+            <CloudSun className="w-8 h-8 text-yellow-500" />
+          </div>
           Weather Forecast
         </h2>
         <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
@@ -86,83 +104,93 @@ const WeatherForecast = () => {
         </p>
       </div>
 
-      <div className="flex flex-col lg:flex-row gap-8 px-6 lg:px-12">
-        {/* Current weather */}
-        <div className="flex-1">
-          <div
-            className="bg-gradient-to-br from-blue-400/90 to-green-400/90 backdrop-blur-lg 
-                          rounded-3xl shadow-2xl p-8 text-center transform hover:scale-105 
-                          transition-all duration-300"
-          >
-            <div className="w-24 h-24 mx-auto mb-6 rounded-full bg-white/40 flex items-center justify-center shadow-lg">
+      <div className="flex flex-col lg:flex-row gap-8">
+        {/* Current Weather Card */}
+        <div className="flex-1 flex justify-center">
+          <div className="relative w-full max-w-sm bg-white/20 backdrop-blur-[5px] border border-white/30 rounded-3xl shadow-[0_4px_30px_rgba(0,0,0,0.1)] p-10 text-center hover:scale-105 transition-transform duration-500 overflow-hidden group">
+            {/* Glow effect */}
+            <div className="absolute inset-0 bg-gradient-to-tr from-sky-200/20 via-white/5 to-teal-200/10 rounded-3xl blur-2xl opacity-60 group-hover:opacity-90 transition"></div>
+
+            {/* Weather Icon */}
+            <div className="w-32 h-32 mx-auto mb-6 rounded-full bg-white/40 flex items-center justify-center shadow-inner border border-gray-300/30 backdrop-blur-md">
               {getWeatherIcon(weeklyForecast[0].condition)}
             </div>
-            <p className="font-bold text-2xl text-gray-900">
+
+            <p className="font-semibold text-2xl text-gray-800">
               {weeklyForecast[0].day}
             </p>
-            <p className="text-5xl font-extrabold text-gray-800 my-3">
+            <p className="text-6xl font-extrabold text-gray-900 my-4 drop-shadow-lg">
               {weeklyForecast[0].temp}°C
             </p>
-            <p className="text-base capitalize text-gray-700 tracking-wide mb-6">
+            <p className="text-md capitalize text-gray-700 tracking-wide mb-8 italic">
               {weeklyForecast[0].condition}
             </p>
 
-            <div className="grid grid-cols-3 gap-4 text-center">
+            <div className="grid grid-cols-3 gap-6 text-center">
               <div>
-                <Droplets className="h-6 w-6 text-blue-600 mx-auto mb-1" />
-                <p className="text-sm text-gray-800">
+                <Droplets className="h-6 w-6 text-blue-500 mx-auto mb-1" />
+                <p className="text-sm font-medium text-gray-800">
                   {weeklyForecast[0].humidity}%
                 </p>
+                <span className="text-xs text-gray-500">Humidity</span>
               </div>
               <div>
-                <Wind className="h-6 w-6 text-green-600 mx-auto mb-1" />
-                <p className="text-sm text-gray-800">
+                <Wind className="h-6 w-6 text-green-500 mx-auto mb-1" />
+                <p className="text-sm font-medium text-gray-800">
                   {weeklyForecast[0].windSpeed} km/h
                 </p>
+                <span className="text-xs text-gray-500">Wind</span>
               </div>
               <div>
-                <Eye className="h-6 w-6 text-purple-600 mx-auto mb-1" />
-                <p className="text-sm text-gray-800">
+                <Eye className="h-6 w-6 text-indigo-500 mx-auto mb-1" />
+                <p className="text-sm font-medium text-gray-800">
                   {weeklyForecast[0].visibility} km
                 </p>
+                <span className="text-xs text-gray-500">Visibility</span>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Next 6 days */}
-        <div className="flex-[2] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        {/* Next 6 Days Cards */}
+        <div className="flex-[2] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
           {weeklyForecast.slice(1).map((day, i) => (
             <div
               key={i}
-              className="bg-white/80 backdrop-blur-md border border-white/40 rounded-2xl 
-                         shadow-md p-6 text-center hover:shadow-xl hover:-translate-y-1 
-                         transition-all duration-300"
+              className="relative bg-white/20 backdrop-blur-[5px] border border-white/30 rounded-2xl shadow-[0_4px_30px_rgba(0,0,0,0.1)] p-6 text-center hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 overflow-hidden group"
             >
-              <div
-                className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-tr from-blue-100 to-green-100 
-                              flex items-center justify-center shadow"
-              >
-                {getWeatherIcon(day.condition)}
-              </div>
-              <p className="font-semibold text-gray-900">{day.day}</p>
-              <p className="text-2xl font-bold text-gray-800">{day.temp}°C</p>
-              <p className="text-sm capitalize text-gray-500 mb-4">
-                {day.condition}
-              </p>
+              {/* Glow on hover */}
+              <div className="absolute inset-0 bg-gradient-to-tr from-sky-100/20 via-white/10 to-emerald-100/20 rounded-2xl blur-2xl opacity-50 group-hover:opacity-80 transition"></div>
 
-              <div className="grid grid-cols-3 gap-2 text-center">
-                <div>
-                  <Droplets className="h-5 w-5 text-blue-500 mx-auto mb-1" />
-                  <p className="text-xs text-gray-600">{day.humidity}%</p>
+              <div className="relative">
+                <div className="w-24 h-24 mx-auto mb-4 rounded-full bg-white/40 flex items-center justify-center shadow-inner border border-gray-300/30 backdrop-blur-md">
+                  {getWeatherIcon(day.condition)}
                 </div>
-                <div>
-                  <Wind className="h-5 w-5 text-green-500 mx-auto mb-1" />
-                  <p className="text-xs text-gray-600">{day.windSpeed} km/h</p>
-                </div>
-                <div>
-                  <Eye className="h-5 w-5 text-purple-500 mx-auto mb-1" />
-                  <p className="text-xs text-gray-600">{day.visibility} km</p>
+                <p className="font-semibold text-lg text-gray-800">{day.day}</p>
+                <p className="text-3xl font-bold text-gray-900">{day.temp}°C</p>
+                <p className="text-sm capitalize text-gray-600 mb-4">
+                  {day.condition}
+                </p>
+
+                <div className="grid grid-cols-3 gap-3 text-center">
+                  <div>
+                    <Droplets className="h-5 w-5 text-blue-500 mx-auto mb-1" />
+                    <p className="text-xs font-medium text-gray-700">
+                      {day.humidity}%
+                    </p>
+                  </div>
+                  <div>
+                    <Wind className="h-5 w-5 text-green-500 mx-auto mb-1" />
+                    <p className="text-xs font-medium text-gray-700">
+                      {day.windSpeed} km/h
+                    </p>
+                  </div>
+                  <div>
+                    <Eye className="h-5 w-5 text-indigo-500 mx-auto mb-1" />
+                    <p className="text-xs font-medium text-gray-700">
+                      {day.visibility} km
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
