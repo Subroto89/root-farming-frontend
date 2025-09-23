@@ -75,7 +75,7 @@ const FieldRegistration = () => {
   };
 
   return (
-    <div className="bg-gray-100 flex items-center justify-center min-h-screen p-4 sm:p-6 lg:p-8">
+    <div className="bg-gray-100 flex items-center justify-center min-h-screen  p-4 sm:p-6 lg:p-8">
       <div className="w-full p-8 space-y-8 bg-white rounded-2xl shadow-lg">
         <div className="text-center">
           <h1 className="text-3xl font-bold text-gray-800">
