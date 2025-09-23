@@ -12,7 +12,7 @@ import OurTrustedPartnersSection from "../../components/HomePage/OurTrustedPartn
 import BecomePartner from "../../components/HomePage/BecomePartner";
 import IndustryRecognitionAndAchievenent from "../../components/HomePage/IndustryRecognitionAndAchievenent";
 import TransformYourFarmSection from "../../components/HomePage/TransformYourFarmSection";
-import ActivityLogging from "../../components/ActivityLogging";
+
 
 const Home = () => {
    return (
