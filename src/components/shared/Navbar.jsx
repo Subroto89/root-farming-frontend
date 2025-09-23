@@ -1,4 +1,4 @@
-// src/components/Navbar.jsx
+
 import React, { useState } from "react";
 import { Link, NavLink } from "react-router";
 import { Leaf, Menu, X } from "lucide-react";
@@ -38,7 +38,7 @@ export default function Navbar() {
     return (
         <nav className="bg-white shadow-sm px-5 md:px-10 lg:px-16">
             <div className="mx-auto px-4">
-                <div className="flex justify-between items-center py-3">
+                <div className="flex justify-between items-center py-4">
                     {/* Logo */}
                     <Link to="/" className="flex items-center space-x-2">
                         <Leaf className="text-green-600" />
