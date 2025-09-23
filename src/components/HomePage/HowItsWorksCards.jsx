@@ -41,7 +41,7 @@ const HowItWorkCards = () => {
   ];
   return (
     <div>
-      <section className="py-12 px-6 max-w-7xl mx-auto">
+      <section className="py-12 px-6 max-w-11/12 mx-auto">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 text-center mb-16">
           {steps.map((step) => (
             <div key={step.id} className="flex flex-col items-center gap-4">

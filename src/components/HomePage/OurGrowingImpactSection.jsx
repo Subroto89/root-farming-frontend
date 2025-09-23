@@ -39,7 +39,7 @@ const OurGrowingImpactSection = () => {
   ];
   return (
     <div className="bg-gradient-to-br from-green-600 to-blue-600">
-      <section className="max-w-7xl mx-auto py-16 px-6 text-white">
+      <section className="max-w-11/12 mx-auto py-16 px-6 text-white">
         {/* Header */}
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold">Our Growing Impact</h2>
