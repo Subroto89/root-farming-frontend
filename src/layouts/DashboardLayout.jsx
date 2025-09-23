@@ -1,6 +1,7 @@
-import React from 'react';
-import { Outlet } from 'react-router';
-import Sidebar from '../pages/DashboardPage/Sidebar/Sidebar';
+import React from "react";
+import { Outlet } from "react-router";
+import Sidebar from "../pages/DashboardPage/Sidebar/Sidebar";
+import { Toaster } from "react-hot-toast";
 
 const DashboardLayout = () => {
   return (
