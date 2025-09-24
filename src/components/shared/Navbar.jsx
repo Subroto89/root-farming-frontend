@@ -70,10 +70,10 @@ export default function Navbar() {
                {/* Desktop Button */}
                <div className="hidden md:block">
                   <Link
-                     to="/get-started"
+                     to="/auth"
                      className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition"
                   >
-                     Get Started
+                    Login
                   </Link>
                </div>
 
@@ -101,11 +101,11 @@ export default function Navbar() {
 
                   {/* Mobile Button */}
                   <Link
-                     to="/get-started"
+                     to="/auth"
                      onClick={() => setIsOpen(false)}
                      className="block bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition w-28"
                   >
-                     Get Started
+                     Login
                   </Link>
                </div>
             )}
