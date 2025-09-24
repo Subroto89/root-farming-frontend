@@ -15,7 +15,7 @@ import {
 } from 'lucide-react';
 
 const Sidebar = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  // const [isOpen, setIsOpen] = useState(false);
 
   const menuItems = [
     { path: '/', icon: Home, label: 'Overview' },

@@ -10,7 +10,7 @@ const DashboardLayout = () => {
         <Sidebar />
       </div>
 
-      <div className="flex-1 overflow-y-auto">
+      <div className="flex-1 overflow-y-auto bg-gray-100">
         <div className="p-5 ">
           {/* Outlet for dynamic contents */}
           <Outlet />
