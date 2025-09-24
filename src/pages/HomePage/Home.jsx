@@ -13,6 +13,7 @@ import BecomePartner from "../../components/HomePage/BecomePartner";
 import IndustryRecognitionAndAchievenent from "../../components/HomePage/IndustryRecognitionAndAchievenent";
 import TransformYourFarmSection from "../../components/HomePage/TransformYourFarmSection";
 
+
 const Home = () => {
    return (
       <>
