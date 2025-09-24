@@ -11,9 +11,11 @@ import ActivityLoggingScheduling from "../pages/DashboardPage/FarmerDashboardPag
 import ChatwithAgriSpecialist from "../pages/DashboardPage/FarmerDashboardPage/ChatwithAgriSpecialist";
 import ResourceManagement from "../pages/DashboardPage/FarmerDashboardPage/ResourceManagement";
 import WeatherForecast from "../pages/DashboardPage/FarmerDashboardPage/WeatherForecast";
+import DailyToDoList from "../pages/DashboardPage/FarmerDashboardPage/DailyToDoList"
 import AuthLayout from "../layouts/AuthLayout";
 import Register from "../components/AuthComponents/Register";
 import Login from "../components/AuthComponents/Login";
+
 
 const router = createBrowserRouter([
   // -------------------------------------------
@@ -76,6 +78,10 @@ const router = createBrowserRouter([
       {
         path: "weather-forecast",
         Component: WeatherForecast,
+      },
+      {
+        path: "daily-todo-list",
+        Component: DailyToDoList,
       },
     ],
   },
