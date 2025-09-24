@@ -81,10 +81,10 @@ const WeatherForecast = () => {
   };
 
   return (
-    <div className="py-20 px-6 bg-gradient-to-br from-sky-50 via-teal-50 to-emerald-100 rounded-3xl mt-16 shadow-2xl border border-gray-200/40">
+    <div className="py-20 px-6 rounded-3xl mt-16">
       {/* Heading */}
       <div className="text-center mb-14">
-        <h2 className="text-4xl md:text-5xl font-vibes  font-bold text-green-700 mb-4 drop-shadow-sm">
+        <h2 className="text-4xl md:text-5xl font-bold mb-4 drop-shadow-sm">
           Weather Forecast
         </h2>
         <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
