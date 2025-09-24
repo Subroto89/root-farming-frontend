@@ -14,6 +14,7 @@ import AuthLayout from "../layouts/AuthLayout";
 import LogInPage from "../pages/AuthenticationPage/LogInPage";
 import RegisterPage from "../pages/AuthenticationPage/RegisterPage";
 import WeatherForecast from "../pages/DashboardPage/FarmerDashboardPage/WeatherForecast";
+import DailyToDoList from "../pages/DashboardPage/FarmerDashboardPage/DailyToDoList";
 
 const router = createBrowserRouter([
   // -------------------------------------------
@@ -76,6 +77,10 @@ const router = createBrowserRouter([
       {
         path: "weather-forecast",
         Component: WeatherForecast,
+      },
+      {
+        path: "daily-todo-list",
+        Component: DailyToDoList,
       },
     ],
   },
