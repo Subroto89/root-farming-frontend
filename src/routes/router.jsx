@@ -10,10 +10,10 @@ import FieldRegistration from "../pages/DashboardPage/FarmerDashboardPage/FieldR
 import ActivityLoggingScheduling from "../pages/DashboardPage/FarmerDashboardPage/ActivityLoggingScheduling";
 import ChatwithAgriSpecialist from "../pages/DashboardPage/FarmerDashboardPage/ChatwithAgriSpecialist";
 import ResourceManagement from "../pages/DashboardPage/FarmerDashboardPage/ResourceManagement";
-import AuthLayout from "../layouts/AuthLayout";
-import LogInPage from "../pages/AuthenticationPage/LogInPage";
-import RegisterPage from "../pages/AuthenticationPage/RegisterPage";
 import WeatherForecast from "../pages/DashboardPage/FarmerDashboardPage/WeatherForecast";
+import AuthLayout from "../layouts/AuthLayout";
+import Register from "../components/AuthComponents/Register";
+import Login from "../components/AuthComponents/Login";
 
 const router = createBrowserRouter([
   // -------------------------------------------
@@ -29,11 +29,11 @@ const router = createBrowserRouter([
         Component: Home,
       },
       {
-        path: "/about",
+        path: "about",
         Component: AboutUs,
       },
       {
-        path: "/contact",
+        path: "contact",
         Component: ContactUs,
       },
     ],
@@ -84,16 +84,16 @@ const router = createBrowserRouter([
   // Auth Layout
   // -------------------------------------------
   {
-    path: "/",
+    path: "/auth",
     Component: AuthLayout,
     children: [
       {
-        path: "login",
-        Component: LogInPage,
+        index: true,
+        Component: Login,
       },
       {
         path: "register",
-        Component: RegisterPage,
+        Component: Register,
       },
     ],
   },
