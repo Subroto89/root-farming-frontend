@@ -1,0 +1,24 @@
+import { Outlet } from "react-router";
+import Sidebar from "../pages/DashboardPage/Sidebar/Sidebar";
+import { Toaster } from "react-hot-toast";
+
+const DashboardLayout = () => {
+  return (
+    <div className="relative flex  min-h-screen ">
+      {/* Left Side: Sidebar Component */}
+      <div className="bg-white h-screen sticky top-0">
+        <Sidebar />
+      </div>
+
+      <div className="flex-1 overflow-y-auto">
+        <div className="p-5 ">
+          {/* Outlet for dynamic contents */}
+          <Outlet />
+        </div>
+      </div>
+      <Toaster position="top-right" reverseOrder={false} />
+    </div>
+  );
+};
+
+export default DashboardLayout;

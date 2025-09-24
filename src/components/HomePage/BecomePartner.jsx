@@ -19,6 +19,12 @@ const partnerBenefits = [
     description:
       'Collaborate on developing cutting-edge agricultural solutions',
   },
+  {
+    icon: Mail, // new icon
+    title: 'Sustainable Practices',
+    description:
+      'Join initiatives to implement eco-friendly and sustainable farming solutions',
+  },
 ];
 
 const BecomePartner = () => {
@@ -36,7 +42,7 @@ const BecomePartner = () => {
         </p>
       </div>
 
-      <div className="relative grid md:grid-cols-3 gap-8 mb-14">
+      <div className="relative grid md:grid-cols-3 lg:grid-cols-4 gap-8 mb-14">
         {partnerBenefits.map((benefit, index) => {
           const IconComponent = benefit.icon;
           return (
