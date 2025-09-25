@@ -74,7 +74,6 @@ const AddResourceModal = ({
          createdAt: resource?.createdAt || new Date().toISOString(),
          updatedAt: new Date().toISOString(),
       };
-      onSubmit(formattedData);
    };
 
    const getCategoryIcon = (category) => {
