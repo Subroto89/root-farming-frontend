@@ -1,9 +1,9 @@
-import React from 'react';
-
+import React from "react";
 import { Outlet } from 'react-router';
 import { Toaster } from 'react-hot-toast';
 import Sidebar from '../pages/DashboardPage/Sidebar/Sidebar';
 import Topbar from '../pages/DashboardPage/Sidebar/Topbar';
+
 
 
 const DashboardLayout = () => {
@@ -14,7 +14,7 @@ const DashboardLayout = () => {
 
       {/* Right Side: Dashboard Dynamic Content */}
       <div className="flex-1 md:ml-64">
-        <Topbar />
+        {/* <Topbar /> */}
         <div className="p-5">
           {/* Outlet for dynamic contents */}
           <Outlet />
@@ -22,7 +22,7 @@ const DashboardLayout = () => {
             position="top-right"
             toastOptions={{
               className:
-                'bg-white dark:bg-gray-800 text-gray-900 dark:text-white',
+                "bg-white dark:bg-gray-800 text-gray-900 dark:text-white",
             }}
           />
         </div>

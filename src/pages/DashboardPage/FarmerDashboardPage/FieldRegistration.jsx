@@ -4,16 +4,21 @@ import { useMutation } from "@tanstack/react-query";
 import MapPicker from "../../../components/Leaflet/MapPicker";
 import toast from "react-hot-toast";
 import useAxiosSecure from "../../../hooks/UseAxiosSecure";
+import { auth } from "../../../firebase/firebase.confiq";
+import useAuth from "../../../hooks/useAuth";
 
 const registerNewField = async (fieldData) => {
   const axiosSecure = useAxiosSecure();
 
-  const response = await axiosSecure.post("/fieldsRegister", fieldData);
+  const response = await axiosSecure.post("/fields", fieldData);
 
   return response.data;
 };
 
 const FieldRegistration = () => {
+  const { user } = useAuth();
+  console.log(user);
+
   const {
     register,
     handleSubmit,
@@ -70,8 +75,15 @@ const FieldRegistration = () => {
 
   // This function will work with the data when the form is submitted.
   const onSubmit = (data) => {
-    mutation.mutate(data);
-    console.log("Form Data Submitted:", data);
+    const customizedData = {
+      ...data,
+      createdAt: new Date().toISOString(),
+      email: user?.email || "guest",
+    };
+    // Send customized data to mutation
+    mutation.mutate(customizedData);
+
+    console.log("Customized Data Sent:", customizedData);
   };
 
   return (
