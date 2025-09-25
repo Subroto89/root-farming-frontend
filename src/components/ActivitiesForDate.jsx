@@ -1,4 +1,3 @@
-// ActivitiesForDate.jsx
 import { Bell, CheckCircle, Clock, AlertCircle } from 'lucide-react';
 import { format, isSameDay } from 'date-fns';
 

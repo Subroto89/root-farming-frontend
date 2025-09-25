@@ -1,4 +1,3 @@
-// ActivityLogging.jsx
 import React, { useState } from 'react';
 import { Calendar, Plus } from 'lucide-react';
 import { format, startOfMonth, endOfMonth, eachDayOfInterval, isToday, isSameDay } from 'date-fns';
