@@ -10,10 +10,12 @@ import FieldRegistration from "../pages/DashboardPage/FarmerDashboardPage/FieldR
 import ActivityLoggingScheduling from "../pages/DashboardPage/FarmerDashboardPage/ActivityLoggingScheduling";
 import ChatwithAgriSpecialist from "../pages/DashboardPage/FarmerDashboardPage/ChatwithAgriSpecialist";
 import WeatherForecast from "../pages/DashboardPage/FarmerDashboardPage/WeatherForecast";
+import DailyToDoList from "../pages/DashboardPage/FarmerDashboardPage/DailyToDoList"
 import AuthLayout from "../layouts/AuthLayout";
 import Register from "../components/AuthComponents/Register";
 import Login from "../components/AuthComponents/Login";
 import ResourceManagement from "../pages/DashboardPage/FarmerDashboardPage/ResourceManagement/ResourceManagement";
+
 
 const router = createBrowserRouter([
    // -------------------------------------------
@@ -57,28 +59,34 @@ const router = createBrowserRouter([
 
          // Farmardashboardpage
 
-         {
-            path: "field-registration",
-            Component: FieldRegistration,
-         },
-         {
-            path: "activity-scheduling",
-            Component: ActivityLoggingScheduling,
-         },
-         {
-            path: "chat-specialist",
-            Component: ChatwithAgriSpecialist,
-         },
-         {
-            path: "resource-management",
-            Component: ResourceManagement,
-         },
-         {
-            path: "weather-forecast",
-            Component: WeatherForecast,
-         },
-      ],
-   },
+
+      {
+        path: "field-registration",
+        Component: FieldRegistration,
+      },
+      {
+        path: "activity-scheduling",
+        Component: ActivityLoggingScheduling,
+      },
+      {
+        path: "chat-specialist",
+        Component: ChatwithAgriSpecialist,
+      },
+      {
+        path: "resource-management",
+        Component: ResourceManagement,
+      },
+      {
+        path: "weather-forecast",
+        Component: WeatherForecast,
+      },
+      {
+        path: "daily-todo-list",
+        Component: DailyToDoList,
+      },
+    ],
+  },
+
 
    // -------------------------------------------
    // Auth Layout
