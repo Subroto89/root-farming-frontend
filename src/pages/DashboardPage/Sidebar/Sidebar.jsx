@@ -1,3 +1,4 @@
+final sidebar
 // ===== Imports =====
 import React, { useState } from 'react';
 import { NavLink, Link } from 'react-router';
@@ -46,7 +47,7 @@ const Sidebar = () => {
           </h2>
         </Link>
         <button onClick={toggleMenu} className="text-gray-700">
-          {isOpen ? <X size={24} /> : <Menu size={24} />}
+         {isOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
 
@@ -73,13 +74,13 @@ const Sidebar = () => {
               </h2>
             )}
           </Link>
-          <button
+          {/* <button
             onClick={toggleCollapse}
             className="hidden md:block text-gray-600 hover:text-green-600"
             title={collapsed ? 'Expand' : 'Collapse'}
           >
             {collapsed ? <Menu size={20} /> : <X size={20} />}
-          </button>
+          </button> */}
         </div>
 
         {/* Menu */}
