@@ -1,69 +1,20 @@
 import React from "react";
 import { Heart, ShoppingCart, Star } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+import LoadingSpinner from "../shared/LoadingSpinner";
 
 const BestSellingProductsSection = () => {
-   const products = [
-      {
-         _id: 1,
-         title: "Organic Tomato Seeds",
-         description:
-            "High-yield organic tomato seeds perfect for home gardens and commercial farming.",
-         price: 24.99,
-         image: "https://images.pexels.com/photos/533280/pexels-photo-533280.jpeg?auto=compress&cs=tinysrgb&w=800",
-         badge: {
-            text: "Best Seller",
-            color: "bg-red-500",
-         },
-         rating: 4.9,
-         reviewCount: 1250,
-         isFavorite: false,
+   // get medical teams data
+   const { data: products, isLoading } = useQuery({
+      queryKey: ["best-selling-products"],
+      queryFn: async () => {
+         const res = await axios.get(
+            `${import.meta.env.VITE_Server_API_KEY}/products/best-selling`
+         );
+         return res.data;
       },
-      {
-         _id: 2,
-         title: "Smart Irrigation Kit",
-         description:
-            "Automated watering system with smartphone control for efficient water management.",
-         price: 89.99,
-         image: "https://images.pexels.com/photos/1301856/pexels-photo-1301856.jpeg?auto=compress&cs=tinysrgb&w=800",
-         badge: {
-            text: "Popular",
-            color: "bg-blue-500",
-         },
-         rating: 4.8,
-         reviewCount: 890,
-         isFavorite: false,
-      },
-      {
-         _id: 3,
-         title: "Premium Fertilizer",
-         description:
-            "All-natural organic fertilizer that boosts plant growth and soil health.",
-         price: 39.99,
-         image: "https://i.ibb.co.com/yFNPbv0j/planting-trees-as-part-reforestation-process-23-2149409995.jpg",
-         badge: {
-            text: "Eco-Friendly",
-            color: "bg-green-500",
-         },
-         rating: 4.7,
-         reviewCount: 2100,
-         isFavorite: false,
-      },
-      {
-         _id: 4,
-         title: "Garden Tool Set",
-         description:
-            "Complete set of professional-grade gardening tools for serious gardening.",
-         price: 159.99,
-         image: "https://images.pexels.com/photos/1301856/pexels-photo-1301856.jpeg?auto=compress&cs=tinysrgb&w=800",
-         badge: {
-            text: "Professional",
-            color: "bg-purple-500",
-         },
-         rating: 4.9,
-         reviewCount: 450,
-         isFavorite: false,
-      },
-   ];
+   });
 
    const toggleFavorite = (productId) => {};
 
@@ -98,6 +49,10 @@ const BestSellingProductsSection = () => {
 
       return stars;
    };
+
+   if (!products || isLoading) {
+      return <LoadingSpinner />;
+   }
 
    return (
       <section className="py-16 px-4 bg-gray-50">

@@ -23,6 +23,18 @@ import logImage from '../../../assets/Logo/Rootfarming.png';
 
 
 const Sidebar = () => {
+  // const [isOpen, setIsOpen] = useState(false);
+
+  const menuItems = [
+    { path: '/', icon: Home, label: 'Overview' },
+    { path: 'field-registration', icon: MapPin, label: 'Field Registration' },
+    { path: 'activity-scheduling', icon: Calendar, label: 'Activity Logging' },
+    { path: 'resource-management', icon: Package, label: 'Resource Management' },
+    { path: 'weather-forecast', icon: Cloud, label: 'Weather Forecast' },
+    { path: 'chat-specialist', icon: MessageCircle, label: 'Chat Specialist' },
+    { path: 'my-profile', icon: User, label: 'My Profile' },
+  ];
+
   // ===== Hooks =====
   // const { signOutUser } = useAuth(); // from your first code
 
@@ -45,6 +57,7 @@ const Sidebar = () => {
 
   // Profile link path
   const profileLink = '/dashboard/my-profile';
+
 
   return (
     <>
