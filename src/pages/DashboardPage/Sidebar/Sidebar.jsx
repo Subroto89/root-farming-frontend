@@ -11,23 +11,25 @@ import {
   AiOutlineHistory,
   AiOutlineUserSwitch,
   AiOutlinePieChart,
-} from "react-icons/ai";
-import { MdAddToPhotos, MdManageAccounts } from "react-icons/md";
-import { FaMoneyBillWave } from "react-icons/fa";
+
+} from 'react-icons/ai';
+import { MdAddToPhotos, MdManageAccounts } from 'react-icons/md';
+import { FaMoneyBillWave } from 'react-icons/fa';
 import {
   Settings,
   LogOut,
   Menu,
   X,
-  User,
-  MessageCircle,
-  Cloud,
-  Package,
-  Calendar,
+
   MapPin,
+  Calendar,
   Home,
-} from "lucide-react";
-import logImage from "../../../assets/Logo/Rootfarming.png";
+  Package,
+  Cloud,
+  MessageCircle,
+  User,
+} from 'lucide-react';
+import logImage from '../../../assets/Logo/Rootfarming.png';
 
 // Hooks
 // import useUserRole from '@/hooks/useUserRole';
@@ -37,17 +39,19 @@ const Sidebar = () => {
   // const [isOpen, setIsOpen] = useState(false);
 
   const menuItems = [
-    { path: "/", icon: Home, label: "Overview" },
-    { path: "field-registration", icon: MapPin, label: "Field Registration" },
-    { path: "activity-scheduling", icon: Calendar, label: "Activity Logging" },
+
+    { path: '/', icon: Home, label: 'Overview' },
+    { path: 'field-registration', icon: MapPin, label: 'Field Registration' },
+    { path: 'activity-scheduling', icon: Calendar, label: 'Activity Logging' },
     {
-      path: "resource-management",
+      path: 'resource-management',
       icon: Package,
-      label: "Resource Management",
+      label: 'Resource Management',
     },
-    { path: "weather-forecast", icon: Cloud, label: "Weather Forecast" },
-    { path: "chat-specialist", icon: MessageCircle, label: "Chat Specialist" },
-    { path: "my-profile", icon: User, label: "My Profile" },
+    { path: 'weather-forecast', icon: Cloud, label: 'Weather Forecast' },
+    { path: 'chat-specialist', icon: MessageCircle, label: 'Chat Specialist' },
+    { path: 'my-profile', icon: User, label: 'My Profile' },
+
   ];
 
   // ===== Hooks =====
@@ -71,7 +75,7 @@ const Sidebar = () => {
     "hover:bg-gray-200 rounded px-3 py-2 flex items-center gap-3 text-gray-700";
 
   // Profile link path
-  const profileLink = "/dashboard/my-profile";
+  const profileLink = '/dashboard/my-profile';
 
   return (
     <>
@@ -85,20 +89,11 @@ const Sidebar = () => {
             className="h-12 w-12 rounded-full shadow"
           />
           <h2>
-            Root <span className="text-yellow-300">Farming</span>
-          </h2>
-        </Link>
-        <button onClick={toggleMenu} className="text-gray-700">
-          {isOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
-      </div>
-
-      {/* ===== Sidebar Container ===== */}
-      <div
-        className={`fixed inset-y-0 left-0 z-40 ${
-          collapsed ? "w-20" : "w-64"
+            Root 
+          collapsed ? 'w-20' : 'w-64'
         } bg-white  transform ${
-          isOpen ? "translate-x-0" : "-translate-x-full"
+          isOpen ? 'translate-x-0' : '-translate-x-full'
+
         } md:translate-x-0 transition-all duration-300 ease-in-out flex flex-col justify-between`}
       >
         {/* ===== Logo & Collapse Button ===== */}
@@ -179,7 +174,9 @@ const Sidebar = () => {
             onClick={() => setIsOpen(false)}
             title={collapsed ? "Daily To-Do List" : undefined}
           >
-            <AiOutlineFileSearch size={20} />{" "}
+
+            <AiOutlineFileSearch size={20} />{' '}
+
             {/* You can change the icon if you like */}
             {!collapsed && <span>Daily To-Do List</span>}
           </NavLink>
@@ -209,7 +206,9 @@ const Sidebar = () => {
             onClick={() => setIsOpen(false)}
             title={collapsed ? "Weather Forecast" : undefined}
           >
-            <AiOutlineFileSearch size={20} />{" "}
+
+            <AiOutlineFileSearch size={20} />{' '}
+
             {/* You can choose another icon if needed */}
             {!collapsed && <span>Weather Forecast</span>}
           </NavLink>
@@ -225,7 +224,7 @@ const Sidebar = () => {
           </NavLink>
 
           <NavLink
-            to="/dashboard/resourceManagement"
+            to="/dashboard/resource-management"
             className={({ isActive }) => (isActive ? activeClass : normalClass)}
             onClick={() => setIsOpen(false)}
             title={collapsed ? "Resource Management" : undefined}

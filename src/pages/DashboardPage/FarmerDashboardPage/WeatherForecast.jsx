@@ -1,10 +1,84 @@
-import React from "react";
-import MainWeatherForecast from "../../../components/WeatherForecast/MainWeatherForecast";
+import React from 'react';
+import { Droplets, Wind, Eye, Sun, Cloud, CloudRain } from 'lucide-react';
+// import MainWeatherForecast from '../../../components/WeatherForecast/MainWeatherForecast';
+
+// Dummy forecast data (replace with props or API later)
+const weeklyForecast = [
+  {
+    day: 'Today',
+    temp: 28,
+    condition: 'sunny',
+    humidity: 65,
+    windSpeed: 12,
+    visibility: 10,
+  },
+  {
+    day: 'Tue',
+    temp: 30,
+    condition: 'cloudy',
+    humidity: 70,
+    windSpeed: 15,
+    visibility: 9,
+  },
+  {
+    day: 'Wed',
+    temp: 25,
+    condition: 'rainy',
+    humidity: 80,
+    windSpeed: 10,
+    visibility: 7,
+  },
+  {
+    day: 'Thu',
+    temp: 27,
+    condition: 'sunny',
+    humidity: 60,
+    windSpeed: 11,
+    visibility: 10,
+  },
+  {
+    day: 'Fri',
+    temp: 29,
+    condition: 'cloudy',
+    humidity: 68,
+    windSpeed: 14,
+    visibility: 9,
+  },
+  {
+    day: 'Sat',
+    temp: 31,
+    condition: 'sunny',
+    humidity: 55,
+    windSpeed: 13,
+    visibility: 10,
+  },
+  {
+    day: 'Sun',
+    temp: 26,
+    condition: 'rainy',
+    humidity: 85,
+    windSpeed: 12,
+    visibility: 6,
+  },
+];
+
+// Weather icon helper
+const getWeatherIcon = condition => {
+  switch (condition.toLowerCase()) {
+    case 'sunny':
+      return <Sun className="h-12 w-12 text-yellow-500" />;
+    case 'cloudy':
+      return <Cloud className="h-12 w-12 text-gray-500" />;
+    case 'rainy':
+      return <CloudRain className="h-12 w-12 text-blue-500" />;
+    default:
+      return <Sun className="h-12 w-12 text-yellow-500" />;
+  }
+};
 
 const WeatherForecast = () => {
   return (
-
-    <div className=" py-5 px-6 rounded-3xl">
+    <div className="py-5 px-6 rounded-3xl">
       {/* Heading */}
       <div className="text-center mb-14">
         <h2 className="text-4xl md:text-5xl font-bold mb-4 drop-shadow-sm">
@@ -115,9 +189,9 @@ const WeatherForecast = () => {
           ))}
         </div>
       </div>
-    <div>
-      <MainWeatherForecast />
 
+      {/* Extra component */}
+      <div className="mt-10">{/* <MainWeatherForecast /> */}</div>
     </div>
   );
 };
