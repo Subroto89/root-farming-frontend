@@ -1,17 +1,17 @@
-import { FaGoogle } from "react-icons/fa";
-import useAuth from "../../hooks/useAuth";
+import { FaGithub } from "react-icons/fa";
+import useAuth from "../../../hooks/useAuth";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router";
-import { saveUserToDatabase } from "../../utils/utilities";
+import { saveUserToDatabase } from "../../../utils/utilities";
 
-const GoogleLogin = () => {
-  const { googleSignInUser } = useAuth();
+const GithubLogin = () => {
+  const { gitHubSignInUser } = useAuth();
   const navigate = useNavigate();
 
-  const handleGoogleSignIn = async () => {
+  const handleGithubSignIn = async () => {
     try {
-      // Step 1: SignIn With Google --------------------------
-      const { user } = await googleSignInUser();
+      // Step 1: SignIn With Github --------------------------------
+      const { user } = await gitHubSignInUser;
       if (user.uid) {
         Swal.fire({
           icon: "success",
@@ -41,16 +41,16 @@ const GoogleLogin = () => {
     }
   };
   return (
-    <div>
+    <div className="w-full">
       <button
-        onClick={handleGoogleSignIn}
+        onClick={handleGithubSignIn}
         className="btn bg-white text-black border-[#e5e5e5] shadow-lg w-full"
       >
-        <FaGoogle className="text-blue-800" />
-        Continue with Google
+        <FaGithub className="text-blue-800" />
+        Continue with Github
       </button>
     </div>
   );
 };
 
-export default GoogleLogin;
+export default GithubLogin;

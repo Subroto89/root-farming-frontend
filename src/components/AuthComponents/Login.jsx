@@ -6,15 +6,19 @@ import { Link, useLocation, useNavigate } from "react-router";
 import { BounceLoader } from "react-spinners";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
-import GoogleLogin from "../shared/GoogleLogin";
 import { Icon } from "lucide-react";
+import { useRef } from "react";
+import { auth } from "../../firebase/firebase.confiq";
+import GoogleLogin from "../shared/SocialLogin/GoogleLogin";
+import GithubLogin from "../shared/SocialLogin/GithubLogin";
 // import {saveUserToDatabase, TabTitle} from "../../utils/utilities";
 
 const Login = () => {
   // TabTitle('JoinUs');
-  const { signInUser } = useAuth();
+  const { signInUser, userPasswordReset } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
+  const emailRef = useRef();
   
   const destination = location.state || '/'
  
@@ -59,6 +63,29 @@ const Login = () => {
     }
   };
 
+  const handleForgetPassword = () => {
+      const email = emailRef.current.value;
+      if(!email){
+        Swal.fire({
+          icon: "error",
+          title: "Email Required",
+          text: "Please enter your email address to reset your password.",
+        });
+        return;
+      } 
+
+      userPasswordReset(auth, email)
+      .then(() => {
+          alert(' Password reset email is sent to your email. pls check');
+      }).catch((error) => {
+          Swal.fire({
+            icon: "error",
+            title: "Reset Failed",
+            text: error.message || "Failed to send password reset email.",
+          });
+      })
+    }
+
   return (
     <div>
       <div className="border border-white rounded-lg shadowlg m-4 p-4 bg-gradient-to-bl from-[#1F5591] to-[#80A5AB] opacity-70">
@@ -93,6 +120,7 @@ const Login = () => {
                   message: "Invalid email address",
                 },
               }}
+               ref={emailRef}
             />
 
             {/*-----------------------------------------------------------------------------------
@@ -117,6 +145,14 @@ const Login = () => {
             />
           </div>
 
+           {/*-----------------------------------------------------------------------------------
+            Forgot Password Section
+            ----------------------------------------------------------------------------------- */}
+          <div className="text-right mb-4">
+            <Link onClick={handleForgetPassword}>
+              <span className="text-white text-xs link"> Forgot Password?</span>
+            </Link>
+          </div>
           {/* -----------------------------------------------------------
             SignIn Button Section
             ----------------------------------------------------------- */}
@@ -142,8 +178,11 @@ const Login = () => {
         {/* -----------------------------------------------------------
         Google Sign In Section
         ----------------------------------------------------------- */}
-        <GoogleLogin />
-
+        <div className="flex justify-between gap-4">
+          <GoogleLogin />
+          <GithubLogin />
+        </div>
+        
         {/* -----------------------------------------------------------
         Don't Have Account Suggestion Section
         ----------------------------------------------------------- */}

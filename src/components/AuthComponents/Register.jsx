@@ -2,11 +2,12 @@ import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import { FaUserPlus } from "react-icons/fa";
 import { Link, useNavigate } from "react-router";
-import GoogleLogin from "../../components/shared/GoogleLogin";
+import GoogleLogin from "../../components/shared/SocialLogin/GoogleLogin";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
 import { imageUpload, saveUserToDatabase, TabTitle } from "../../utils/utilities";
 import RegisterForm from "../shared/Forms/RegisterFrom";
+import GithubLogin from "../shared/SocialLogin/GithubLogin";
 
 
 const Register = () => {
@@ -143,7 +144,11 @@ const Register = () => {
       {/* -----------------------------------------------------------
       Google Login Button
       ----------------------------------------------------------- */}
-      <GoogleLogin />
+      <div className="flex justify-between gap-4">
+        <GoogleLogin />
+        <GithubLogin />
+      </div>
+      
       {/* -----------------------------------------------------------
       Already Account Exist Suggestion Section
       ----------------------------------------------------------- */}
