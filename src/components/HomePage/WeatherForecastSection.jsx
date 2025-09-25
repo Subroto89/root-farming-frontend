@@ -1,199 +1,407 @@
-import React, { useState } from 'react';
-import { Cloud, Sun, CloudRain, Droplets, Wind, Eye } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import {
+  Cloud,
+  Sun,
+  CloudRain,
+  Wind,
+  Droplets,
+  Search,
+  Eye,
+  Gauge,
+} from 'lucide-react';
 
-const WeatherForecast = () => {
-  const [weeklyForecast] = useState([
-    {
-      day: 'Mon',
-      temp: 24,
-      condition: 'sunny',
-      humidity: 65,
-      windSpeed: 12,
-      visibility: 10,
-    },
-    {
-      day: 'Tue',
-      temp: 22,
-      condition: 'cloudy',
-      humidity: 60,
-      windSpeed: 10,
-      visibility: 12,
-    },
-    {
-      day: 'Wed',
-      temp: 26,
-      condition: 'rainy',
-      humidity: 70,
-      windSpeed: 15,
-      visibility: 8,
-    },
-    {
-      day: 'Thu',
-      temp: 25,
-      condition: 'sunny',
-      humidity: 65,
-      windSpeed: 12,
-      visibility: 10,
-    },
-    {
-      day: 'Fri',
-      temp: 28,
-      condition: 'cloudy',
-      humidity: 60,
-      windSpeed: 14,
-      visibility: 9,
-    },
-    {
-      day: 'Sat',
-      temp: 30,
-      condition: 'sunny',
-      humidity: 55,
-      windSpeed: 13,
-      visibility: 10,
-    },
-    {
-      day: 'Sun',
-      temp: 27,
-      condition: 'rainy',
-      humidity: 72,
-      windSpeed: 16,
-      visibility: 7,
-    },
-  ]);
+// Helper: Tailwind color based on weather condition
+const getWeatherColor = condition => {
+  switch (condition) {
+    case 'Clear':
+      return 'text-yellow-400';
+    case 'Clouds':
+      return 'text-gray-400';
+    case 'Rain':
+      return 'text-blue-500';
+    case 'Thunderstorm':
+      return 'text-purple-600';
+    case 'Snow':
+      return 'text-cyan-300';
+    case 'Mist':
+    case 'Fog':
+    case 'Haze':
+      return 'text-gray-300';
+    default:
+      return 'text-blue-400';
+  }
+};
 
-  const getWeatherIcon = condition => {
-    switch (condition) {
-      case 'sunny':
-        return (
-          <Sun className="h-16 w-16 text-yellow-500 drop-shadow-md animate-pulse" />
-        );
-      case 'cloudy':
-        return (
-          <Cloud className="h-16 w-16 text-gray-500 drop-shadow-md animate-pulse" />
-        );
-      case 'rainy':
-        return (
-          <CloudRain className="h-16 w-16 text-blue-500 drop-shadow-md animate-pulse" />
-        );
-      default:
-        return <Sun className="h-16 w-16 text-yellow-500" />;
+const WeatherForecastSection = () => {
+  const [weather, setWeather] = useState(null);
+  const [forecast, setForecast] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [city, setCity] = useState('Dhaka,BD');
+  const [query, setQuery] = useState('');
+  const [isCurrentLocation, setIsCurrentLocation] = useState(false);
+
+  const API_KEY = 'e83583dbada9b16da8972d6d26726e7a';
+
+  // Fetch by city name
+  const fetchWeather = async cityName => {
+    try {
+      setLoading(true);
+      setIsCurrentLocation(false);
+
+      const resCurrent = await fetch(
+        `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=metric&appid=${API_KEY}`
+      );
+      const dataCurrent = await resCurrent.json();
+
+      if (dataCurrent.cod !== 200) {
+        if (cityName !== 'Dhaka,BD') fetchWeather('Dhaka,BD');
+        else {
+          setWeather(null);
+          setForecast([]);
+          setLoading(false);
+        }
+        return;
+      }
+
+      const resForecast = await fetch(
+        `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&units=metric&appid=${API_KEY}`
+      );
+      const dataForecast = await resForecast.json();
+
+      const daily = [];
+      const usedDays = new Set();
+      for (let item of dataForecast.list) {
+        const date = new Date(item.dt_txt).toLocaleDateString('en-IN', {
+          weekday: 'long',
+        });
+        if (!usedDays.has(date) && daily.length < 5) {
+          usedDays.add(date);
+          daily.push(item);
+        }
+      }
+
+      setWeather(dataCurrent);
+      setForecast(daily);
+      setLoading(false);
+    } catch (err) {
+      console.error('Error fetching weather:', err);
+      setLoading(false);
     }
   };
 
-  return (
-    <div className="py-20 px-6 bg-gradient-to-br from-sky-50 via-teal-50 to-emerald-100 rounded-3xl mt-16 shadow-2xl border border-gray-200/40">
-      {/* Heading */}
-      <div className="text-center mb-14">
-        <h2 className="text-4xl md:text-5xl font-vibes  font-bold text-green-700 mb-4 drop-shadow-sm">
-          Weather Forecast
-        </h2>
-        <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
-          Stay updated with real-time forecasts and make smarter farming
-          decisions with confidence.
-        </p>
+  // Fetch by coordinates
+  const fetchWeatherByCoords = async (lat, lon) => {
+    try {
+      setLoading(true);
+      setIsCurrentLocation(true);
+
+      const resCurrent = await fetch(
+        `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${API_KEY}`
+      );
+      const dataCurrent = await resCurrent.json();
+
+      const resForecast = await fetch(
+        `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&appid=${API_KEY}`
+      );
+      const dataForecast = await resForecast.json();
+
+      const daily = [];
+      const usedDays = new Set();
+      for (let item of dataForecast.list) {
+        const date = new Date(item.dt_txt).toLocaleDateString('en-IN', {
+          weekday: 'long',
+        });
+        if (!usedDays.has(date) && daily.length < 5) {
+          usedDays.add(date);
+          daily.push(item);
+        }
+      }
+
+      setWeather(dataCurrent);
+      setForecast(daily);
+      setLoading(false);
+    } catch (err) {
+      console.error('Error fetching weather:', err);
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        position => {
+          const { latitude, longitude } = position.coords;
+          fetchWeatherByCoords(latitude, longitude);
+        },
+        () => {
+          fetchWeather(city);
+        }
+      );
+    } else {
+      fetchWeather(city);
+    }
+  }, []);
+
+  const handleSearch = e => {
+    e.preventDefault();
+    if (query.trim()) {
+      fetchWeather(query.trim());
+      setQuery('');
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center text-lg sm:text-xl font-bold text-green-700">
+        Loading Weather...
       </div>
+    );
+  }
 
-      <div className="flex flex-col lg:flex-row gap-4">
-        {/* Current Weather Card */}
-        <div className="flex-1 flex justify-center">
-          <div className="relative w-full max-w-sm bg-gradient-to-br from-white/40 to-white/20 backdrop-blur-xl border border-white/40 rounded-3xl shadow-xl p-10 text-center hover:scale-105 transition-transform duration-500 overflow-hidden group">
-            {/* Glow effect */}
-            <div className="absolute inset-0 bg-gradient-to-tr from-sky-200/20 via-white/5 to-teal-200/10 rounded-3xl blur-2xl opacity-60 group-hover:opacity-90 transition"></div>
+  const farmingTips = [
+    {
+      title: 'Irrigation Recommendation',
+      description:
+        'With 65% humidity and partly cloudy conditions, reduce watering frequency for most crops.',
+      priority: 'medium',
+    },
+    {
+      title: 'Pest Alert',
+      description:
+        'High humidity levels may increase fungal disease risk. Monitor crops closely.',
+      priority: 'high',
+    },
+    {
+      title: 'Planting Conditions',
+      description:
+        'Current soil temperature is ideal for planting summer vegetables.',
+      priority: 'low',
+    },
+  ];
 
-            {/* Weather Icon */}
-            <div className="w-32 h-32 mx-auto mb-6 rounded-full bg-white/40 flex items-center justify-center shadow-inner border border-gray-300/30 backdrop-blur-md">
-              {getWeatherIcon(weeklyForecast[0].condition)}
-            </div>
+  return (
+    <div className="relative min-h-screen bg-gradient-to-br from-blue-50 via-white to-green-50 py-8 sm:py-12 px-4 sm:px-6 lg:px-10 overflow-x-hidden">
+      {/* Background blobs */}
+      <div className="absolute top-10 left-4 sm:left-10 w-60 sm:w-80 h-60 sm:h-80 bg-blue-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse"></div>
+      <div className="absolute bottom-10 right-4 sm:right-10 w-72 sm:w-96 h-72 sm:h-96 bg-green-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse"></div>
 
-            {/* Day */}
-            <p className="font-semibold text-2xl text-gray-800">
-              {weeklyForecast[0].day}
-            </p>
-
-            {/* Temperature */}
-            <p className="text-6xl font-extrabold text-gray-900 my-4 drop-shadow-lg">
-              {weeklyForecast[0].temp}°C
-            </p>
-
-            {/* Condition */}
-            <p className="text-md capitalize text-gray-700 tracking-wide mb-8 italic">
-              {weeklyForecast[0].condition}
-            </p>
-
-            {/* Weather Stats */}
-            <div className="grid grid-cols-3 gap-6 text-center">
-              <div>
-                <Droplets className="h-6 w-6 text-blue-500 mx-auto mb-1" />
-                <p className="text-sm font-medium text-gray-800">
-                  {weeklyForecast[0].humidity}%
-                </p>
-                <span className="text-xs text-gray-500">Humidity</span>
-              </div>
-              <div>
-                <Wind className="h-6 w-6 text-green-500 mx-auto mb-1" />
-                <p className="text-sm font-medium text-gray-800">
-                  {weeklyForecast[0].windSpeed} km/h
-                </p>
-                <span className="text-xs text-gray-500">Wind</span>
-              </div>
-              <div>
-                <Eye className="h-6 w-6 text-indigo-500 mx-auto mb-1" />
-                <p className="text-sm font-medium text-gray-800">
-                  {weeklyForecast[0].visibility} km
-                </p>
-                <span className="text-xs text-gray-500">Visibility</span>
-              </div>
-            </div>
-          </div>
+      <div className="relative z-10 max-w-7xl mx-auto flex flex-col gap-8 sm:gap-12">
+        {/* Header */}
+        <div className="text-center">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 drop-shadow-md">
+            Weather Forecast
+          </h1>
+          <p className="text-gray-600 mt-2 text-base sm:text-lg md:text-xl">
+            Real-time weather updates for smarter decisions
+          </p>
         </div>
 
-        {/* Next 6 Days */}
-        <div className="flex-[2] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
-          {weeklyForecast.slice(1).map((day, i) => (
-            <div
-              key={i}
-              className="relative bg-gradient-to-br from-white/40 to-white/20 backdrop-blur-xl border border-gray-300/20 rounded-2xl shadow-md p-6 text-center hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 overflow-hidden group"
-            >
-              {/* Glow on hover */}
-              <div className="absolute inset-0 bg-gradient-to-tr from-sky-100/20 via-white/10 to-emerald-100/20 rounded-2xl blur-2xl opacity-50 group-hover:opacity-80 transition"></div>
+        {/* Search Bar */}
+        <form
+          onSubmit={handleSearch}
+          className="flex flex-col sm:flex-row gap-3 max-w-lg mx-auto"
+        >
+          <input
+            type="text"
+            value={query}
+            onChange={e => setQuery(e.target.value)}
+            placeholder="Search city..."
+            className="flex-1 px-4 py-2 sm:px-5 sm:py-3 bg-white/50 backdrop-blur-md border border-gray-300 rounded-xl text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-green-700 transition text-sm sm:text-base"
+          />
+          <button
+            type="submit"
+            className="bg-green-700 text-white px-5 sm:px-6 py-2 sm:py-3 rounded-xl font-semibold hover:bg-green-800 transition flex items-center justify-center text-sm sm:text-base"
+          >
+            <Search className="h-4 w-4 mr-1 sm:mr-2" />
+            Search
+          </button>
+        </form>
 
-              <div className="relative">
-                <div className="w-24 h-24 mx-auto mb-4 rounded-full bg-white/40 flex items-center justify-center shadow-inner border border-gray-300/30 backdrop-blur-md">
-                  {getWeatherIcon(day.condition)}
-                </div>
-                <p className="font-semibold text-lg text-gray-800">{day.day}</p>
-                <p className="text-3xl font-bold text-gray-900">{day.temp}°C</p>
-                <p className="text-sm capitalize text-gray-600 mb-4">
-                  {day.condition}
-                </p>
-
-                <div className="grid grid-cols-3 gap-3 text-center">
-                  <div>
-                    <Droplets className="h-5 w-5 text-blue-500 mx-auto mb-1" />
-                    <p className="text-xs font-medium text-gray-700">
-                      {day.humidity}%
-                    </p>
-                  </div>
-                  <div>
-                    <Wind className="h-5 w-5 text-green-500 mx-auto mb-1" />
-                    <p className="text-xs font-medium text-gray-700">
-                      {day.windSpeed} km/h
-                    </p>
-                  </div>
-                  <div>
-                    <Eye className="h-5 w-5 text-indigo-500 mx-auto mb-1" />
-                    <p className="text-xs font-medium text-gray-700">
-                      {day.visibility} km
-                    </p>
-                  </div>
-                </div>
+        {/* Current Weather */}
+        {weather && (
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
+            {/* Temperature Card */}
+            <div className="flex flex-col items-center justify-center text-center p-6 sm:p-8 md:p-10 bg-gradient-to-br from-blue-50 to-blue-100 rounded-3xl shadow-2xl hover:scale-105 transform transition duration-300">
+              <div className="text-4xl sm:text-5xl font-bold text-gray-900 mb-3 sm:mb-4">
+                {Math.round(weather.main.temp)}°C
               </div>
+              {(() => {
+                const IconComponent =
+                  weather.weather[0].main === 'Rain'
+                    ? CloudRain
+                    : weather.weather[0].main === 'Clear'
+                    ? Sun
+                    : Cloud;
+                return (
+                  <IconComponent
+                    className={`h-16 sm:h-20 w-16 sm:w-20 mb-2 drop-shadow-xl ${getWeatherColor(
+                      weather.weather[0].main
+                    )}`}
+                  />
+                );
+              })()}
+              <p className="text-xl sm:text-2xl md:text-3xl font-medium text-gray-700 capitalize">
+                {weather.weather[0].description}
+              </p>
+              <p className="mt-2 text-gray-600 text-base sm:text-lg font-medium">
+                {weather.name}, {weather.sys.country}{' '}
+                {isCurrentLocation && (
+                  <span className="text-blue-600 font-semibold">
+                    (Current Location)
+                  </span>
+                )}
+              </p>
+              <p className="mt-3 sm:mt-4 text-gray-600 text-base sm:text-lg">
+                Feels like{' '}
+                <span className="font-semibold text-gray-900">
+                  {Math.round(weather.main.feels_like)}°C
+                </span>
+              </p>
             </div>
-          ))}
+
+            {/* Stats Cards */}
+            <div className="grid grid-cols-2 gap-4 sm:gap-6">
+              {[
+                {
+                  icon: (
+                    <Droplets className="h-5 w-5 sm:h-6 sm:w-6 text-blue-600" />
+                  ),
+                  label: 'Humidity',
+                  value: `${weather.main.humidity}%`,
+                  bg: 'from-blue-50 to-blue-100',
+                },
+                {
+                  icon: (
+                    <Wind className="h-5 w-5 sm:h-6 sm:w-6 text-green-600" />
+                  ),
+                  label: 'Wind',
+                  value: `${weather.wind.speed} km/h`,
+                  bg: 'from-green-50 to-green-100',
+                },
+                {
+                  icon: (
+                    <Eye className="h-5 w-5 sm:h-6 sm:w-6 text-yellow-600" />
+                  ),
+                  label: 'Visibility',
+                  value: `${Math.round(weather.visibility / 1000)} km`,
+                  bg: 'from-yellow-50 to-yellow-100',
+                },
+                {
+                  icon: (
+                    <Gauge className="h-5 w-5 sm:h-6 sm:w-6 text-purple-600" />
+                  ),
+                  label: 'Pressure',
+                  value: `${weather.main.pressure} mb`,
+                  bg: 'from-purple-50 to-purple-100',
+                },
+              ].map((stat, idx) => (
+                <div
+                  key={idx}
+                  className={`p-4 sm:p-6 rounded-2xl bg-gradient-to-br ${stat.bg} shadow-lg hover:scale-105 transform transition duration-300 flex flex-col items-center`}
+                >
+                  {stat.icon}
+                  <p className="text-gray-600 mt-1 sm:mt-2 text-xs sm:text-sm">
+                    {stat.label}
+                  </p>
+                  <p className="text-gray-900 font-bold text-lg sm:text-xl mt-1">
+                    {stat.value}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* 5-Day Forecast */}
+        {forecast.length > 0 && (
+          <div className="bg-white/70 backdrop-blur-md rounded-3xl shadow-2xl p-6 sm:p-8">
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6 sm:mb-8 text-center">
+              5-Day Forecast
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4 sm:gap-6">
+              {forecast.map((day, idx) => {
+                const date = new Date(day?.dt_txt).toLocaleDateString('en-IN', {
+                  weekday: 'short',
+                });
+                const IconComponent =
+                  day?.weather[0].main === 'Rain'
+                    ? CloudRain
+                    : day.weather[0].main === 'Clear'
+                    ? Sun
+                    : Cloud;
+                return (
+                  <div
+                    key={idx}
+                    className="text-center p-4 sm:p-6 rounded-2xl bg-gradient-to-br from-blue-50 to-white shadow-lg hover:scale-105 transform transition duration-300"
+                  >
+                    <p className="font-semibold text-gray-900 mb-1 sm:mb-2 text-sm sm:text-base">
+                      {date}
+                    </p>
+                    <IconComponent
+                      className={`h-10 sm:h-12 w-10 sm:w-12 mx-auto mb-1 sm:mb-2 drop-shadow ${getWeatherColor(
+                        day?.weather[0].main
+                      )}`}
+                    />
+                    <p className="text-gray-600 mb-1 sm:mb-2 text-xs sm:text-sm">
+                      {day?.weather[0].main}
+                    </p>
+                    <p className="font-bold text-gray-900 text-sm sm:text-base">
+                      {Math.round(day?.main.temp_max)}° /{' '}
+                      <span className="text-gray-500">
+                        {Math.round(day?.main.temp_min)}°
+                      </span>
+                    </p>
+                    <div className="flex items-center justify-center mt-1 sm:mt-2 text-[10px] sm:text-xs text-gray-600">
+                      <Droplets className="h-3 w-3 text-blue-500 mr-1" />
+                      Precip {day?.pop ? day?.pop * 100 : 10}%
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
+
+        {/* Farming Tips */}
+        <div className="bg-white rounded-lg shadow-lg p-6 sm:p-8">
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6 text-left">
+            Farming Recommendations
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            {farmingTips.map((tip, index) => (
+              <div
+                key={index}
+                className={`p-4 sm:p-6 rounded-lg border-l-4 transition-transform transform hover:scale-105 hover:shadow-2xl hover:translate-y-1 duration-300 cursor-pointer ${
+                  tip.priority === 'high'
+                    ? 'bg-red-50 border-red-500'
+                    : tip.priority === 'medium'
+                    ? 'bg-yellow-50 border-yellow-500'
+                    : 'bg-green-50 border-green-500'
+                }`}
+              >
+                <h3 className="font-semibold text-gray-900 mb-2 text-left">
+                  {tip.title}
+                </h3>
+                <p className="text-gray-700 text-left">{tip.description}</p>
+                <span
+                  className={`inline-block mt-2 px-2 py-1 text-xs rounded-full ${
+                    tip.priority === 'high'
+                      ? 'bg-red-100 text-red-800'
+                      : tip.priority === 'medium'
+                      ? 'bg-yellow-100 text-yellow-800'
+                      : 'bg-green-100 text-green-800'
+                  }`}
+                >
+                  {tip.priority.charAt(0).toUpperCase() + tip.priority.slice(1)}{' '}
+                  Priority
+                </span>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>
   );
 };
 
-export default WeatherForecast;
+export default WeatherForecastSection;
