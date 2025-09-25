@@ -63,8 +63,11 @@ const Login = () => {
     }
   };
 
-  const handleForgetPassword = () => {
+  const handleForgetPassword = (e) => {
+      e.preventDefault();
+      // Step 1: Get the email from the input field
       const email = emailRef.current.value;
+      // Step 2: Validate the email
       if(!email){
         Swal.fire({
           icon: "error",
@@ -73,10 +76,14 @@ const Login = () => {
         });
         return;
       } 
-
+      // Step 3: Send password reset email
       userPasswordReset(auth, email)
       .then(() => {
-          alert(' Password reset email is sent to your email. pls check');
+          Swal.fire({
+            icon: "success",
+            title: "Email Sent",
+            text: "Password reset email has been sent. Please check your inbox.",
+          });
       }).catch((error) => {
           Swal.fire({
             icon: "error",
@@ -149,9 +156,9 @@ const Login = () => {
             Forgot Password Section
             ----------------------------------------------------------------------------------- */}
           <div className="text-right mb-4">
-            <Link onClick={handleForgetPassword}>
+            <button onClick={handleForgetPassword}>
               <span className="text-white text-xs link"> Forgot Password?</span>
-            </Link>
+            </button>
           </div>
           {/* -----------------------------------------------------------
             SignIn Button Section
