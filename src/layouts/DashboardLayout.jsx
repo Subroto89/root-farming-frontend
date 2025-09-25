@@ -1,9 +1,6 @@
-import React from 'react';
-
-import { Outlet } from 'react-router';
-import { Toaster } from 'react-hot-toast';
-import Sidebar from '@/pages/DashboardPages/Sidebar/Sidebar';
-import Topbar from '@/pages/DashboardPages/Sidebar/Topbar';
+import { Outlet } from "react-router";
+import Sidebar from "../pages/DashboardPage/Sidebar/Sidebar";
+import { Toaster } from "react-hot-toast";
 
 const DashboardLayout = () => {
   return (
@@ -13,7 +10,7 @@ const DashboardLayout = () => {
 
       {/* Right Side: Dashboard Dynamic Content */}
       <div className="flex-1 md:ml-64">
-        <Topbar />
+
         <div className="p-5">
           {/* Outlet for dynamic contents */}
           <Outlet />
