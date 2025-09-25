@@ -220,7 +220,9 @@ const ResourceManagement = () => {
                }}
                onSubmit={handleAddResource}
                resource={selectedResource}
-               isLoading={isLoading}
+               isLoading={
+                  isLoading
+               }
             />
          </div>
       </div>
