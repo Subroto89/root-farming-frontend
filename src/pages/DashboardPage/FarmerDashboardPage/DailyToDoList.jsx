@@ -1,7 +1,13 @@
-import React from 'react';
+
+import React from "react";
 
 const DailyToDoList = () => {
-  return <div>DailyToDoList</div>;
+  return (
+    <div>
+      <h1>Hello i am DailyToDoList</h1>
+    </div>
+  );
+
 };
 
 export default DailyToDoList;
