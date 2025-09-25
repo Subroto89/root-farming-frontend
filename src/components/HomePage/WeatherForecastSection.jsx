@@ -36,13 +36,13 @@ const WeatherForecastSection = () => {
   const [weather, setWeather] = useState(null);
   const [forecast, setForecast] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [city, setCity] = useState('Dhaka,BD');
   const [query, setQuery] = useState('');
+  const [suggestions, setSuggestions] = useState([]);
   const [isCurrentLocation, setIsCurrentLocation] = useState(false);
 
   const API_KEY = 'e83583dbada9b16da8972d6d26726e7a';
 
-  // Fetch by city name
+  // Fetch weather by city/country string
   const fetchWeather = async cityName => {
     try {
       setLoading(true);
@@ -52,14 +52,10 @@ const WeatherForecastSection = () => {
         `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=metric&appid=${API_KEY}`
       );
       const dataCurrent = await resCurrent.json();
-
       if (dataCurrent.cod !== 200) {
-        if (cityName !== 'Dhaka,BD') fetchWeather('Dhaka,BD');
-        else {
-          setWeather(null);
-          setForecast([]);
-          setLoading(false);
-        }
+        setWeather(null);
+        setForecast([]);
+        setLoading(false);
         return;
       }
 
@@ -89,7 +85,7 @@ const WeatherForecastSection = () => {
     }
   };
 
-  // Fetch by coordinates
+  // Fetch weather by coordinates
   const fetchWeatherByCoords = async (lat, lon) => {
     try {
       setLoading(true);
@@ -134,19 +130,41 @@ const WeatherForecastSection = () => {
           fetchWeatherByCoords(latitude, longitude);
         },
         () => {
-          fetchWeather(city);
+          fetchWeather('Dhaka,BD');
         }
       );
     } else {
-      fetchWeather(city);
+      fetchWeather('Dhaka,BD');
     }
   }, []);
 
-  const handleSearch = e => {
+  // Handle input typing for suggestions
+  const handleInputChange = async e => {
+    const value = e.target.value;
+    setQuery(value);
+
+    if (value.length > 1) {
+      try {
+        const res = await fetch(
+          `http://api.openweathermap.org/geo/1.0/direct?q=${value}&limit=5&appid=${API_KEY}`
+        );
+        const data = await res.json();
+        setSuggestions(data);
+      } catch (err) {
+        console.error('Error fetching suggestions:', err);
+        setSuggestions([]);
+      }
+    } else {
+      setSuggestions([]); // input ছোট হলে clear
+    }
+  };
+
+  const handleSearchSubmit = e => {
     e.preventDefault();
     if (query.trim()) {
       fetchWeather(query.trim());
-      setQuery('');
+      setSuggestions([]);
+      setQuery(''); // ✅ input reset হবে
     }
   };
 
@@ -198,25 +216,43 @@ const WeatherForecastSection = () => {
 
         {/* Search Bar */}
         <form
-          onSubmit={handleSearch}
-          className="flex flex-col sm:flex-row gap-3 max-w-lg mx-auto"
+          onSubmit={handleSearchSubmit}
+          className="relative flex flex-col sm:flex-row gap-3 max-w-lg mx-auto"
         >
           <input
             type="text"
             value={query}
-            onChange={e => setQuery(e.target.value)}
+            onChange={handleInputChange}
             placeholder="Search city..."
-            className="flex-1 px-4 py-2 sm:px-5 sm:py-3 bg-white/50 backdrop-blur-md border border-gray-300 rounded-xl text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-green-700 transition text-sm sm:text-base"
+            className="flex-1 px-4 py-2 sm:px-5 sm:py-3 lg:px-6 lg:py-4 bg-white/50 backdrop-blur-md border border-gray-300 rounded-xl text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-green-700 transition text-sm sm:text-base lg:text-lg"
           />
           <button
             type="submit"
-            className="bg-green-700 text-white px-5 sm:px-6 py-2 sm:py-3 rounded-xl font-semibold hover:bg-green-800 transition flex items-center justify-center text-sm sm:text-base"
+            className="bg-green-700 text-white px-6 sm:px-6 lg:px-8 py-2 sm:py-3 lg:py-4 rounded-xl font-semibold hover:bg-green-800 transition flex items-center justify-center text-sm sm:text-base lg:text-lg"
           >
             <Search className="h-4 w-4 mr-1 sm:mr-2" />
             Search
           </button>
-        </form>
 
+          {/* Suggestions Dropdown */}
+          {suggestions.length > 0 && (
+            <ul className="absolute top-full left-0 w-full bg-white rounded-xl shadow-lg mt-1 max-h-60 overflow-y-auto z-20">
+              {suggestions.map((item, idx) => (
+                <li
+                  key={idx}
+                  className="px-4 py-2 hover:bg-green-100 cursor-pointer"
+                  onClick={() => {
+                    fetchWeather(`${item.name},${item.country}`);
+                    setQuery(''); // ✅ input reset হবে suggestion select করলে
+                    setSuggestions([]);
+                  }}
+                >
+                  {item.name}, {item.country}
+                </li>
+              ))}
+            </ul>
+          )}
+        </form>
         {/* Current Weather */}
         {weather && (
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
