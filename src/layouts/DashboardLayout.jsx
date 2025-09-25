@@ -1,10 +1,10 @@
 import React from "react";
+import { Outlet } from 'react-router';
+import { Toaster } from 'react-hot-toast';
+import Sidebar from '../pages/DashboardPage/Sidebar/Sidebar';
+import Topbar from '../pages/DashboardPage/Sidebar/Topbar';
 
-import { Outlet } from "react-router";
-import { Toaster } from "react-hot-toast";
-// import Sidebar from '@/pages/DashboardPages/Sidebar/Sidebar';
-// import Topbar from '@/pages/DashboardPages/Sidebar/Topbar';
-import Sidebar from "../pages/DashboardPage/Sidebar/Sidebar";
+
 
 const DashboardLayout = () => {
   return (
