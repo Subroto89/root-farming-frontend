@@ -34,7 +34,7 @@ const AuthProvider = ({ children }) => {
     setLoading(true);
     return signInWithPopup(auth, provider);
   };
-  
+
   const updateUserProfile = (updateData) => {
     setLoading(true);
     return updateProfile(auth.currentUser, updateData);
@@ -54,19 +54,19 @@ const AuthProvider = ({ children }) => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
 
-    //   if (currentUser?.email) {
-    //     axios
-    //       .post(`${import.meta.env.VITE_Server_API_KEY}/jwt`, {
-    //         email: currentUser.email,
-    //       })
-    //       .then((res) => {
-    //         const token = res.data.token;
-    //         localStorage.setItem("token", token);
-    //       });
-    //   }
-    //   if (!currentUser?.email) {
-    //     localStorage.removeItem("token");
-    //   }
+      //   if (currentUser?.email) {
+      //     axios
+      //       .post(`${import.meta.env.VITE_Server_API_KEY}/jwt`, {
+      //         email: currentUser.email,
+      //       })
+      //       .then((res) => {
+      //         const token = res.data.token;
+      //         localStorage.setItem("token", token);
+      //       });
+      //   }
+      //   if (!currentUser?.email) {
+      //     localStorage.removeItem("token");
+      //   }
 
       setLoading(false);
     });

@@ -42,7 +42,7 @@ const MainWeatherForecast = () => {
         loading: false,
         error: "Geolocation is not supported. Searching for a default city.",
       });
-      fetchWeather({ city: "Kolkata" });
+      fetchWeather({ city: "dhaka" });
       return;
     }
 
@@ -59,7 +59,7 @@ const MainWeatherForecast = () => {
           loading: false,
           error: "Location access denied. Showing weather for a default city.",
         });
-        fetchWeather({ city: "Kolkata" });
+        fetchWeather({ city: "Dhaka" });
       }
     );
   }, [fetchWeather]);
