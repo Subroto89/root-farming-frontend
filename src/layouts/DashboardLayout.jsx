@@ -1,6 +1,7 @@
-import { Outlet } from "react-router";
-import Sidebar from "../pages/DashboardPage/Sidebar/Sidebar";
-import { Toaster } from "react-hot-toast";
+import { Outlet } from 'react-router';
+import Sidebar from '../pages/DashboardPage/Sidebar/Sidebar';
+import { Toaster } from 'react-hot-toast';
+import Topbar from '../pages/DashboardPage/Sidebar/Topbar';
 
 const DashboardLayout = () => {
   return (
@@ -11,6 +12,7 @@ const DashboardLayout = () => {
       </div>
 
       <div className="flex-1 overflow-y-auto">
+        <Topbar />
         <div className="p-5 ">
           {/* Outlet for dynamic contents */}
           <Outlet />
