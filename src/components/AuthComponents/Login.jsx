@@ -6,15 +6,20 @@ import { Link, useLocation, useNavigate } from "react-router";
 import { BounceLoader } from "react-spinners";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
-import GoogleLogin from "../shared/GoogleLogin";
 import { Icon } from "lucide-react";
+import { useRef } from "react";
+// import { auth } from "../../firebase/firebase.confiq";
+import GoogleLogin from "../shared/SocialLogin/GoogleLogin";
+import GithubLogin from "../shared/SocialLogin/GithubLogin";
+// import { userPasswordReset } from "../../contexts/AuthProvider";
 // import {saveUserToDatabase, TabTitle} from "../../utils/utilities";
 
 const Login = () => {
   // TabTitle('JoinUs');
-  const { signInUser } = useAuth();
+  const { signInUser, userPasswordReset } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
+  const emailRef = useRef();
   
   const destination = location.state || '/'
  
@@ -59,6 +64,36 @@ const Login = () => {
     }
   };
 
+  const handleForgetPassword = () => {
+      
+      // Step 1: Get the email from the input field
+      const email = emailRef.current.value;
+      // Step 2: Validate the email
+      if(!email){
+        Swal.fire({
+          icon: "error",
+          title: "Email Required",
+          text: "Please enter your email address to reset your password.",
+        });
+        return;
+      } 
+      // Step 3: Send password reset email
+      userPasswordReset(email)
+      .then(() => {
+          Swal.fire({
+            icon: "success",
+            title: "Email Sent",
+            text: "Password reset email has been sent. Please check your inbox.",
+          });
+      }).catch((error) => {
+          Swal.fire({
+            icon: "error",
+            title: "Reset Failed",
+            text: error.message || "Failed to send password reset email.",
+          });
+      })
+    }
+
   return (
     <div>
       <div className="border border-white rounded-lg shadowlg m-4 p-4 bg-gradient-to-bl from-[#1F5591] to-[#80A5AB] opacity-70">
@@ -93,6 +128,7 @@ const Login = () => {
                   message: "Invalid email address",
                 },
               }}
+               ref={emailRef}
             />
 
             {/*-----------------------------------------------------------------------------------
@@ -117,6 +153,14 @@ const Login = () => {
             />
           </div>
 
+           {/*-----------------------------------------------------------------------------------
+            Forgot Password Section
+            ----------------------------------------------------------------------------------- */}
+          <div className="text-right mb-4">
+            <button onClick={handleForgetPassword}>
+              <span className="text-white text-xs link"> Forgot Password?</span>
+            </button>
+          </div>
           {/* -----------------------------------------------------------
             SignIn Button Section
             ----------------------------------------------------------- */}
@@ -142,8 +186,11 @@ const Login = () => {
         {/* -----------------------------------------------------------
         Google Sign In Section
         ----------------------------------------------------------- */}
-        <GoogleLogin />
-
+        <div className="flex justify-between gap-4">
+          <GoogleLogin />
+          <GithubLogin />
+        </div>
+        
         {/* -----------------------------------------------------------
         Don't Have Account Suggestion Section
         ----------------------------------------------------------- */}
