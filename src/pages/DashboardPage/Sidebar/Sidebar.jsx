@@ -14,15 +14,42 @@ import {
 } from 'react-icons/ai';
 import { MdAddToPhotos, MdManageAccounts } from 'react-icons/md';
 import { FaMoneyBillWave } from 'react-icons/fa';
-import { Settings, LogOut, Menu, X } from 'lucide-react';
+import {
+  Settings,
+  LogOut,
+  Menu,
+  X,
+  MapPin,
+  Calendar,
+  Home,
+  Package,
+  Cloud,
+  MessageCircle,
+  User,
+} from 'lucide-react';
 import logImage from '../../../assets/Logo/Rootfarming.png';
 
 // Hooks
 // import useUserRole from '@/hooks/useUserRole';
 // import LoadingSpinner from '@/components/LoadingSpinner';
 
-
 const Sidebar = () => {
+  // const [isOpen, setIsOpen] = useState(false);
+
+  const menuItems = [
+    { path: '/', icon: Home, label: 'Overview' },
+    { path: 'field-registration', icon: MapPin, label: 'Field Registration' },
+    { path: 'activity-scheduling', icon: Calendar, label: 'Activity Logging' },
+    {
+      path: 'resource-management',
+      icon: Package,
+      label: 'Resource Management',
+    },
+    { path: 'weather-forecast', icon: Cloud, label: 'Weather Forecast' },
+    { path: 'chat-specialist', icon: MessageCircle, label: 'Chat Specialist' },
+    { path: 'my-profile', icon: User, label: 'My Profile' },
+  ];
+
   // ===== Hooks =====
   // const { signOutUser } = useAuth(); // from your first code
 
@@ -68,9 +95,11 @@ const Sidebar = () => {
 
       {/* ===== Sidebar Container ===== */}
       <div
-        className={`fixed inset-y-0 left-0 z-40 ${collapsed ? 'w-20' : 'w-64'
-          } bg-white  transform ${isOpen ? 'translate-x-0' : '-translate-x-full'
-          } md:translate-x-0 transition-all duration-300 ease-in-out flex flex-col justify-between`}
+        className={`fixed inset-y-0 left-0 z-40 ${
+          collapsed ? 'w-20' : 'w-64'
+        } bg-white  transform ${
+          isOpen ? 'translate-x-0' : '-translate-x-full'
+        } md:translate-x-0 transition-all duration-300 ease-in-out flex flex-col justify-between`}
       >
         {/* ===== Logo & Collapse Button ===== */}
         <div className="p-4 flex items-center justify-between">
@@ -150,7 +179,8 @@ const Sidebar = () => {
             onClick={() => setIsOpen(false)}
             title={collapsed ? 'Daily To-Do List' : undefined}
           >
-            <AiOutlineFileSearch size={20} /> {/* You can change the icon if you like */}
+            <AiOutlineFileSearch size={20} />{' '}
+            {/* You can change the icon if you like */}
             {!collapsed && <span>Daily To-Do List</span>}
           </NavLink>
 
@@ -179,7 +209,8 @@ const Sidebar = () => {
             onClick={() => setIsOpen(false)}
             title={collapsed ? 'Weather Forecast' : undefined}
           >
-            <AiOutlineFileSearch size={20} /> {/* You can choose another icon if needed */}
+            <AiOutlineFileSearch size={20} />{' '}
+            {/* You can choose another icon if needed */}
             {!collapsed && <span>Weather Forecast</span>}
           </NavLink>
 
@@ -194,7 +225,7 @@ const Sidebar = () => {
           </NavLink>
 
           <NavLink
-            to="/dashboard/resourceManagement"
+            to="/dashboard/resource-management"
             className={({ isActive }) => (isActive ? activeClass : normalClass)}
             onClick={() => setIsOpen(false)}
             title={collapsed ? 'Resource Management' : undefined}
