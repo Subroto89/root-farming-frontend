@@ -315,7 +315,7 @@ const AddResourceModal = ({
                            whileTap={{ scale: 0.98 }}
                            type="submit"
                            disabled={isLoading}
-                           className="flex-1 px-6 py-3 bg-primary-500 hover:bg-primary-600 text-white rounded-lg font-semibold disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                           className="flex-1 px-6 py-3 bg-green-500 hover:bg-primary-600 text-white rounded-lg font-semibold disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                         >
                            {isLoading
                               ? "Saving..."
