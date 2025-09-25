@@ -31,6 +31,7 @@ const GoogleLogin = () => {
       } else {
         throw new Error("Signing In failed!");
       }
+      
       navigate("/");
     } catch (err) {
       Swal.fire({

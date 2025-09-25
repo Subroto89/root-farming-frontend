@@ -8,9 +8,10 @@ import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
 import { Icon } from "lucide-react";
 import { useRef } from "react";
-import { auth } from "../../firebase/firebase.confiq";
+// import { auth } from "../../firebase/firebase.confiq";
 import GoogleLogin from "../shared/SocialLogin/GoogleLogin";
 import GithubLogin from "../shared/SocialLogin/GithubLogin";
+// import { userPasswordReset } from "../../contexts/AuthProvider";
 // import {saveUserToDatabase, TabTitle} from "../../utils/utilities";
 
 const Login = () => {
@@ -63,8 +64,8 @@ const Login = () => {
     }
   };
 
-  const handleForgetPassword = (e) => {
-      e.preventDefault();
+  const handleForgetPassword = () => {
+      
       // Step 1: Get the email from the input field
       const email = emailRef.current.value;
       // Step 2: Validate the email
@@ -77,7 +78,7 @@ const Login = () => {
         return;
       } 
       // Step 3: Send password reset email
-      userPasswordReset(auth, email)
+      userPasswordReset(email)
       .then(() => {
           Swal.fire({
             icon: "success",
