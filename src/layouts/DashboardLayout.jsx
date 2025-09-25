@@ -14,6 +14,7 @@ const DashboardLayout = () => {
       <div className="flex-1 overflow-y-auto">
         <Topbar />
         <div className="p-5 ">
+        <div className="p-5 md:ml-64">
           {/* Outlet for dynamic contents */}
           <Outlet />
         </div>
