@@ -10,7 +10,7 @@ import {
   Gauge,
 } from 'lucide-react';
 
-// Helper: return Tailwind text color based on condition
+// Helper: Tailwind color based on weather condition
 const getWeatherColor = condition => {
   switch (condition) {
     case 'Clear':
@@ -152,21 +152,42 @@ const WeatherForecastSection = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center text-lg sm:text-xl font-bold text-blue-600">
+      <div className="min-h-screen flex items-center justify-center text-lg sm:text-xl font-bold text-green-700">
         Loading Weather...
       </div>
     );
   }
 
-  return (
-    <div className="relative min-h-screen bg-gradient-to-br from-blue-50 via-white to-green-50 py-8 sm:py-12 px-3 sm:px-6 md:px-10 overflow-x-hidden">
-      {/* Background blobs */}
-      <div className="absolute top-10 left-10 w-60 sm:w-80 h-60 sm:h-80 bg-blue-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse"></div>
-      <div className="absolute bottom-10 right-10 w-72 sm:w-96 h-72 sm:h-96 bg-green-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse"></div>
+  const farmingTips = [
+    {
+      title: 'Irrigation Recommendation',
+      description:
+        'With 65% humidity and partly cloudy conditions, reduce watering frequency for most crops.',
+      priority: 'medium',
+    },
+    {
+      title: 'Pest Alert',
+      description:
+        'High humidity levels may increase fungal disease risk. Monitor crops closely.',
+      priority: 'high',
+    },
+    {
+      title: 'Planting Conditions',
+      description:
+        'Current soil temperature is ideal for planting summer vegetables.',
+      priority: 'low',
+    },
+  ];
 
-      <div className="relative z-10 max-w-7xl mx-auto">
+  return (
+    <div className="relative min-h-screen bg-gradient-to-br from-blue-50 via-white to-green-50 py-8 sm:py-12 px-4 sm:px-6 lg:px-10 overflow-x-hidden">
+      {/* Background blobs */}
+      <div className="absolute top-10 left-4 sm:left-10 w-60 sm:w-80 h-60 sm:h-80 bg-blue-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse"></div>
+      <div className="absolute bottom-10 right-4 sm:right-10 w-72 sm:w-96 h-72 sm:h-96 bg-green-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse"></div>
+
+      <div className="relative z-10 max-w-7xl mx-auto flex flex-col gap-8 sm:gap-12">
         {/* Header */}
-        <div className="text-center mb-10 sm:mb-12">
+        <div className="text-center">
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 drop-shadow-md">
             Weather Forecast
           </h1>
@@ -178,7 +199,7 @@ const WeatherForecastSection = () => {
         {/* Search Bar */}
         <form
           onSubmit={handleSearch}
-          className="flex flex-col sm:flex-row gap-3 max-w-lg mx-auto mb-10 sm:mb-12"
+          className="flex flex-col sm:flex-row gap-3 max-w-lg mx-auto"
         >
           <input
             type="text"
@@ -198,7 +219,7 @@ const WeatherForecastSection = () => {
 
         {/* Current Weather */}
         {weather && (
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 mb-10 sm:mb-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
             {/* Temperature Card */}
             <div className="flex flex-col items-center justify-center text-center p-6 sm:p-8 md:p-10 bg-gradient-to-br from-blue-50 to-blue-100 rounded-3xl shadow-2xl hover:scale-105 transform transition duration-300">
               <div className="text-4xl sm:text-5xl font-bold text-gray-900 mb-3 sm:mb-4">
@@ -340,6 +361,44 @@ const WeatherForecastSection = () => {
             </div>
           </div>
         )}
+
+        {/* Farming Tips */}
+        <div className="bg-white rounded-lg shadow-lg p-6 sm:p-8">
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6 text-left">
+            Farming Recommendations
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            {farmingTips.map((tip, index) => (
+              <div
+                key={index}
+                className={`p-4 sm:p-6 rounded-lg border-l-4 transition-transform transform hover:scale-105 hover:shadow-2xl hover:translate-y-1 duration-300 cursor-pointer ${
+                  tip.priority === 'high'
+                    ? 'bg-red-50 border-red-500'
+                    : tip.priority === 'medium'
+                    ? 'bg-yellow-50 border-yellow-500'
+                    : 'bg-green-50 border-green-500'
+                }`}
+              >
+                <h3 className="font-semibold text-gray-900 mb-2 text-left">
+                  {tip.title}
+                </h3>
+                <p className="text-gray-700 text-left">{tip.description}</p>
+                <span
+                  className={`inline-block mt-2 px-2 py-1 text-xs rounded-full ${
+                    tip.priority === 'high'
+                      ? 'bg-red-100 text-red-800'
+                      : tip.priority === 'medium'
+                      ? 'bg-yellow-100 text-yellow-800'
+                      : 'bg-green-100 text-green-800'
+                  }`}
+                >
+                  {tip.priority.charAt(0).toUpperCase() + tip.priority.slice(1)}{' '}
+                  Priority
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );
