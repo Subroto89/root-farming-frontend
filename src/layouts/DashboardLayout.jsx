@@ -17,7 +17,7 @@ const DashboardLayout = () => {
       {/* Right Side: Dashboard Dynamic Content */}
       <div className="flex-1">
         {/* <Topbar /> */}
-        <div className="p-5 md:ml-64">
+        <div className=" md:ml-64 ">
           {/* Outlet for dynamic contents */}
           <Outlet />
           <Toaster

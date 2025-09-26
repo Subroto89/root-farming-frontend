@@ -11,7 +11,6 @@ import FarmerSuccessStoriesSection from "../../components/HomePage/FarmerSuccess
 import OurTrustedPartnersSection from "../../components/HomePage/OurTrustedPartnersSection";
 import BecomePartner from "../../components/HomePage/BecomePartner";
 import IndustryRecognitionAndAchievenent from "../../components/HomePage/IndustryRecognitionAndAchievenent";
-import TransformYourFarmSection from "../../components/HomePage/TransformYourFarmSection";
 
 
 const Home = () => {
@@ -21,7 +20,6 @@ const Home = () => {
          <HeroSection />
          <WeatherForecastSection />
          <WhyChooseRFSection />
-         <TransformYourFarmSection />
          <BestSellingProductsSection />
          <OurProductsSection />
          <HowItWorksSection />

@@ -4,14 +4,17 @@ import OurGrowingImpactSection from "./OurGrowingImpactSection";
 
 const HowItWorksSection = () => {
   return (
-    <div className="text-center pt-9 bg-gradient-to-b from-green-50 to-white ">
-      <h2 className="text-3xl font-black my-3 ">How It Works</h2>
-      <p className="text-gray-500">
-        Simple steps to transform your farming experience with Root Farming
-      </p>
+    <section className="bg-gradient-to-b from-green-50 to-white">
+         <div className="text-center max-w-7xl mx-auto py-16 ">
+            <h2 className="text-3xl font-black my-3 ">How It Works</h2>
+            <p className="text-gray-500">
+               Simple steps to transform your farming experience with Root
+               Farming
+            </p>
 
-      <HowItsWorksCards></HowItsWorksCards>
-    </div>
+            <HowItsWorksCards></HowItsWorksCards>
+         </div>
+      </section>
   );
 };
 

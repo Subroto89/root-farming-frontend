@@ -5,7 +5,7 @@ import { Link } from "react-router";
 
 const HeroSection = () => {
    return (
-      <section className="bg-white py-16 px-5 md:px-10 lg:px-16 ">
+      <section className="bg-white py-28 px-5 md:px-10 lg:px-16 ">
          <div className="mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-6 items-center max-w-7xl">
             {/* Left Content */}
             <div className="space-y-6">
@@ -61,7 +61,7 @@ const HeroSection = () => {
                <img
                   src="https://agrisa.org.za/wp-content/uploads/2024/07/pexels-tomfisk-4784072-1024x855.jpg"
                   alt="Smart Farming"
-                  className="rounded-2xl shadow-xl aspect-[16/9]"
+                  className="rounded-2xl shadow-xl aspect-[16/10]"
                />
             </div>
          </div>

@@ -82,7 +82,7 @@ const ResourceCard = ({ resource, onEdit }) => {
    return (
       <motion.div
          whileHover={{ y: -5, shadow: "0 20px 40px rgba(0, 0, 0, 0.1)" }}
-         className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 hover:shadow-lg transition-all duration-300"
+         className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 hover:shadow-lg transition-all duration-300 h-full"
       >
          {/* Header */}
          <div className="flex items-start justify-between mb-4">
