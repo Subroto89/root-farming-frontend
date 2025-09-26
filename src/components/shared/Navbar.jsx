@@ -1,21 +1,41 @@
-
 import React, { useState } from "react";
-import { Link, NavLink } from "react-router";
+import { Link, NavLink, useNavigate } from "react-router"; // 🔹 add useNavigate here
 import { Leaf, Menu, X } from "lucide-react";
 import logo from "../../assets/Logo/Rootfarming.png";
 
+import useAuth from "../../hooks/useAuth"; // adjust path if needed
+import Swal from "sweetalert2";
+
 export default function Navbar() {
+   
    const [isOpen, setIsOpen] = useState(false);
+
+   // 🔹 get user & logout from useAuth
+   const { user, logOutUser } = useAuth();
+   const navigate = useNavigate(); // 🔹 navigation hook
+
+   const handleLogout = () => {
+      logOutUser()
+         .then(() => {
+            Swal.fire({
+               icon: "success",
+               title: "You Logged Out",
+               showConfirmButton: false,
+               timer: 1500,
+            });
+            navigate("/"); // 🔹 redirect to Home after logout
+         })
+         .catch((err) => console.error(err));
+   };
 
    const links = (
       <>
          <NavLink
             to="/"
             className={({ isActive }) =>
-               `font-medium ${
-                  isActive
-                     ? "text-green-600"
-                     : "text-gray-700 hover:text-green-600"
+               `font-medium ${isActive
+                  ? "text-green-600"
+                  : "text-gray-700 hover:text-green-600"
                }`
             }
          >
@@ -24,10 +44,9 @@ export default function Navbar() {
          <NavLink
             to="/about"
             className={({ isActive }) =>
-               `font-medium ${
-                  isActive
-                     ? "text-green-600"
-                     : "text-gray-700 hover:text-green-600"
+               `font-medium ${isActive
+                  ? "text-green-600"
+                  : "text-gray-700 hover:text-green-600"
                }`
             }
          >
@@ -36,15 +55,23 @@ export default function Navbar() {
          <NavLink
             to="/contact"
             className={({ isActive }) =>
-               `font-medium ${
-                  isActive
-                     ? "text-green-600"
-                     : "text-gray-700 hover:text-green-600"
+               `font-medium ${isActive
+                  ? "text-green-600"
+                  : "text-gray-700 hover:text-green-600"
                }`
             }
          >
             Contact
          </NavLink>
+       {
+         user && (
+              <NavLink to="/dashboard" className="font-medium hover:text-green-600">
+            Dashboard
+         </NavLink>
+         )
+       }
+
+         
       </>
    );
 
@@ -69,12 +96,21 @@ export default function Navbar() {
 
                {/* Desktop Button */}
                <div className="hidden md:block">
-                  <Link
-                     to="/auth"
-                     className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition"
-                  >
-                    Login
-                  </Link>
+                  {user ? (
+                     <button
+                        onClick={handleLogout}
+                        className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition"
+                     >
+                        Logout
+                     </button>
+                  ) : (
+                     <Link
+                        to="/auth"
+                        className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition"
+                     >
+                        Login
+                     </Link>
+                  )}
                </div>
 
                {/* Hamburger for mobile */}
@@ -100,13 +136,25 @@ export default function Navbar() {
                   </div>
 
                   {/* Mobile Button */}
-                  <Link
-                     to="/auth"
-                     onClick={() => setIsOpen(false)}
-                     className="block bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition w-28"
-                  >
-                     Login
-                  </Link>
+                  {user ? (
+                     <button
+                        onClick={() => {
+                           handleLogout();
+                           setIsOpen(false);
+                        }}
+                        className="block bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition w-28"
+                     >
+                        Logout
+                     </button>
+                  ) : (
+                     <Link
+                        to="/auth"
+                        onClick={() => setIsOpen(false)}
+                        className="block bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition w-28"
+                     >
+                        Login
+                     </Link>
+                  )}
                </div>
             )}
          </div>

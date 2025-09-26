@@ -10,11 +10,14 @@ import {
   updateProfile,
   signOut,
   updatePassword,
+  sendPasswordResetEmail,
+  GithubAuthProvider,
 } from "firebase/auth";
 
 // import axios from "axios";
 
 const provider = new GoogleAuthProvider();
+const gitProvider = new GithubAuthProvider();
 
 const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
@@ -35,6 +38,11 @@ const AuthProvider = ({ children }) => {
     return signInWithPopup(auth, provider);
   };
 
+  const gitHubSignInUser = () => {
+    setLoading(true);
+    return signInWithPopup(auth, gitProvider);
+  };
+  
   const updateUserProfile = (updateData) => {
     setLoading(true);
     return updateProfile(auth.currentUser, updateData);
@@ -50,23 +58,28 @@ const AuthProvider = ({ children }) => {
     return updatePassword(user, newPassword);
   };
 
+  const userPasswordReset = (email) => {
+    setLoading(true);
+    return sendPasswordResetEmail(auth, email);
+  }
+
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
 
-      //   if (currentUser?.email) {
-      //     axios
-      //       .post(`${import.meta.env.VITE_Server_API_KEY}/jwt`, {
-      //         email: currentUser.email,
-      //       })
-      //       .then((res) => {
-      //         const token = res.data.token;
-      //         localStorage.setItem("token", token);
-      //       });
-      //   }
-      //   if (!currentUser?.email) {
-      //     localStorage.removeItem("token");
-      //   }
+    //   if (currentUser?.email) {
+    //     axios
+    //       .post(`${import.meta.env.VITE_Server_API_KEY}/jwt`, {
+    //         email: currentUser.email,
+    //       })
+    //       .then((res) => {
+    //         const token = res.data.token;
+    //         localStorage.setItem("token", token);
+    //       });
+    //   }
+    //   if (!currentUser?.email) {
+    //     localStorage.removeItem("token");
+    //   }
 
       setLoading(false);
     });
@@ -82,10 +95,12 @@ const AuthProvider = ({ children }) => {
     createUser,
     signInUser,
     googleSignInUser,
+    gitHubSignInUser,
     user,
     updateUserProfile,
     logOutUser,
     userPasswordUpdate,
+    userPasswordReset
   };
 
   return <AuthContext value={authData}> {children} </AuthContext>;

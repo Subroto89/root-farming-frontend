@@ -1,6 +1,6 @@
 // ===== Imports =====
-import React, { useState } from "react";
-import { NavLink, Link } from "react-router";
+import React, { useState } from 'react';
+import { NavLink, Link, useNavigate } from 'react-router';
 import {
   AiOutlineHome,
   AiOutlineUser,
@@ -11,92 +11,71 @@ import {
   AiOutlineHistory,
   AiOutlineUserSwitch,
   AiOutlinePieChart,
-
 } from 'react-icons/ai';
 import { MdAddToPhotos, MdManageAccounts } from 'react-icons/md';
 import { FaMoneyBillWave } from 'react-icons/fa';
-import {
-  Settings,
-  LogOut,
-  Menu,
-  X,
-
-  MapPin,
-  Calendar,
-  Home,
-  Package,
-  Cloud,
-  MessageCircle,
-  User,
-} from 'lucide-react';
+import { Settings, LogOut, Menu, X } from 'lucide-react';
 import logImage from '../../../assets/Logo/Rootfarming.png';
-
-// Hooks
-// import useUserRole from '@/hooks/useUserRole';
-// import LoadingSpinner from '@/components/LoadingSpinner';
+import Swal from 'sweetalert2';
+import useAuth from '../../../hooks/useAuth';
 
 const Sidebar = () => {
-  // const [isOpen, setIsOpen] = useState(false);
-
-  const menuItems = [
-
-    { path: '/', icon: Home, label: 'Overview' },
-    { path: 'field-registration', icon: MapPin, label: 'Field Registration' },
-    { path: 'activity-scheduling', icon: Calendar, label: 'Activity Logging' },
-    {
-      path: 'resource-management',
-      icon: Package,
-      label: 'Resource Management',
-    },
-    { path: 'weather-forecast', icon: Cloud, label: 'Weather Forecast' },
-    { path: 'chat-specialist', icon: MessageCircle, label: 'Chat Specialist' },
-    { path: 'my-profile', icon: User, label: 'My Profile' },
-
-  ];
-
-  // ===== Hooks =====
-  // const { signOutUser } = useAuth(); // from your first code
-
-  // const [role, isRoleLoading] = useUserRole();
-  // if (isRoleLoading) return <LoadingSpinner />;
-
-  // ===== State Management =====
   const [isOpen, setIsOpen] = useState(false); // mobile sidebar toggle
   const [collapsed, setCollapsed] = useState(false); // collapse/expand on desktop
 
-  // ===== Handlers =====
+     const { user, logOutUser } = useAuth();
+   const navigate = useNavigate(); // 🔹 navigation hook
+
+   const handleLogout = () => {
+      logOutUser()
+         .then(() => {
+            Swal.fire({
+               icon: "success",
+               title: "You Logged Out",
+               showConfirmButton: false,
+               timer: 1500,
+            });
+            navigate("/"); // 🔹 redirect to Home after logout
+         })
+         .catch((err) => console.error(err));
+   };
+
   const toggleMenu = () => setIsOpen(!isOpen);
   const toggleCollapse = () => setCollapsed(!collapsed);
 
-  // ===== NavLink Classes =====
   const activeClass =
-    "bg-green-100 text-green-700 font-semibold rounded px-3 py-2 flex items-center gap-3";
+    'bg-green-100 text-green-700 font-semibold rounded px-3 py-2 flex items-center gap-3';
   const normalClass =
-    "hover:bg-gray-200 rounded px-3 py-2 flex items-center gap-3 text-gray-700";
+    'hover:bg-gray-200 rounded px-3 py-2 flex items-center gap-3 text-gray-700';
 
-  // Profile link path
   const profileLink = '/dashboard/my-profile';
 
   return (
     <>
-      {/* ===== Mobile Header ===== */}
-      <div className="bg-white  shadow-md md:hidden flex justify-between items-center p-4">
+      {/* Mobile Header */}
+      <div className="bg-white border-b shadow-md md:hidden flex justify-between items-center p-4">
         <Link to="/" className="flex items-center gap-2 font-bold text-xl">
-          {/* Logo Placeholder */}
           <img
             src={logImage}
             alt="Logo"
             className="h-12 w-12 rounded-full shadow"
           />
           <h2>
-            Root 
-          collapsed ? 'w-20' : 'w-64'
-        } bg-white  transform ${
-          isOpen ? 'translate-x-0' : '-translate-x-full'
+            Root <span className="text-yellow-300">Farming</span>
+          </h2>
+        </Link>
+        <button onClick={toggleMenu} className="text-gray-700">
+         {isOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
+      </div>
 
-        } md:translate-x-0 transition-all duration-300 ease-in-out flex flex-col justify-between`}
+      {/* Sidebar */}
+      <div
+        className={`fixed inset-y-0 left-0 z-40 ${collapsed ? 'w-20' : 'w-64'
+          } bg-white  transform ${isOpen ? 'translate-x-0' : '-translate-x-full'
+          } md:translate-x-0 transition-all duration-300 ease-in-out flex flex-col justify-between`}
       >
-        {/* ===== Logo & Collapse Button ===== */}
+        {/* Logo + Collapse */}
         <div className="p-4 flex items-center justify-between">
           <Link
             to="/"
@@ -107,216 +86,198 @@ const Sidebar = () => {
               alt="Logo"
               className="h-12 w-12 rounded-full shadow"
             />
-            {!collapsed && (
+            {(!collapsed || isOpen) && (
               <h2>
                 Root <span className="text-yellow-300">Farming</span>
               </h2>
             )}
           </Link>
-          <button
+          {/* <button
             onClick={toggleCollapse}
             className="hidden md:block text-gray-600 hover:text-green-600"
-            title={collapsed ? "Expand" : "Collapse"}
+            title={collapsed ? 'Expand' : 'Collapse'}
           >
             {collapsed ? <Menu size={20} /> : <X size={20} />}
-          </button>
+          </button> */}
         </div>
 
-        {/* ===== Menu Section ===== */}
+        {/* Menu */}
         <nav className="flex-1 overflow-y-auto p-4 space-y-2">
-          {/* --- Dashboard Home --- */}
           <NavLink
             to="/dashboard"
             end
             className={({ isActive }) => (isActive ? activeClass : normalClass)}
             onClick={() => setIsOpen(false)}
-            title={collapsed ? "Dashboard Home" : undefined}
+            title={collapsed ? 'Dashboard Home' : undefined}
           >
             <AiOutlineHome size={20} />
-            {!collapsed && <span>Dashboard Home</span>}
+            {(!collapsed || isOpen) && <span>Dashboard Home</span>}
           </NavLink>
 
-          {/* ===== ADMIN LINKS ===== */}
+          {/* ADMIN LINKS */}
           <NavLink
             to="/dashboard/manageUsers"
             className={({ isActive }) => (isActive ? activeClass : normalClass)}
             onClick={() => setIsOpen(false)}
-            title={collapsed ? "Manage Users" : undefined}
+            title={collapsed ? 'Manage Users' : undefined}
           >
             <AiOutlineTeam size={20} />
-            {!collapsed && <span>Manage Users</span>}
+            {(!collapsed || isOpen) && <span>Manage Users</span>}
           </NavLink>
 
           <NavLink
             to="/dashboard/adminNews"
             className={({ isActive }) => (isActive ? activeClass : normalClass)}
             onClick={() => setIsOpen(false)}
-            title={collapsed ? "Agri-News & Schemes" : undefined}
+            title={collapsed ? 'Agri-News & Schemes' : undefined}
           >
             <AiOutlineFileSearch size={20} />
-            {!collapsed && <span>Agri-News & Schemes</span>}
+            {(!collapsed || isOpen) && <span>Agri-News & Schemes</span>}
           </NavLink>
 
           <NavLink
             to="/dashboard/adminBalance"
             className={({ isActive }) => (isActive ? activeClass : normalClass)}
             onClick={() => setIsOpen(false)}
-            title={collapsed ? "Platform Balance" : undefined}
+            title={collapsed ? 'Platform Balance' : undefined}
           >
             <FaMoneyBillWave size={20} />
-            {!collapsed && <span>Platform Balance</span>}
+            {(!collapsed || isOpen) && <span>Platform Balance</span>}
           </NavLink>
 
-          {/* ===== FARMER LINKS ===== */}
+          {/* FARMER LINKS */}
           <NavLink
             to="/dashboard/daily-todo-list"
             className={({ isActive }) => (isActive ? activeClass : normalClass)}
             onClick={() => setIsOpen(false)}
-            title={collapsed ? "Daily To-Do List" : undefined}
+            title={collapsed ? 'Daily To-Do List' : undefined}
           >
-
-            <AiOutlineFileSearch size={20} />{' '}
-
-            {/* You can change the icon if you like */}
-            {!collapsed && <span>Daily To-Do List</span>}
+            <AiOutlineFileSearch size={20} />
+            {(!collapsed || isOpen) && <span>Daily To-Do List</span>}
           </NavLink>
 
           <NavLink
             to="/dashboard/field-registration"
             className={({ isActive }) => (isActive ? activeClass : normalClass)}
             onClick={() => setIsOpen(false)}
-            title={collapsed ? "Field Registration" : undefined}
+            title={collapsed ? 'Field Registration' : undefined}
           >
             <MdAddToPhotos size={20} />
-            {!collapsed && <span>Field Registration</span>}
+            {(!collapsed || isOpen) && <span>Field Registration</span>}
           </NavLink>
 
           <NavLink
             to="/dashboard/activity-scheduling"
             className={({ isActive }) => (isActive ? activeClass : normalClass)}
             onClick={() => setIsOpen(false)}
-            title={collapsed ? "Activity Logging" : undefined}
+            title={collapsed ? 'Activity Logging' : undefined}
           >
             <AiOutlineHistory size={20} />
-            {!collapsed && <span>Activity Logging</span>}
+            {(!collapsed || isOpen) && <span>Activity Logging</span>}
           </NavLink>
+
           <NavLink
             to="/dashboard/weather-forecast"
             className={({ isActive }) => (isActive ? activeClass : normalClass)}
             onClick={() => setIsOpen(false)}
-            title={collapsed ? "Weather Forecast" : undefined}
+            title={collapsed ? 'Weather Forecast' : undefined}
           >
-
-            <AiOutlineFileSearch size={20} />{' '}
-
-            {/* You can choose another icon if needed */}
-            {!collapsed && <span>Weather Forecast</span>}
-          </NavLink>
-
-          <NavLink
-            to="/dashboard/activity-scheduling"
-            className={({ isActive }) => (isActive ? activeClass : normalClass)}
-            onClick={() => setIsOpen(false)}
-            title={collapsed ? "Activity Logging" : undefined}
-          >
-            <AiOutlineHistory size={20} />
-            {!collapsed && <span>Activity Logging</span>}
+            <AiOutlineFileSearch size={20} />
+            {(!collapsed || isOpen) && <span>Weather Forecast</span>}
           </NavLink>
 
           <NavLink
             to="/dashboard/resource-management"
             className={({ isActive }) => (isActive ? activeClass : normalClass)}
             onClick={() => setIsOpen(false)}
-            title={collapsed ? "Resource Management" : undefined}
+            title={collapsed ? 'Resource Management' : undefined}
           >
             <MdManageAccounts size={20} />
-            {!collapsed && <span>Resource Management</span>}
+            {(!collapsed || isOpen) && <span>Resource Management</span>}
           </NavLink>
 
           <NavLink
             to="/dashboard/cropsInventory"
             className={({ isActive }) => (isActive ? activeClass : normalClass)}
             onClick={() => setIsOpen(false)}
-            title={collapsed ? "Crops Inventory" : undefined}
+            title={collapsed ? 'Crops Inventory' : undefined}
           >
             <AiOutlinePlus size={20} />
-            {!collapsed && <span>Crops Inventory</span>}
+            {(!collapsed || isOpen) && <span>Crops Inventory</span>}
           </NavLink>
 
           <NavLink
             to="/dashboard/chatAgriSpecialist"
             className={({ isActive }) => (isActive ? activeClass : normalClass)}
             onClick={() => setIsOpen(false)}
-            title={collapsed ? "Chat with Agri-specialist" : undefined}
+            title={collapsed ? 'Chat with Agri-specialist' : undefined}
           >
             <AiOutlineUserSwitch size={20} />
-            {!collapsed && <span>Chat with Agri-specialist</span>}
+            {(!collapsed || isOpen) && <span>Chat with Agri-specialist</span>}
           </NavLink>
 
-          {/* ===== CUSTOMER LINKS ===== */}
+          {/* CUSTOMER LINKS */}
           <NavLink
             to="/dashboard/orderHistory"
             className={({ isActive }) => (isActive ? activeClass : normalClass)}
             onClick={() => setIsOpen(false)}
-            title={collapsed ? "Order History" : undefined}
+            title={collapsed ? 'Order History' : undefined}
           >
             <AiOutlineHistory size={20} />
-            {!collapsed && <span>Order History</span>}
+            {(!collapsed || isOpen) && <span>Order History</span>}
           </NavLink>
 
           <NavLink
             to="/dashboard/favorites"
             className={({ isActive }) => (isActive ? activeClass : normalClass)}
             onClick={() => setIsOpen(false)}
-            title={collapsed ? "Favorite Crops" : undefined}
+            title={collapsed ? 'Favorite Crops' : undefined}
           >
             <AiOutlinePieChart size={20} />
-            {!collapsed && <span>Favorite Crops</span>}
+            {(!collapsed || isOpen) && <span>Favorite Crops</span>}
           </NavLink>
 
-          {/* ===== AGRI-SPECIALIST LINKS ===== */}
+          {/* AGRI-SPECIALIST LINKS */}
           <NavLink
             to="/dashboard/chatInbox"
             className={({ isActive }) => (isActive ? activeClass : normalClass)}
             onClick={() => setIsOpen(false)}
-            title={collapsed ? "Farmer Chats" : undefined}
+            title={collapsed ? 'Farmer Chats' : undefined}
           >
             <AiOutlineTeam size={20} />
-            {!collapsed && <span>Farmer Chats</span>}
+            {(!collapsed || isOpen) && <span>Farmer Chats</span>}
           </NavLink>
 
           <NavLink
             to="/dashboard/addBlog"
             className={({ isActive }) => (isActive ? activeClass : normalClass)}
             onClick={() => setIsOpen(false)}
-            title={collapsed ? "Add Blog/Advice" : undefined}
+            title={collapsed ? 'Add Blog/Advice' : undefined}
           >
             <AiOutlinePlusCircle size={20} />
-            {!collapsed && <span>Add Blog/Advice</span>}
+            {(!collapsed || isOpen) && <span>Add Blog/Advice</span>}
           </NavLink>
         </nav>
 
-        {/* ===== Footer Section ===== */}
+        {/* Footer */}
         <div className="border-t p-4 space-y-2">
-          {/* --- Profile Link --- */}
           <Link
             to={profileLink}
             className="flex items-center gap-3 px-4 py-2 hover:bg-gray-200 rounded text-gray-700"
             onClick={() => setIsOpen(false)}
-            title={collapsed ? "Profile" : undefined}
+            title={collapsed ? 'Profile' : undefined}
           >
             <Settings size={20} />
-            {!collapsed && <span className="font-medium">Profile</span>}
+            {(!collapsed || isOpen) && <span className="font-medium">Profile</span>}
           </Link>
-
-          {/* --- Logout Button --- */}
+          
           <button
-            // onClick={signOutUser}
             className="w-full flex items-center gap-3 px-4 py-2 text-red-600 hover:bg-red-50 rounded"
-            title={collapsed ? "Logout" : undefined}
+            title={collapsed ? 'Logout' : undefined}
+            onClick={handleLogout}
           >
             <LogOut size={20} />
-            {!collapsed && <span className="font-medium">Logout</span>}
+            {(!collapsed || isOpen) && <span className="font-medium">Logout</span>}
           </button>
         </div>
       </div>

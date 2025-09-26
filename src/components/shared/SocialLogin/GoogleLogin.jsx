@@ -1,8 +1,8 @@
 import { FaGoogle } from "react-icons/fa";
-import useAuth from "../../hooks/useAuth";
+import useAuth from "../../../hooks/useAuth";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router";
-import { saveUserToDatabase } from "../../utils/utilities";
+import { saveUserToDatabase } from "../../../utils/utilities";
 
 const GoogleLogin = () => {
   const { googleSignInUser } = useAuth();
@@ -41,7 +41,7 @@ const GoogleLogin = () => {
     }
   };
   return (
-    <div>
+    <div className="w-full">
       <button
         onClick={handleGoogleSignIn}
         className="btn bg-white text-black border-[#e5e5e5] shadow-lg w-full"
