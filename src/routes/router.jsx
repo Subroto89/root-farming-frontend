@@ -15,6 +15,9 @@ import AuthLayout from '../layouts/AuthLayout';
 import Register from '../components/AuthComponents/Register';
 import Login from '../components/AuthComponents/Login';
 import ResourceManagement from '../pages/DashboardPage/FarmerDashboardPage/ResourceManagement/ResourceManagement';
+import Shop from '../pages/ShopPage/Shop';
+import Cart from '../pages/CartPage/Cart';
+import Blog from '../pages/Blog/Blog';
 
 const router = createBrowserRouter([
   // -------------------------------------------
@@ -37,6 +40,23 @@ const router = createBrowserRouter([
         path: 'contact',
         Component: ContactUs,
       },
+      {
+        path: 'shop',
+        Component: Shop
+      },
+      {
+        path: 'cart',
+        Component: Cart
+      },
+      {
+        path: 'blog',
+        Component: Blog
+      },
+      {
+        path: 'update-profile/:email',
+        Component: MyProfile,
+      }
+     
     ],
   },
 

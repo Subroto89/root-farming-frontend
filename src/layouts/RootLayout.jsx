@@ -1,6 +1,7 @@
 import { Outlet } from "react-router";
-import Navbar from "../components/shared/Navbar";
+// import Navbar from "../components/shared/Navbar";
 import Footer from "../components/shared/Footer";
+import Navbar from "../components/NavbarComponents/Navbar";
 
 const RootLayout = () => {
    return (
@@ -8,6 +9,7 @@ const RootLayout = () => {
          <div>
             <nav className="fixed top-0 left-0 w-full z-50">
                <Navbar />
+               {/* <Navbar/> */}
             </nav>
             <main className="min-h-[calc(100vh-40px)]">
                <Outlet>{/* Dynamic Pages Goes Here */}</Outlet>
