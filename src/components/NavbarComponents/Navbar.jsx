@@ -1,53 +1,26 @@
-import { useState } from "react";
+
 import RFLogo from "./RFLogo";
 import NavMenuGeneral from "./NavMenuGeneral";
 import ThemeSwitcher from "./ThemeSwitcher";
 import AuthenticationButton from "./AuthenticationButton";
-import NavAvatar from "./NavAvatar";
+import NavAvatar from "./NavAvatar/NavAvatar";
 
 const Navbar = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isLanguageOpen, setIsLanguageOpen] = useState(false);
-
-  // Avata Dropdown Functionality ----------------------------
-
-  const toggleAvatarDropdown = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
-  const closeAvatarDropdown = () => {
-    setIsMenuOpen(false);
-  };
-
-  // Menu Toggle Functionality
-  // ---------------------------------------------------------
-  const toggleLanguage = () => {
-    setIsLanguageOpen(!isLanguageOpen);
-  };
-  const closeLanguageDropdown = () => {
-    setIsLanguageOpen(false);
-  };
-
+  
   return (
     <>
-      <div className="w-11/12 mx-auto flex justify-between items-center py-4">
+      <div className="w-11/12 flex justify-between items-center mx-auto py-2">
         {/*Logo Section ------------------- */}
-        <RFLogo />
+        <div>
+          <RFLogo />
+        </div>
 
         {/*Nav Links In Large Screen ----------------------- */}
-        <div className="hidden md:flex gap-4">
-          <NavMenuGeneral
-            toggleLanguage={toggleLanguage}
-            closeAvatarDropdown={closeAvatarDropdown}
-          />
-          
+        <div className="hidden md:flex items-center gap-2">
+          <NavMenuGeneral/>
           <ThemeSwitcher />
-
           <AuthenticationButton />
-
-          <NavAvatar
-            toggleAvatarDropdown={toggleAvatarDropdown}
-            closeLanguageDropdown={closeLanguageDropdown}
-          />
+          <NavAvatar/>
         </div>
       </div>
     </>

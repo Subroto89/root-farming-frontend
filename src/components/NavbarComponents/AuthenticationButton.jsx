@@ -1,5 +1,5 @@
 import useAuth from "../../hooks/useAuth";
-import NavMenuButton from "./NavButton";
+import NavButton2 from "./NavButton2";
 
 const AuthenticationButton = () => {
     const { user, logOutUser } = useAuth();
@@ -7,9 +7,9 @@ const AuthenticationButton = () => {
     <>
       <div>
         {user ? (
-          <NavMenuButton label="Logout" onClick={logOutUser} />
+          <NavButton2 label="Logout" onClick={logOutUser} />
         ) : (
-          <NavMenuButton label="Sign In" address="/auth" />
+          <NavButton2 label="Sign In" address="/auth" />
         )}
       </div>
     </>

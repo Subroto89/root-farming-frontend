@@ -1,7 +1,8 @@
-import { NavLink } from "react-router";
+import { Link } from "react-router";
 import { useTheme } from "../../hooks/useTheme";
 
-const NavMenuButton = ({ label, icon: Icon, address, onClick }) => {
+
+const NavButton2 = ({ label, icon: Icon, address, onClick }) => {
     const { theme } = useTheme();
   const style =
             theme === "dark"
@@ -9,16 +10,16 @@ const NavMenuButton = ({ label, icon: Icon, address, onClick }) => {
                 : "text-gray-700 hover:text-gray-900";
   return (
     <>
-      <NavLink
+      <Link
         to={address}
         onClick={onClick}
         className={`btn bg-transparent border-0 font-semibold btn-color shadow-none ${style}`} 
       >
         {label}
         {Icon && <Icon size={20} />}
-      </NavLink>
+      </Link>
     </>
   );
 };
 
-export default NavMenuButton;
+export default NavButton2;
