@@ -3,7 +3,7 @@ import { Link } from "react-router";
 const RFLogo = () => {
   return (
     <>
-      <div className="w-96 text-3xl font-bold text-gray-600">
+      <div className="text-md md:text-lg lg:text-xl font-bold text-gray-600">
        <Link to="/">
         Root Farming
        </Link>

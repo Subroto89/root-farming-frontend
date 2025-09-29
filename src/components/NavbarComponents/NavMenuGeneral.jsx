@@ -1,7 +1,7 @@
-import React from "react";
 import NavMenuButton from "./NavButton";
-import { Languages } from "lucide-react";
 import LanguageButton from "./NavLanguage/LanguageButton";
+import ThemeSwitcher from "./ThemeSwitcher";
+import AuthenticationButton from "./AuthenticationButton";
 
 const NavMenuGeneral = () => {
   return (
@@ -14,6 +14,8 @@ const NavMenuGeneral = () => {
         <NavMenuButton label="Cart" address="/cart" />
         <NavMenuButton label="Blog" address="/blog" />
         <LanguageButton/>
+        <ThemeSwitcher />
+        <AuthenticationButton />
       </div>
     </>
   );

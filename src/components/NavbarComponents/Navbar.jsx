@@ -1,9 +1,8 @@
 
 import RFLogo from "./RFLogo";
 import NavMenuGeneral from "./NavMenuGeneral";
-import ThemeSwitcher from "./ThemeSwitcher";
-import AuthenticationButton from "./AuthenticationButton";
 import NavAvatar from "./NavAvatar/NavAvatar";
+import HamburgerButton from "./Hamburger/HamburgerButton";
 
 const Navbar = () => {
   
@@ -16,11 +15,14 @@ const Navbar = () => {
         </div>
 
         {/*Nav Links In Large Screen ----------------------- */}
-        <div className="hidden md:flex items-center gap-2">
+        <div className="hidden lg:flex items-center gap-2">
           <NavMenuGeneral/>
-          <ThemeSwitcher />
-          <AuthenticationButton />
           <NavAvatar/>
+        </div>
+
+        {/*Hamburger Menu In Small Screen ----------------------- */}
+        <div className="flex lg:hidden">
+          <HamburgerButton />
         </div>
       </div>
     </>
