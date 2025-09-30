@@ -1,4 +1,4 @@
-import NavMenuButton from "./NavButton";
+import NavButton from "../shared/Buttons/NavButton";
 import LanguageButton from "./NavLanguage/LanguageButton";
 import ThemeSwitcher from "./ThemeSwitcher";
 import AuthenticationButton from "./AuthenticationButton";
@@ -7,12 +7,12 @@ const NavMenuGeneral = () => {
   return (
     <>
       <div className="flex justify-center items-center gap-2">
-        <NavMenuButton label="Home" address="/" />
-        <NavMenuButton label="About Us" address="/about" />
-        <NavMenuButton label="Contact Us" address="/contact" />
-        <NavMenuButton label="Shop" address="/shop" />
-        <NavMenuButton label="Cart" address="/cart" />
-        <NavMenuButton label="Blog" address="/blog" />
+        <NavButton label="Home" address="/" />
+        <NavButton label="About Us" address="/about" />
+        <NavButton label="Contact Us" address="/contact" />
+        <NavButton label="Shop" address="/shop" />
+        <NavButton label="Cart" address="/cart" />
+        <NavButton label="Blog" address="/blog" />
         <LanguageButton/>
         <ThemeSwitcher />
         <AuthenticationButton />

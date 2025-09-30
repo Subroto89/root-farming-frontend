@@ -1,6 +1,6 @@
 import useAuth from "../../../hooks/useAuth";
-// import NavMenuButton from "../NavButton";
-import NavButton2 from "../NavButton2";
+// import NavButton from "../NavButton";
+import NavButton2 from "../../shared/Buttons/NavButton2";
 
 const NavAvatarDropdown = () => {
   const { user } = useAuth();

@@ -1,5 +1,5 @@
 import AuthenticationButton from "../AuthenticationButton";
-import NavMenuButton from "../NavButton";
+import NavButton from "../../shared/Buttons/NavButton";
 import LanguageButton from "../NavLanguage/LanguageButton";
 import RFLogo from "../RFLogo";
 import ThemeSwitcher from "../ThemeSwitcher";
@@ -14,18 +14,18 @@ const HamburgerSidebar = () => {
         <hr className="w-2/3 my-4 flex justify-center border-gray-400" />
 
          {/* 2. Links Section------------ */}
-        <NavMenuButton label="Home" address="/" />
-        <NavMenuButton label="About Us" address="/about" />
-        <NavMenuButton label="Contact Us" address="/contact" />
-        <NavMenuButton label="Shop" address="/shop" />
-        <NavMenuButton label="Cart" address="/cart" />
-        <NavMenuButton label="Blog" address="/blog" />
+        <NavButton label="Home" address="/" />
+        <NavButton label="About Us" address="/about" />
+        <NavButton label="Contact Us" address="/contact" />
+        <NavButton label="Shop" address="/shop" />
+        <NavButton label="Cart" address="/cart" />
+        <NavButton label="Blog" address="/blog" />
 
         <hr className="w-2/3 border-gray-400 my-4"/>
 
          {/* 3. Dashboard & Profile Section------------ */}
-        <NavMenuButton label="Dashboard" address="/dashboard" />
-        <NavMenuButton label="Profile" address="/profile" />
+        <NavButton label="Dashboard" address="/dashboard" />
+        <NavButton label="Profile" address="/profile" />
 
         <hr className="w-2/3 border-gray-400 my-4"/>
 

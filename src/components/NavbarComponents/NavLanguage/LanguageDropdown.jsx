@@ -1,4 +1,4 @@
-import NavButton2 from "../NavButton2";
+import NavButton2 from "../../shared/Buttons/NavButton2";
 
 const LanguageDropdown = () => {
     return (

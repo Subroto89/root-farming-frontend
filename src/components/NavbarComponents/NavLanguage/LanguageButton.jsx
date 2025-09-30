@@ -1,5 +1,5 @@
 import { useState } from "react";
-import NavButton2 from "../NavButton2";
+import NavButton2 from "../../shared/Buttons/NavButton2";
 import { Languages } from "lucide-react";
 import LanguageDropdown from "./LanguageDropdown";
 
