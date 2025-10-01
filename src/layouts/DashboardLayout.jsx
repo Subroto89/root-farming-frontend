@@ -1,35 +1,44 @@
-import React from "react";
-import { Outlet } from 'react-router';
-import { Toaster } from 'react-hot-toast';
-import Sidebar from '../pages/DashboardPage/Sidebar/Sidebar';
-import Topbar from '../pages/DashboardPage/Sidebar/Topbar';
-
-
+import { useState } from "react";
+import { Outlet } from "react-router";
+import DashboardNavbar from "../components/Dashboard/Navbar/DashboardNavbar";
+import DashboardSidebar from "../components/Dashboard/Sidebar/DashboardSidebar";
 
 const DashboardLayout = () => {
-  return (
-    <div className="relative min-h-screen md:flex bg-gray-50 dark:bg-gray-900">
-      {/* Left Side: Sidebar Component */}
-      <div >
-        <Sidebar />
-      </div>
+   const [isSideBarOpen, setIsSideBarOpen] = useState(false);
+  const toggleMenu = () => {
+    setIsSideBarOpen(!isSideBarOpen);
+  };
 
-      {/* Right Side: Dashboard Dynamic Content */}
-      <div className="flex-1">
-        {/* <Topbar /> */}
-        <div className=" md:ml-64 ">
-          {/* Outlet for dynamic contents */}
-          <Outlet />
-          <Toaster
-            position="top-right"
-            toastOptions={{
-              className:
-                "bg-white dark:bg-gray-800 text-gray-900 dark:text-white",
-            }}
-          />
+  return (
+    <>
+      <div className="relative flex flex-col min-h-screen bg-gray-100">
+        {/* ------------------------------------------------------------
+            Dashboard Navbar For Small Screen Only Section
+            ------------------------------------------------------------ */}
+        <div className="absolute md:hidden top-0 z-20 inset-x-0">
+          <DashboardNavbar isSideBarOpen={isSideBarOpen} toggleMenu={toggleMenu}/>
+        </div>
+
+        <div className="flex-1 gap-2 w-full">
+          {/* ------------------------------------------------------------
+          Sidebar Section
+          ------------------------------------------------------------ */}
+          <div>
+            <DashboardSidebar
+              isSideBarOpen={isSideBarOpen}
+              toggleMenu={toggleMenu}
+            />
+          </div>
+          {/* ------------------------------------------------------------
+          Outlet Section
+          ------------------------------------------------------------ */}
+          <div className="w-full md:pl-64">
+            <Outlet />
+          </div>
+          {/* ------------------------------------------------------------ */}
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
