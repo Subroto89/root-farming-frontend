@@ -1,23 +1,26 @@
-import React from 'react';
-import NavButton from '../../../../shared/Buttons/NavButton';
-import FinancialsAndCommissionsDropdown from './FinancialsAndCommissionsDropdown';
+import React, { useState } from "react";
+import NavButton from "../../../../shared/Buttons/NavButton";
+import FinancialsAndCommissionsDropdown from "./FinancialsAndCommissionsDropdown";
+import { ChevronDown, ChevronRight, ReceiptText } from "lucide-react";
 
 const FinancialAndCommissionsButton = () => {
-    return (
-        <>
-            {/*  Financials and Commissions Button --------------*/}
-            <div className='relative'>
-                <NavButton
-                    label="Financials & Commissions"
-                />
-            </div>
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const toggleMenu = () => {
+    setIsMenuOpen((prev) => !prev);
+  };
+  return (
+    <>
+      {/*  Financials and Commissions Button --------------*/}
+      <div onClick={toggleMenu} className="flex items-center justify-between space-x-1">
+        <NavButton label="Financials & Commissions" icon={ ReceiptText } />
 
-            {/* Financials and Commisions Dropdown ------------- */}
-            <div className='absolute top-0 -right-2'>
-                <FinancialsAndCommissionsDropdown/>
-            </div>
-        </>
-    );
+        {!isMenuOpen ? <ChevronRight size={18} /> : <ChevronDown size={18} />}
+      </div>
+
+      {/* Financials and Commisions Dropdown ------------- */}
+      <div>{isMenuOpen && <FinancialsAndCommissionsDropdown />}</div>
+    </>
+  );
 };
 
 export default FinancialAndCommissionsButton;

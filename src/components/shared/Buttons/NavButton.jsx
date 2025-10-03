@@ -14,8 +14,8 @@ const NavButton = ({ label, icon: Icon, address, onClick }) => {
         onClick={onClick}
         className={`btn bg-transparent border-0 font-bold btn-color shadow-none ${style}`} 
       >
-        {label}
         {Icon && <Icon size={20} />}
+        {label}
       </NavLink>
     </>
   );

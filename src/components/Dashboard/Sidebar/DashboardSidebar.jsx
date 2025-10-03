@@ -1,28 +1,21 @@
-import { Link, useNavigate } from "react-router";
+import { Link } from "react-router";
 import useAuth from "../../../hooks/useAuth";
-import { useTheme } from "../../../hooks/useTheme";
+// import { useTheme } from "../../../hooks/useTheme";
 // import LoadingSpinner from "../../shared/LoadingSpinner";
 
 // import useUserRole from "../../../hooks/useUserRole";
-import { FaSignOutAlt } from "react-icons/fa";
-import RFLogo from "../../NavbarComponents/RFLogo";
+import RFLogo from "../../shared/RFLogo";
 import LoadingSpinner from "../../shared/LoadingSpinner";
-import AdminMenu from "../Menu/AdminMenu/AdminMenu";
-import SellerMenu from "../Menu/SellerMenu/SellerMenu";
-import CustomerMenu from "../Menu/CustomerMenu/CustomerMenu";
-import FarmerMenu from "../Menu/FarmerMenu/FarmerMenu";
-import { Moon, Sun, UserRoundPen } from "lucide-react";
+
+import UserPhoto from "./UserPhoto";
+import UserWiseMenu from "./UserWiseMenu";
+import ThemeSwitcher from "../../shared/ThemeSwitcher";
+import LogoutButton from "./LogoutButton";
+import UpdateProfileButton from "./UpdateProfileButton";
 
 const DashboardSidebar = ({ isSideBarOpen, toggleMenu }) => {
-  const { user, logOutUser } = useAuth();
-  const navigate = useNavigate();
-
-  const { theme, toggleTheme } = useTheme();
-
   const { loading: authLoading } = useAuth();
-  //   const { userRole, userRoleLoading } = useUserRole();
-
-  const userRole = "farmer";
+  // const { userRoleLoading } = useUserRole();
 
   //   if (authLoading || userRoleLoading) return <LoadingSpinner />;
   if (authLoading) return <LoadingSpinner />;
@@ -31,82 +24,41 @@ const DashboardSidebar = ({ isSideBarOpen, toggleMenu }) => {
   return (
     <>
       <nav
-        className={`absolute w-56 md:w-64  inset-y-0 shadow-xl flex flex-col gap-20 md:fixed   md:translate-x-0 transform ${
-          !isSideBarOpen && "-translate-x-full"
-        }  transition duration-200 ease-in-out z-10`}
+        className={`fixed top-0 w-56 md:w-68 h-screen bg-green-100 shadow-xl flex flex-col justify-between
+             md:fixed md:translate-x-0 transform ${
+               !isSideBarOpen && "-translate-x-full"
+             }  transition duration-200 ease-in-out z-10`}
       >
         {/*---------------------------------------------------------------
         Sidebar Logo - For Large Screen Only 
         ---------------------------------------------------------------*/}
-        <div className="hidden md:block w-full">
-          <Link to="/">
-            <RFLogo />
-          </Link>
+        <div className="hidden md:block text-center mt-4">
+          <RFLogo />
         </div>
 
         {/* ---------------------------------------------------------------
-            Sidebar Menu
+            User Photo
         ---------------------------------------------------------------- */}
-        <div
-          className=" w-full mt-24 md:mt-1 flex flex-col"
-          onClick={toggleMenu}
-        >
-          <Link to="/dashboard">
-            <div className="w-16 h-16 rounded-full overflow-hidden ml-24 ring ring-blue-500 hover:ring-blue-700 hover:shadow-md hover:scale-104">
-              <img
-                src={user?.photoURL}
-                className="w-full h-full object-cover"
-                title={user?.displayName}
-              />
-            </div>
-          </Link>
+        <Link to="/dashboard" className="mb-6">
+          <UserPhoto />
+        </Link>
 
-          {/* User Wise Menu In The Middle Part ---------------------  */}
-          <div className="flex-1">
-            {userRole === "admin" ? (
-              <AdminMenu />
-            ) : userRole === "seller" ? (
-              <SellerMenu />
-            ) : userRole === "customer" ? (
-              <CustomerMenu />
-            ) : userRole === "farmer" ? (
-              <FarmerMenu />
-            ) : (
-              <h2>No menu</h2>
-            )}
-          </div>
+         {/* ---------------------------------------------------------------
+            User Role Wise Menu
+        ---------------------------------------------------------------- */}
+        <div className="flex-1 overflow-y-auto">
+          <UserWiseMenu />
+        </div>
 
-          <hr className="w-3/4 "/>
+        {/* ---------------------------------------------------------------
+            Bottom Section(Update Profile, Theme Switcher, and Logout Sec)
+        ---------------------------------------------------------------- */}
 
-          <div
-            className={`flex flex-col items-center mt-6  ${
-              theme === "dark" ? "text-white" : "text-gray-800  "
-            }`}
-          >
-            <Link
-              to={`/update-profile/${user?.email}`}
-              className="flex items-center justify-center gap-2 py-1 border-t border-b border-gray-400 hover:bg-green-500 hover:text-white cursor-pointer w-full mb-3  "
-            >
-              <UserRoundPen />
-              Update Profile
-            </Link>
-            <div className="flex items-center gap-4">
-              {/* -----------------------------------------------------------------------
-                          Theme Toggler Icon
-              ----------------------------------------------------------------------- */}
-              <div onClick={() => toggleTheme()}>
-                {theme === "dark" ? <Sun /> : <Moon />}
-              </div>
-
-              <button
-                onClick={() => {
-                  logOutUser(), navigate("/");
-                }}
-                className="flex items-center gap-2 border border-gray-400 rounded-md px-2 hover:bg-green-500 hover:text-white cursor-pointer"
-              >
-                Logout <FaSignOutAlt />{" "}
-              </button>
-            </div>
+        <div className="flex flex-col items-center mb-6 mt-6">
+          <UpdateProfileButton />
+          <div className="flex items-center gap-4">
+            <ThemeSwitcher />
+            <LogoutButton />
           </div>
         </div>
       </nav>

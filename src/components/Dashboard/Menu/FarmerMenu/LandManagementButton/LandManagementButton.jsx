@@ -1,23 +1,26 @@
 import React, { useState } from 'react';
 import NavButton from '../../../../shared/Buttons/NavButton';
 import LandManagementDropdown from './LandManagementDropdown';
+import { ChevronDown, ChevronRight, LandPlot } from 'lucide-react';
 
 const LandManagementButton = () => {
-    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
     const toggleSidebar = () => {
-        setIsSidebarOpen(prev => !prev)
+        setIsMenuOpen(prev => !prev)
     }
     return (
         <>
-            <div className="relative" onClick={toggleSidebar}>
+            <div onClick={toggleSidebar}  className="flex justify-between items-center space-x-1">
                 <NavButton
                     label="Land Management"
+                    icon={ LandPlot }
                 />
+                {!isMenuOpen ? <ChevronRight size={18}/> : <ChevronDown size={18}/>}
             </div>   
 
-            <div className="absolute top-0 -right-2">
+            <div>
                 {
-                    isSidebarOpen && (
+                    isMenuOpen && (
                         <LandManagementDropdown/>
                     )
 

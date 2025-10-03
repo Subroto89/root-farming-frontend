@@ -4,7 +4,7 @@ import Home from '../pages/HomePage/Home';
 import AboutUs from '../pages/AboutUsPage/AboutUs';
 import ContactUs from '../pages/ContactUsPage/ContactUs';
 import DashboardLayout from '../layouts/DashboardLayout';
-import Statisticspage from '../pages/Statisticspage/Statisticspage';
+import DashboardHome from '../pages/DashboardPages/DashboardHome';
 import MyProfile from '../pages/DashboardPage/ProfilePage/MyProfile';
 import FieldRegistration from '../pages/DashboardPage/FarmerDashboardPage/FieldRegistration';
 import ActivityLoggingScheduling from '../pages/DashboardPage/FarmerDashboardPage/ActivityLoggingScheduling';
@@ -69,7 +69,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        Component: Statisticspage,
+        Component: DashboardHome,
       },
       {
         path: 'my-profile',

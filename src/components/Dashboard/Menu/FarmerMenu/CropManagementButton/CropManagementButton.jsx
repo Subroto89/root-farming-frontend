@@ -1,26 +1,29 @@
 import React, { useState } from 'react';
 import NavButton from '../../../../shared/Buttons/NavButton';
 import CropManagementDropdown from './CropManagementDropdown';
+import { ChevronDown, ChevronRight, Vegan } from 'lucide-react';
 
 const CropManagementButton = () => {
 
-    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
     
     const toggleSidebar = () => {
-        setIsSidebarOpen(prev => !prev);
+        setIsMenuOpen(prev => !prev);
     }
 
     return (
         <>
-          <div onClick={toggleSidebar} className='relative'>
+          <div onClick={toggleSidebar}  className="flex justify-between items-center space-x-1">
             <NavButton
                 label="Crop Management"
+                icon={ Vegan }
             />
+            {!isMenuOpen ? <ChevronRight size={18}/> : <ChevronDown size={18}/>}
           </div>  
 
-          <div className='absolute top-0 -right-2'>
+          <div>
             {
-                isSidebarOpen && (
+                isMenuOpen && (
                     <CropManagementDropdown/>
                 )
             }

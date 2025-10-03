@@ -1,8 +1,8 @@
 import AuthenticationButton from "../AuthenticationButton";
 import NavButton from "../../shared/Buttons/NavButton";
 import LanguageButton from "../NavLanguage/LanguageButton";
-import RFLogo from "../RFLogo";
-import ThemeSwitcher from "../ThemeSwitcher";
+import RFLogo from "../../shared/RFLogo";
+import ThemeSwitcher from "../../shared/ThemeSwitcher";
 
 const HamburgerSidebar = () => {
   return (

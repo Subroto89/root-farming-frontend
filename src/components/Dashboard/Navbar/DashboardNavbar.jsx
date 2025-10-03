@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import RFLogo from "../../NavbarComponents/RFLogo";
+import RFLogo from "../../shared/RFLogo";
 import { Menu, UserRound, X } from "lucide-react";
 
 

@@ -4,7 +4,7 @@ import NavButton from '../../../../shared/Buttons/NavButton';
 const ContentManagementDropdown = () => {
     return (
         <>
-          <div>
+          <div className='flex flex-col items-start px-1 rounded-lg bg-green-200 ml-8 w-full border border-white'>
             <NavButton
                 label="Govt News & Facilities"
                 address="/dashboard/govt-news-facilites"

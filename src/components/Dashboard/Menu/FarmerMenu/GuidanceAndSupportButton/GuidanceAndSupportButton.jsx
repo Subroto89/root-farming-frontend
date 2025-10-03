@@ -1,27 +1,30 @@
 import React, { useState } from 'react';
 import GuidanceAndSupportButtonDropdown from './GuidanceAndSupportButtonDropdown';
 import NavButton from '../../../../shared/Buttons/NavButton';
+import { ChevronDown, ChevronRight, Info } from 'lucide-react';
 
 const GuidanceAndSupportButton = () => {
-    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     const toggleSidebar = () => {
-        setIsSidebarOpen(prev => !prev);
+        setIsMenuOpen(prev => !prev);
     }
     
     return (
         <>
             {/* Guidance & Support Button ----------- */}
-            <div  onClick={toggleSidebar}> 
+            <div  onClick={toggleSidebar}  className="flex justify-between items-center space-x-1"> 
                 <NavButton
                     label="Guidance & Support"
+                    icon={ Info }
                 />
+                {!isMenuOpen ? <ChevronRight size={18}/> : <ChevronDown size={18}/>}
             </div>
 
             {/* Dropdown ---------------------------- */}
-            <div className='absolute top-0 -right-2'>
+            <div>
                 {
-                    isSidebarOpen && (
+                    isMenuOpen && (
                         <GuidanceAndSupportButtonDropdown/>
                     )
                 }

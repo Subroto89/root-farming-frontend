@@ -4,7 +4,7 @@ import NavButton from '../../../../shared/Buttons/NavButton';
 const FinancialsAndCommissionsDropdown = () => {
     return (
         <>
-            <div className='flex flex-col p-2 rounded-lg'>
+            <div className='flex flex-col items-start px-1 rounded-lg bg-green-200 ml-8 w-full border border-white'>
                 <NavButton
                     label="Specialists' Salary"
                     address="/dashboard/specialists'-salary"

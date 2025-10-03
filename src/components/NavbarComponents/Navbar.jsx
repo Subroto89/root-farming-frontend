@@ -1,5 +1,5 @@
 
-import RFLogo from "./RFLogo";
+import RFLogo from "../shared/RFLogo";
 import NavMenuGeneral from "./NavMenuGeneral";
 import NavAvatar from "./NavAvatar/NavAvatar";
 import HamburgerButton from "./Hamburger/HamburgerButton";

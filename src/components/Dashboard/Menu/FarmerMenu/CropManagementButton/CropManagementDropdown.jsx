@@ -4,7 +4,7 @@ import NavButton from '../../../../shared/Buttons/NavButton';
 const CropManagementDropdown = () => {
     return (
         <>
-            <div className='flex flex-col items-start gap-2 p-2 rounded-lg'>
+            <div className='flex flex-col items-start px-1 rounded-lg bg-green-200 ml-8 border border-white'>
                 <NavButton
                     label="Start New Crop"
                     address="/dashboard/new-crop"

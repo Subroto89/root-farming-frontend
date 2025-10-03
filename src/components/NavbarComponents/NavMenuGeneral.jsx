@@ -1,6 +1,6 @@
 import NavButton from "../shared/Buttons/NavButton";
 import LanguageButton from "./NavLanguage/LanguageButton";
-import ThemeSwitcher from "./ThemeSwitcher";
+import ThemeSwitcher from "../shared/ThemeSwitcher";
 import AuthenticationButton from "./AuthenticationButton";
 
 const NavMenuGeneral = () => {

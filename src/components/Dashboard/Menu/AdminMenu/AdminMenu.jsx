@@ -1,3 +1,4 @@
+import { ChartScatter, House, Rss, Shapes, ShieldCheck } from 'lucide-react';
 import NavButton from '../../../shared/Buttons/NavButton';
 import ContentManagementButton from './ContentManagement/ContentManagementButton';
 import FinancialAndCommissionsButton from './FinancialAndCommissions/FinancialAndCommissionsButton';
@@ -11,6 +12,7 @@ const AdminMenu = () => {
                 <NavButton
                     label="Dashboard Home"
                     address="/dashboard"
+                    icon={House}
                 />
 
                 <UserManagementButton/>
@@ -21,23 +23,31 @@ const AdminMenu = () => {
                 
                 <NavButton 
                     label="Product Moderation"
-                    address="/dashboard/product-moderation"/>
+                    address="/dashboard/product-moderation"
+                    icon={ ShieldCheck }
+                />
 
                 <NavButton 
                     label="Reports & Analytics"
-                    address="/dashboard/reports-and-analytics"/>        
+                    address="/dashboard/reports-and-analytics"
+                    icon={ ChartScatter }
+                />        
                 
                 <NavButton
                     label="Category Management"
-                    address="/dashboard/manage-categories"/>
+                    address="/dashboard/manage-categories"
+                    icon={ Shapes }    
+                />
           
-                 <NavButton
+                 {/* <NavButton
                     label="Manage Banner Advertises"
-                    address="/dashboard/manage-banner-advertises"/>
+                    address="/dashboard/manage-banner-advertises"/> */}
           
                  <NavButton
                     label="Blogs Management"
-                    address="/dashboard/blogs-management"/>
+                    address="/dashboard/blogs-management"
+                    icon={ Rss }    
+                />
                 
             </div>
         </>
