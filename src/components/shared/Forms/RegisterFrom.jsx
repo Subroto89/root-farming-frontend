@@ -169,8 +169,10 @@ const RegisterForm = ({
                 aria-describedby="role-error"
               >
                 <option value="">Select a role</option>
-                <option value="user">User</option>
+                <option value="farmer">Farmer</option>
+                <option value="Agri-Specialist">Agri-Specialist</option>
                 <option value="seller">Seller</option>
+                <option value="customer">Customer</option>
               </select>
             </div>
             {errors.role && (

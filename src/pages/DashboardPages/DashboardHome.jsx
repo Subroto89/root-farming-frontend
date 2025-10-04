@@ -6,13 +6,14 @@ import AdminDashboardHome from '../../pages/DashboardPages/AdminDashboardPages/A
 import FarmerDashboardHome from '../../pages/DashboardPages/FarmerDashboardPages/FarmerDashboardHome';
 import SellerDashboardHome from '../../pages/DashboardPages/SellerDashboardPages/SellerDashboardHome';
 import CustomerDashboardHome from '../../pages/DashboardPages/CustomerDashboardPages/CustomerDashboardHome';
+import AgriSpecialistDashboardHome from '../../pages/DashboardPages/AgriSpecialistDashboardPages/AgriSpecialistDashboardHome';
 
 
 const DashboardHome = () => {
   const { user, loading } = useAuth();
 //   const {userRole, userRoleLoading} = useUserRole() 
 
-const userRole = "customer";
+const userRole = "admin";
 
 //   if (loading || userRoleLoading) {
 //     return <LoadingSpinner />;
@@ -27,7 +28,9 @@ const userRole = "customer";
     case 'admin':
       return <AdminDashboardHome />;
     case 'farmer':
-        return <FarmerDashboardHome />
+        return <FarmerDashboardHome />;
+    case 'Agri-Specialist':
+        return <AgriSpecialistDashboardHome/>;
     case 'seller': 
       return <SellerDashboardHome />; 
     case 'customer':
