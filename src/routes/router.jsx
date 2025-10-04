@@ -5,8 +5,8 @@ import AboutUs from '../pages/AboutUsPage/AboutUs';
 import ContactUs from '../pages/ContactUsPage/ContactUs';
 import DashboardLayout from '../layouts/DashboardLayout';
 import DashboardHome from '../pages/DashboardPages/DashboardHome';
+import FieldRegistration from '../pages/DashboardPages/FarmerDashboardPages/FieldRegistration';
 import MyProfile from '../pages/DashboardPage/ProfilePage/MyProfile';
-import FieldRegistration from '../pages/DashboardPage/FarmerDashboardPage/FieldRegistration';
 import ActivityLoggingScheduling from '../pages/DashboardPage/FarmerDashboardPage/ActivityLoggingScheduling';
 import ChatwithAgriSpecialist from '../pages/DashboardPage/FarmerDashboardPage/ChatwithAgriSpecialist';
 import WeatherForecast from '../pages/DashboardPage/FarmerDashboardPage/WeatherForecast';
@@ -63,6 +63,7 @@ const router = createBrowserRouter([
 
   // -------------------------------------------
   // Dashboard Layout
+  // -------------------------------------------
 
   {
     path: '/dashboard',

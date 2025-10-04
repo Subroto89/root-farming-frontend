@@ -7,7 +7,7 @@ const LandManagementDropdown = () => {
            <div className='flex flex-col items-start px-1 rounded-lg bg-green-200 ml-8 border border-white'>
                 <NavButton
                     label="Land Registration"
-                    address="/"
+                    address="/dashboard/field-registration"
                 />
                 <NavButton
                     label="View Registered Lands"
