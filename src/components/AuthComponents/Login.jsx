@@ -8,16 +8,15 @@ import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
 import { Icon } from "lucide-react";
 import { useRef } from "react";
-import { auth } from "../../firebase/firebase.confiq";
 import GoogleLogin from "../shared/SocialLogin/GoogleLogin";
 import GithubLogin from "../shared/SocialLogin/GithubLogin";
-import { sendPasswordResetEmail } from "firebase/auth";
+// import { sendPasswordResetEmail } from "firebase/auth";
 // import { userPasswordReset } from "../../contexts/AuthProvider";
-// import {saveUserToDatabase, TabTitle} from "../../utils/utilities";
+import {saveUserToDatabase, TabTitle} from "../../utils/utilities";
 
 const Login = () => {
-  // TabTitle('JoinUs');
-  const { signInUser, userPasswordReset } = useAuth();
+  TabTitle('Login');
+  const { signInUser } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
   const emailRef = useRef();
@@ -44,11 +43,10 @@ const Login = () => {
           timer: 1500,
         });
         // Step 2: Update User Data In The Database --------------------
-        // const userData = {
-        //   userEmail : user?.email
-        // }
-        // saveUserToDatabase(userData);
-
+        const userData = {
+          userEmail : user?.email
+        }
+        saveUserToDatabase(userData);
 
         // Step 3: Redirect after confirmation -------------------------
         navigate(destination);
@@ -79,20 +77,20 @@ const Login = () => {
         return;
       } 
       // Step 3: Send password reset email
-      sendPasswordResetEmail(auth, email)
-      .then(() => {
-          Swal.fire({
-            icon: "success",
-            title: "Email Sent",
-            text: "Password reset email has been sent. Please check your inbox.",
-          });
-      }).catch((error) => {
-          Swal.fire({
-            icon: "error",
-            title: "Reset Failed",
-            text: error.message || "Failed to send password reset email.",
-          });
-      })
+      // userPasswordReset(email)
+      // .then(() => {
+      //     Swal.fire({
+      //       icon: "success",
+      //       title: "Email Sent",
+      //       text: "Password reset email has been sent. Please check your inbox.",
+      //     });
+      // }).catch((error) => {
+      //     Swal.fire({
+      //       icon: "error",
+      //       title: "Reset Failed",
+      //       text: error.message || "Failed to send password reset email.",
+      //     });
+      // })
     }
 
   return (

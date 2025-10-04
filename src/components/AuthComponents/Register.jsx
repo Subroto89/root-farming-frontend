@@ -96,13 +96,7 @@ const Register = () => {
         userRole: data?.role
       }
       
-
-      saveUserToDatabase(userDataToDb)
-
-
-
-
-
+      saveUserToDatabase(userDataToDb);
 
       //   Step 5: Navigate User to Home Page
       navigate("/");

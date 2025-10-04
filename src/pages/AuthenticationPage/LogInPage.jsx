@@ -1,7 +1,7 @@
-import React from 'react';
+// import React from 'react';
 
-const LogInPage = () => {
-  return <div>LogInPage</div>;
-};
+// const LogInPage = () => {
+//   return <div>LogInPage</div>;
+// };
 
-export default LogInPage;
+// export default LogInPage;

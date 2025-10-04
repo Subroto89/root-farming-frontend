@@ -21,7 +21,7 @@ export const imageUpload = async (imageFile) => {
 };
 
 export const saveUserToDatabase = async(userData) => {
-  const {data} = await axios.post(`${import.meta.env.VITE_Server_API_KEY}/save-user`, userData);
+  const {data} = await axios.post(`${import.meta.env.VITE_Server_API_KEY}/users/save-user`, userData);
   console.log(data)
 };
 
