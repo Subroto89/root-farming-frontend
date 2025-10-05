@@ -42,4 +42,19 @@ export default function StartNewCrop() {
     });
 
     const selectedType = watch("type");
+
+    // ✅ Fetch crops
+    const { data: crops = [], isLoading } = useQuery({
+        queryKey: ["crops", farmerEmail],
+        queryFn: async () => {
+            const res = await axios.get(`http://localhost:3000/crops?email=${farmerEmail}`);
+            return res.data;
+        },
+        enabled: !!farmerEmail,
+    });
+
+    // ✅ Show Loader before data fetching
+    if (isLoading) return <LoadingPage />;
+
+    return <div className="p-4">Start New Crop</div>;
 }
