@@ -96,7 +96,7 @@ export default function StartNewCrop() {
     const onSubmit = (data) => addCropMutation.mutate(data);
 
     // ✅ Show Loader before data fetching
-    if (isLoading) return <LoadingPage />;
+     if (isLoading) return <LoadingPage />;
 
     return (
         <div className="p-4 max-w-7xl mx-auto bg-gray-50">
