@@ -43,7 +43,7 @@ export default function StartNewCrop() {
 
     const selectedType = watch("type");
 
-    //  Fetch crops
+    // ✅ Fetch crops
     const { data: crops = [], isLoading } = useQuery({
         queryKey: ["crops", farmerEmail],
         queryFn: async () => {
@@ -53,7 +53,7 @@ export default function StartNewCrop() {
         enabled: !!farmerEmail,
     });
 
-    // Add crop mutation (with ImgBB)
+    // ✅ Add crop mutation (with ImgBB)
     const addCropMutation = useMutation({
         mutationFn: async (formData) => {
             const imageFile = formData.image[0];
@@ -74,7 +74,7 @@ export default function StartNewCrop() {
             return res.data;
         },
         onSuccess: (data) => {
-            // Update React Query cache (no useState)
+            // ✅ Update React Query cache (no useState)
             queryClient.invalidateQueries(["crops", farmerEmail]);
             reset();
             setIsModalOpen(false);
@@ -95,8 +95,193 @@ export default function StartNewCrop() {
 
     const onSubmit = (data) => addCropMutation.mutate(data);
 
-    // Show Loader before data fetching
+    // ✅ Show Loader before data fetching
     if (isLoading) return <LoadingPage />;
 
-    return <div className="p-4">Start New Crop</div>;
+    return (
+        <div className="p-4 max-w-6xl mx-auto">
+            <div className="flex justify-between items-center mb-4">
+                <h2 className="text-xl font-bold">Crop Inventory Summary</h2>
+                <button
+                    onClick={() => setIsModalOpen(true)}
+                    className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+                >
+                    + Add Crops
+                </button>
+            </div>
+
+            {/* ✅ Table */}
+            {crops && crops.length > 0 ? (
+                <table className="table-auto w-full border-collapse">
+                    <thead>
+                        <tr className="bg-gray-100">
+                            <th className="border p-2">Image</th>
+                            <th className="border p-2">Name</th>
+                            <th className="border p-2">Description</th>
+                            <th className="border p-2">Amount</th>
+                            <th className="border p-2">Unit</th>
+                            <th className="border p-2">Price</th>
+                            <th className="border p-2">Discount</th>
+                            <th className="border p-2">Quality</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {crops.map((crop) => (
+                            <tr key={crop._id}>
+                                <td className="border p-2">
+                                    {crop.image && (
+                                        <img
+                                            src={crop.image}
+                                            alt={crop.name}
+                                            className="w-16 h-16 object-cover"
+                                        />
+                                    )}
+                                </td>
+                                <td className="border p-2">{crop.name}</td>
+                                <td className="border p-2">{crop.description}</td>
+                                <td className="border p-2">{crop.amount}</td>
+                                <td className="border p-2">{crop.unit || "—"}</td>
+                                <td className="border p-2">{crop.price}</td>
+                                <td className="border p-2">{crop.discount}</td>
+                                <td className="border p-2">{crop.quality}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            ) : (
+                <p>No crops found.</p>
+            )}
+
+            {/* ✅ Modal */}
+            {isModalOpen && (
+                <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+                    <div className="bg-white rounded-lg shadow-lg w-full max-w-2xl p-6 relative">
+                        <button
+                            onClick={() => setIsModalOpen(false)}
+                            className="absolute top-2 right-2 text-gray-600 hover:text-gray-800"
+                        >
+                            ✕
+                        </button>
+                        <h3 className="text-lg font-bold mb-4">Add Crop</h3>
+
+                        <form
+                            onSubmit={handleSubmit(onSubmit)}
+                            className="grid grid-cols-1 md:grid-cols-2 gap-4"
+                        >
+                            <InputField
+                                name="name"
+                                label="Name"
+                                placeholder="Crop Name"
+                                type="text"
+                                register={register}
+                                validationRules={{ required: "Name is required" }}
+                                errors={errors}
+                            />
+
+                            <InputField
+                                name="image"
+                                label="Crop Image"
+                                placeholder="Upload Image"
+                                type="file"
+                                register={register}
+                                validationRules={{ required: "Image is required" }}
+                                errors={errors}
+                            />
+
+                            <InputField
+                                name="description"
+                                label="Description"
+                                placeholder="Description"
+                                type="textarea"
+                                rows={5}
+                                register={register}
+                                validationRules={{ required: "Description is required" }}
+                                errors={errors}
+                            />
+
+                            <div>
+                                <label className="block text-sm font-medium">Type</label>
+                                <div className="flex items-center gap-4 mt-1">
+                                    <label className="flex items-center gap-1">
+                                        <input type="radio" value="weight" {...register("type")} />
+                                        Weight
+                                    </label>
+                                    <label className="flex items-center gap-1">
+                                        <input type="radio" value="pieces" {...register("type")} />
+                                        Pieces
+                                    </label>
+                                </div>
+                            </div>
+
+                            <InputField
+                                name="amount"
+                                label="Amount"
+                                placeholder="Amount"
+                                type="number"
+                                register={register}
+                                validationRules={{ required: "Amount is required" }}
+                                errors={errors}
+                            />
+
+                            {selectedType === "weight" && (
+                                <div>
+                                    <label className="block text-sm font-medium">Unit</label>
+                                    <Controller
+                                        name="unit"
+                                        control={control}
+                                        render={({ field }) => (
+                                            <Select {...field} options={unitOptions} placeholder="Select unit" />
+                                        )}
+                                    />
+                                </div>
+                            )}
+
+                            <InputField
+                                name="price"
+                                label="Price"
+                                placeholder="Price"
+                                type="number"
+                                register={register}
+                                validationRules={{ required: "Price is required" }}
+                                errors={errors}
+                            />
+
+                            <InputField
+                                name="discount"
+                                label="Discount"
+                                placeholder="Discount"
+                                type="number"
+                                register={register}
+                                errors={errors}
+                            />
+
+                            <InputField
+                                name="quality"
+                                label="Quality"
+                                type="select"
+                                placeholder="Select Quality"
+                                options={[
+                                    { value: "A", label: "A" },
+                                    { value: "B", label: "B" },
+                                    { value: "C", label: "C" },
+                                ]}
+                                register={register}
+                                validationRules={{ required: "Quality is required" }}
+                                errors={errors}
+                            />
+
+                            <div className="md:col-span-2">
+                                <button
+                                    type="submit"
+                                    className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+                                >
+                                    Save Crop
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            )}
+        </div>
+    );
 }
