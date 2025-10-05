@@ -112,7 +112,7 @@ const router = createBrowserRouter([
       },
       {
         path: 'govt-news-facilites',
-        Component: <GovtNewsAndFacilities />
+        // Component: GovtNewsAndFacilities
       },
       {
         path: "*",

@@ -90,7 +90,7 @@ const CategoryManagement = () => {
         {/* --------------------------------------------------------------
                      Category Based products/Crops Information Table
         ---------------------------------------------------------------*/}
-        <div>
+        {/* <div>
           {categories.length > 0 ? (
             <div className="w-full max-h-[calc(100vh-150px)] overflow-auto rounded-lg mt-10 shadow-lg">
               <table
@@ -131,7 +131,7 @@ const CategoryManagement = () => {
               message={"No Category Added Yet. Please, Add First."}
             />
           )}
-        </div>
+        </div> */}
 
         {/* --------------------------------------------------------------
                     Modal For Adding New Category
