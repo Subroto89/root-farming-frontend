@@ -35,7 +35,7 @@ const AdminMenu = () => {
                 
                 <NavButton
                     label="Category Management"
-                    address="/dashboard/manage-categories"
+                    address="/dashboard/category-management"
                     icon={ Shapes }    
                 />
           
