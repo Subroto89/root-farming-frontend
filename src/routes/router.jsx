@@ -20,6 +20,7 @@ import Cart from '../pages/CartPage/Cart';
 import Blog from '../pages/Blog/Blog';
 import ErrorPage from '../pages/DashboardPages/ErrorPage';
 import CategoryManagement from '../pages/DashboardPages/AdminDashboardPages/CategoryManagement/CategoryManagement';
+import GovtNewsAndFacilities from '../pages/DashboardPages/AdminDashboardPages/ContentManagment/GovtNewsAndFacilities';
 
 const router = createBrowserRouter([
   // -------------------------------------------
@@ -44,21 +45,20 @@ const router = createBrowserRouter([
       },
       {
         path: 'shop',
-        Component: Shop
+        Component: Shop,
       },
       {
         path: 'cart',
-        Component: Cart
+        Component: Cart,
       },
       {
         path: 'blog',
-        Component: Blog
+        Component: Blog,
       },
       {
         path: 'update-profile/:email',
         Component: MyProfile,
-      }
-     
+      },
     ],
   },
 
@@ -108,16 +108,16 @@ const router = createBrowserRouter([
       // Admin Dashboard Routes
       {
         path: 'category-management',
-        Component: CategoryManagement
+        Component: CategoryManagement,
       },
       {
         path: 'govt-news-facilites',
-        // Component: GovtNewsAndFacilities
+        Component: GovtNewsAndFacilities,
       },
       {
-        path: "*",
-        Component: ErrorPage
-      }
+        path: '*',
+        Component: ErrorPage,
+      },
     ],
   },
 
