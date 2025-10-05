@@ -99,7 +99,7 @@ export default function StartNewCrop() {
     if (isLoading) return <LoadingPage />;
 
     return (
-        <div className="p-4 max-w-6xl mx-auto">
+        <div className="p-4 max-w-7xl mx-auto bg-gray-50">
             <div className="flex justify-between items-center mb-4">
                 <h2 className="text-xl font-bold">Crop Inventory Summary</h2>
                 <button
@@ -111,10 +111,10 @@ export default function StartNewCrop() {
             </div>
 
             {/* ✅ Table */}
-            {crops && crops.length > 0 ? (
+             {crops && crops.length > 0 ? (
                 <table className="table-auto w-full border-collapse">
                     <thead>
-                        <tr className="bg-gray-100">
+                        <tr className="bg-white">
                             <th className="border p-2">Image</th>
                             <th className="border p-2">Name</th>
                             <th className="border p-2">Description</th>
@@ -126,24 +126,24 @@ export default function StartNewCrop() {
                         </tr>
                     </thead>
                     <tbody>
-                        {crops.map((crop) => (
-                            <tr key={crop._id}>
+                        {crops?.map((crop) => (
+                            <tr key={crop._id} className="bg-white">
                                 <td className="border p-2">
-                                    {crop.image && (
+                                    {crop?.image && (
                                         <img
-                                            src={crop.image}
-                                            alt={crop.name}
+                                            src={crop?.image}
+                                            alt={crop?.name}
                                             className="w-16 h-16 object-cover"
                                         />
                                     )}
                                 </td>
-                                <td className="border p-2">{crop.name}</td>
-                                <td className="border p-2">{crop.description}</td>
-                                <td className="border p-2">{crop.amount}</td>
-                                <td className="border p-2">{crop.unit || "—"}</td>
-                                <td className="border p-2">{crop.price}</td>
-                                <td className="border p-2">{crop.discount}</td>
-                                <td className="border p-2">{crop.quality}</td>
+                                <td className="border p-2">{crop?.name}</td>
+                                <td className="border p-2">{crop?.description}</td>
+                                <td className="border p-2">{crop?.amount}</td>
+                                <td className="border p-2">{crop?.unit || "—"}</td>
+                                <td className="border p-2">{crop?.price}</td>
+                                <td className="border p-2">{crop?.discount}</td>
+                                <td className="border p-2">{crop?.quality}</td>
                             </tr>
                         ))}
                     </tbody>
@@ -155,7 +155,7 @@ export default function StartNewCrop() {
             {/* ✅ Modal */}
             {isModalOpen && (
                 <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-                    <div className="bg-white rounded-lg shadow-lg w-full max-w-2xl p-6 relative">
+                    <div className="bg-white rounded-lg shadow-lg w-full max-w-4xl p-6 relative">
                         <button
                             onClick={() => setIsModalOpen(false)}
                             className="absolute top-2 right-2 text-gray-600 hover:text-gray-800"
