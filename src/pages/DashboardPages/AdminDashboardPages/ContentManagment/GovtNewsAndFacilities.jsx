@@ -1,7 +1,7 @@
 import React from 'react';
 
 const GovtNewsAndFacilities = () => {
-  return <div> GovtsNewsAndFacilitie GovtsNewsAndFacilitie</div>;
+  return <div>GovtNewsAndFacilities</div>;
 };
 
 export default GovtNewsAndFacilities;
