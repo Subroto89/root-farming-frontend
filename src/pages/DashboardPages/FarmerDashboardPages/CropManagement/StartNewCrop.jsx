@@ -43,7 +43,7 @@ export default function StartNewCrop() {
 
     const selectedType = watch("type");
 
-    // ✅ Fetch crops
+    //  Fetch crops
     const { data: crops = [], isLoading } = useQuery({
         queryKey: ["crops", farmerEmail],
         queryFn: async () => {
@@ -53,7 +53,49 @@ export default function StartNewCrop() {
         enabled: !!farmerEmail,
     });
 
-    // ✅ Show Loader before data fetching
+    // Add crop mutation (with ImgBB)
+    const addCropMutation = useMutation({
+        mutationFn: async (formData) => {
+            const imageFile = formData.image[0];
+            const imgbbKey = import.meta.env.VITE_IMGBB_API_KEY;
+            const imgForm = new FormData();
+            imgForm.append("image", imageFile);
+
+            const imgRes = await axios.post(`https://api.imgbb.com/1/upload?key=${imgbbKey}`, imgForm);
+            const imageUrl = imgRes.data.data.url;
+
+            const cropData = {
+                ...formData,
+                image: imageUrl,
+                unit: formData.unit?.value || null,
+                farmerEmail,
+            };
+            const res = await axios.post("http://localhost:3000/crops", cropData);
+            return res.data;
+        },
+        onSuccess: (data) => {
+            // Update React Query cache (no useState)
+            queryClient.invalidateQueries(["crops", farmerEmail]);
+            reset();
+            setIsModalOpen(false);
+            Swal.fire({
+                icon: "success",
+                title: "Crop Added",
+                text: `Crop "${data.description}" added successfully!`,
+            });
+        },
+        onError: (error) => {
+            Swal.fire({
+                icon: "error",
+                title: "Error",
+                text: error.response?.data?.message || "Failed to add crop",
+            });
+        },
+    });
+
+    const onSubmit = (data) => addCropMutation.mutate(data);
+
+    // Show Loader before data fetching
     if (isLoading) return <LoadingPage />;
 
     return <div className="p-4">Start New Crop</div>;
