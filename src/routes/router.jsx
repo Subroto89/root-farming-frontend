@@ -19,6 +19,7 @@ import Shop from '../pages/ShopPage/Shop';
 import Cart from '../pages/CartPage/Cart';
 import Blog from '../pages/Blog/Blog';
 import ErrorPage from '../pages/DashboardPages/ErrorPage';
+import CategoryManagement from '../pages/DashboardPages/AdminDashboardPages/CategoryManagement/CategoryManagement';
 
 const router = createBrowserRouter([
   // -------------------------------------------
@@ -78,7 +79,7 @@ const router = createBrowserRouter([
         Component: MyProfile,
       },
 
-      // Farmardashboardpage
+      // Farmar Dashboard Routes
 
       {
         path: 'field-registration',
@@ -103,6 +104,15 @@ const router = createBrowserRouter([
       {
         path: 'daily-todo-list',
         Component: DailyToDoList,
+      },
+      // Admin Dashboard Routes
+      {
+        path: 'category-management',
+        Component: CategoryManagement
+      },
+      {
+        path: 'govt-news-facilites',
+        Component: <GovtNewsAndFacilities />
       },
       {
         path: "*",
