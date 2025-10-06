@@ -9,6 +9,7 @@ import AddCategoryModal from "../../../../components/Dashboard/RouteBasedCompone
 import CategoryRow from "../../../../components/Dashboard/RouteBasedComponents/AdminRoutesComponents/CategoryManagement/CategoryRow";
 import LoadingSpinner from "../../../../components/shared/LoadingSpinner";
 import { FaTools } from "react-icons/fa";
+import UpdateCategoryModal from "../../../../components/Dashboard/RouteBasedComponents/AdminRoutesComponents/CategoryManagement/UpdateCategoryModal";
 
 
 const CategoryManagement = () => {
@@ -31,11 +32,13 @@ const CategoryManagement = () => {
     setIsUpdateCategoryModal(!isUpdateCategoryModal);
   };
 
+  
+
   // --------------------------------------------------------------------
   // Fetching All Categories Using Tanstack
   // --------------------------------------------------------------------
   const {
-    data: categories,
+    data: categories=[],
     isLoading,
     refetch,
   } = useQuery({
@@ -53,7 +56,7 @@ const CategoryManagement = () => {
   // ------------------------------------------------------------------------------
   const handleCategoryDelete = async (id) => {
     try {
-      const { data } = await axiosSecure.delete(`/delete-category/${id}`);
+      const { data } = await axiosSecure.delete(`/categories/delete-category/${id}`);
       if (data.deletedCount) {
         Swal.fire({
           icon: "success",
@@ -90,7 +93,7 @@ const CategoryManagement = () => {
         {/* --------------------------------------------------------------
                      Category Based products/Crops Information Table
         ---------------------------------------------------------------*/}
-        {/* <div>
+        <div>
           {categories.length > 0 ? (
             <div className="w-full max-h-[calc(100vh-150px)] overflow-auto rounded-lg mt-10 shadow-lg">
               <table
@@ -121,6 +124,7 @@ const CategoryManagement = () => {
                       handleCategoryDelete={handleCategoryDelete}
                       handleUpdateCategoryModal={handleUpdateCategoryModal}
                       setCategoryToEdit={setCategoryToEdit}
+                      refetch={refetch}
                     />
                   ))}
                 </tbody>
@@ -131,15 +135,28 @@ const CategoryManagement = () => {
               message={"No Category Added Yet. Please, Add First."}
             />
           )}
-        </div> */}
+        </div>
 
         {/* --------------------------------------------------------------
                     Modal For Adding New Category
         -------------------------------------------------------------- */}
         <div>
           {isCategoryModal && (
-            <AddCategoryModal handleCategoryModal={handleCategoryModal} />
+            <AddCategoryModal handleCategoryModal={handleCategoryModal} refetch={refetch}/>
           )}
+        </div>
+
+         {/* --------------------------------------------------------------
+                    Modal for Category Update
+        -------------------------------------------------------------- */}
+        <div>
+            {isUpdateCategoryModal && (
+                <UpdateCategoryModal 
+                    handleUpdateCategoryModal={handleUpdateCategoryModal} 
+                    categoryToEdit={categoryToEdit}
+                    refetch={refetch}
+                />
+            )}
         </div>
       </div>
     </>

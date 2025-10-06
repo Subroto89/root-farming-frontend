@@ -1,4 +1,5 @@
 import { SquarePen, Trash } from "lucide-react";
+import { capitalizeFirstLetter } from "../../../../../utils/utilities";
 
 const CategoryRow = ({ category, handleCategoryDelete, handleUpdateCategoryModal, setCategoryToEdit }) => {
   const { _id, categoryName, categoryPhoto, productCount, createdAt, status } = category;
@@ -19,7 +20,7 @@ const CategoryRow = ({ category, handleCategoryDelete, handleUpdateCategoryModal
       <td className="py-2 px-8">{categoryName}</td>
       <td className="py-2 px-8 text-center">{productCount}</td>
       <td className="py-2 px-8">{new Date(createdAt).toLocaleDateString()}</td>
-      <td className="py-2 px-8">{status}</td>
+      <td className="py-2 px-8">{capitalizeFirstLetter(status)}</td>
       <td className="py-2 px-8">
         <div className="flex items-center gap-2">
           <SquarePen onClick={()=>{handleUpdateCategoryModal(), setCategoryToEdit(category)}} className="btn btn-xs btn-outline hover:bg-blue-400 hover:text-white"/>
