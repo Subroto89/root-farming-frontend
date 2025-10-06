@@ -23,6 +23,7 @@ import CategoryManagement from '../pages/DashboardPages/AdminDashboardPages/Cate
 import GovtNewsAndFacilities from '../pages/DashboardPages/AdminDashboardPages/ContentManagment/GovtNewsAndFacilities';
 import StartNewCrop from '../pages/DashboardPages/FarmerDashboardPages/CropManagement/StartNewCrop';
 import ManagementInstructionalGuides from '../pages/DashboardPages/AdminDashboardPages/ContentManagment/ManagementInstructionalGuides';
+import SpecialistsSalary from '../pages/DashboardPages/AdminDashboardPages/FinancialsAndCommission/SpecialistsSalary';
 
 const router = createBrowserRouter([
   // -------------------------------------------
@@ -85,6 +86,10 @@ const router = createBrowserRouter([
       {
         path: 'management-instructional-guides',
         Component: ManagementInstructionalGuides,
+      },
+      {
+        path: "specialist's-salary",
+        Component: SpecialistsSalary,
       },
 
       // Farmer Dashboard Routes
