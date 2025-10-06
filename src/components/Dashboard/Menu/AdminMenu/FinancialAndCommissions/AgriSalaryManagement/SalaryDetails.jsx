@@ -1,5 +1,5 @@
 import React from "react";
-import InputField from "../../../../components/shared/InputField/InputField";
+import InputField from "../../../../../shared/InputField/InputField";
 
 export default function SalaryDetails({ specialist}) {
   const handleSubmit = (e) => {
