@@ -3,9 +3,9 @@ import axios from "axios";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import Swal from "sweetalert2";
 import toast, { Toaster } from "react-hot-toast";
-import SalaryTable from "../../../../components/Dashboard/Menu/AdminMenu/FinancialAndCommissions/AgriSalaryManagement/SalaryTable";
-import SalaryDetails from "../../../../components/Dashboard/Menu/AdminMenu/FinancialAndCommissions/AgriSalaryManagement/SalaryDetails";
-import DownloadPDFButton from "../../../../components/Dashboard/Menu/AdminMenu/FinancialAndCommissions/AgriSalaryManagement/DownloadReportButton";
+import SalaryTable from "../../../../components/Dashboard/RouteBasedComponents/AdminRoutesComponents/AgriSalaryManagement/SalaryTable";
+import SalaryDetails from "../../../../components/Dashboard/RouteBasedComponents/AdminRoutesComponents/AgriSalaryManagement/SalaryDetails";
+import DownloadPDFButton from "../../../../components/Dashboard/RouteBasedComponents/AdminRoutesComponents/AgriSalaryManagement/DownloadReportButton";
 
 // Axios instance with base URL (for future use)
 const api = axios.create({
