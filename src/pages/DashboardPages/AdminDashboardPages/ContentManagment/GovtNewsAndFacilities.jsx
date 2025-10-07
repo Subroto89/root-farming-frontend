@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { PlusCircle, Trash2, Edit2 } from 'lucide-react';
+import { PlusCircle, Trash2, Edit2, Newspaper } from 'lucide-react';
 import Swal from 'sweetalert2';
 import GovtNewsForm from '../../../../components/Dashboard/GovtNewsComponents/GovtNewsForm';
 import GovtNewsModal from '../../../../components/Dashboard/GovtNewsComponents/GovtNewsModal';
@@ -70,7 +70,9 @@ const GovtNewsAndFacilities = () => {
   return (
     <div className="p-6 space-y-6">
       <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-bold">📰 Govt News & Facilities</h1>
+        <h1 className="text-2xl font-bold flex items-center gap-2">
+          <Newspaper size={24} /> Govt News & Facilities
+        </h1>
         <button
           onClick={() => {
             setEditData(null);
