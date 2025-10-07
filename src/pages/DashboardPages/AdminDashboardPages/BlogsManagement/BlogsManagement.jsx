@@ -5,6 +5,7 @@ import Swal from 'sweetalert2';
 import BlogModal from '../../../../components/Dashboard/BlogsManagementComponents/BlogModal';
 import BlogForm from '../../../../components/Dashboard/BlogsManagementComponents/BlogForm';
 import useAxiosSecure from '../../../../hooks/UseAxiosSecure';
+import LoadingSpinner from '../../../../components/shared/LoadingSpinner';
 
 const BlogsManagement = () => {
   const axiosSecure = useAxiosSecure();
@@ -55,7 +56,7 @@ const BlogsManagement = () => {
     });
   };
 
-  if (isLoading) return <p className="text-center mt-10">Loading blogs...</p>;
+  if (isLoading) return <LoadingSpinner />;
 
   return (
     <div className="p-6 space-y-6">
