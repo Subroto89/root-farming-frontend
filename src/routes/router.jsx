@@ -21,7 +21,11 @@ import Blog from '../pages/Blog/Blog';
 import ErrorPage from '../pages/DashboardPages/ErrorPage';
 import CategoryManagement from '../pages/DashboardPages/AdminDashboardPages/CategoryManagement/CategoryManagement';
 import GovtNewsAndFacilities from '../pages/DashboardPages/AdminDashboardPages/ContentManagment/GovtNewsAndFacilities';
-
+import ManageFarmers from '../pages/DashboardPages/AdminDashboardPages/UserManagement/ManageFarmers';
+import ManageSellers from '../pages/DashboardPages/AdminDashboardPages/UserManagement/ManageSellers';
+import ManageCustomers from '../pages/DashboardPages/AdminDashboardPages/UserManagement/ManageCustomers';
+import ManageAgriSpecialists from '../pages/DashboardPages/AdminDashboardPages/UserManagement/ManageAgriSpecialists';
+  
 const router = createBrowserRouter([
   // -------------------------------------------
   // Root Layout
@@ -78,6 +82,7 @@ const router = createBrowserRouter([
         path: 'my-profile',
         Component: MyProfile,
       },
+     
 
       // Farmar Dashboard Routes
 
@@ -105,7 +110,24 @@ const router = createBrowserRouter([
         path: 'daily-todo-list',
         Component: DailyToDoList,
       },
+
       // Admin Dashboard Routes
+      {
+        path: 'manage-sellers',
+        Component: ManageSellers
+      },
+      {
+        path: 'manage-customers',
+        Component: ManageCustomers
+      },
+      {
+        path: 'manage-agri-specialists',
+        Component: ManageAgriSpecialists
+      },
+      {
+        path: 'manage-farmers',
+        Component: ManageFarmers,
+      },       
       {
         path: 'category-management',
         Component: CategoryManagement,
