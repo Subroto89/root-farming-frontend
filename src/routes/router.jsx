@@ -21,6 +21,7 @@ import Blog from '../pages/Blog/Blog';
 import ErrorPage from '../pages/DashboardPages/ErrorPage';
 import CategoryManagement from '../pages/DashboardPages/AdminDashboardPages/CategoryManagement/CategoryManagement';
 import GovtNewsAndFacilities from '../pages/DashboardPages/AdminDashboardPages/ContentManagment/GovtNewsAndFacilities';
+import BlogsManagement from '../pages/DashboardPages/AdminDashboardPages/BlogsManagement/BlogsManagement';
 import StartNewCrop from '../pages/DashboardPages/FarmerDashboardPages/CropManagement/StartNewCrop';
 import ManagementInstructionalGuides from '../pages/DashboardPages/AdminDashboardPages/ContentManagment/ManagementInstructionalGuides';
 import SpecialistsSalary from '../pages/DashboardPages/AdminDashboardPages/FinancialsAndCommission/SpecialistsSalary';
@@ -131,6 +132,10 @@ const router = createBrowserRouter([
       {
         path: 'govt-news-facilites',
         Component: GovtNewsAndFacilities,
+      },
+      {
+        path: 'blogs-management',
+        Component: BlogsManagement,
       },
       {
         path: '*',
