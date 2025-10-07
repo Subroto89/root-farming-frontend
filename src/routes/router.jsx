@@ -22,6 +22,9 @@ import ErrorPage from '../pages/DashboardPages/ErrorPage';
 import CategoryManagement from '../pages/DashboardPages/AdminDashboardPages/CategoryManagement/CategoryManagement';
 import GovtNewsAndFacilities from '../pages/DashboardPages/AdminDashboardPages/ContentManagment/GovtNewsAndFacilities';
 import BlogsManagement from '../pages/DashboardPages/AdminDashboardPages/BlogsManagement/BlogsManagement';
+import StartNewCrop from '../pages/DashboardPages/FarmerDashboardPages/CropManagement/StartNewCrop';
+import ManagementInstructionalGuides from '../pages/DashboardPages/AdminDashboardPages/ContentManagment/ManagementInstructionalGuides';
+import SpecialistsSalary from '../pages/DashboardPages/AdminDashboardPages/FinancialsAndCommission/SpecialistsSalary';
 
 const router = createBrowserRouter([
   // -------------------------------------------
@@ -79,12 +82,27 @@ const router = createBrowserRouter([
         path: 'my-profile',
         Component: MyProfile,
       },
+      
+      // Admin Dashboard Routes
+      {
+        path: 'management-instructional-guides',
+        Component: ManagementInstructionalGuides,
+      },
+      {
+        path: "specialist's-salary",
+        Component: SpecialistsSalary,
+      },
 
-      // Farmar Dashboard Routes
+      // Farmer Dashboard Routes
 
       {
         path: 'field-registration',
         Component: FieldRegistration,
+      },
+
+      {
+        path: 'new-crop',
+        Component: StartNewCrop,
       },
       {
         path: 'activity-scheduling',
