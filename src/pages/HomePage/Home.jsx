@@ -10,6 +10,7 @@ import OurTrustedPartnersSection from '../../components/HomePage/OurTrustedPartn
 import BecomePartner from '../../components/HomePage/BecomePartner';
 import IndustryRecognitionAndAchievenent from '../../components/HomePage/IndustryRecognitionAndAchievenent';
 import Features from '../../components/HomePage/Features';
+import HowItWorks from '../../components/HomePage/HowItWorks';
 
 const Home = () => {
   return (
@@ -18,6 +19,7 @@ const Home = () => {
       <HeroSection />
       <WeatherForecastSection />
       <Features />
+      <HowItWorks />
       <WhyChooseRFSection />
       {/* <BestSellingProductsSection /> */}
       <OurProductsSection />
