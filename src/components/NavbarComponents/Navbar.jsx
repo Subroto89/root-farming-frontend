@@ -5,9 +5,10 @@ import NavAvatar from "./NavAvatar/NavAvatar";
 import HamburgerButton from "./Hamburger/HamburgerButton";
 
 const Navbar = () => {
-  
+ 
   return (
     <>
+    <div className="w-full bg-green-700 border-b border-white text-white"> 
       <div className="w-11/12 flex justify-between items-center mx-auto py-2">
         {/*Logo Section ------------------- */}
         <div>
@@ -25,6 +26,8 @@ const Navbar = () => {
           <HamburgerButton />
         </div>
       </div>
+    </div>
+      
     </>
   );
 };

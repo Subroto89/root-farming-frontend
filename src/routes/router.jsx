@@ -26,6 +26,11 @@ import ManageSellers from '../pages/DashboardPages/AdminDashboardPages/UserManag
 import ManageCustomers from '../pages/DashboardPages/AdminDashboardPages/UserManagement/ManageCustomers';
 import ManageAgriSpecialists from '../pages/DashboardPages/AdminDashboardPages/UserManagement/ManageAgriSpecialists';
   
+import BlogsManagement from '../pages/DashboardPages/AdminDashboardPages/BlogsManagement/BlogsManagement';
+import StartNewCrop from '../pages/DashboardPages/FarmerDashboardPages/CropManagement/StartNewCrop';
+import ManagementInstructionalGuides from '../pages/DashboardPages/AdminDashboardPages/ContentManagment/ManagementInstructionalGuides';
+import SpecialistsSalary from '../pages/DashboardPages/AdminDashboardPages/FinancialsAndCommission/SpecialistsSalary';
+
 const router = createBrowserRouter([
   // -------------------------------------------
   // Root Layout
@@ -83,12 +88,27 @@ const router = createBrowserRouter([
         Component: MyProfile,
       },
      
+      
+      // Admin Dashboard Routes
+      {
+        path: 'management-instructional-guides',
+        Component: ManagementInstructionalGuides,
+      },
+      {
+        path: "specialist's-salary",
+        Component: SpecialistsSalary,
+      },
 
-      // Farmar Dashboard Routes
+      // Farmer Dashboard Routes
 
       {
         path: 'field-registration',
         Component: FieldRegistration,
+      },
+
+      {
+        path: 'new-crop',
+        Component: StartNewCrop,
       },
       {
         path: 'activity-scheduling',
@@ -135,6 +155,10 @@ const router = createBrowserRouter([
       {
         path: 'govt-news-facilites',
         Component: GovtNewsAndFacilities,
+      },
+      {
+        path: 'blogs-management',
+        Component: BlogsManagement,
       },
       {
         path: '*',

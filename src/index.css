@@ -10,7 +10,89 @@
    themes: light --default dark --prefersdark;
 }
 
+/* ---------------ROOT VARIABLES ------------------ */
+
+:root{
+  --color-primary: #3A6F43;
+  --color-secondary: #4682B4;
+  --color-accent: #FF8C00;
+  --color-neutral: #F6EFE7;
+
+  --color-info: ;
+  --color-info-dark: ;
+  --color-success: ;
+  --color-warning: ;  
+  --color-error: ;
+  --color-danger: ;
+  --color-white: #ffffff;
+
+  --color-black: #000000;
+  --color-dark: #242424;
+  --color-light: #f9f9f9;
+  --color-dark-gray: 1C1C1C;
+  --color-dark-variant: #1a1a1a;
+  --color-light-variant: #f0f0f0;
+
+  --card-padding: 1rem;
+  --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  
+}
+
+
+/* -------- DARK THEME VARIABLES ----------- */
+.dark-theme{
+  --color-background: #181a1e;
+  --color-foreground: #567aff;
+
+  --color-primary-text: #f6f6f6;
+  --color-secondary-text: #0a0a0a;
+   
+  --color-white: #202528;
+  --color-dark: #edeffd;
+  --color-dark-variant: #a3bdcc;
+  --color-light: rbga(0, 0, 0, 0.4);
+  --box-shadow: 0 2rem 3rem var(--color-light);
+}
+
+
+
+
+.text-muted{
+  color: var(--color-info-dark);
+}
+
+.primary{
+  color: var(--color-primary);
+}
+
+.danger{
+  color: var(--color-danger);
+} 
+
+.success{
+  color: var(--color-success);
+} 
+
+.warning{
+  color: var(--color-warning);
+} 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 body{
+  background-color: var(--color-neutral);
   font-family: "Montserrat", sans-serif;
   font-optical-sizing: auto;
   font-weight: 400;
@@ -20,6 +102,27 @@ body{
 .active{
   color: green
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;

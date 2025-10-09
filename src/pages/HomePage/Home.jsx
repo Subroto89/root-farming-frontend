@@ -1,9 +1,9 @@
 import React from 'react';
-
+// import MarqueeSection from '../../components/HomePage/MarqueeSection';
 import HeroSection from '../../components/HomePage/HeroSection';
 import WeatherForecastSection from '../../components/HomePage/WeatherForecastSection';
 import WhyChooseRFSection from '../../components/HomePage/WhyChooseRFSection';
-import BestSellingProductsSection from '../../components/HomePage/BestSellingProductsSection';
+// import BestSellingProductsSection from '../../components/HomePage/BestSellingProductsSection';
 import OurProductsSection from '../../components/HomePage/OurProductsSection';
 import HowItWorksSection from '../../components/HomePage/HowItWorksSection';
 import OurGrowingImpactSection from '../../components/HomePage/OurGrowingImpactSection';
@@ -19,7 +19,7 @@ const Home = () => {
       <HeroSection />
       <WeatherForecastSection />
       <WhyChooseRFSection />
-      <BestSellingProductsSection />
+      {/* <BestSellingProductsSection /> */}
       <OurProductsSection />
       <HowItWorksSection />
       <OurGrowingImpactSection />

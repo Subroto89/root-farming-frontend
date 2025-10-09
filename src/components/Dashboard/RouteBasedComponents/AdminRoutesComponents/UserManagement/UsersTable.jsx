@@ -7,7 +7,7 @@ const UsersTable = ({ users, refetch, setRole, setUserEmail, handleUpdateRoleMod
     <>
       <div className="w-full max-h-[calc(100vh-120px)] overflow-auto rounded-lg shadow-lg">
         <table className="min-w-full divide-y divide-gray-500 ">
-          <thead className={` shadow-lg text-sm sticky top-0 bg-gradient-to-b from-green-900 to-green-200 text-gray-200 }`}>
+          <thead className={` shadow-lg text-sm sticky top-0 bg-gradient-to-b from-green-900 to-green-300 text-gray-200 }`}>
             <tr>
               <th
                 scope="col"
@@ -35,7 +35,7 @@ const UsersTable = ({ users, refetch, setRole, setUserEmail, handleUpdateRoleMod
               </th>
               <th
                 scope="col"
-                className="font-bold uppercase flex items-center justify-center  gap-3 px-5 py-2"
+                className="font-bold uppercase flex items-center justify-center gap-3 px-5 py-2"
               >
                 <GrUpdate size={18} />
                 Action

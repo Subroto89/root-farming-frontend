@@ -10,7 +10,7 @@ import CategoryRow from "../../../../components/Dashboard/RouteBasedComponents/A
 import LoadingSpinner from "../../../../components/shared/LoadingSpinner";
 import { FaTools } from "react-icons/fa";
 import UpdateCategoryModal from "../../../../components/Dashboard/RouteBasedComponents/AdminRoutesComponents/CategoryManagement/UpdateCategoryModal";
-
+import Container from "../../../../components/shared/Container";
 
 const CategoryManagement = () => {
   TabTitle("Category Management");
@@ -32,13 +32,11 @@ const CategoryManagement = () => {
     setIsUpdateCategoryModal(!isUpdateCategoryModal);
   };
 
-  
-
   // --------------------------------------------------------------------
   // Fetching All Categories Using Tanstack
   // --------------------------------------------------------------------
   const {
-    data: categories=[],
+    data: categories = [],
     isLoading,
     refetch,
   } = useQuery({
@@ -56,7 +54,9 @@ const CategoryManagement = () => {
   // ------------------------------------------------------------------------------
   const handleCategoryDelete = async (id) => {
     try {
-      const { data } = await axiosSecure.delete(`/categories/delete-category/${id}`);
+      const { data } = await axiosSecure.delete(
+        `/categories/delete-category/${id}`
+      );
       if (data.deletedCount) {
         Swal.fire({
           icon: "success",
@@ -73,92 +73,95 @@ const CategoryManagement = () => {
 
   return (
     <>
-      <div>
-        {/* --------------------------------------------------------------
+      <Container>
+        <div>
+          {/* --------------------------------------------------------------
                      Page Title & Button For Adding New Category
         -------------------------------------------------------------- */}
-        <div className={`flex items-center justify-between`}>
-          <h2 className="text-lg md:text-xl font-bold my-10 md:my-2">
-            Manage Medicine Categories
-          </h2>
-          <button
-            onClick={handleCategoryModal}
-            className="flex items-center gap-2 btn btn-outline hover:bg-green-500 hover:text-white"
-          >
-            <Plus />
-            Add New Category
-          </button>
-        </div>
+          <div className={`flex items-center justify-between`}>
+            <h2 className="text-lg md:text-xl font-bold my-10 md:my-2">
+              Manage Medicine Categories
+            </h2>
+            <button
+              onClick={handleCategoryModal}
+              className="flex items-center gap-2 btn btn-outline hover:bg-green-500 hover:text-white"
+            >
+              <Plus />
+              Add New Category
+            </button>
+          </div>
 
-        {/* --------------------------------------------------------------
+          {/* --------------------------------------------------------------
                      Category Based products/Crops Information Table
         ---------------------------------------------------------------*/}
-        <div>
-          {categories.length > 0 ? (
-            <div className="w-full max-h-[calc(100vh-150px)] overflow-auto rounded-lg mt-10 shadow-lg">
-              <table
-                className={`w-full divider-y divider-gray-500`}
-              >
-                <thead
-                  className={`h-4 bg-gray-200 uppercase text-sm font-semibold sticky top-0 ${
-                    theme === "dark" ? "category-card" : ""
-                  }`}
-                >
-                  <tr className="text-left">
-                    <th className="py-2 px-20">Photo</th>
-                    <th className="py-2 px-8">Category Name</th>
-                    <th className="py-2 px-8">Total Products</th>
-                    <th className="py-2 px-8">Created On</th>
-                    <th className="py-2 px-8">Status</th>
-                    <th className="py-2 px-8 text-center flex items-center gap-2">
-                      <FaTools size={16} />
-                      Action
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {categories.map((category) => (
-                    <CategoryRow
-                      key={category._id}
-                      category={category}
-                      handleCategoryDelete={handleCategoryDelete}
-                      handleUpdateCategoryModal={handleUpdateCategoryModal}
-                      setCategoryToEdit={setCategoryToEdit}
-                      refetch={refetch}
-                    />
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          ) : (
-            <DataNotFound
-              message={"No Category Added Yet. Please, Add First."}
-            />
-          )}
-        </div>
+          <div>
+            {categories.length > 0 ? (
+              <div className="w-full max-h-[calc(100vh-150px)] overflow-auto rounded-lg mt-10 shadow-lg">
+                <table className={`w-full divider-y divider-gray-500`}>
+                  <thead
+                    className={`h-4 bg-gray-200 uppercase text-sm font-semibold sticky top-0 ${
+                      theme === "dark" ? "category-card" : ""
+                    }`}
+                  >
+                    <tr className="text-left">
+                      <th className="py-2 px-20">Photo</th>
+                      <th className="py-2 px-8">Category Name</th>
+                      <th className="py-2 px-8">Total Products</th>
+                      <th className="py-2 px-8">Created On</th>
+                      <th className="py-2 px-8">Status</th>
+                      <th className="py-2 px-8 text-center flex items-center gap-2">
+                        <FaTools size={16} />
+                        Action
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {categories.map((category) => (
+                      <CategoryRow
+                        key={category._id}
+                        category={category}
+                        handleCategoryDelete={handleCategoryDelete}
+                        handleUpdateCategoryModal={handleUpdateCategoryModal}
+                        setCategoryToEdit={setCategoryToEdit}
+                        refetch={refetch}
+                      />
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            ) : (
+              <DataNotFound
+                message={"No Category Added Yet. Please, Add First."}
+              />
+            )}
+          </div>
 
-        {/* --------------------------------------------------------------
+          {/* --------------------------------------------------------------
                     Modal For Adding New Category
         -------------------------------------------------------------- */}
-        <div>
-          {isCategoryModal && (
-            <AddCategoryModal handleCategoryModal={handleCategoryModal} refetch={refetch}/>
-          )}
-        </div>
+          <div>
+            {isCategoryModal && (
+              <AddCategoryModal
+                handleCategoryModal={handleCategoryModal}
+                refetch={refetch}
+              />
+            )}
+          </div>
 
-         {/* --------------------------------------------------------------
+          {/* --------------------------------------------------------------
                     Modal for Category Update
         -------------------------------------------------------------- */}
-        <div>
+          <div>
             {isUpdateCategoryModal && (
-                <UpdateCategoryModal 
-                    handleUpdateCategoryModal={handleUpdateCategoryModal} 
-                    categoryToEdit={categoryToEdit}
-                    refetch={refetch}
-                />
+              <UpdateCategoryModal
+                handleUpdateCategoryModal={handleUpdateCategoryModal}
+                categoryToEdit={categoryToEdit}
+                refetch={refetch}
+              />
             )}
+          </div>
         </div>
-      </div>
+      </Container>
     </>
   );
 };
