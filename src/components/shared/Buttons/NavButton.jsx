@@ -5,8 +5,8 @@ const NavButton = ({ label, icon: Icon, address, onClick }) => {
     const { theme } = useTheme();
   const style =
             theme === "dark"
-                ? "text-white hover:text-gray-200"
-                : "text-gray-700 hover:text-gray-900";
+                ? "navbar-dark hover:text-white"
+                : "navbar-light hover:text-white";
   return (
     <>
       <NavLink

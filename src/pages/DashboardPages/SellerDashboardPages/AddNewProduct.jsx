@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import Modal_AddNewItem from "../../../components/Dashboard/RouteBasedComponents/SellerRoutesComponents/MyListings/Add&ManageNewItem/Modal_AddNewItem";
+import Modal_AddNewProduct from "../../../components/Dashboard/RouteBasedComponents/SellerRoutesComponents/MyListings/Add&ManageNewItem/Modal_AddNewProduct";
 import NavButton2 from "../../../components/shared/Buttons/NavButton2";
 import { Plus } from "lucide-react";
 import Container from "../../../components/shared/Container";
 
-const AddNewItem = () => {
+const AddNewProduct = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const handleModalToggle = () => {
     setIsModalOpen((prev) => !prev);
@@ -15,9 +15,9 @@ const AddNewItem = () => {
         <div>
           {/* Button for Add New Item Section ----------------------------------- */}
           <div className="flex justify-between items-center">
-            <h2>Add & Manage New Item</h2>
+            <h2>Add & Manage New Product</h2>
             <NavButton2
-              label="Add New Item"
+              label="Add New Product"
               onClick={handleModalToggle}
               icon={Plus}
               status="success"
@@ -31,7 +31,7 @@ const AddNewItem = () => {
           {/* Modal for Add New Item Section ------------------------------------ */}
           <div>
             {isModalOpen && (
-              <Modal_AddNewItem handleModalToggle={handleModalToggle} />
+              <Modal_AddNewProduct handleModalToggle={handleModalToggle} />
             )}
           </div>
         </div>
@@ -40,4 +40,4 @@ const AddNewItem = () => {
   );
 };
 
-export default AddNewItem;
+export default AddNewProduct;

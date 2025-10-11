@@ -11,7 +11,7 @@ import { imageUpload } from "../../../../../../utils/utilities";
 import { PuffLoader } from "react-spinners";
 import Swal from "sweetalert2";
 
-const Form_AddNewItem = ({handleModalToggle}) => {
+const Form_AddNewProduct = ({handleModalToggle}) => {
   const {user} = useAuth()
  const {
     register,
@@ -142,7 +142,7 @@ const Form_AddNewItem = ({handleModalToggle}) => {
               <InputField
                 type="select"
                 label="Category"
-                name="category"
+                name="categoryId"
                 placeholder={"Select category"}
                 register={register}
                 errors={errors}
@@ -272,4 +272,4 @@ const Form_AddNewItem = ({handleModalToggle}) => {
   );
 };
 
-export default Form_AddNewItem;
+export default Form_AddNewProduct;

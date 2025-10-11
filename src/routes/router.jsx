@@ -30,7 +30,8 @@ import BlogsManagement from '../pages/DashboardPages/AdminDashboardPages/BlogsMa
 import StartNewCrop from '../pages/DashboardPages/FarmerDashboardPages/CropManagement/StartNewCrop';
 import ManagementInstructionalGuides from '../pages/DashboardPages/AdminDashboardPages/ContentManagment/ManagementInstructionalGuides';
 import SpecialistsSalary from '../pages/DashboardPages/AdminDashboardPages/FinancialsAndCommission/SpecialistsSalary';
-import AddNewItem from '../pages/DashboardPages/SellerDashboardPages/AddNewItem';
+import AddNewProduct from '../pages/DashboardPages/SellerDashboardPages/AddNewProduct';
+// import AddNewProduct from '../pages/DashboardPages/SellerDashboardPages/AddNewItem';
 
 const router = createBrowserRouter([
   // -------------------------------------------
@@ -135,7 +136,7 @@ const router = createBrowserRouter([
       // Seller Dashboard Routes
       {
         path: 'add-new-item',
-        Component: AddNewItem
+        Component: AddNewProduct
       },
 
       // Admin Dashboard Routes

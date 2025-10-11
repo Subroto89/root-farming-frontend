@@ -10,10 +10,15 @@ import UserWiseMenu from "./UserWiseMenu";
 import ThemeSwitcher from "../../shared/ThemeSwitcher";
 import LogoutButton from "./LogoutButton";
 import UpdateProfileButton from "./UpdateProfileButton";
+import { useTheme } from "../../../hooks/useTheme";
 
 const DashboardSidebar = ({ isSideBarOpen, toggleMenu }) => {
+  const {theme} = useTheme();
   const { user, loading: authLoading } = useAuth();
   const { userRole, userRoleLoading } = useUserRole();
+
+  const sidebarStyle = theme === 'dark' ? 'navbar-dark' : 'navbar-light';
+
 
   if (authLoading || userRoleLoading) return <LoadingSpinner />;
   if (authLoading) return <LoadingSpinner />;
@@ -21,7 +26,7 @@ const DashboardSidebar = ({ isSideBarOpen, toggleMenu }) => {
   return (
     <>
       <nav
-        className={`fixed top-0 w-56 md:w-68 h-screen bg-green-300 shadow-xl flex flex-col justify-between
+        className={`${sidebarStyle} fixed top-0 w-56 md:w-68 h-screen shadow-xl flex flex-col justify-between
              md:fixed md:translate-x-0 transform ${
                !isSideBarOpen && "-translate-x-full"
              }  transition duration-200 ease-in-out z-10`}
@@ -40,7 +45,7 @@ const DashboardSidebar = ({ isSideBarOpen, toggleMenu }) => {
           <Link to="/dashboard" className="mb-2">
             <UserPhoto />
           </Link>
-          <h2 className="text-md">{user && user?.email}</h2>
+          <h2 className="text-sm">{user && user?.email}</h2>
           <h3 className="text-sm font-semibold">{userRole}</h3>
         </div>
         {/* ---------------------------------------------------------------

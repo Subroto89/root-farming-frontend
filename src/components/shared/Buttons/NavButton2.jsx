@@ -22,7 +22,7 @@ const NavButton2 = ({ label, icon: Icon, type, onClick, status, spread }) => {
   const style =
             theme === "dark"
                 ? `text-white ${btnStyle} hover:text-gray-200`
-                : `text-gray-700 ${btnStyle} hover:text-gray-900`;
+                : `text-white ${btnStyle} hover:text-gray-900`;
   return (
     <>
       <button

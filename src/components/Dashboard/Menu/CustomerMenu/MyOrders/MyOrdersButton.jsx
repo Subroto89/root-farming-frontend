@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import NavButton from "../../../../shared/Buttons/NavButton";
 import MyOrdersDropdown from "./MyOrdersDropdown";
 import { ChevronDown, ChevronRight, Handbag } from "lucide-react";
+import NavButton2 from "../../../../shared/Buttons/NavButton2";
 
 const MyOrdersButton = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

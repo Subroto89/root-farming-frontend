@@ -61,6 +61,16 @@ body{
   font-style: normal;
 }
 
+.navbar-light {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}
+
+.navbar-dark {
+  background-color: var(--color-dark);
+  color: var(--color-white)
+}
+
 .modal-header-light{
   width: 100%;
   background-color: var(--color-primary);
@@ -151,7 +161,7 @@ body{
 
 
 .active{
-  color: green
+  color: var(--color-accent);
 }
 
 

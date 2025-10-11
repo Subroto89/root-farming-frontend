@@ -7,12 +7,12 @@ import {useTheme} from "../../hooks/useTheme";
 
 const Navbar = () => {
   const {theme} = useTheme();
- const dark = theme === 'dark'
-  ? 'bg-gray-800 border-b border-white text-white'
-  : 'bg-green-700 border-b border-white text-white';
+ const navStyle = theme === 'dark'
+  ? 'w-full navbar-dark border-b border-white'
+  : 'w-full navbar-light border-b border-white';
   return (
     <>
-    <div className={`${dark} w-full border-b border-white`}> 
+    <div className={`${navStyle}`}> 
       <div className="w-11/12 flex justify-between items-center mx-auto py-2">
         {/*Logo Section ------------------- */}
         <div>
