@@ -6,7 +6,7 @@ const ThemeSwitcher = () => {
     
   return (
     <>
-      <div className="cursor-pointer" onClick={() => toggleTheme()}>
+      <div className="cursor-pointer" onClick={toggleTheme}>
         {theme === "dark" ? <Sun size={22}/> : <Moon size={22}/>}
       </div>
     </>

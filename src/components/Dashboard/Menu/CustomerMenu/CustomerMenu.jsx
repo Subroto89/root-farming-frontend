@@ -15,12 +15,50 @@ const CustomerMenu = () => {
         />
 
         <NavButton
+          label="Shop Now"
+          address="/shop"
+          icon={House}
+        />
+
+        <NavButton
+          label="My Orders"
+          address="/my-orders"
+          icon={House}
+        />
+
+        <NavButton
+          label="Track Order"
+          address="/track-order"
+          icon={House}
+        />
+
+        <NavButton
+          label="Shopping Cart"
+          address="/cart"
+          icon={ShoppingCart}
+        />
+
+        <NavButton
+          label="Payment Method"
+          address="/payment-method"
+          icon={House}
+        />
+
+
+        <NavButton
+          label="Wishlist"
+          address="/wishlist"
+          icon={House}
+        />
+
+
+        <NavButton
           label="Advanced Search & Filter"
           address="advanced-search-filter"
           icon={Search}
         />
 
-        <NavButton label="My Cart" address="my-cart" icon={ShoppingCart}/>
+        
 
         <MyOrdersButton />
 

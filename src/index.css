@@ -18,12 +18,12 @@
   --color-accent: #FF8C00;
   --color-neutral: #F6EFE7;
 
-  --color-info: ;
-  --color-info-dark: ;
-  --color-success: ;
-  --color-warning: ;  
-  --color-error: ;
-  --color-danger: ;
+  --color-info: #17A2B8;
+  --color-info-dark: #007BFF;
+  --color-success: #28A745;
+  --color-warning: #FFC107;  
+  --color-error: #DC3545;
+  --color-danger: #DC3545;
   --color-white: #ffffff;
 
   --color-black: #000000;
@@ -35,7 +35,6 @@
 
   --card-padding: 1rem;
   --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  
 }
 
 
@@ -53,6 +52,77 @@
   --color-light: rbga(0, 0, 0, 0.4);
   --box-shadow: 0 2rem 3rem var(--color-light);
 }
+
+body{
+  background-color: var(--color-neutral);
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.modal-header-light{
+  width: 100%;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  font-weight: 600;
+  font-size: 1.25rem;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-header-dark{
+  width: 100%;
+  background-color: var(--color-dark);
+  color: var(--color-white);
+  font-weight: 600;
+  font-size: 1.25rem;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* w-[700px] h-[400px] bg-white rounded-xl overflow-hidden flex flex-col items-center justify-between */
+
+.modal-light{
+  background-color: var(--color-neutral);
+  border-radius: 0.75rem;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: between;
+}
+
+.modal-dark{
+  background-color: var(--color-dark);
+   border-radius: 0.75rem;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: between;
+}
+
+.btn-success{
+  background-color: var(--color-success);
+  color: var(--color-white);
+}
+
+.btn-danger-light{
+  background-color: var(--color-danger);
+  color: var(--color-dark);
+}
+
+.btn-danger-dark{
+  background-color: var(--color-danger);
+  color: var(--color-light);
+}
+
+
 
 
 
@@ -79,25 +149,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-body{
-  background-color: var(--color-neutral);
-  font-family: "Montserrat", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-style: normal;
-}
 
 .active{
   color: green

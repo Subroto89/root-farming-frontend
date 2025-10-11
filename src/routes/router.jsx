@@ -30,6 +30,7 @@ import BlogsManagement from '../pages/DashboardPages/AdminDashboardPages/BlogsMa
 import StartNewCrop from '../pages/DashboardPages/FarmerDashboardPages/CropManagement/StartNewCrop';
 import ManagementInstructionalGuides from '../pages/DashboardPages/AdminDashboardPages/ContentManagment/ManagementInstructionalGuides';
 import SpecialistsSalary from '../pages/DashboardPages/AdminDashboardPages/FinancialsAndCommission/SpecialistsSalary';
+import AddNewItem from '../pages/DashboardPages/SellerDashboardPages/AddNewItem';
 
 const router = createBrowserRouter([
   // -------------------------------------------
@@ -129,6 +130,12 @@ const router = createBrowserRouter([
       {
         path: 'daily-todo-list',
         Component: DailyToDoList,
+      },
+
+      // Seller Dashboard Routes
+      {
+        path: 'add-new-item',
+        Component: AddNewItem
       },
 
       // Admin Dashboard Routes

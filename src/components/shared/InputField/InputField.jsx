@@ -74,7 +74,7 @@ const InputField = ({
                 id={name}
                 name={name}
                 placeholder={placeholder}
-                className={`border border-gray-300 rounded-lg ${
+                className={`w-full border border-gray-300 rounded-lg ${
                 Icon ? "pl-10" : "pl-4"
                 } p-2 w-full focus:outline-none focus:ring-2 focus:ring-teal-500 ${
                 errors[name] ? "border-red-500" : "border-gray-300"
