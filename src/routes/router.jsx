@@ -19,7 +19,7 @@ import Shop from '../pages/ShopPage/Shop';
 import Cart from '../pages/CartPage/Cart';
 import Blog from '../pages/Blog/Blog';
 import ErrorPage from '../pages/DashboardPages/ErrorPage';
-import CategoryManagement from '../pages/DashboardPages/AdminDashboardPages/CategoryManagement/CategoryManagement';
+import ProductCategoryManagement from '../pages/DashboardPages/AdminDashboardPages/CategoryManagement/ProductCategoryManagement';
 import GovtNewsAndFacilities from '../pages/DashboardPages/AdminDashboardPages/ContentManagment/GovtNewsAndFacilities';
 import ManageFarmers from '../pages/DashboardPages/AdminDashboardPages/UserManagement/ManageFarmers';
 import ManageSellers from '../pages/DashboardPages/AdminDashboardPages/UserManagement/ManageSellers';
@@ -31,6 +31,9 @@ import StartNewCrop from '../pages/DashboardPages/FarmerDashboardPages/CropManag
 import ManagementInstructionalGuides from '../pages/DashboardPages/AdminDashboardPages/ContentManagment/ManagementInstructionalGuides';
 import SpecialistsSalary from '../pages/DashboardPages/AdminDashboardPages/FinancialsAndCommission/SpecialistsSalary';
 import AddNewProduct from '../pages/DashboardPages/SellerDashboardPages/AddNewProduct';
+import ProductTypeManagement from '../pages/DashboardPages/AdminDashboardPages/CategoryManagement/ProductTypeManagement';
+import ProductSubCategoryManagement from '../pages/DashboardPages/AdminDashboardPages/CategoryManagement/ProductSubCategoryManagement';
+import ProductVariantManagement from '../pages/DashboardPages/AdminDashboardPages/CategoryManagement/ProductVariantManagement';
 // import AddNewProduct from '../pages/DashboardPages/SellerDashboardPages/AddNewItem';
 
 const router = createBrowserRouter([
@@ -155,10 +158,22 @@ const router = createBrowserRouter([
       {
         path: 'manage-farmers',
         Component: ManageFarmers,
-      },       
+      },
       {
-        path: 'category-management',
-        Component: CategoryManagement,
+        path: 'manage-product-type',
+        Component: ProductTypeManagement,
+      },      
+      {
+        path: 'management-product-category',
+        Component: ProductCategoryManagement,
+      },
+      {
+        path: 'manage-product-subCategory',
+        Component: ProductSubCategoryManagement
+      }, 
+      {
+        path: 'manage-product-variant',
+        Component: ProductVariantManagement
       },
       {
         path: 'govt-news-facilites',

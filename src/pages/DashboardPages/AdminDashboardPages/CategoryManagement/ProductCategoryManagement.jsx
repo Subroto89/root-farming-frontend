@@ -12,7 +12,7 @@ import { FaTools } from "react-icons/fa";
 import UpdateCategoryModal from "../../../../components/Dashboard/RouteBasedComponents/AdminRoutesComponents/CategoryManagement/UpdateCategoryModal";
 import Container from "../../../../components/shared/Container";
 
-const CategoryManagement = () => {
+const ProductCategoryManagement = () => {
   TabTitle("Category Management");
   const { theme } = useTheme();
   const axiosSecure = useAxiosSecure();
@@ -166,4 +166,4 @@ const CategoryManagement = () => {
   );
 };
 
-export default CategoryManagement;
+export default ProductCategoryManagement;

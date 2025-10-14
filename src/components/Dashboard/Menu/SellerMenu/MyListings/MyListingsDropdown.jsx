@@ -4,7 +4,7 @@ import NavButton from '../../../../shared/Buttons/NavButton';
 const MyListingsDropdown = () => {
     return (
         <>
-            <div className='flex flex-col items-start px-1 rounded-lg bg-green-200 ml-8 w-full border border-white'>
+            <div className='flex flex-col items-start w-60 border-t border-b border-gray-300'>
                 <NavButton
                     label="Add New Item"
                     address="/dashboard/add-new-item"

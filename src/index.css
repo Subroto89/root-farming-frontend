@@ -53,6 +53,7 @@
   --box-shadow: 0 2rem 3rem var(--color-light);
 }
 
+
 body{
   background-color: var(--color-neutral);
   font-family: "Montserrat", sans-serif;
@@ -164,7 +165,12 @@ body{
   color: var(--color-accent);
 }
 
+.badge{
+  background-color: var(--color-accent);
+  padding: 1px;
+  border-radius: 100%;
 
+}
 
 
 

@@ -3,6 +3,7 @@ import NavButton from '../../../shared/Buttons/NavButton';
 import ContentManagementButton from './ContentManagement/ContentManagementButton';
 import FinancialAndCommissionsButton from './FinancialAndCommissions/FinancialAndCommissionsButton';
 import UserManagementButton from './User Management/UserManagementButton';
+import CategoryManagementButton from './CategoryManagement/CategoryManagementButton';
 
 const AdminMenu = () => {
     return (
@@ -33,11 +34,6 @@ const AdminMenu = () => {
                     icon={ ChartScatter }
                 />        
                 
-                <NavButton
-                    label="Category Management"
-                    address="/dashboard/category-management"
-                    icon={ Shapes }    
-                />
           
                  {/* <NavButton
                     label="Manage Banner Advertises"
@@ -48,6 +44,8 @@ const AdminMenu = () => {
                     address="/dashboard/blogs-management"
                     icon={ Rss }    
                 />
+
+                <CategoryManagementButton/>
                 
             </div>
         </>

@@ -10,9 +10,13 @@ import { UploadCloud } from "lucide-react";
 import { imageUpload } from "../../../../../../utils/utilities";
 import { PuffLoader } from "react-spinners";
 import Swal from "sweetalert2";
+import { useTheme } from "../../../../../../hooks/useTheme";
 
 const Form_AddNewProduct = ({handleModalToggle}) => {
-  const {user} = useAuth()
+  const {user} = useAuth();
+  const {theme} = useTheme();
+  const themeStyle = theme === 'dark' ? "text-white" : "text-gray-800"
+
  const {
     register,
     watch,
@@ -208,7 +212,7 @@ const Form_AddNewProduct = ({handleModalToggle}) => {
             {/* Right Column of the Form */}
             <div className="col-span-2 flex flex-col justify-between gap-4">
               <div className="flex justify-center items-center">
-                <div className="w-full h-[160px] flex justify-center items-center overflow-hidden mt-6 rounded-xl border border-gray-300">
+                <div className={`${themeStyle} w-full h-[160px] flex justify-center items-center overflow-hidden mt-6 rounded-xl border border-gray-300`}>
                   {uploadedProductPhoto ? (
               <img
                 src={uploadedProductPhoto}

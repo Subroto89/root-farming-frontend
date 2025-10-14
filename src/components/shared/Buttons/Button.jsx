@@ -1,8 +1,8 @@
-import { Link } from "react-router";
 import { useTheme } from "../../../hooks/useTheme";
+import { Link } from "react-router";
 
 
-const NavButton2 = ({ label, icon: Icon, type, onClick, address, status, spread }) => {
+const Button = ({ label, icon: Icon, address, type, onClick, status, spread }) => {
     const { theme } = useTheme();
     const isSpread = spread === 'yes' ? 'flex-1' : ''
 
@@ -31,11 +31,11 @@ const NavButton2 = ({ label, icon: Icon, type, onClick, address, status, spread 
         to={address}
         className={`btn ${isSpread} border-0 font-bold btn-color shadow-none ${style}`} 
       >
-        {label}
         {Icon && <Icon size={20} />}
+        {label}
       </Link>
     </>
   );
 };
 
-export default NavButton2;
+export default Button;

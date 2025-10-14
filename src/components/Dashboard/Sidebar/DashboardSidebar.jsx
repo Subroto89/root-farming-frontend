@@ -42,11 +42,11 @@ const DashboardSidebar = ({ isSideBarOpen, toggleMenu }) => {
             User Photo
         ---------------------------------------------------------------- */}
         <div className="flex flex-col justify-center items-center">
-          <Link to="/dashboard" className="mb-2">
+          <Link to="/dashboard" className="mb-1">
             <UserPhoto />
           </Link>
-          <h2 className="text-sm">{user && user?.email}</h2>
-          <h3 className="text-sm font-semibold">{userRole}</h3>
+          <h2 className="text-xs mb-1">{user && user?.email}</h2>
+          <h3 className="text-xs font-semibold badge mb-2">{userRole}</h3>
         </div>
         {/* ---------------------------------------------------------------
             User Role Wise Menu

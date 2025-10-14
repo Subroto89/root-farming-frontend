@@ -1,5 +1,5 @@
 import React from 'react';
-import { MdOutlineSentimentDissatisfied } from 'react-icons/md'; // Importing a suitable icon
+import { MdOutlineSentimentDissatisfied } from 'react-icons/md'; 
 
 import { Link, useNavigate } from 'react-router';
 

@@ -1,6 +1,9 @@
 // ---------------------------------------------------------------------------
 // Input Field Component - Used In the RegisterForm Component  ***************
 // The Below Parameters Are Passed When This Component Is Invoked.
+
+import { useTheme } from "../../../hooks/useTheme";
+
 // ---------------------------------------------------------------------------
 const InputField = ({
   name,
@@ -14,15 +17,19 @@ const InputField = ({
   rows = 3,
   options = [],
 }) => {
+  const {theme} = useTheme();
+  const themeStyle = theme === 'dark' ? "border border-gray-200 text-white" : "border border-gray-800 text-gray-800"
+
+
   const isTextArea = type === "textarea";
   const isSelect = type === "select";
-  // ###########################################################################################
+ 
   return (
     <div>
       {/* ---------------------------------------------------------------------------
         Label of a Input Element
         ---------------------------------------------------------------------------- */}
-      <label htmlFor={name} className="block text-sm font-medium">
+      <label htmlFor={name} className={`${themeStyle} border-0 text-sm font-medium`}>
         {label}
       </label>
 
@@ -45,7 +52,7 @@ const InputField = ({
                 placeholder={placeholder}
                 rows={rows}
                 {...register(name, validationRules)}
-                className={`mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm
+                className={`${themeStyle} mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm
                 ${errors[name] ? "border-red-500" : "border-gray-300"}
             `}
             ></textarea>
@@ -54,7 +61,7 @@ const InputField = ({
                 id={name}
                 name={name}
                 {...register(name, validationRules)}
-                className={`mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm
+                className={`${themeStyle} mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm
                 ${errors[name] ? "border-red-500" : "border-gray-300"}
             `}
             >
@@ -74,7 +81,7 @@ const InputField = ({
                 id={name}
                 name={name}
                 placeholder={placeholder}
-                className={`w-full border border-gray-300 rounded-lg ${
+                className={`${themeStyle} w-full border border-gray-300 rounded-lg ${
                 Icon ? "pl-10" : "pl-4"
                 } p-2 w-full focus:outline-none focus:ring-2 focus:ring-teal-500 ${
                 errors[name] ? "border-red-500" : "border-gray-300"
