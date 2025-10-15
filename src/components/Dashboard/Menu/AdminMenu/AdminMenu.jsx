@@ -16,6 +16,8 @@ const AdminMenu = () => {
                     icon={House}
                 />
 
+                <CategoryManagementButton/>
+
                 <UserManagementButton/>
 
                 <ContentManagementButton/>
@@ -45,7 +47,7 @@ const AdminMenu = () => {
                     icon={ Rss }    
                 />
 
-                <CategoryManagementButton/>
+                
                 
             </div>
         </>

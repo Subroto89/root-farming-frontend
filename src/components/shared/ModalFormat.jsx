@@ -2,6 +2,7 @@ import { X } from "lucide-react";
 import { useTheme } from "../../hooks/useTheme";
 
 const ModalFormat = ({
+    
   width,
   height,
   headerText,

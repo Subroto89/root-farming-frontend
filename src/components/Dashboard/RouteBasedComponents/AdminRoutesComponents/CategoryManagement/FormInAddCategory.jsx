@@ -8,7 +8,6 @@ import { CloudUpload, Shapes } from "lucide-react";
 import { PuffLoader } from "react-spinners";
 import InputField from "../../../../shared/InputField/InputField";
 
-
 const AddCategoryForm = ({ handleCategoryModal, refetch }) => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
@@ -49,83 +48,55 @@ const AddCategoryForm = ({ handleCategoryModal, refetch }) => {
     uploadFile();
   }, [categoryPhoto]);
 
-//   const onSubmit = async (data) => {
-//     data.categoryPhoto = uploadedCategoryPhoto;
-//     data.createdBy = user?.email;
 
-//     try {
-//         console.log(data);
-      
-//       const { data: info } = await axiosSecure.post("/categories/save-category", data);
-
-//       if (info.insertedId) {
-//         Swal.fire({
-//           icon: "success",
-//           title: "Success",
-//           text: "Category Added Successfully",
-//           timer: 1500,
-//         });
-//         refetch();
-//         handleCategoryModal();
-//       } else {
-//         Swal.fire("Category Addition Failed!");
-//       }
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   };
-
-const onSubmit = async (data) => {
+  const onSubmit = async (data) => {
     data.categoryPhoto = uploadedCategoryPhoto;
     data.createdBy = user?.email;
 
     try {
-        // 1. Send the POST request
-        const { data: info } = await axiosSecure.post("/categories/save-category", data);
+      // 1. Send the POST request
+      const { data: info } = await axiosSecure.post(
+        "/categories/save-category",
+        data
+      );
 
-        // 2. Check for successful insertion (backend sends 201 Created and insertedId)
-        if (info.insertedId) {
-            Swal.fire({
-                icon: "success",
-                title: "Success",
-                text: "Category Added Successfully",
-                timer: 1500,
-            });
-            // Refresh list and close modal
-            refetch();
-            handleCategoryModal();
-        } 
-        // Note: The else block below is removed because any failure status (4xx or 5xx) 
-        // will now be caught by the catch block.
-        
-    } catch (error) {
-        // Axios error handling block
-        let errorMessage = "Category addition failed due to a server error.";
-        
-        // Check if the error has a response object (meaning it's an HTTP error, not a network error)
-        if (error.response) {
-            // Check for 409 Conflict or 400 Bad Request statuses
-            if (error.response.status === 409 || error.response.status === 400) {
-                // The backend sends the specific error message in error.response.data.error
-                errorMessage = error.response.data.error || "A category with this name already exists.";
-            } else {
-                // Handle other client/server errors (401, 403, 500, etc.)
-                errorMessage = `Request failed with status ${error.response.status}.`;
-            }
-        } else if (error.request) {
-            // The request was made but no response was received (e.g., network timeout)
-            errorMessage = "No response received from the server. Check your connection.";
-        }
-        
-        console.error("API Error:", error);
-
+      // 2. Check for successful insertion (backend sends 201 Created and insertedId)
+      if (info.insertedId) {
         Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: errorMessage,
+          icon: "success",
+          title: "Success",
+          text: "Category Added Successfully",
+          timer: 1500,
         });
+        // Refresh list and close modal
+        refetch();
+        handleCategoryModal();
+      }
+    } catch (error) {
+      let errorMessage = "Category addition failed due to a server error.";
+
+      if (error.response) {
+        if (error.response.status === 409 || error.response.status === 400) {
+          errorMessage =
+            error.response.data.error ||
+            "A category with this name already exists.";
+        } else {
+          errorMessage = `Request failed with status ${error.response.status}.`;
+        }
+      } else if (error.request) {
+        errorMessage =
+          "No response received from the server. Check your connection.";
+      }
+
+      console.error("API Error:", error);
+
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: errorMessage,
+      });
     }
-};
+  };
   return (
     <div className="mx-8">
       <form

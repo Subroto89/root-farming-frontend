@@ -11,6 +11,7 @@ const InputField = ({
   icon: Icon,
   type,
   placeholder,
+  defaultValue,
   validationRules,
   register,
   errors,
@@ -81,6 +82,7 @@ const InputField = ({
                 id={name}
                 name={name}
                 placeholder={placeholder}
+                setValue={defaultValue}
                 className={`${themeStyle} w-full border border-gray-300 rounded-lg ${
                 Icon ? "pl-10" : "pl-4"
                 } p-2 w-full focus:outline-none focus:ring-2 focus:ring-teal-500 ${

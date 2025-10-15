@@ -5,12 +5,13 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../../hooks/UseAxiosSecure";
 import Swal from "sweetalert2";
 import { useTheme } from "../../../../hooks/useTheme";
-import AddCategoryModal from "../../../../components/Dashboard/RouteBasedComponents/AdminRoutesComponents/CategoryManagement/AddCategoryModal";
 import CategoryRow from "../../../../components/Dashboard/RouteBasedComponents/AdminRoutesComponents/CategoryManagement/CategoryRow";
 import LoadingSpinner from "../../../../components/shared/LoadingSpinner";
 import { FaTools } from "react-icons/fa";
 import UpdateCategoryModal from "../../../../components/Dashboard/RouteBasedComponents/AdminRoutesComponents/CategoryManagement/UpdateCategoryModal";
 import Container from "../../../../components/shared/Container";
+import ModalFormat from "../../../../components/shared/ModalFormat";
+import FormInAddCategory from "../../../../components/Dashboard/RouteBasedComponents/AdminRoutesComponents/CategoryManagement/FormInAddCategory";
 
 const ProductCategoryManagement = () => {
   TabTitle("Category Management");
@@ -47,8 +48,6 @@ const ProductCategoryManagement = () => {
     },
   });
 
-  if (isLoading) return <LoadingSpinner />;
-
   //   ----------------------------------------------------------------------------
   // Category Delete Function
   // ------------------------------------------------------------------------------
@@ -70,7 +69,8 @@ const ProductCategoryManagement = () => {
       console.log(error);
     }
   };
-
+  if (isLoading) return <LoadingSpinner />;
+  
   return (
     <>
       <Container>
@@ -80,7 +80,7 @@ const ProductCategoryManagement = () => {
         -------------------------------------------------------------- */}
           <div className={`flex items-center justify-between`}>
             <h2 className="text-lg md:text-xl font-bold my-10 md:my-2">
-              Manage Medicine Categories
+              Manage Product Categories
             </h2>
             <button
               onClick={handleCategoryModal}
@@ -141,9 +141,17 @@ const ProductCategoryManagement = () => {
         -------------------------------------------------------------- */}
           <div>
             {isCategoryModal && (
-              <AddCategoryModal
-                handleCategoryModal={handleCategoryModal}
-                refetch={refetch}
+              <ModalFormat
+                width="w-[400px]"
+                height="h-[300px]"
+                headerText="Add New Category"
+                modalClosingFunction={handleCategoryModal}
+                form={
+                  <FormInAddCategory
+                    handleCategoryModal={handleCategoryModal}
+                    refetch={refetch}
+                  />
+                }
               />
             )}
           </div>

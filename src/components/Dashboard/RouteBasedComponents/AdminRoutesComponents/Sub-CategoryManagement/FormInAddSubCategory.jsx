@@ -8,14 +8,14 @@ import { CloudUpload, FileType, Shapes } from "lucide-react";
 import { PuffLoader } from "react-spinners";
 import InputField from "../../../../shared/InputField/InputField";
 
-const FormInAddType = ({ handleModalToggle, refetch }) => {
+const FormInAddSubCategory = ({ handleModalToggle, refetch }) => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
 
   //--------------------------------------------------------------
   //  Necessary State Variables
   // --------------------------------------------------------------
-  const [uploadedTypePhoto, setUploadedTypePhoto] = useState(null);
+  const [uploadedSubCategoryPhoto, setUploadedSubCategoryPhoto] = useState(null);
   const [uploadingPhoto, setUploadingPhoto] = useState(false);
   const [photoUploadError, setPhotoUploadError] = useState(null);
   const {
@@ -25,37 +25,37 @@ const FormInAddType = ({ handleModalToggle, refetch }) => {
     formState: { errors, isSubmitting },
   } = useForm();
 
-  const typePhoto = watch("typePhoto");
+  const subCategoryPhoto = watch("subCategoryPhoto");
 
   useEffect(() => {
     const uploadFile = async () => {
-      if (typePhoto && typePhoto.length > 0) {
-        setUploadedTypePhoto(null);
+      if (subCategoryPhoto && subCategoryPhoto.length > 0) {
+        setUploadedSubCategoryPhoto(null);
         setPhotoUploadError(null);
         setUploadingPhoto(true);
         try {
-          const imageUrl = await imageUpload(typePhoto[0]);
-          setUploadedTypePhoto(imageUrl);
+          const imageUrl = await imageUpload(subCategoryPhoto[0]);
+          setUploadedSubCategoryPhoto(imageUrl);
         } catch (error) {
           console.error("Image upload failed:", error);
           setPhotoUploadError("Image upload failed. Please try again.");
-          setUploadedTypePhoto(null);
+          setUploadedSubCategoryPhoto(null);
         } finally {
           setUploadingPhoto(false);
         }
       }
     };
     uploadFile();
-  }, [typePhoto]);
+  }, [subCategoryPhoto]);
 
   const onSubmit = async (data) => {
-    data.typePhoto = uploadedTypePhoto;
+    data.subCategoryPhoto = uploadedSubCategoryPhoto;
     data.createdBy = user?.email;
 
     try {
       // 1. Send the POST request
       const { data: info } = await axiosSecure.post(
-        "/types/save-type",
+        "/subcategories/save-subcategory",
         data
       );
 
@@ -64,21 +64,21 @@ const FormInAddType = ({ handleModalToggle, refetch }) => {
         Swal.fire({
           icon: "success",
           title: "Success",
-          text: "Product Type Added Successfully",
+          text: "Product Sub-category Added Successfully",
           timer: 1500,
         });
-        // Refetch list and close modal
+        // Refresh list and close modal
         refetch();
         handleModalToggle();
       }
     } catch (error) {
-      let errorMessage = "Product type addition failed due to a server error.";
+      let errorMessage = "Product sub-category addition failed due to a server error.";
 
       if (error.response) {
         if (error.response.status === 409 || error.response.status === 400) {
           errorMessage =
             error.response.data.error ||
-            "A product type with this name already exists.";
+            "A product sub-category with this name already exists.";
         } else {
           errorMessage = `Request failed with status ${error.response.status}.`;
         }
@@ -106,33 +106,33 @@ const FormInAddType = ({ handleModalToggle, refetch }) => {
         <div className="flex items-center gap-3">
           <div className=" space-y-3">
             <InputField
-              label="Product Type Name"
-              name="typeName"
+              label="Product Sub-Category Name"
+              name="subCategoryName"
               type="text"
-              placeholder="Enter the product type name"
+              placeholder="Enter the product sub-category name"
               icon={FileType}
               register={register}
               errors={errors}
               validationRules={{
-                required: "Product Type Name is required",
+                required: "Product sub-category Name is Required",
                 minLength: {
                   value: 3,
                   message:
-                    "Product Type Name must be at least 3 characters long",
+                    "Product sub=category Name must be at least 3 characters long",
                 },
               }}
             />
 
             <InputField
               label=""
-              name="typePhoto"
+              name="subCategoryPhoto"
               type="file"
-              placeholder="Select the product type photo"
+              placeholder="Select the product sub-category photo"
               icon={CloudUpload}
               register={register}
               errors={errors}
               validationRules={{
-                required: "Product type photo is required",
+                required: "Product sub-category photo is required",
                 validate: (value) => {
                   if (value.length === 0) return "Please upload a photo";
                   const file = value[0];
@@ -153,10 +153,10 @@ const FormInAddType = ({ handleModalToggle, refetch }) => {
           </div>
 
           <div className="w-28 h-24 rounded-md overflow-hidden border-2 border-gray-300 mb-1 mt-5 flex items-center justify-end">
-            {uploadedTypePhoto ? (
+            {uploadedSubCategoryPhoto ? (
               <img
-                src={uploadedTypePhoto}
-                alt="Product Type Photo"
+                src={uploadedSubCategoryPhoto}
+                alt="Product Sub-Category Photo"
                 className="w-full h-full object-cover"
               />
             ) : (
@@ -172,7 +172,7 @@ const FormInAddType = ({ handleModalToggle, refetch }) => {
         </div>
 
         {/* --------------------------------------------------------------
-                Action Button For Adding Product Type & Cancel Button
+                Action Button For Adding Product Sub-Category & Cancel Button
         -------------------------------------------------------------- */}
 
         <div>
@@ -184,7 +184,7 @@ const FormInAddType = ({ handleModalToggle, refetch }) => {
             {uploadingPhoto ? (
               <h2 className="text-green-500">Photo Uploading ...</h2>
             ) : (
-              "Add Product Type"
+              "Add Product Sub-Category"
             )}
           </button>
         </div>
@@ -193,4 +193,4 @@ const FormInAddType = ({ handleModalToggle, refetch }) => {
   );
 };
 
-export default FormInAddType;
+export default FormInAddSubCategory;

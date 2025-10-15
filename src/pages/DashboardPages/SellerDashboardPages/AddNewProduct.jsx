@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import Modal_AddNewProduct from "../../../components/Dashboard/RouteBasedComponents/SellerRoutesComponents/MyListings/Add&ManageNewItem/Modal_AddNewProduct";
+import { useState } from "react";
 import NavButton2 from "../../../components/shared/Buttons/NavButton2";
 import { Plus } from "lucide-react";
 import Container from "../../../components/shared/Container";
-
+import ModalFormat from "../../../components/shared/ModalFormat";
+import Form_AddNewItem from "../../../components/Dashboard/RouteBasedComponents/SellerRoutesComponents/MyListings/Add&ManageNewItem/Form_AddNewProduct"
 const AddNewProduct = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const handleModalToggle = () => {
@@ -31,7 +31,13 @@ const AddNewProduct = () => {
           {/* Modal for Add New Item Section ------------------------------------ */}
           <div>
             {isModalOpen && (
-              <Modal_AddNewProduct handleModalToggle={handleModalToggle} />
+              <ModalFormat
+                width="w-[800px]"
+                height="h-[500px]"
+                headerText="Add New Product"
+                modalClosingFunction={handleModalToggle}
+                form={<Form_AddNewItem/>}
+              />
             )}
           </div>
         </div>
