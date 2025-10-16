@@ -6,77 +6,91 @@ const partnerBenefits = [
     icon: Globe,
     title: 'Global Network',
     description:
-      'Access to our worldwide network of farmers and agricultural experts',
+      'Access our worldwide community of farmers, agri-tech innovators, and experts for growth and learning.',
   },
   {
     icon: Users,
     title: 'Premium Support',
-    description: 'Dedicated support team and priority technical assistance',
+    description:
+      'Enjoy dedicated partner support and priority technical assistance from our expert team.',
   },
   {
     icon: Zap,
     title: 'Co-Innovation',
     description:
-      'Collaborate on developing cutting-edge agricultural solutions',
+      'Collaborate with us on pioneering agricultural technologies and data-driven solutions.',
   },
   {
-    icon: Mail, // new icon
+    icon: Mail,
     title: 'Sustainable Practices',
     description:
-      'Join initiatives to implement eco-friendly and sustainable farming solutions',
+      'Be part of initiatives promoting eco-friendly and sustainable farming methods worldwide.',
   },
 ];
 
 const BecomePartner = () => {
   return (
-    <section className="bg-gradient-to-r from-green-600 to-blue-600">
-      <div className=" max-w-7xl mx-auto relative py-10 lg:py-20 px-4 lg:px-0 text-white overflow-hidden">
-        <div className="relative text-center mb-14">
-          <h2 className="text-4xl md:text-5xl font-semibold mb-6 tracking-tight">
+    <div className="py-20 md:py-24 bg-gray-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Heading */}
+        <div className="text-center mb-16">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
             Become a Partner
           </h2>
-          <p className="text-lg md:text-xl opacity-90 max-w-3xl mx-auto leading-relaxed">
-            Join our ecosystem of innovative partners and help us transform
-            agriculture for a sustainable future.
+          <p className="text-base sm:text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto">
+            Join our global ecosystem of innovators, organizations, and experts
+            dedicated to transforming modern agriculture sustainably.
           </p>
         </div>
 
-        <div className="relative grid md:grid-cols-3 lg:grid-cols-4 gap-8 mb-14">
+        {/* Benefits Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           {partnerBenefits.map((benefit, index) => {
-            const IconComponent = benefit.icon;
+            const Icon = benefit.icon;
             return (
               <div
                 key={index}
-                className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-10 text-center 
-                         hover:scale-105 hover:shadow-2xl transition-all duration-300"
+                className="group bg-white border border-gray-200 rounded-2xl p-8 shadow-sm 
+                           hover:shadow-xl hover:-translate-y-2 transition-all duration-300"
               >
-                <div className="flex justify-center mb-6">
-                  <div
-                    className="w-20 h-20 rounded-full border border-white/40 flex items-center justify-center 
-                                bg-white/10 hover:bg-white/20 transition-all duration-300 shadow-lg"
-                  >
-                    <IconComponent className="h-12 w-12 text-white" />
-                  </div>
+                {/* Icon */}
+                <div
+                  className="w-16 h-16 rounded-xl bg-green-700 flex items-center justify-center mb-5 
+                                shadow-md transform transition-transform duration-300 group-hover:scale-110"
+                >
+                  <Icon className="w-8 h-8 text-white" />
                 </div>
-                <h3 className="text-2xl font-semibold mb-3">{benefit.title}</h3>
-                <p className="text-base opacity-90">{benefit.description}</p>
+
+                {/* Title */}
+                <h3
+                  className="text-xl sm:text-2xl font-semibold text-gray-900 mb-3 
+                               transition-colors duration-300 group-hover:text-green-700"
+                >
+                  {benefit.title}
+                </h3>
+
+                {/* Description */}
+                <p className="text-gray-600 text-sm sm:text-base">
+                  {benefit.description}
+                </p>
               </div>
             );
           })}
         </div>
 
-        <div className="relative flex flex-col sm:flex-row gap-5 justify-center">
-          <button className="inline-flex items-center bg-white text-green-700 px-8 py-3 rounded-lg font-semibold shadow-lg hover:shadow-xl hover:bg-gray-100 transition-all duration-300">
+        {/* Call-to-Action Buttons */}
+        <div className="flex flex-col sm:flex-row gap-5 justify-center">
+          <button className="inline-flex items-center justify-center bg-green-700 text-white px-8 py-3 rounded-lg font-semibold shadow-lg hover:shadow-xl hover:bg-green-800 transition-all duration-300">
             <Mail className="h-5 w-5 mr-2" />
             Partner With Us
           </button>
-          <button className="inline-flex items-center bg-transparent border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-green-700 transition-all duration-300">
+          <button className="inline-flex items-center justify-center bg-transparent border-2 border-green-700 text-green-700 px-8 py-3 rounded-lg font-semibold hover:bg-green-700 hover:text-white transition-all duration-300">
             <Download className="h-5 w-5 mr-2" />
             Partnership Guide
           </button>
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 
