@@ -22,6 +22,7 @@ import ErrorPage from '../pages/DashboardPages/ErrorPage';
 import CategoryManagement from '../pages/DashboardPages/AdminDashboardPages/CategoryManagement/CategoryManagement';
 import GovtNewsAndFacilities from '../pages/DashboardPages/AdminDashboardPages/ContentManagment/GovtNewsAndFacilities';
 import BlogsManagement from '../pages/DashboardPages/AdminDashboardPages/BlogsManagement/BlogsManagement';
+import ProductDetails from '../components/shopComponents/ProductDetails';
 
 const router = createBrowserRouter([
   // -------------------------------------------
@@ -47,6 +48,10 @@ const router = createBrowserRouter([
       {
         path: 'shop',
         Component: Shop,
+      },
+      {
+        path: 'shop/:id',
+        Component: ProductDetails,
       },
       {
         path: 'cart',

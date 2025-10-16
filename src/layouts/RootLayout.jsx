@@ -12,9 +12,8 @@ const RootLayout = () => {
         <main className="min-h-[calc(100vh-40px)]">
           <Outlet>{/* Dynamic Pages Goes Here */}</Outlet>
         </main>
-        <footer className="bg-gray-900 text-white px-4">
-          <Footer />
-        </footer>
+
+        <Footer />
       </div>
     </>
   );

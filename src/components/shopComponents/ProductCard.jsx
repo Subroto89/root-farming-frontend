@@ -102,7 +102,7 @@ const ProductCard = ({ product, viewMode }) => {
         {/* Action Buttons */}
         <div className="flex justify-between items-center gap-3 mb-2">
           <button
-            onClick={() => navigate(`/marketplace/${product._id}`)}
+            onClick={() => navigate(`/shop/${product._id}`)}
             className="bg-gray-100 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-200 transition-colors text-sm"
           >
             View Details
