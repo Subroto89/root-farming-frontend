@@ -65,15 +65,14 @@ const Footer = () => {
   ];
 
   return (
-    <div className="max-w-11/12 mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-8">
-      <div className="grid lg:grid-cols-2 gap-8 items-start">
+    <div className="max-w-7xl mx-auto pt-12 pb-8">
+      {/* Company + Newsletter Section */}
+      <div className="flex flex-col lg:flex-row gap-12 items-start">
         {/* Company Information */}
-        <div>
+        <div className="w-full lg:w-1/2">
           <div className="flex items-center space-x-3 mb-6">
             <img src={logo} alt="Root Farming Logo" className="h-10 w-10" />
-            <div className="h-10 flex items-center">
-              <h2 className="text-2xl font-bold">Root Farming</h2>
-            </div>
+            <h2 className="text-2xl font-bold text-white">Root Farming</h2>
           </div>
 
           <p className="text-gray-300 mb-6 leading-relaxed">
@@ -101,51 +100,49 @@ const Footer = () => {
         </div>
 
         {/* Newsletter + Social */}
-        <div>
-          <div>
-            <h3 className="text-2xl font-bold mb-4">Stay Updated</h3>
-            <p className="text-gray-300 mb-6">
-              Get the latest farming tips, market insights, and product updates
-              delivered to your inbox.
-            </p>
+        <div className="w-full lg:w-1/2">
+          <h3 className="text-2xl font-bold mb-4 text-white">Stay Updated</h3>
+          <p className="text-gray-300 mb-6">
+            Get the latest farming tips, market insights, and product updates
+            delivered to your inbox.
+          </p>
 
-            <form onSubmit={handleSubscribe} className="space-y-4">
-              <div className="flex flex-col sm:flex-row gap-3">
-                <input
-                  type="email"
-                  value={email}
-                  onChange={e => setEmail(e.target.value)}
-                  placeholder="Enter your email address"
-                  className="flex-1 px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-green-400"
-                  required
-                />
-                <button
-                  type="submit"
-                  className="bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors flex items-center justify-center"
-                >
-                  Subscribe
-                  <ArrowRight className="h-4 w-4 ml-2" />
-                </button>
-              </div>
+          <form onSubmit={handleSubscribe} className="space-y-4">
+            <div className="flex flex-col sm:flex-row gap-3">
+              <input
+                type="email"
+                value={email}
+                onChange={e => setEmail(e.target.value)}
+                placeholder="Enter your email address"
+                className="flex-1 px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-green-400"
+                required
+              />
+              <button
+                type="submit"
+                className="bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors flex items-center justify-center"
+              >
+                Subscribe
+                <ArrowRight className="h-4 w-4 ml-2" />
+              </button>
+            </div>
 
-              <label className="flex items-start space-x-3">
-                <input
-                  type="checkbox"
-                  checked={agreed}
-                  onChange={e => setAgreed(e.target.checked)}
-                  className="mt-1 w-4 h-4 accent-green-700 border-gray-700 rounded focus:ring-green-700"
-                  required
-                />
-                <span className="text-sm text-gray-300">
-                  I agree to receive marketing communications and understand I
-                  can opt out at any time.
-                </span>
-              </label>
-            </form>
-          </div>
+            <label className="flex items-start space-x-3">
+              <input
+                type="checkbox"
+                checked={agreed}
+                onChange={e => setAgreed(e.target.checked)}
+                className="mt-1 w-4 h-4 accent-green-700 border-gray-700 rounded focus:ring-green-700"
+                required
+              />
+              <span className="text-sm text-gray-300">
+                I agree to receive marketing communications and understand I can
+                opt out at any time.
+              </span>
+            </label>
+          </form>
 
-          <div className="text-center lg:text-start py-4">
-            <h3 className="text-2xl font-bold my-4">Follow Us</h3>
+          <div className="mt-8 text-center lg:text-left">
+            <h3 className="text-2xl font-bold mb-4 text-white">Follow Us</h3>
             <div className="flex justify-center lg:justify-start space-x-4">
               {socialLinks.map((social, index) => {
                 const IconComponent = social.icon;
@@ -166,9 +163,9 @@ const Footer = () => {
       </div>
 
       {/* Quick Links */}
-      <div className="grid lg:grid-cols-4 gap-8 border-t border-gray-800 mt-12 pt-12">
+      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 border-t border-gray-800 mt-12 pt-12">
         <div>
-          <h3 className="text-lg font-bold mb-6">Products</h3>
+          <h3 className="text-lg font-bold mb-6 text-white">Products</h3>
           <ul className="space-y-3">
             {productLinks.map((link, index) => (
               <li key={index}>
@@ -184,7 +181,7 @@ const Footer = () => {
         </div>
 
         <div>
-          <h3 className="text-lg font-bold mb-6">Services</h3>
+          <h3 className="text-lg font-bold mb-6 text-white">Services</h3>
           <ul className="space-y-3">
             {serviceLinks.map((link, index) => (
               <li key={index}>
@@ -200,7 +197,7 @@ const Footer = () => {
         </div>
 
         <div>
-          <h3 className="text-lg font-bold mb-6">Company</h3>
+          <h3 className="text-lg font-bold mb-6 text-white">Company</h3>
           <ul className="space-y-3">
             {companyLinks.map((link, index) => (
               <li key={index}>
@@ -216,7 +213,7 @@ const Footer = () => {
         </div>
 
         <div>
-          <h3 className="text-lg font-bold mb-6">Resources</h3>
+          <h3 className="text-lg font-bold mb-6 text-white">Resources</h3>
           <ul className="space-y-3">
             {resourceLinks.map((link, index) => (
               <li key={index}>
@@ -234,7 +231,7 @@ const Footer = () => {
 
       {/* Copyright */}
       <div className="border-t border-gray-800 mt-12 pt-8">
-        <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+        <div className="flex flex-col md:flex-row justify-between items-center text-center md:text-left space-y-4 md:space-y-0">
           <p className="text-gray-400 text-sm">
             © 2024 RootFarming. All rights reserved.
           </p>
