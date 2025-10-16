@@ -29,9 +29,8 @@ const ProductTypeManagement = () => {
   };
 
   const handleUpdateTypeModal = () => {
-    setIsUpdateTypeModal(prev => !prev);
-  }
-
+    setIsUpdateTypeModal((prev) => !prev);
+  };
 
   // --------------------------------------------------------------------
   // Fetching All Types Using Tanstack Query
@@ -48,32 +47,27 @@ const ProductTypeManagement = () => {
     },
   });
 
-
-   //   ----------------------------------------------------------------------------
-    // Type Delete Function
-    // ------------------------------------------------------------------------------
-    const handleTypeDelete = async (id) => {
-      try {
-        const { data } = await axiosSecure.delete(
-          `/types/delete-type/${id}`
-        );
-        if (data.deletedCount) {
-          Swal.fire({
-            icon: "success",
-            title: "Success",
-            text: "Type Deleted!",
-            timer: 1500,
-          });
-          refetch();
-        }
-      } catch (error) {
-        console.log(error);
-
+  //   ----------------------------------------------------------------------------
+  // Type Delete Function
+  // ------------------------------------------------------------------------------
+  const handleTypeDelete = async (id) => {
+    try {
+      const { data } = await axiosSecure.delete(`/types/delete-type/${id}`);
+      if (data.deletedCount) {
+        Swal.fire({
+          icon: "success",
+          title: "Success",
+          text: "Type Deleted!",
+          timer: 1500,
+        });
+        refetch();
       }
-    };
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-
-  if(typeLoading) return <LoadingSpinner/>
+  if (typeLoading) return <LoadingSpinner />;
 
   return (
     <>
@@ -105,7 +99,7 @@ const ProductTypeManagement = () => {
                 >
                   <tr className="text-left">
                     <th className="py-2 px-20">Photo</th>
-                    <th className="py-2 px-8">Category Name</th>
+                    <th className="py-2 px-8">Type Name</th>
                     <th className="py-2 px-8">Total Products</th>
                     <th className="py-2 px-8">Created On</th>
                     <th className="py-2 px-8">Status</th>
@@ -146,28 +140,39 @@ const ProductTypeManagement = () => {
               height="h-[300px]"
               headerText="Add New Type"
               modalClosingFunction={handleModalToggle}
-              form={<FormInAddType handleModalToggle={handleModalToggle} refetch={refetch}/>}
+              form={
+                <FormInAddType
+                  handleModalToggle={handleModalToggle}
+                  refetch={refetch}
+                />
+              }
             />
           )}
         </div>
 
-           {/* --------------------------------------------------------------
+        {/* --------------------------------------------------------------
                     Modal for Type Update
         -------------------------------------------------------------- */}
-          <div>
-            {isUpdateTypeModal && (
-              <ModalFormat
-                width="w-[500px]"
-                height="h-[350px]"
-                headerText="Update Type"
-                modalClosingFunction={handleUpdateTypeModal}
-                handleUpdateTypeModal={handleUpdateTypeModal}
-                typeToEdit={typeToEdit}
-                refetch={refetch}
-                form={<Form_UpdateType handleUpdateTypeModal={handleUpdateTypeModal} typeToEdit={typeToEdit} refetch={refetch}/>}
-              />
-            )}
-          </div>
+        <div>
+          {isUpdateTypeModal && (
+            <ModalFormat
+              width="w-[500px]"
+              height="h-[350px]"
+              headerText="Update Type"
+              modalClosingFunction={handleUpdateTypeModal}
+              handleUpdateTypeModal={handleUpdateTypeModal}
+              typeToEdit={typeToEdit}
+              refetch={refetch}
+              form={
+                <Form_UpdateType
+                  handleUpdateTypeModal={handleUpdateTypeModal}
+                  typeToEdit={typeToEdit}
+                  refetch={refetch}
+                />
+              }
+            />
+          )}
+        </div>
       </Container>
     </>
   );

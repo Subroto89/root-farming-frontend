@@ -12,19 +12,17 @@ import { PuffLoader } from "react-spinners";
 import Swal from "sweetalert2";
 import { useTheme } from "../../../../../../hooks/useTheme";
 
-const Form_AddNewProduct = ({handleModalToggle}) => {
-  const {user} = useAuth();
-  const {theme} = useTheme();
-  const themeStyle = theme === 'dark' ? "text-white" : "text-gray-800"
+const Form_AddNewProduct = ({ handleModalToggle }) => {
+  const { user } = useAuth();
+  const { theme } = useTheme();
+  const themeStyle = theme === "dark" ? "text-white" : "text-gray-800";
 
- const {
+  const {
     register,
     watch,
     formState: { errors, isSubmitting },
     handleSubmit,
   } = useForm();
-
-
 
   //--------------------------------------------------------------
   //  Necessary State Variables For Product Photo Upload
@@ -64,6 +62,7 @@ const Form_AddNewProduct = ({handleModalToggle}) => {
 
   const axiosSecure = useAxiosSecure();
 
+  // Fetch Categories
   const {
     data: categories = [],
     fetch,
@@ -77,9 +76,28 @@ const Form_AddNewProduct = ({handleModalToggle}) => {
     },
   });
 
+  // Fetch Types
+  const {
+    data: types = [],
+    // fetch,
+    isLoading: isLoadingTypes,
+    error: typesError,
+  } = useQuery({
+    queryKey: ["types"],
+    queryFn: async () => {
+      const { data } = await axiosSecure.get("/types/get-types");
+      return data;
+    },
+  });
+
   const categoryOptions = categories.map((cat) => ({
     value: cat._id,
     label: cat.categoryName,
+  }));
+
+  const typeOptions = types.map((type) => ({
+    value: type._id,
+    label: type.typeName,
   }));
 
   const qualityOptions = [
@@ -87,14 +105,11 @@ const Form_AddNewProduct = ({handleModalToggle}) => {
     { value: "grade-B", label: "Grade-B" },
     { value: "grade-C", label: "Grade-C" },
   ];
- 
 
-
-    //-------------------------------------------------------------------------
+  //-------------------------------------------------------------------------
   //   Form Submition Function
-  //--------------------------------------------------------------------------
+  //-------------------------------------------------------------------------
   const onSubmit = async (data) => {
-    
     data.productPhoto = uploadedProductPhoto;
     data.sellerDetails = {
       sellerId: user?.uid,
@@ -102,138 +117,158 @@ const Form_AddNewProduct = ({handleModalToggle}) => {
       sellerName: user?.displayName,
       sellerPhoto: user?.photoURL,
     };
-    console.log(data)
-    try{
-         const { data: response } = await axiosSecure.post("/products/add-product", data);
-    if (response.insertedId) {
-      Swal.fire({
-        position: "center",
-        icon: "success",
-        title: "Product Added Successfully",
-        timer: 1500,
-      });
-      handleModalToggle();
-      // refetch();
-    } else {
-      Swal.fire({
-        position: "center",
-        icon: "error",
-        title: "Something Wrong!",
-        timer: 1500,
-      });
+    console.log(data);
+    try {
+      const { data: response } = await axiosSecure.post(
+        "/products/add-product",
+        data
+      );
+      if (response.insertedId) {
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Product Added Successfully",
+          timer: 1500,
+        });
+        handleModalToggle();
+        // refetch();
+      } else {
+        Swal.fire({
+          position: "center",
+          icon: "error",
+          title: "Something Wrong!",
+          timer: 1500,
+        });
+      }
+    } catch (error) {
+      console.log(error);
     }
-    }catch(error){
-      console.log(error)
-    }
-
- 
   };
 
-
-
   // if (isSubmitting) return <LoadingSpinner />;
-
-
 
   return (
     <>
       <div>
-        <form onSubmit={handleSubmit(onSubmit)} className="grid grid-cols-5 gap-4 mt-4 px-[1rem]">
-      
-            {/* Left Column of the Form */}
-            <div className="col-span-3">
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="grid grid-cols-5 gap-4 mt-4 px-[1rem]"
+        >
+          {/* Left Column of the Form */}
+          <div className="col-span-3">
+            <div className="flex items-center gap-4">
+              {/* Product Type Field ------------------------------------ */}
+              <div className="flex-1">
+                <InputField
+                  type="select"
+                  label="Product Type"
+                  name="productType"
+                  placeholder={"Select a type"}
+                  register={register}
+                  errors={errors}
+                  options={typeOptions}
+                  validationRules={{
+                    required: "Type is required",
+                  }}
+                />
+              </div>
               {/* Category Field ---------------------------------------  */}
-              <InputField
-                type="select"
-                label="Category"
-                name="categoryId"
-                placeholder={"Select category"}
-                register={register}
-                errors={errors}
-                options={categoryOptions}
-                validationRules={{
-                  required: "Category is required",
-                }}
-              />
-
-              {/* Product Name Field---------------------------------------------- */}
-              <InputField
-                type="text"
-                label="Product Name"
-                name="productName"
-                placeholder={"Enter the product name"}
-                register={register}
-                errors={errors}
-                validationRules={{
-                  required: "Product name is required",
-                  minLength: {
-                    value: 3,
-                    message: "Item name must be at least 3 characters long",
-                  },
-                }}
-              />
-
-              {/* Quality Field ---------------------------------------- */}
-              <InputField
-                type="select"
-                label="Quality"
-                name="quality"
-                placeholder={"Select product quality"}
-                register={register}
-                errors={errors}
-                options={qualityOptions}
-                validationRules={{
-                  required: "Quality is Required",
-                }}
-              />
-
-              {/* Short Description Field -------------------------------- */}
-              <InputField
-                type="textarea"
-                label="Short Description"
-                name="shortDescription"
-                placeholder={"Give short description of your product"}
-                row={4}
-                register={register}
-                errors={errors}
-                validationRules={{
-                  required: "Description is required",
-                  minLength: {
-                    value: 10,
-                    message: "Description should be minimum 10 characters",
-                  },
-                  maxLength: {
-                    value: 200,
-                    message: "Description should be maximum 200 characters",
-                  },
-                }}
-              />
+              <div className="flex-1">
+                <InputField
+                  type="select"
+                  label="Category"
+                  name="categoryId"
+                  placeholder={"Select category"}
+                  register={register}
+                  errors={errors}
+                  options={categoryOptions}
+                  validationRules={{
+                    required: "Category is required",
+                  }}
+                />
+              </div>
             </div>
-            {/* Right Column of the Form */}
-            <div className="col-span-2 flex flex-col justify-between gap-4">
-              <div className="flex justify-center items-center">
-                <div className={`${themeStyle} w-full h-[160px] flex justify-center items-center overflow-hidden mt-6 rounded-xl border border-gray-300`}>
-                  {uploadedProductPhoto ? (
-              <img
-                src={uploadedProductPhoto}
-                alt="User Photo"
-                className="w-full h-full object-cover"
-              />
-            ) : (
-              <div className="flex items-center pr-3">
-                {uploadingProductPhoto ? (
-                  <PuffLoader size={80} />
+
+            {/* Product Name Field---------------------------------------------- */}
+            <InputField
+              type="text"
+              label="Product Name"
+              name="productName"
+              placeholder={"Enter the product name"}
+              register={register}
+              errors={errors}
+              validationRules={{
+                required: "Product name is required",
+                minLength: {
+                  value: 3,
+                  message: "Item name must be at least 3 characters long",
+                },
+              }}
+            />
+
+            {/* Quality Field ---------------------------------------- */}
+            <InputField
+              type="select"
+              label="Quality"
+              name="quality"
+              placeholder={"Select product quality"}
+              register={register}
+              errors={errors}
+              options={qualityOptions}
+              validationRules={{
+                required: "Quality is Required",
+              }}
+            />
+
+            {/* Short Description Field -------------------------------- */}
+            <InputField
+              type="textarea"
+              label="Short Description"
+              name="shortDescription"
+              placeholder={"Give short description of your product"}
+              row={4}
+              register={register}
+              errors={errors}
+              validationRules={{
+                required: "Description is required",
+                minLength: {
+                  value: 10,
+                  message: "Description should be minimum 10 characters",
+                },
+                maxLength: {
+                  value: 200,
+                  message: "Description should be maximum 200 characters",
+                },
+              }}
+            />
+          </div>
+          {/* Right Column of the Form */}
+          <div className="col-span-2 flex flex-col justify-between gap-4">
+            <div className="flex justify-center items-center">
+              <div
+                className={`${themeStyle} w-full h-[160px] flex justify-center items-center overflow-hidden mt-6 rounded-xl border border-gray-300`}
+              >
+                {uploadedProductPhoto ? (
+                  <img
+                    src={uploadedProductPhoto}
+                    alt="User Photo"
+                    className="w-full h-full object-cover"
+                  />
                 ) : (
-                  <h2>Product Photo</h2>
+                  <div className="flex items-center pr-3">
+                    {uploadingProductPhoto ? (
+                      <PuffLoader size={80} />
+                    ) : (
+                      <h2>Product Photo</h2>
+                    )}
+                  </div>
                 )}
               </div>
-            )}
-                </div>
-              </div>
+            </div>
 
-              {/* Photo Upload Button ------------------------------------------------ */}
-              <div>
-                <div className="mt-3">
+            {/* Photo Upload Button ------------------------------------------------ */}
+            <div>
+              <div className="mt-3">
                 <InputField
                   type="file"
                   icon={UploadCloud}
@@ -264,12 +299,15 @@ const Form_AddNewProduct = ({handleModalToggle}) => {
 
               <div className="flex justify-between items-center gap-4">
                 <NavButton2 label="Clear Fields" status="danger" spread="yes" />
-                <NavButton2 label="Add Item" status="success" spread="yes" type="submit"/>
-                
-              </div>
+                <NavButton2
+                  label="Add Item"
+                  status="success"
+                  spread="yes"
+                  type="submit"
+                />
               </div>
             </div>
-          
+          </div>
         </form>
       </div>
     </>
