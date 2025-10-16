@@ -1,5 +1,5 @@
-import useAxiosSecure from '@/hooks/useAxiosSecure';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import useAxiosSecure from '../hooks/UseAxiosSecure';
 
 export const useWishlist = userEmail => {
   const axiosSecure = useAxiosSecure();
