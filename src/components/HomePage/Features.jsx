@@ -71,49 +71,42 @@ const features = [
 
 const Features = () => {
   return (
-    <div className=" py-20 min-h-screen  bg-gray-50 overflow-hidden flex items-center">
-      <div className="max-w-7xl mx-auto px-4 w-full">
-        {/* Heading */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+    <div className="bg-gray-50 md:py-24 py-16 min-h-screen flex items-center overflow-hidden">
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Section Header */}
+        <div className="text-center mb-12 sm:mb-16">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 leading-snug">
             Everything You Need to Farm Smart
           </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            From field registration to marketplace selling, we've got every
-            aspect of modern farming covered
+          <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 max-w-2xl mx-auto">
+            From field registration to marketplace selling — we cover every
+            aspect of modern farming.
           </p>
         </div>
 
-        {/* Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        {/* Feature Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8 md:gap-10">
           {features.map((feature, index) => {
             const Icon = feature.icon;
             return (
               <Link to={feature.path}>
                 <div
                   key={index}
-                  className="group bg-white border border-gray-200 rounded-2xl p-6 shadow-sm 
-                       hover:shadow-xl hover:-translate-y-2 transition-all duration-300"
+                  className="group bg-white border border-gray-200 rounded-2xl p-6 sm:p-8 shadow-sm 
+                hover:shadow-lg hover:-translate-y-2 transition-all duration-300 flex flex-col h-full"
                 >
                   {/* Icon */}
-                  <div
-                    className="w-14 h-14 rounded-xl bg-green-700 flex items-center justify-center mb-4 
-                         shadow-md transform transition-transform duration-300 
-                         group-hover:scale-110"
-                  >
-                    <Icon className="w-7 h-7 text-white" />
+                  <div className="w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-xl bg-green-700 flex items-center justify-center mb-5 shadow-md transition-transform duration-300 group-hover:scale-110">
+                    <Icon className="w-7 h-7 sm:w-8 sm:h-10 md:w-12 md:h-12 text-white" />
                   </div>
 
                   {/* Title */}
-                  <h3
-                    className="text-xl font-semibold text-gray-900 mb-2 
-                         transition-colors duration-300 group-hover:text-green-700"
-                  >
+                  <h3 className="text-lg sm:text-xl md:text-2xl font-semibold text-gray-900 mb-2 group-hover:text-green-700 transition-colors duration-300">
                     {feature.title}
                   </h3>
 
                   {/* Description */}
-                  <p className="text-base text-gray-600 line-clamp-2">
+                  <p className="text-gray-600 text-sm sm:text-base md:text-base flex-grow ">
                     {feature.description}
                   </p>
                 </div>
