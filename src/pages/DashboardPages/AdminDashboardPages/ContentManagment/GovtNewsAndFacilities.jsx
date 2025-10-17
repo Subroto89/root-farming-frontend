@@ -5,6 +5,7 @@ import Swal from 'sweetalert2';
 import GovtNewsForm from '../../../../components/Dashboard/GovtNewsComponents/GovtNewsForm';
 import GovtNewsModal from '../../../../components/Dashboard/GovtNewsComponents/GovtNewsModal';
 import useAxiosSecure from '../../../../hooks/UseAxiosSecure';
+import LoadingSpinner from '../../../../components/shared/LoadingSpinner';
 
 const GovtNewsAndFacilities = () => {
   const axiosSecure = useAxiosSecure();
@@ -65,7 +66,7 @@ const GovtNewsAndFacilities = () => {
     });
   };
 
-  if (isLoading) return <p className="text-center mt-10">Loading...</p>;
+  if (isLoading) return <LoadingSpinner />;
 
   return (
     <div className="p-6 space-y-6">

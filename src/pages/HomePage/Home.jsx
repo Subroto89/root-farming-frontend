@@ -1,4 +1,5 @@
 import React from 'react';
+
 // import MarqueeSection from '../../components/HomePage/MarqueeSection';
 import HeroSection from '../../components/HomePage/HeroSection';
 import WeatherForecastSection from '../../components/HomePage/WeatherForecastSection';
@@ -11,6 +12,12 @@ import FarmerSuccessStoriesSection from '../../components/HomePage/FarmerSuccess
 import OurTrustedPartnersSection from '../../components/HomePage/OurTrustedPartnersSection';
 import BecomePartner from '../../components/HomePage/BecomePartner';
 import IndustryRecognitionAndAchievenent from '../../components/HomePage/IndustryRecognitionAndAchievenent';
+
+import Features from '../../components/HomePage/Features';
+import HowItWorks from '../../components/HomePage/HowItWorks';
+import AdvertisementSection from '../../components/HomePage/AdvertisementSection';
+import LatestReviews from '../../components/HomePage/LatestReviews';
+
 const Home = () => {
   return (
     <>
@@ -22,9 +29,12 @@ const Home = () => {
       <OurProductsSection />
       <HowItWorksSection />
       <OurGrowingImpactSection />
+      <Features />
+      <HowItWorks />
+      <AdvertisementSection />
+      <LatestReviews />
       <FarmerSuccessStoriesSection />
       <OurTrustedPartnersSection />
-      <IndustryRecognitionAndAchievenent />
       <BecomePartner />
     </>
   );

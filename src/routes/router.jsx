@@ -27,6 +27,9 @@ import ManageCustomers from '../pages/DashboardPages/AdminDashboardPages/UserMan
 import ManageAgriSpecialists from '../pages/DashboardPages/AdminDashboardPages/UserManagement/ManageAgriSpecialists';
   
 import BlogsManagement from '../pages/DashboardPages/AdminDashboardPages/BlogsManagement/BlogsManagement';
+
+import ProductDetails from '../components/shopComponents/ProductDetails';
+
 import StartNewCrop from '../pages/DashboardPages/FarmerDashboardPages/CropManagement/StartNewCrop';
 import ManagementInstructionalGuides from '../pages/DashboardPages/AdminDashboardPages/ContentManagment/ManagementInstructionalGuides';
 import SpecialistsSalary from '../pages/DashboardPages/AdminDashboardPages/FinancialsAndCommission/SpecialistsSalary';
@@ -62,6 +65,10 @@ const router = createBrowserRouter([
         // Component: Shop,
       },
       {
+        path: 'shop/:id',
+        Component: ProductDetails,
+      },
+      {
         path: 'cart',
         Component: Cart,
       },
@@ -92,8 +99,7 @@ const router = createBrowserRouter([
         path: 'my-profile',
         Component: MyProfile,
       },
-     
-      
+
       // Admin Dashboard Routes
       {
         path: 'management-instructional-guides',
