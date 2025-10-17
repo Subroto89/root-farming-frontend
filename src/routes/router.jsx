@@ -25,7 +25,7 @@ import ManageFarmers from '../pages/DashboardPages/AdminDashboardPages/UserManag
 import ManageSellers from '../pages/DashboardPages/AdminDashboardPages/UserManagement/ManageSellers';
 import ManageCustomers from '../pages/DashboardPages/AdminDashboardPages/UserManagement/ManageCustomers';
 import ManageAgriSpecialists from '../pages/DashboardPages/AdminDashboardPages/UserManagement/ManageAgriSpecialists';
-  
+
 import BlogsManagement from '../pages/DashboardPages/AdminDashboardPages/BlogsManagement/BlogsManagement';
 
 import ProductDetails from '../components/shopComponents/ProductDetails';
@@ -38,7 +38,9 @@ import ProductTypeManagement from '../pages/DashboardPages/AdminDashboardPages/C
 import ProductSubCategoryManagement from '../pages/DashboardPages/AdminDashboardPages/CategoryManagement/ProductSubCategoryManagement';
 import ProductVariantManagement from '../pages/DashboardPages/AdminDashboardPages/CategoryManagement/ProductVariantManagement';
 // import AddNewProduct from '../pages/DashboardPages/SellerDashboardPages/AddNewItem';
-import Shop from "../pages/ShopPage/Shop";
+import Shop from '../pages/ShopPage/Shop';
+import MyReviews from '../pages/DashboardPages/CustomerDashboardPages/MyReviews';
+import MyWishlist from '../pages/DashboardPages/CustomerDashboardPages/MyWishlist';
 
 const router = createBrowserRouter([
   // -------------------------------------------
@@ -143,24 +145,35 @@ const router = createBrowserRouter([
         Component: DailyToDoList,
       },
 
+      // Customer Dashboard Routes
+
+      {
+        path: 'review-rating',
+        Component: MyReviews,
+      },
+      {
+        path: 'wishlist',
+        Component: MyWishlist,
+      },
+
       // Seller Dashboard Routes
       {
         path: 'add-new-item',
-        Component: AddNewProduct
+        Component: AddNewProduct,
       },
 
       // Admin Dashboard Routes
       {
         path: 'manage-sellers',
-        Component: ManageSellers
+        Component: ManageSellers,
       },
       {
         path: 'manage-customers',
-        Component: ManageCustomers
+        Component: ManageCustomers,
       },
       {
         path: 'manage-agri-specialists',
-        Component: ManageAgriSpecialists
+        Component: ManageAgriSpecialists,
       },
       {
         path: 'manage-farmers',
@@ -169,18 +182,18 @@ const router = createBrowserRouter([
       {
         path: 'manage-product-type',
         Component: ProductTypeManagement,
-      },      
+      },
       {
         path: 'management-product-category',
         Component: ProductCategoryManagement,
       },
       {
         path: 'manage-product-subCategory',
-        Component: ProductSubCategoryManagement
-      }, 
+        Component: ProductSubCategoryManagement,
+      },
       {
         path: 'manage-product-variant',
-        Component: ProductVariantManagement
+        Component: ProductVariantManagement,
       },
       {
         path: 'govt-news-facilites',
