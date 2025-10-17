@@ -33,7 +33,7 @@ const WishlistButton = ({ product }) => {
             timer: 1500,
             showConfirmButton: false,
           });
-          navigate('/dashboard/wishlist'); // optional redirect
+          // navigate('/dashboard/wishlist'); // optional redirect
         },
         onError: err => {
           Swal.fire({
