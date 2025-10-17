@@ -38,6 +38,7 @@ import ProductTypeManagement from '../pages/DashboardPages/AdminDashboardPages/C
 import ProductSubCategoryManagement from '../pages/DashboardPages/AdminDashboardPages/CategoryManagement/ProductSubCategoryManagement';
 import ProductVariantManagement from '../pages/DashboardPages/AdminDashboardPages/CategoryManagement/ProductVariantManagement';
 // import AddNewProduct from '../pages/DashboardPages/SellerDashboardPages/AddNewItem';
+import Shop from "../pages/ShopPage/Shop";
 
 const router = createBrowserRouter([
   // -------------------------------------------
@@ -62,7 +63,7 @@ const router = createBrowserRouter([
       },
       {
         path: 'shop',
-        // Component: Shop,
+        Component: Shop,
       },
       {
         path: 'shop/:id',
