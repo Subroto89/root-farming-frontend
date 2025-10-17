@@ -39,7 +39,7 @@ const ImageUploader = ({ onUpload }) => {
         <img
           src={preview}
           alt="Preview"
-          className="mb-2 w-full h-48 object-cover rounded"
+          className="mb-2 w-full h-20 object-cover rounded"
         />
       )}
       <label className="inline-block bg-green-600 text-white px-3 py-1 rounded cursor-pointer hover:bg-green-700">

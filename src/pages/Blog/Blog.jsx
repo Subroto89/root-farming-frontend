@@ -4,6 +4,7 @@ import useAxiosSecure from '../../hooks/UseAxiosSecure';
 import FeaturedPostCard from '../../components/BlogPageComponents/FeaturedPostCard';
 import BlogCategories from '../../components/BlogPageComponents/BlogCategories';
 import BlogCard from '../../components/BlogPageComponents/Blogcard';
+import LoadingSpinner from '../../components/shared/LoadingSpinner';
 
 const Blog = () => {
   const axiosSecure = useAxiosSecure();
@@ -26,7 +27,7 @@ const Blog = () => {
   });
 
   if (loadingFeatured || loadingBlogs) {
-    return <p className="text-center text-gray-600 py-10">Loading blogs...</p>;
+    return <LoadingSpinner />;
   }
 
   const categories = ['All Posts', ...new Set(blogPosts.map(b => b.category))];

@@ -1,16 +1,13 @@
 import React from 'react';
-
 import HeroSection from '../../components/HomePage/HeroSection';
 import WeatherForecastSection from '../../components/HomePage/WeatherForecastSection';
-import WhyChooseRFSection from '../../components/HomePage/WhyChooseRFSection';
-import BestSellingProductsSection from '../../components/HomePage/BestSellingProductsSection';
-import OurProductsSection from '../../components/HomePage/OurProductsSection';
-import HowItWorksSection from '../../components/HomePage/HowItWorksSection';
-import OurGrowingImpactSection from '../../components/HomePage/OurGrowingImpactSection';
 import FarmerSuccessStoriesSection from '../../components/HomePage/FarmerSuccessStoriesSection';
 import OurTrustedPartnersSection from '../../components/HomePage/OurTrustedPartnersSection';
 import BecomePartner from '../../components/HomePage/BecomePartner';
-import IndustryRecognitionAndAchievenent from '../../components/HomePage/IndustryRecognitionAndAchievenent';
+import Features from '../../components/HomePage/Features';
+import HowItWorks from '../../components/HomePage/HowItWorks';
+import AdvertisementSection from '../../components/HomePage/AdvertisementSection';
+import LatestReviews from '../../components/HomePage/LatestReviews';
 
 const Home = () => {
   return (
@@ -18,14 +15,13 @@ const Home = () => {
       {/* <MarqueeSection /> */}
       <HeroSection />
       <WeatherForecastSection />
-      <WhyChooseRFSection />
-      <BestSellingProductsSection />
-      <OurProductsSection />
-      <HowItWorksSection />
-      <OurGrowingImpactSection />
+      <Features />
+      <HowItWorks />
+      <AdvertisementSection />
+      <LatestReviews />
+
       <FarmerSuccessStoriesSection />
       <OurTrustedPartnersSection />
-      <IndustryRecognitionAndAchievenent />
       <BecomePartner />
     </>
   );

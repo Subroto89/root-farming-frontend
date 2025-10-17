@@ -150,11 +150,11 @@ const BlogForm = ({ onSuccess, defaultValues = null }) => {
       </label>
 
       <ImageUploader onUpload={setImageUrl} />
-      {imageUrl && (
+      {/* {imageUrl && (
         <p className="text-sm text-gray-600">
           <strong>Image Uploaded:</strong> {imageUrl}
         </p>
-      )}
+      )} */}
 
       <button
         type="submit"
