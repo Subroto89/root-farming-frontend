@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import useUserRole from "../../../hooks/useUserRole";
 import AdminMenu from "../Menu/AdminMenu/AdminMenu";
 import CustomerMenu from "../Menu/CustomerMenu/CustomerMenu";
@@ -5,25 +6,28 @@ import FarmerMenu from "../Menu/FarmerMenu/FarmerMenu";
 import SellerMenu from "../Menu/SellerMenu/SellerMenu";
 
 const UserWiseMenu = () => {
-    const { userRole } = useUserRole();
-   
-    return (
-        <>
+   const { userRole } = useUserRole();
+   useEffect(() => {
+      console.log("User Role:", userRole);
+   }, [userRole]);
+
+   return (
+      <>
          <div>
-          {userRole === "admin" ? (
-            <AdminMenu />
-          ) : userRole === "seller" ? (
-            <SellerMenu />
-          ) : userRole === "customer" ? (
-            <CustomerMenu />
-          ) : userRole === "farmer" ? (
-            <FarmerMenu />
-          ) : (
-            <h2>No menu</h2>
-          )}
-        </div>   
-        </>
-    );
+            {userRole === "admin" ? (
+               <AdminMenu />
+            ) : userRole === "seller" ? (
+               <SellerMenu />
+            ) : userRole === "customer" ? (
+               <CustomerMenu />
+            ) : userRole === "farmer" ? (
+               <FarmerMenu />
+            ) : (
+               <h2>No menu</h2>
+            )}
+         </div>
+      </>
+   );
 };
 
 export default UserWiseMenu;
