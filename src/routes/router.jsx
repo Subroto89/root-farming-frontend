@@ -15,7 +15,7 @@ import AuthLayout from '../layouts/AuthLayout';
 import Register from '../components/AuthComponents/Register';
 import Login from '../components/AuthComponents/Login';
 import ResourceManagement from '../pages/DashboardPage/FarmerDashboardPage/ResourceManagement/ResourceManagement';
-import Shop from '../pages/ShopPage/Shop';
+// import Shop from '../pages/ShopPage/Shop';
 import Cart from '../pages/CartPage/Cart';
 import Blog from '../pages/Blog/Blog';
 import ErrorPage from '../pages/DashboardPages/ErrorPage';
@@ -59,7 +59,7 @@ const router = createBrowserRouter([
       },
       {
         path: 'shop',
-        Component: Shop,
+        // Component: Shop,
       },
       {
         path: 'cart',

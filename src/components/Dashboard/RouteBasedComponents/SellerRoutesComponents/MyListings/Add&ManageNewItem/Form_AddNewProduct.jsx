@@ -11,6 +11,8 @@ import { imageUpload } from "../../../../../../utils/utilities";
 import { PuffLoader } from "react-spinners";
 import Swal from "sweetalert2";
 import { useTheme } from "../../../../../../hooks/useTheme";
+import Button from "../../../../../shared/Buttons/Button";
+import SubmitButton from "../../../../../shared/Buttons/SubmitButton";
 
 const Form_AddNewProduct = ({ handleModalToggle }) => {
   const { user } = useAuth();
@@ -62,7 +64,7 @@ const Form_AddNewProduct = ({ handleModalToggle }) => {
 
   const axiosSecure = useAxiosSecure();
 
-  // Fetch Categories
+  // Fetch Categories --------------------------------------------------------
   const {
     data: categories = [],
     fetch,
@@ -76,7 +78,7 @@ const Form_AddNewProduct = ({ handleModalToggle }) => {
     },
   });
 
-  // Fetch Types
+  // Fetch Types --------------------------------------------------------------
   const {
     data: types = [],
     // fetch,
@@ -90,20 +92,67 @@ const Form_AddNewProduct = ({ handleModalToggle }) => {
     },
   });
 
-  const categoryOptions = categories.map((cat) => ({
-    value: cat._id,
-    label: cat.categoryName,
-  }));
+  // Fetch Sub-Category ------------------------------------------------------
+  const {
+    data: subCategories = [],
+    // fetch,
+    isLoading: isLoadingSubCategories,
+    error: subCategoryError,
+  } = useQuery({
+    queryKey: ["subCategories"],
+    queryFn: async () => {
+      const { data } = await axiosSecure.get(
+        "/subCategories/get-subCategories"
+      );
+      return data;
+    },
+  });
+
+  // Fetch Sub-Category ------------------------------------------------------
+  const {
+    data: variants = [],
+    // fetch,
+    isLoading: isLoadingVariants,
+    error: variantError,
+  } = useQuery({
+    queryKey: ["variants"],
+    queryFn: async () => {
+      const { data } = await axiosSecure.get("/variants/get-variants");
+      return data;
+    },
+  });
 
   const typeOptions = types.map((type) => ({
     value: type._id,
     label: type.typeName,
   }));
 
+  const categoryOptions = categories.map((cat) => ({
+    value: cat._id,
+    label: cat.categoryName,
+  }));
+
+  const subCategoryOptions = subCategories.map((subCategory) => ({
+    value: subCategory._id,
+    label: subCategory.subCategoryName,
+  }));
+
+  const variantOptions = variants.map((variant) => ({
+    value: variant._id,
+    label: variant.variantName,
+  }));
+
   const qualityOptions = [
     { value: "grade-A", label: "Grade-A" },
     { value: "grade-B", label: "Grade-B" },
     { value: "grade-C", label: "Grade-C" },
+  ];
+
+  const unitOptions = [
+    { value: "kg", label: "Kilo-gram" },
+    { value: "ltr", label: "Liter" },
+    { value: "ml", label: "Mili-liter" },
+    { value: "gm", label: "Gram" },
   ];
 
   //-------------------------------------------------------------------------
@@ -152,7 +201,7 @@ const Form_AddNewProduct = ({ handleModalToggle }) => {
       <div>
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="grid grid-cols-5 gap-4 mt-4 px-[1rem]"
+          className="grid grid-cols-5 gap-4 mt-4  px-[1rem]"
         >
           {/* Left Column of the Form */}
           <div className="col-span-3">
@@ -189,44 +238,104 @@ const Form_AddNewProduct = ({ handleModalToggle }) => {
               </div>
             </div>
 
-            {/* Product Name Field---------------------------------------------- */}
-            <InputField
-              type="text"
-              label="Product Name"
-              name="productName"
-              placeholder={"Enter the product name"}
-              register={register}
-              errors={errors}
-              validationRules={{
-                required: "Product name is required",
-                minLength: {
-                  value: 3,
-                  message: "Item name must be at least 3 characters long",
-                },
-              }}
-            />
+            <div className="flex items-center gap-4 my-2">
+              {/* Product Sub-Category Field---------------------------------------------- */}
+              <div className="flex-1">
+                <InputField
+                  type="select"
+                  label="Sub-Category"
+                  name="subCategoryName"
+                  placeholder={"Enter the sub-category"}
+                  register={register}
+                  errors={errors}
+                  options={subCategoryOptions}
+                  validationRules={{
+                    required: "Product sub-category name is required",
+                    minLength: {
+                      value: 3,
+                      message:
+                        "Item sub-category name must be at least 3 characters long",
+                    },
+                  }}
+                />
+              </div>
+              {/* Product Variant Field---------------------------------------------- */}
+              <div className="flex-1">
+                <InputField
+                  type="select"
+                  label="Variant"
+                  name="variantName"
+                  placeholder={"Enter the product variant"}
+                  register={register}
+                  errors={errors}
+                  options={variantOptions}
+                  validationRules={{
+                    required: "Product variant name is required",
+                    minLength: {
+                      value: 3,
+                      message:
+                        "Item variant name must be at least 3 characters long",
+                    },
+                  }}
+                />
+              </div>
+            </div>
+            <div className="flex items-center gap-4">
+              {/* Quality Field ---------------------------------------- */}
+              <div className="flex-1">
+                <InputField
+                  type="select"
+                  label="Quality"
+                  name="quality"
+                  placeholder={"Select product quality"}
+                  register={register}
+                  errors={errors}
+                  options={qualityOptions}
+                  validationRules={{
+                    required: "Quality is Required",
+                  }}
+                />
+              </div>
 
-            {/* Quality Field ---------------------------------------- */}
-            <InputField
-              type="select"
-              label="Quality"
-              name="quality"
-              placeholder={"Select product quality"}
-              register={register}
-              errors={errors}
-              options={qualityOptions}
-              validationRules={{
-                required: "Quality is Required",
-              }}
-            />
+              {/* Unit Field ---------------------------------------- */}
+              <div className="flex-1">
+                <InputField
+                  type="select"
+                  label="Unit"
+                  name="unit"
+                  placeholder={"Unit"}
+                  register={register}
+                  errors={errors}
+                  options={unitOptions}
+                  validationRules={{
+                    required: "Unit is Required",
+                  }}
+                />
+              </div>
+            </div>
 
+            {/* Price Field ---------------------------------------- */}
+
+            <div className="my-2">
+              <InputField
+                type="number"
+                label="Price(Tk)"
+                name="price"
+                placeholder={"Price"}
+                register={register}
+                errors={errors}
+                validationRules={{
+                  required: "Price is Required",
+                }}
+              />
+            </div>
             {/* Short Description Field -------------------------------- */}
             <InputField
               type="textarea"
               label="Short Description"
               name="shortDescription"
               placeholder={"Give short description of your product"}
-              row={4}
+              row={5}
               register={register}
               errors={errors}
               validationRules={{
@@ -246,7 +355,7 @@ const Form_AddNewProduct = ({ handleModalToggle }) => {
           <div className="col-span-2 flex flex-col justify-between gap-4">
             <div className="flex justify-center items-center">
               <div
-                className={`${themeStyle} w-full h-[160px] flex justify-center items-center overflow-hidden mt-6 rounded-xl border border-gray-300`}
+                className={`${themeStyle} w-full h-[260px] flex justify-center items-center overflow-hidden mt-7 rounded-xl border border-gray-500`}
               >
                 {uploadedProductPhoto ? (
                   <img
@@ -268,7 +377,7 @@ const Form_AddNewProduct = ({ handleModalToggle }) => {
 
             {/* Photo Upload Button ------------------------------------------------ */}
             <div>
-              <div className="mt-3">
+              <div className="mb-3">
                 <InputField
                   type="file"
                   icon={UploadCloud}
@@ -297,9 +406,9 @@ const Form_AddNewProduct = ({ handleModalToggle }) => {
                 />
               </div>
 
-              <div className="flex justify-between items-center gap-4">
+              <div className="flex justify-between items-center gap-2">
                 <NavButton2 label="Clear Fields" status="danger" spread="yes" />
-                <NavButton2
+                <SubmitButton
                   label="Add Item"
                   status="success"
                   spread="yes"

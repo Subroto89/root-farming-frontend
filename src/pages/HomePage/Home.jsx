@@ -11,7 +11,6 @@ import FarmerSuccessStoriesSection from '../../components/HomePage/FarmerSuccess
 import OurTrustedPartnersSection from '../../components/HomePage/OurTrustedPartnersSection';
 import BecomePartner from '../../components/HomePage/BecomePartner';
 import IndustryRecognitionAndAchievenent from '../../components/HomePage/IndustryRecognitionAndAchievenent';
-
 const Home = () => {
   return (
     <>
