@@ -24,11 +24,11 @@ const Home = () => {
       {/* <MarqueeSection /> */}
       <HeroSection />
       <WeatherForecastSection />
-      <WhyChooseRFSection />
+      {/* <WhyChooseRFSection /> */}
       {/* <BestSellingProductsSection /> */}
-      <OurProductsSection />
-      <HowItWorksSection />
-      <OurGrowingImpactSection />
+      {/* <OurProductsSection /> */}
+      {/* <HowItWorksSection /> */}
+      {/* <OurGrowingImpactSection /> */}
       <Features />
       <HowItWorks />
       <AdvertisementSection />

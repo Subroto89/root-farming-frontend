@@ -170,8 +170,8 @@ body{
 
 .badge{
   background-color: var(--color-accent);
-  padding: 1px;
-  border-radius: 100%;
+  padding: 8px;
+  border-radius: 20%;
 
 }
 
