@@ -1,3 +1,4 @@
+
 import useUserRole from '../../../hooks/useUserRole';
 import AdminMenu from '../Menu/AdminMenu/AdminMenu';
 import CustomerMenu from '../Menu/CustomerMenu/CustomerMenu';
@@ -10,13 +11,13 @@ const UserWiseMenu = () => {
   return (
     <>
       <div>
-        {userRole === 'Admin' ? (
+        {userRole === 'admin' ? (
           <AdminMenu />
-        ) : userRole === 'Seller' ? (
+        ) : userRole === 'seller' ? (
           <SellerMenu />
-        ) : userRole === 'Customer' ? (
+        ) : userRole === 'customer' ? (
           <CustomerMenu />
-        ) : userRole === 'Farmer' ? (
+        ) : userRole === 'farmer' ? (
           <FarmerMenu />
         ) : (
           <h2>No menu</h2>
@@ -24,6 +25,6 @@ const UserWiseMenu = () => {
       </div>
     </>
   );
-};
+
 
 export default UserWiseMenu;
