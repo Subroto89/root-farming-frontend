@@ -2,18 +2,34 @@ import { Link } from "react-router";
 import { useTheme } from "../../../hooks/useTheme";
 
 
-const NavButton2 = ({ label, icon: Icon, address, onClick }) => {
+const NavButton2 = ({ label, icon: Icon, type, onClick, address, status, spread }) => {
     const { theme } = useTheme();
+    const isSpread = spread === 'yes' ? 'flex-1' : ''
+
+    let btnStyle;
+    switch (status) {
+      case 'success':
+        btnStyle = 'btn-success';
+        break;
+      case 'danger':
+        btnStyle = theme === 'light' ? 'btn-danger-light' : 'btn-danger-dark';
+        break;
+      default:
+        btnStyle = 'bg-transparent';
+    }
+
+
   const style =
             theme === "dark"
-                ? "text-white hover:text-gray-200"
-                : "text-gray-700 hover:text-gray-900";
+                ? `text-white ${btnStyle} hover:text-gray-200`
+                : `text-white ${btnStyle} hover:text-gray-900`;
   return (
     <>
       <Link
-        to={address}
+        type={type}
         onClick={onClick}
-        className={`btn bg-transparent border-0 font-bold btn-color shadow-none ${style}`} 
+        to={address}
+        className={`btn ${isSpread} border-0 font-bold btn-color shadow-none ${style}`} 
       >
         {label}
         {Icon && <Icon size={20} />}

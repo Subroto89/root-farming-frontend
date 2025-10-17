@@ -12,7 +12,7 @@ const OrderManagementButton = () => {
   return (
     <>
        {/* Order Management Button -----------------  */}
-      <div onClick={toggleMenu} className="flex justify-between items-center space-x-1">
+      <div onClick={toggleMenu} className="w-60 flex justify-between items-center">
         <NavButton
             label="Order Management"
             icon={SquareMenu}

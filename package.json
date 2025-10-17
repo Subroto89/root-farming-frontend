@@ -11,6 +11,7 @@
    },
    "dependencies": {
       "@react-pdf/renderer": "^4.3.1",
+      "@reduxjs/toolkit": "^2.9.0",
       "@tailwindcss/vite": "^4.1.13",
       "@tanstack/react-query": "^5.90.1",
       "@tanstack/react-query-devtools": "^5.90.0",
@@ -32,9 +33,11 @@
       "react-hot-toast": "^2.6.0",
       "react-icons": "^5.5.0",
       "react-leaflet": "^5.0.0",
+      "react-redux": "^9.2.0",
       "react-router": "^7.9.1",
       "react-select": "^5.10.2",
       "react-spinners": "^0.17.0-beta.3",
+      "recharts": "^3.2.1",
       "sweetalert2": "^10.16.5",
       "tailwindcss": "^4.1.13",
       "uuid": "^13.0.0"

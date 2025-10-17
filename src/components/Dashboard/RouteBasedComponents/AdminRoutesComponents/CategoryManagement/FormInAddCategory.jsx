@@ -8,7 +8,6 @@ import { CloudUpload, Shapes } from "lucide-react";
 import { PuffLoader } from "react-spinners";
 import InputField from "../../../../shared/InputField/InputField";
 
-
 const AddCategoryForm = ({ handleCategoryModal, refetch }) => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
@@ -49,13 +48,19 @@ const AddCategoryForm = ({ handleCategoryModal, refetch }) => {
     uploadFile();
   }, [categoryPhoto]);
 
+
   const onSubmit = async (data) => {
     data.categoryPhoto = uploadedCategoryPhoto;
     data.createdBy = user?.email;
 
     try {
-      const { data: info } = await axiosSecure.post("/categories/save-category", data);
+      // 1. Send the POST request
+      const { data: info } = await axiosSecure.post(
+        "/categories/save-category",
+        data
+      );
 
+      // 2. Check for successful insertion (backend sends 201 Created and insertedId)
       if (info.insertedId) {
         Swal.fire({
           icon: "success",
@@ -63,16 +68,35 @@ const AddCategoryForm = ({ handleCategoryModal, refetch }) => {
           text: "Category Added Successfully",
           timer: 1500,
         });
+        // Refresh list and close modal
         refetch();
         handleCategoryModal();
-      } else {
-        Swal.fire("Category Addition Failed!");
       }
     } catch (error) {
-      console.log(error);
+      let errorMessage = "Category addition failed due to a server error.";
+
+      if (error.response) {
+        if (error.response.status === 409 || error.response.status === 400) {
+          errorMessage =
+            error.response.data.error ||
+            "A category with this name already exists.";
+        } else {
+          errorMessage = `Request failed with status ${error.response.status}.`;
+        }
+      } else if (error.request) {
+        errorMessage =
+          "No response received from the server. Check your connection.";
+      }
+
+      console.error("API Error:", error);
+
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: errorMessage,
+      });
     }
   };
-
   return (
     <div className="mx-8">
       <form

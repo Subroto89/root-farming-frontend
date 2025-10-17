@@ -21,7 +21,7 @@ const LanguageButton = () => {
         onBlur={() => setIsLanguageOpen(false)}
       />
 
-      <div className="absolute top-0 left-18  md:top-12  md:left-0 z-100">
+      <div className="absolute top-0 left-18  md:top-12  md:left-0 z-100 ">
         {isLanguageOpen && (
             <LanguageDropdown/>
         )}

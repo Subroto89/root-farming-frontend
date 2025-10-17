@@ -2,7 +2,7 @@ import React from "react";
 import NavButton from "../../../shared/Buttons/NavButton";
 import MyOrdersButton from "./MyOrders/MyOrdersButton";
 import MyAccountButton from "./MyAccount/MyAccountButton";
-import { House, Search, ShoppingCart } from "lucide-react";
+import { Handbag, Heart, House, Search, ShoppingCart, Star } from "lucide-react";
 
 const CustomerMenu = () => {
   return (
@@ -15,12 +15,33 @@ const CustomerMenu = () => {
         />
 
         <NavButton
-          label="Advanced Search & Filter"
-          address="advanced-search-filter"
-          icon={Search}
+          label="Shop Now"
+          address="/shop"
+          icon={Handbag}
         />
 
-        <NavButton label="My Cart" address="my-cart" icon={ShoppingCart}/>
+      
+
+        <NavButton
+          label="Shopping Cart"
+          address="/cart"
+          icon={ShoppingCart}
+        />
+
+        <NavButton
+          label="Wishlist"
+          address="/wishlist"
+          icon={Heart}
+        />
+
+
+        <NavButton
+          label="Review & Rating"
+          address="review-rating"
+          icon={Star}
+        />
+
+        
 
         <MyOrdersButton />
 

@@ -70,7 +70,7 @@ const ManagementInstructionalGuides = () => {
 
         if (result.isConfirmed) {
             try {
-                await axios.delete(`http://localhost:3000/api/guides/${id}`);
+                await axiosSecure.delete(`/api/guides/${id}`);
                 queryClient.invalidateQueries(["guides"]);
                 Swal.fire({
                     title: "Deleted!",
