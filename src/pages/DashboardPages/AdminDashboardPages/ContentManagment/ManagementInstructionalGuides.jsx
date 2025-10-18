@@ -122,7 +122,7 @@ const ManagementInstructionalGuides = () => {
         mutation.mutate(payload);
     };
 
-    if (isLoading) return <LoadingPage />;
+    if (isLoading) return  <LoadingPage />;
 
     return (
         <div className="p-8 bg-gray-100 min-h-screen">
@@ -243,7 +243,7 @@ const ManagementInstructionalGuides = () => {
                                     onClick={() => handleDelete(g._id)}
                                     className="text-red-600 hover:text-red-800"
                                 >
-                                    <Trash2 size={18} />
+                                    <Trash2 size={20} />
                                 </button>
                             </div>
                         </div>
