@@ -4,8 +4,15 @@ import { useProducts } from '../../allProductsApi/UseProducts';
 import { useCategories, useLocations } from '../../allProductsApi/UseFilters';
 import Filters from '../../components/shopComponents/Filters';
 import ProductCard from '../../components/shopComponents/ProductCard';
+import { useTheme } from '../../hooks/useTheme';
 
 const Shop = () => {
+  const {theme} = useTheme();
+
+    const themeBackgroundStyle = theme === 'dark' ? "bg-dark" : "bg-light";
+    const themeForegroundStyle = theme === 'dark' ? "fg-dark" : "fg-light";
+
+
   const [search, setSearch] = useState('');
   const [category, setCategory] = useState('All');
   const [location, setLocation] = useState('All');
@@ -32,7 +39,7 @@ const Shop = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-neutral-900 py-16">
+    <div className={`${themeBackgroundStyle} min-h-screen bg-gray-50 dark:bg-neutral-900 py-16`}>
       {/* Header Section */}
       <div className="max-w-7xl mx-auto mb-8 text-center sm:text-left px-4 sm:px-6 lg:px-8">
         <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-2">

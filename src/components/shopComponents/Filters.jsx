@@ -1,5 +1,6 @@
 import React from 'react';
 import { Grid, List, Search, RefreshCcw } from 'lucide-react';
+import { useTheme } from '../../hooks/useTheme';
 
 const Filters = ({
   search,
@@ -16,16 +17,20 @@ const Filters = ({
   locations,
   onReset,
 }) => {
+  const {theme} = useTheme();
+  
+      const themeBackgroundStyle = theme === 'dark' ? "bg-dark" : "bg-light";
+      const themeForegroundStyle = theme === 'dark' ? "fg-dark" : "fg-light";
   return (
-    <div className="bg-white rounded-2xl shadow-lg p-6 mb-8">
+    <div className={`${themeForegroundStyle} rounded-2xl shadow-lg p-6 mb-8`}>
       <div className="grid lg:grid-cols-6 gap-6 items-end">
         {/* Search */}
         <div className="lg:col-span-2">
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="block text-sm font-medium mb-2">
             Search Products
           </label>
           <div className="relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5" />
             <input
               type="text"
               placeholder="Search products, farmers, or keywords..."
