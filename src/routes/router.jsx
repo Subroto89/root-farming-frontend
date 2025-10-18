@@ -276,8 +276,7 @@ const router = createBrowserRouter([
             path: "track-current-orders",
             Component: OrderTracking,
          },
-      ],
-   },
+      
 
 
    // -------------------------------------------

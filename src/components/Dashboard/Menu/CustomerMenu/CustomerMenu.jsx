@@ -17,7 +17,7 @@ const CustomerMenu = () => {
       <div>
         <NavButton
           label="Dashboard Home"
-          address="/dashboard/customer-dashboard-home"
+          address="/dashboard"
           icon={House}
         />
 

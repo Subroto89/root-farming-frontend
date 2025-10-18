@@ -8,7 +8,7 @@ import {useTheme} from "../../hooks/useTheme";
 const Navbar = () => {
   const {theme} = useTheme();
  const navStyle = theme === 'dark'
-  ? 'w-full navbar-dark border-b border-white'
+  ? 'w-full fg-dark border-b border-white'
   : 'w-full navbar-light border-b border-white';
   return (
     <>

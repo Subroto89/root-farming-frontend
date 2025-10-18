@@ -18,7 +18,7 @@
   --color-primary: #3A6F43;
   --color-secondary: #4682B4;
   --color-accent: #FF8C00;
-  --color-neutral: #F6EFE7;
+  --color-neutral: #F9FAFB;
 
   --color-info: #17A2B8;
   --color-info-dark: #007BFF;
@@ -34,9 +34,19 @@
   --color-dark-gray: 1C1C1C;
   --color-dark-variant: #1a1a1a;
   --color-light-variant: #f0f0f0;
+  --color-white-beige: #F5F5DC;
 
   --card-padding: 1rem;
   --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  
+  /* dark theme variables */
+  --color-background-dark: #1A202C;
+  --color-background-text-dark: #F7FAFC;
+  --color-foreground-dark: #2D3748;
+  --color-foreground-text-dark: #F7FAFC;
+
+  --color-foreground-top-dark: #374151;
+  --box-shadow: 0 2rem 3rem #f9f9f9;
 }
 
 
@@ -62,6 +72,41 @@ body{
   font-weight: 400;
   font-style: normal;
 }
+
+.bg-dark{
+  background-color: var(--color-background-dark);
+  color: var(--color-background-text-dark);
+}
+
+.fg-dark{
+  background-color: var(--color-foreground-dark);
+  color: var(--color-foreground-text-dark);
+}
+
+.fg-of-fg-dark{
+  background-color: var(--color-foreground-top-dark);
+  color: var(--color-foreground-text-dark);
+}
+
+.bg-light{
+  background-color: var(--color-neutral);
+  color: var(--color-black);
+}
+
+.fg-light{
+  background-color: var(--color-white);
+  color: var(--color-black);
+}
+
+.fg-of-fg-light{
+  background-color: var(--color-white-beige);
+  color: var(--color-black);
+}
+
+
+
+
+
 
 .navbar-light {
   background-color: var(--color-primary);
@@ -170,8 +215,8 @@ body{
 
 .badge{
   background-color: var(--color-accent);
-  padding: 1px;
-  border-radius: 100%;
+  padding: 8px;
+  border-radius: 20%;
 
 }
 

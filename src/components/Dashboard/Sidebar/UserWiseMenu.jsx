@@ -1,4 +1,3 @@
-
 import useUserRole from '../../../hooks/useUserRole';
 import AdminMenu from '../Menu/AdminMenu/AdminMenu';
 import CustomerMenu from '../Menu/CustomerMenu/CustomerMenu';
@@ -8,6 +7,7 @@ import SellerMenu from '../Menu/SellerMenu/SellerMenu';
 const UserWiseMenu = () => {
   const { userRole } = useUserRole();
 
+  
   return (
     <>
       <div>
@@ -25,6 +25,5 @@ const UserWiseMenu = () => {
       </div>
     </>
   );
-
-
+}
 export default UserWiseMenu;
