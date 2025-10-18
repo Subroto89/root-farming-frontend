@@ -14,7 +14,7 @@ const SalesAndPayoutsButton = () => {
     return (
         <>
         {/* Sales And Payout Button --------------------- */}
-         <div onClick={toggleMenu} className="flex justify-between items-center space-x-1">
+         <div onClick={toggleMenu} className="w-60 flex justify-between items-center space-x-1">
             <NavButton
                 label="Sales & Payouts"
                 icon={ Receipt }

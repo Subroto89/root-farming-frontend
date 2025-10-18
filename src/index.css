@@ -1,25 +1,198 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap');@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap');
+/* Google Fonts ------------------------------------ */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
-@import "tailwindcss";
+
+@import 'tailwindcss';
 @tailwind utilities;
 @plugin "daisyui" {
   themes: light --default;
 }
 
 @plugin "daisyui" {
-   themes: light --default dark --prefersdark;
+  themes: light --default dark --prefersdark;
+}
+
+/* ---------------ROOT VARIABLES ------------------ */
+
+:root{
+  --color-primary: #3A6F43;
+  --color-secondary: #4682B4;
+  --color-accent: #FF8C00;
+  --color-neutral: #F6EFE7;
+
+  --color-info: #17A2B8;
+  --color-info-dark: #007BFF;
+  --color-success: #28A745;
+  --color-warning: #FFC107;  
+  --color-error: #DC3545;
+  --color-danger: #DC3545;
+  --color-white: #ffffff;
+
+  --color-black: #000000;
+  --color-dark: #242424;
+  --color-light: #f9f9f9;
+  --color-dark-gray: 1C1C1C;
+  --color-dark-variant: #1a1a1a;
+  --color-light-variant: #f0f0f0;
+
+  --card-padding: 1rem;
+  --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+/* -------- DARK THEME VARIABLES ----------- */
+.dark-theme{
+  --color-background: #181a1e;
+  --color-foreground: #567aff;
+
+  --color-primary-text: #f6f6f6;
+  --color-secondary-text: #0a0a0a;
+   
+  --color-white: #202528;
+  --color-dark: #edeffd;
+  --color-dark-variant: #a3bdcc;
+  --color-light: rbga(0, 0, 0, 0.4);
+  --box-shadow: 0 2rem 3rem var(--color-light);
 }
 
 body{
-  font-family: "Montserrat", sans-serif;
+  background-color: var(--color-neutral);
+  font-family: "Poppins", sans-serif;
   font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
 }
 
-.active{
-  color: green
+.navbar-light {
+  background-color: var(--color-primary);
+  color: var(--color-white);
 }
+
+.navbar-dark {
+  background-color: var(--color-dark);
+  color: var(--color-white)
+}
+
+.modal-header-light{
+  width: 100%;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  font-weight: 600;
+  font-size: 1.25rem;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-header-dark{
+  width: 100%;
+  background-color: var(--color-dark);
+  color: var(--color-white);
+  font-weight: 600;
+  font-size: 1.25rem;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+
+/* w-[700px] h-[400px] bg-white rounded-xl overflow-hidden flex flex-col items-center justify-between */
+
+.modal-light{
+  background-color: var(--color-neutral);
+  border-radius: 0.75rem;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: between;
+}
+
+.modal-dark{
+  background-color: var(--color-dark);
+   border-radius: 0.75rem;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: between;
+}
+
+.btn-success{
+  background-color: var(--color-success);
+  color: var(--color-white);
+}
+
+.btn-danger-light{
+  background-color: var(--color-danger);
+  color: var(--color-dark);
+}
+
+.btn-danger-dark{
+  background-color: var(--color-danger);
+  color: var(--color-light);
+}
+
+
+
+
+
+
+.text-muted{
+  color: var(--color-info-dark);
+}
+
+.primary{
+  color: var(--color-primary);
+}
+
+.danger{
+  color: var(--color-danger);
+} 
+
+.success{
+  color: var(--color-success);
+} 
+
+.warning{
+  color: var(--color-warning);
+} 
+
+
+
+
+.active{
+  color: var(--color-accent);
+}
+
+.badge{
+  background-color: var(--color-accent);
+  padding: 1px;
+  border-radius: 100%;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;

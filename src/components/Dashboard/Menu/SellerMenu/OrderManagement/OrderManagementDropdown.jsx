@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import NavButton from '../../../../shared/Buttons/NavButton';
 
 const OrderManagementDropdown = () => {
+    const {theme} = useState();
+    const dropDownStyle = theme === 'dark' ? "navbar-dark" : "navbar-light";
     return (
         <>
-            <div className='flex flex-col items-start px-1 rounded-lg bg-green-200 ml-8 w-full border border-white'>
+            <div className={`flex flex-col items-start w-60 border-t border-b border-gray-300`}>
                 <NavButton
                     label="View New Orders"
                     address="view-new-orders"

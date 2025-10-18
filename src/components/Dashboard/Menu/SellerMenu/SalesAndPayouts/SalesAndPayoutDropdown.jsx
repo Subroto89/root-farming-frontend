@@ -4,7 +4,7 @@ import NavButton from '../../../../shared/Buttons/NavButton';
 const SalesAndPayoutDropdown = () => {
     return (
         <>
-         <div className='flex flex-col items-start px-1 rounded-lg bg-green-200 ml-8 w-full border border-white'>
+         <div className='flex flex-col items-start w-full border-t border-b border-gray-300'>
             <NavButton
                 label="Sales Report"
                 address="view-sales-report"

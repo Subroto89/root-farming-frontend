@@ -1,30 +1,32 @@
 import { Link } from "react-router";
 import useAuth from "../../../hooks/useAuth";
 // import { useTheme } from "../../../hooks/useTheme";
-// import LoadingSpinner from "../../shared/LoadingSpinner";
-
-// import useUserRole from "../../../hooks/useUserRole";
-import RFLogo from "../../shared/RFLogo";
 import LoadingSpinner from "../../shared/LoadingSpinner";
 
+import useUserRole from "../../../hooks/useUserRole";
+import RFLogo from "../../shared/RFLogo";
 import UserPhoto from "./UserPhoto";
 import UserWiseMenu from "./UserWiseMenu";
 import ThemeSwitcher from "../../shared/ThemeSwitcher";
 import LogoutButton from "./LogoutButton";
 import UpdateProfileButton from "./UpdateProfileButton";
+import { useTheme } from "../../../hooks/useTheme";
 
 const DashboardSidebar = ({ isSideBarOpen, toggleMenu }) => {
-  const { loading: authLoading } = useAuth();
-  // const { userRoleLoading } = useUserRole();
+  const {theme} = useTheme();
+  const { user, loading: authLoading } = useAuth();
+  const { userRole, userRoleLoading } = useUserRole();
 
-  //   if (authLoading || userRoleLoading) return <LoadingSpinner />;
+  const sidebarStyle = theme === 'dark' ? 'navbar-dark' : 'navbar-light';
+
+
+  if (authLoading || userRoleLoading) return <LoadingSpinner />;
   if (authLoading) return <LoadingSpinner />;
-  //   console.log(userRole);
 
   return (
     <>
       <nav
-        className={`fixed top-0 w-56 md:w-68 h-screen bg-green-100 shadow-xl flex flex-col justify-between
+        className={`${sidebarStyle} fixed top-0 w-56 md:w-68 h-screen shadow-xl flex flex-col justify-between
              md:fixed md:translate-x-0 transform ${
                !isSideBarOpen && "-translate-x-full"
              }  transition duration-200 ease-in-out z-10`}
@@ -39,11 +41,14 @@ const DashboardSidebar = ({ isSideBarOpen, toggleMenu }) => {
         {/* ---------------------------------------------------------------
             User Photo
         ---------------------------------------------------------------- */}
-        <Link to="/dashboard" className="mb-6">
-          <UserPhoto />
-        </Link>
-
-         {/* ---------------------------------------------------------------
+        <div className="flex flex-col justify-center items-center">
+          <Link to="/dashboard" className="mb-1">
+            <UserPhoto />
+          </Link>
+          <h2 className="text-xs mb-1">{user && user?.email}</h2>
+          <h3 className="text-xs font-semibold badge mb-2">{userRole}</h3>
+        </div>
+        {/* ---------------------------------------------------------------
             User Role Wise Menu
         ---------------------------------------------------------------- */}
         <div className="flex-1 overflow-y-auto">
