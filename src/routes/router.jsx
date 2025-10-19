@@ -15,17 +15,16 @@ import AuthLayout from "../layouts/AuthLayout";
 import Register from "../components/AuthComponents/Register";
 import Login from "../components/AuthComponents/Login";
 import ResourceManagement from "../pages/DashboardPage/FarmerDashboardPage/ResourceManagement/ResourceManagement";
-// import Shop from '../pages/ShopPage/Shop';
-import Cart from '../pages/CartPage/Cart';
-import Blog from '../pages/Blog/Blog';
-import ErrorPage from '../pages/DashboardPages/ErrorPage';
-import ProductCategoryManagement from '../pages/DashboardPages/AdminDashboardPages/CategoryManagement/ProductCategoryManagement';
-import GovtNewsAndFacilities from '../pages/DashboardPages/AdminDashboardPages/ContentManagment/GovtNewsAndFacilities';
-import ManageFarmers from '../pages/DashboardPages/AdminDashboardPages/UserManagement/ManageFarmers';
-import ManageSellers from '../pages/DashboardPages/AdminDashboardPages/UserManagement/ManageSellers';
-import ManageCustomers from '../pages/DashboardPages/AdminDashboardPages/UserManagement/ManageCustomers';
-import ManageAgriSpecialists from '../pages/DashboardPages/AdminDashboardPages/UserManagement/ManageAgriSpecialists';
-import BlogsManagement from '../pages/DashboardPages/AdminDashboardPages/BlogsManagement/BlogsManagement';
+import Cart from "../pages/CartPage/Cart";
+import Blog from "../pages/Blog/Blog";
+import ErrorPage from "../pages/DashboardPages/ErrorPage";
+import ProductCategoryManagement from "../pages/DashboardPages/AdminDashboardPages/CategoryManagement/ProductCategoryManagement";
+import GovtNewsAndFacilities from "../pages/DashboardPages/AdminDashboardPages/ContentManagment/GovtNewsAndFacilities";
+import ManageFarmers from "../pages/DashboardPages/AdminDashboardPages/UserManagement/ManageFarmers";
+import ManageSellers from "../pages/DashboardPages/AdminDashboardPages/UserManagement/ManageSellers";
+import ManageCustomers from "../pages/DashboardPages/AdminDashboardPages/UserManagement/ManageCustomers";
+import ManageAgriSpecialists from "../pages/DashboardPages/AdminDashboardPages/UserManagement/ManageAgriSpecialists";
+import BlogsManagement from "../pages/DashboardPages/AdminDashboardPages/BlogsManagement/BlogsManagement";
 import ProductDetails from "../components/shopComponents/ProductDetails";
 import StartNewCrop from "../pages/DashboardPages/FarmerDashboardPages/CropManagement/StartNewCrop";
 import ManagementInstructionalGuides from "../pages/DashboardPages/AdminDashboardPages/ContentManagment/ManagementInstructionalGuides";
@@ -34,12 +33,9 @@ import AddNewProduct from "../pages/DashboardPages/SellerDashboardPages/AddNewPr
 import ProductTypeManagement from "../pages/DashboardPages/AdminDashboardPages/CategoryManagement/ProductTypeManagement";
 import ProductSubCategoryManagement from "../pages/DashboardPages/AdminDashboardPages/CategoryManagement/ProductSubCategoryManagement";
 import ProductVariantManagement from "../pages/DashboardPages/AdminDashboardPages/CategoryManagement/ProductVariantManagement";
-// import AddNewProduct from '../pages/DashboardPages/SellerDashboardPages/AddNewItem';
-
-import Shop from '../pages/ShopPage/Shop';
-import MyReviews from '../pages/DashboardPages/CustomerDashboardPages/MyReviews';
-import MyWishlist from '../pages/DashboardPages/CustomerDashboardPages/MyWishlist';
-
+import Shop from "../pages/ShopPage/Shop";
+import MyReviews from "../pages/DashboardPages/CustomerDashboardPages/MyReviews";
+import MyWishlist from "../pages/DashboardPages/CustomerDashboardPages/MyWishlist";
 import OrderTracking from "../pages/DashboardPages/CustomerDashboardPages/OrderTracking";
 import ChatWithAgriSpecialist from "../pages/DashboardPages/FarmerDashboardPages/GuidanceAndSupport/ChatWithAgriSpecialist";
 import SpecialistChat from "../pages/DashboardPages/AgriSpecialistDashboardPages/Chat/SpecialistChat";
@@ -53,37 +49,36 @@ const router = createBrowserRouter([
       Component: RootLayout,
       children: [
          {
-            path: "/",
             index: true,
-            Component: Home,
+            Component: Home
          },
          {
             path: "about",
-            Component: AboutUs,
+            Component: AboutUs
          },
          {
             path: "contact",
-            Component: ContactUs,
+            Component: ContactUs
          },
          {
             path: "shop",
-            Component: Shop,
+            Component: Shop
          },
          {
             path: "shop/:id",
-            Component: ProductDetails,
+            Component: ProductDetails
          },
          {
             path: "cart",
-            Component: Cart,
+            Component: Cart
          },
          {
             path: "blog",
-            Component: Blog,
+            Component: Blog
          },
          {
             path: "update-profile/:email",
-            Component: MyProfile,
+            Component: MyProfile
          },
       ],
    },
@@ -91,194 +86,134 @@ const router = createBrowserRouter([
    // -------------------------------------------
    // Dashboard Layout
    // -------------------------------------------
-
    {
       path: "/dashboard",
       Component: DashboardLayout,
       children: [
          {
             index: true,
-            Component: DashboardHome,
+            Component: DashboardHome
          },
          {
             path: "my-profile",
-            Component: MyProfile,
+            Component: MyProfile
          },
 
          // Admin Dashboard Routes
          {
             path: "management-instructional-guides",
-            Component: ManagementInstructionalGuides,
+            Component: ManagementInstructionalGuides
          },
          {
             path: "specialist's-salary",
-            Component: SpecialistsSalary,
+            Component: SpecialistsSalary
+         },
+         {
+            path: "manage-sellers",
+            Component: ManageSellers
+         },
+         {
+            path: "manage-customers",
+            Component: ManageCustomers
+         },
+         {
+            path: "manage-agri-specialists",
+            Component: ManageAgriSpecialists
+         },
+         {
+            path: "manage-farmers",
+            Component: ManageFarmers
+         },
+         {
+            path: "manage-product-type",
+            Component: ProductTypeManagement
+         },
+         {
+            path: "management-product-category",
+            Component: ProductCategoryManagement
+         },
+         {
+            path: "manage-product-subCategory",
+            Component: ProductSubCategoryManagement
+         },
+         {
+            path: "manage-product-variant",
+            Component: ProductVariantManagement
+         },
+         {
+            path: "govt-news-facilites",
+            Component: GovtNewsAndFacilities
+         },
+         {
+            path: "blogs-management",
+            Component: BlogsManagement
          },
 
          // Farmer Dashboard Routes
-
          {
             path: "field-registration",
-            Component: FieldRegistration,
+            Component: FieldRegistration
          },
-
          {
             path: "new-crop",
-            Component: StartNewCrop,
+            Component: StartNewCrop
          },
          {
             path: "activity-scheduling",
-            Component: ActivityLoggingScheduling,
+            Component: ActivityLoggingScheduling
          },
          {
             path: "chat-specialist",
-            Component: ChatwithAgriSpecialist,
+            Component: ChatwithAgriSpecialist
          },
          {
             path: "resource-management",
-            Component: ResourceManagement,
+            Component: ResourceManagement
          },
          {
             path: "weather-forecast",
-            Component: WeatherForecast,
+            Component: WeatherForecast
          },
          {
             path: "daily-todo-list",
-            Component: DailyToDoList,
+            Component: DailyToDoList
          },
          {
             path: "live-chat",
-            Component: ChatWithAgriSpecialist,
+            Component: ChatWithAgriSpecialist
          },
          {
-            path: "chat-specialist",
-            Component: SpecialistChat,
+            path: "specialist-chat",
+            Component: SpecialistChat
          },
 
          // Seller Dashboard Routes
          {
             path: "add-new-item",
-            Component: AddNewProduct,
-         },
-
-      // Customer Dashboard Routes
-
-      {
-        path: 'review-rating',
-        Component: MyReviews,
-      },
-      {
-        path: 'wishlist',
-        Component: MyWishlist,
-      },
-
-      // Seller Dashboard Routes
-      {
-        path: 'add-new-item',
-        Component: AddNewProduct,
-      },
-
-      // Admin Dashboard Routes
-      {
-        path: 'manage-sellers',
-        Component: ManageSellers,
-      },
-      {
-        path: 'manage-customers',
-        Component: ManageCustomers,
-      },
-      {
-        path: 'manage-agri-specialists',
-        Component: ManageAgriSpecialists,
-      },
-      {
-        path: 'manage-farmers',
-        Component: ManageFarmers,
-      },
-      {
-        path: 'manage-product-type',
-        Component: ProductTypeManagement,
-      },
-      {
-        path: 'management-product-category',
-        Component: ProductCategoryManagement,
-      },
-      {
-        path: 'manage-product-subCategory',
-        Component: ProductSubCategoryManagement,
-      },
-      {
-        path: 'manage-product-variant',
-        Component: ProductVariantManagement,
-      },
-      {
-        path: 'govt-news-facilites',
-        Component: GovtNewsAndFacilities,
-      },
-      {
-        path: 'blogs-management',
-        Component: BlogsManagement,
-      },
-      {
-        path: '*',
-        Component: ErrorPage,
-      },
-    ],
-  },
-         // Admin Dashboard Routes
-         {
-            path: "manage-sellers",
-            Component: ManageSellers,
-         },
-         {
-            path: "manage-customers",
-            Component: ManageCustomers,
-         },
-         {
-            path: "manage-agri-specialists",
-            Component: ManageAgriSpecialists,
-         },
-         {
-            path: "manage-farmers",
-            Component: ManageFarmers,
-         },
-         {
-            path: "manage-product-type",
-            Component: ProductTypeManagement,
-         },
-         {
-            path: "management-product-category",
-            Component: ProductCategoryManagement,
-         },
-         {
-            path: "manage-product-subCategory",
-            Component: ProductSubCategoryManagement,
-         },
-         {
-            path: "manage-product-variant",
-            Component: ProductVariantManagement,
-         },
-         {
-            path: "govt-news-facilites",
-            Component: GovtNewsAndFacilities,
-         },
-         {
-            path: "blogs-management",
-            Component: BlogsManagement,
-         },
-         {
-            path: "*",
-            Component: ErrorPage,
+            Component: AddNewProduct
          },
 
          // Customer Dashboard Routes
          {
+            path: "review-rating",
+            Component: MyReviews
+         },
+         {
+            path: "wishlist",
+            Component: MyWishlist
+         },
+         {
             path: "track-current-orders",
-            Component: OrderTracking,
+            Component: OrderTracking
+         },
+
+         // Error Page
+         {
+            path: "*",
+            Component: ErrorPage
          },
       ],
    },
-
 
    // -------------------------------------------
    // Auth Layout
@@ -289,15 +224,14 @@ const router = createBrowserRouter([
       children: [
          {
             index: true,
-            Component: Login,
+            Component: Login
          },
          {
             path: "register",
-            Component: Register,
+            Component: Register
          },
       ],
    },
-   // -------------------------------------------
 ]);
 
 export default router;

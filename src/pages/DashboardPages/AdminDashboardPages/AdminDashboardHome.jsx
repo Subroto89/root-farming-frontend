@@ -1,24 +1,3 @@
-<<<<<<< HEAD
-import React, { useMemo } from "react";
-import {
-  LineChart,
-  Line,
-  BarChart,
-  Bar,
-  PieChart,
-  Pie,
-  Cell,
-  XAxis,
-  YAxis,
-  Tooltip,
-  Legend,
-  ResponsiveContainer,
-  CartesianGrid,
-  AreaChart,
-  Area,
-} from "recharts";
-import { Users, DollarSign, TrendingUp, Briefcase, LineChart as LineChartIcon, Trophy } from "lucide-react";
-=======
 import React from "react";
 import {
   PieChart,
@@ -43,7 +22,6 @@ import {
 } from "react-icons/fa";
 import Container from "../../../components/shared/Container";
 // import './Dashboard.css'; // Assume you'll add some CSS here
->>>>>>> 0b1c57d3e5d876748529c219f88d5f890c22c72b
 
 // --- Sample Data ---
 

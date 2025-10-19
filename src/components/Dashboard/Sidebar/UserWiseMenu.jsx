@@ -24,7 +24,7 @@ const UserWiseMenu = () => {
         )}
       </div>
     </>
-  );
+  )};
 
 
 export default UserWiseMenu;
