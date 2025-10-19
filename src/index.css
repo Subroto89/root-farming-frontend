@@ -84,11 +84,6 @@ body{
   color: var(--color-foreground-text-dark);
 }
 
-.fg-of-fg-dark{
-  background-color: var(--color-foreground-top-dark);
-  color: var(--color-foreground-text-dark);
-}
-
 .bg-light{
   background-color: var(--color-neutral);
   color: var(--color-black);
@@ -99,10 +94,20 @@ body{
   color: var(--color-black);
 }
 
+.fg-of-fg-dark{
+  background-color: var(--color-foreground-top-dark);
+  color: var(--color-foreground-text-dark);
+}
+
 .fg-of-fg-light{
   background-color: var(--color-white-beige);
   color: var(--color-black);
 }
+
+
+
+
+
 
 
 
@@ -182,11 +187,6 @@ body{
   color: var(--color-light);
 }
 
-
-
-
-
-
 .text-muted{
   color: var(--color-info-dark);
 }
@@ -216,8 +216,8 @@ body{
 
 .badge{
   background-color: var(--color-accent);
-  padding: 8px;
-  border-radius: 20%;
+  padding: 10px;
+  border-radius: 20px;
 
 }
 

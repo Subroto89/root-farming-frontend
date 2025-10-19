@@ -36,8 +36,9 @@ const CustomerDashboardHome = () => {
     // Filter orders based on status
     const filteredOrders = filter === "All" ? orders : orders.filter((o) => o.status === filter);
  
-    const themeBackgroundStyle = theme === 'dark' ? "bg-dark" : "";
-    const themeForegroundStyle = theme === 'dark' ? "fg-dark" : "";
+    const themeBackgroundStyle = theme === 'dark' ? "bg-dark" : "bg-light";
+    const themeForegroundStyle = theme === 'dark' ? "fg-dark" : "fg-light";
+    const themeFgOfFgStyle = theme === 'dark' ? "fg-of-fg-dark" : "fg-of-fg-light"
 
     // Summary Card component
     const SummaryCard = ({ title, value, subtitle, color }) => (
@@ -48,12 +49,12 @@ const CustomerDashboardHome = () => {
     </div>
     )
     return (
-        <div className= {`${themeBackgroundStyle} px-6  space-y-6`}>
+        <div className= {`${themeBackgroundStyle} px-6  space-y-6 pt-4`}>
 
             {/* Header Section */}
-            <div className={`flex flex-col sm:flex-row sm:items-center sm:justify-between`}>
-                <h2 className="text-3xl font-semibold">
-                    Customer: <span className="text-2xl font-semibold text-gray-800">{user?.displayName}</span>
+            <div className={`${themeBackgroundStyle} flex flex-col sm:flex-row sm:items-center sm:justify-betwee`}>
+                <h2 className="text-2xl font-semibold">
+                    Welcome: <span className="text-2xl font-semibold">{user?.displayName}</span>
                 </h2>
                 <input
                     type="text"
@@ -71,7 +72,7 @@ const CustomerDashboardHome = () => {
             </div>
 
             {/* Main Grid: Customer Info + Orders */}
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 pb-[19px]">
 
                 {/* Customer Information */}
                 <div className={`${themeForegroundStyle} p-5 rounded-lg shadow-sm `}>
@@ -94,7 +95,7 @@ const CustomerDashboardHome = () => {
                 </div>
 
                 {/* Orders Section */}
-                <div className={`${themeForegroundStyle} lg:col-span-2 bg-white p-5 rounded-lg shadow-sm`}>
+                <div className={`${themeForegroundStyle} lg:col-span-2 p-5 rounded-lg shadow-sm`}>
                     <div className="flex flex-wrap items-center justify-between mb-4 gap-2">
                         <h3 className="font-semibold text-lg">Orders</h3>
                         <div className="flex flex-wrap gap-2">
@@ -102,7 +103,7 @@ const CustomerDashboardHome = () => {
                                 <button
                                     key={btn}
                                     onClick={() => setFilter(btn)}
-                                    className={`px-4 py-1.5 rounded-full text-sm border border-gray-300 transition ${filter === btn
+                                    className={`${themeForegroundStyle} px-4 py-1.5 rounded-full text-sm border border-gray-300 transition ${filter === btn
                                         ? "bg-green-600 text-white"
                                         : "bg-gray-100 hover:bg-gray-200"
                                         }`}
@@ -113,9 +114,9 @@ const CustomerDashboardHome = () => {
                         </div>
                     </div>
 
-                    <div className="overflow-x-auto">
+                    <div className="overflow-x-auto h-[280px]">
                         <table className="w-full text-sm text-left border-t border-gray-300">
-                            <thead className="fg-of-fg-dark bg-gray-100 uppercase text-xs">
+                            <thead className={`${themeFgOfFgStyle} bg-gray-100 uppercase text-xs`}>
                                 <tr>
                                     <th className="p-3 border-b border-gray-300">ID</th>
                                     <th className="p-3 border-b border-gray-300">Product name</th>
