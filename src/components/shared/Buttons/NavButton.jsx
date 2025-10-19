@@ -1,18 +1,16 @@
 import { NavLink } from "react-router";
 import { useTheme } from "../../../hooks/useTheme";
 
-const NavButton = ({ label, icon: Icon, address, onClick }) => {
-    const { theme } = useTheme();
+const NavButton = ({ label, icon: Icon, address, onClick, textSize }) => {
+  const { theme } = useTheme();
   const style =
-            theme === "dark"
-                ? "navbar-dark hover:text-white"
-                : "navbar-light hover:text-white";
+    theme === "dark" ? "fg-dark " : "fg-light ";
   return (
     <>
       <NavLink
         to={address}
         onClick={onClick}
-        className={`btn bg-transparent border-0 font-bold btn-color shadow-none ${style}`} 
+        className={`${style} btn bg-transparent border-0 btn-color shadow-none text-${textSize} `}
       >
         {Icon && <Icon size={20} />}
         {label}

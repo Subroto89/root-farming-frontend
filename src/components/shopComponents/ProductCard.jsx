@@ -1,12 +1,17 @@
 import React from 'react';
 import { ShoppingCart, Star, MapPin } from 'lucide-react';
 import { useNavigate } from 'react-router';
+import { useTheme } from '../../hooks/useTheme';
 
 const ProductCard = ({ product, viewMode }) => {
+   const {theme} = useTheme();
+  
+      const themeBackgroundStyle = theme === 'dark' ? "bg-dark" : "bg-light";
+      const themeForegroundStyle = theme === 'dark' ? "fg-dark" : "fg-light";
   const navigate = useNavigate();
   return (
     <div
-      className={`bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden 
+      className={`${themeForegroundStyle} rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden 
         ${viewMode === 'list' ? 'flex items-stretch' : 'flex flex-col h-full'}
       `}
     >
@@ -62,18 +67,18 @@ const ProductCard = ({ product, viewMode }) => {
           {/* Product Title & Rating */}
           <div className="mb-1">
             <div className="flex items-center justify-between">
-              <h3 className="text-[18px] font-bold text-gray-900 mb-1 line-clamp-1">
+              <h3 className={`text-[18px] font-bold mb-1 line-clamp-1`}>
                 {product.name}
               </h3>
               <div className="flex items-center text-yellow-400">
                 <Star className="h-4 w-4 fill-current" />
-                <span className="text-sm text-gray-600 ml-1">
+                <span className="text-sm ml-1">
                   {product.rating}
                 </span>
               </div>
             </div>
 
-            <p className="text-green-600 font-medium">{product.farmer}</p>
+          <p className="font-medium">{product.farmer}</p>
           </div>
 
           {/* Location */}
@@ -91,12 +96,12 @@ const ProductCard = ({ product, viewMode }) => {
         {/* Price & Quantity */}
         <div className="flex items-center justify-between">
           <div className="flex items-center">
-            <span className="text-xl font-bold text-green-600">
+            <span className="text-xl font-bold">
               ${product.price}
             </span>
-            <span className="text-sm text-gray-600">{product.unit}</span>
+            <span className="text-sm">{product.unit}</span>
           </div>
-          <span className="text-sm text-gray-600">{product.quantity}</span>
+          <span className="text-sm">{product.quantity}</span>
         </div>
 
         {/* Action Buttons */}

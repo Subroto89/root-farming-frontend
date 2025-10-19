@@ -17,7 +17,7 @@ const DashboardSidebar = ({ isSideBarOpen, toggleMenu }) => {
   const { user, loading: authLoading } = useAuth();
   const { userRole, userRoleLoading } = useUserRole();
 
-  const sidebarStyle = theme === 'dark' ? 'navbar-dark' : 'navbar-light';
+  const sidebarStyle = theme === 'dark' ? 'fg-dark' : 'bg-light';
 
 
   if (authLoading || userRoleLoading) return <LoadingSpinner />;

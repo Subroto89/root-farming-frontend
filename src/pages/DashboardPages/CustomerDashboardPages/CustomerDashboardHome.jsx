@@ -2,8 +2,11 @@ import { useState } from "react";
 // import { useQuery } from "@tanstack/react-query";
 // import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useAuth from "../../../hooks/useAuth";
+import { useTheme } from "../../../hooks/useTheme";
 
 const CustomerDashboardHome = () => {
+    const {theme} = useTheme();
+    console.log(theme)
     // State to track order filter
     const [filter, setFilter] = useState("All");
 
@@ -32,14 +35,26 @@ const CustomerDashboardHome = () => {
 
     // Filter orders based on status
     const filteredOrders = filter === "All" ? orders : orders.filter((o) => o.status === filter);
+ 
+    const themeBackgroundStyle = theme === 'dark' ? "bg-dark" : "bg-light";
+    const themeForegroundStyle = theme === 'dark' ? "fg-dark" : "fg-light";
+    const themeFgOfFgStyle = theme === 'dark' ? "fg-of-fg-dark" : "fg-of-fg-light"
 
+    // Summary Card component
+    const SummaryCard = ({ title, value, subtitle, color }) => (
+    <div className={`${themeForegroundStyle} p-5 rounded-2xl shadow-sm`}>
+        <h4 className="text-sm text-gray-500">{title}</h4>
+        <p className={`text-2xl font-semibold ${color}`}>{value}</p>
+        <p className="text-xs text-gray-400 mt-1">{subtitle}</p>
+    </div>
+    )
     return (
-        <div className="px-6 pt-2 space-y-6">
+        <div className= {`${themeBackgroundStyle} px-6  space-y-6 pt-4`}>
 
             {/* Header Section */}
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
-                <h2 className="text-3xl font-semibold">
-                    Customer: <span className="text-2xl font-semibold text-gray-800">{user?.displayName}</span>
+            <div className={`${themeBackgroundStyle} flex flex-col sm:flex-row sm:items-center sm:justify-betwee`}>
+                <h2 className="text-2xl font-semibold">
+                    Welcome: <span className="text-2xl font-semibold">{user?.displayName}</span>
                 </h2>
                 <input
                     type="text"
@@ -50,17 +65,17 @@ const CustomerDashboardHome = () => {
 
             {/* Summary Cards Section */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                <SummaryCard title="Total Cost" value="$10440.2k" subtitle="Total cost last 365 days" color="text-blue-600" />
+                <SummaryCard className={`${themeForegroundStyle}`} title="Total Cost" value="$10440.2k" subtitle="Total cost last 365 days" color="text-blue-600" />
                 <SummaryCard title="Total Order" value="127" subtitle="Total order last 365 days" color="text-yellow-500" />
                 <SummaryCard title="Completed" value="100" subtitle="Completed order last 365 days" color="text-green-600" />
                 <SummaryCard title="Cancelled" value="27" subtitle="Cancelled order last 365 days" color="text-red-500" />
             </div>
 
             {/* Main Grid: Customer Info + Orders */}
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 pb-[19px]">
 
                 {/* Customer Information */}
-                <div className="bg-white p-5 rounded-2xl shadow-sm border border-gray-300">
+                <div className={`${themeForegroundStyle} p-5 rounded-lg shadow-sm `}>
                     <h3 className="font-semibold text-lg mb-4">Customer Information</h3>
                     <div className="space-y-2 text-sm">
                         <p><span className="font-medium">Name:</span> {user?.displayName}</p>
@@ -80,7 +95,7 @@ const CustomerDashboardHome = () => {
                 </div>
 
                 {/* Orders Section */}
-                <div className="lg:col-span-2 bg-white p-5 rounded-2xl shadow-sm border border-gray-300">
+                <div className={`${themeForegroundStyle} lg:col-span-2 p-5 rounded-lg shadow-sm`}>
                     <div className="flex flex-wrap items-center justify-between mb-4 gap-2">
                         <h3 className="font-semibold text-lg">Orders</h3>
                         <div className="flex flex-wrap gap-2">
@@ -88,7 +103,7 @@ const CustomerDashboardHome = () => {
                                 <button
                                     key={btn}
                                     onClick={() => setFilter(btn)}
-                                    className={`px-4 py-1.5 rounded-full text-sm border border-gray-300 transition ${filter === btn
+                                    className={`${themeForegroundStyle} px-4 py-1.5 rounded-full text-sm border border-gray-300 transition ${filter === btn
                                         ? "bg-green-600 text-white"
                                         : "bg-gray-100 hover:bg-gray-200"
                                         }`}
@@ -99,9 +114,9 @@ const CustomerDashboardHome = () => {
                         </div>
                     </div>
 
-                    <div className="overflow-x-auto">
+                    <div className="overflow-x-auto h-[280px]">
                         <table className="w-full text-sm text-left border-t border-gray-300">
-                            <thead className="bg-gray-100 text-gray-700 uppercase text-xs">
+                            <thead className={`${themeFgOfFgStyle} bg-gray-100 uppercase text-xs`}>
                                 <tr>
                                     <th className="p-3 border-b border-gray-300">ID</th>
                                     <th className="p-3 border-b border-gray-300">Product name</th>
@@ -139,15 +154,5 @@ const CustomerDashboardHome = () => {
             </div>
         </div>
     );
-};
-
-// Summary Card component
-const SummaryCard = ({ title, value, subtitle, color }) => (
-    <div className="bg-white p-5 rounded-2xl shadow-sm border border-gray-300">
-        <h4 className="text-sm text-gray-500">{title}</h4>
-        <p className={`text-2xl font-semibold ${color}`}>{value}</p>
-        <p className="text-xs text-gray-400 mt-1">{subtitle}</p>
-    </div>
-);
-
+}
 export default CustomerDashboardHome;
