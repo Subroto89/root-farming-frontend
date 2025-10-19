@@ -67,6 +67,7 @@
 
 body{
   background-color: var(--color-neutral);
+  color: var(--color-neutral);
   font-family: "Poppins", sans-serif;
   font-optical-sizing: auto;
   font-weight: 400;
