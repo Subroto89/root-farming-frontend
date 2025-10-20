@@ -6,7 +6,12 @@ import FarmerMenu from '../Menu/FarmerMenu/FarmerMenu';
 import SellerMenu from '../Menu/SellerMenu/SellerMenu';
 
 const UserWiseMenu = () => {
-  const { userRole } = useUserRole();
+  // const { userRole } = useUserRole();
+  const userRole = "admin"
+  // const userRole = "agri-specialist"
+  // const userRole = "seller"
+  // const userRole = "customer"
+  // const userRole = "farmer"
 
   return (
     <>
