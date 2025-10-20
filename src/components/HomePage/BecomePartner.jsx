@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Mail, Download, Users, Globe, Zap } from 'lucide-react';
 import { useTheme } from '../../hooks/useTheme';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const partnerBenefits = [
   {
@@ -33,15 +35,30 @@ const BecomePartner = () => {
   const { theme } = useTheme();
   const themeBackgroundStyle = theme === 'dark' ? 'bg-dark' : 'bg-light';
   const themeForegroundStyle = theme === 'dark' ? 'fg-dark' : 'fg-light';
+
+  useEffect(() => {
+    AOS.init({
+      duration: 900,
+      once: true,
+      easing: 'ease-in-out',
+      offset: 100,
+    });
+    AOS.refresh();
+  }, []);
+
   return (
     <div className={`${themeBackgroundStyle} py-20 md:py-24`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Heading */}
-        <div className="text-center mb-16">
+        <div
+          className="text-center mb-16"
+          data-aos="fade-up"
+          data-aos-duration="900"
+        >
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
             Become a Partner
           </h2>
-          <p className="text-base sm:text-lg lg:text-xl  max-w-3xl mx-auto">
+          <p className="text-base sm:text-lg lg:text-xl max-w-3xl mx-auto">
             Join our global ecosystem of innovators, organizations, and experts
             dedicated to transforming modern agriculture sustainably.
           </p>
@@ -56,6 +73,9 @@ const BecomePartner = () => {
                 key={index}
                 className={`${themeForegroundStyle} border border-gray-200 group rounded-2xl p-8 shadow-sm 
                            hover:shadow-xl hover:-translate-y-2 transition-all duration-300`}
+                data-aos="fade-up"
+                data-aos-delay={index * 100}
+                data-aos-duration="900"
               >
                 {/* Icon */}
                 <div
@@ -67,21 +87,26 @@ const BecomePartner = () => {
 
                 {/* Title */}
                 <h3
-                  className="text-xl sm:text-2xl font-semibold  mb-3 
+                  className="text-xl sm:text-2xl font-semibold mb-3 
                                transition-colors duration-300 group-hover:text-green-700"
                 >
                   {benefit.title}
                 </h3>
 
                 {/* Description */}
-                <p className=" text-sm sm:text-base">{benefit.description}</p>
+                <p className="text-sm sm:text-base">{benefit.description}</p>
               </div>
             );
           })}
         </div>
 
         {/* Call-to-Action Buttons */}
-        <div className="flex flex-col sm:flex-row gap-5 justify-center">
+        <div
+          className="flex flex-col sm:flex-row gap-5 justify-center"
+          data-aos="fade-up"
+          data-aos-delay="400"
+          data-aos-duration="900"
+        >
           <button className="inline-flex items-center justify-center bg-green-700 text-white px-8 py-3 rounded-lg font-semibold shadow-lg hover:shadow-xl hover:bg-green-800 transition-all duration-300">
             <Mail className="h-5 w-5 mr-2" />
             Partner With Us

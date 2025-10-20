@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Mail,
   Phone,
@@ -12,12 +12,24 @@ import {
 import logo from '../../assets/Logo/Rootfarming.png';
 import { Link } from 'react-router';
 import { useTheme } from '../../hooks/useTheme';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const Footer = () => {
   const { theme } = useTheme();
   const Style = theme === 'dark' ? ' fg-dark ' : 'bg-[#0F172A] ';
   const [email, setEmail] = useState('');
   const [agreed, setAgreed] = useState(false);
+
+  useEffect(() => {
+    AOS.init({
+      duration: 900,
+      once: true,
+      easing: 'ease-in-out',
+      offset: 100,
+    });
+    AOS.refresh();
+  }, []);
 
   const handleSubscribe = e => {
     e.preventDefault();
@@ -68,12 +80,19 @@ const Footer = () => {
   ];
 
   return (
-    <footer className={`${Style}  overflow-hidden`}>
+    <footer className={`${Style} overflow-hidden`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-8">
         {/* Top Section */}
-        <div className="flex flex-col lg:flex-row gap-10 lg:gap-16 items-start">
+        <div
+          className="flex flex-col lg:flex-row gap-10 lg:gap-16 items-start"
+          data-aos="fade-up"
+        >
           {/* Company Info */}
-          <div className="w-full lg:w-1/2">
+          <div
+            className="w-full lg:w-1/2"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
             <div className="flex items-center space-x-3 mb-6">
               <img src={logo} alt="Root Farming Logo" className="h-10 w-10" />
               <h2 className="text-2xl font-bold">Root Farming</h2>
@@ -104,7 +123,11 @@ const Footer = () => {
           </div>
 
           {/* Newsletter & Social */}
-          <div className="w-full lg:w-1/2">
+          <div
+            className="w-full lg:w-1/2"
+            data-aos="fade-up"
+            data-aos-delay="200"
+          >
             <h3 className="text-2xl font-bold mb-4">Stay Updated</h3>
             <p className="text-gray-300 mb-6 text-sm sm:text-base">
               Get the latest farming tips, market insights, and product updates
@@ -114,6 +137,8 @@ const Footer = () => {
             <form
               onSubmit={handleSubscribe}
               className="space-y-4 w-full max-w-lg"
+              data-aos="fade-up"
+              data-aos-delay="300"
             >
               <div className="flex flex-col sm:flex-row gap-3">
                 <input
@@ -149,7 +174,11 @@ const Footer = () => {
             </form>
 
             {/* Social Icons */}
-            <div className="mt-8 text-center sm:text-left">
+            <div
+              className="mt-8 text-center sm:text-left"
+              data-aos="fade-up"
+              data-aos-delay="400"
+            >
               <h3 className="text-xl font-bold mb-4">Follow Us</h3>
               <div className="flex justify-center sm:justify-start gap-4 flex-wrap">
                 {socialLinks.map((social, index) => {
@@ -171,7 +200,11 @@ const Footer = () => {
         </div>
 
         {/* Quick Links */}
-        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 border-t border-gray-800 mt-12 pt-12">
+        <div
+          className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 border-t border-gray-800 mt-12 pt-12"
+          data-aos="fade-up"
+          data-aos-delay="500"
+        >
           {[
             { title: 'Products', links: productLinks },
             { title: 'Services', links: serviceLinks },
@@ -197,7 +230,11 @@ const Footer = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-gray-800 mt-12 pt-8">
+        <div
+          className="border-t border-gray-800 mt-12 pt-8"
+          data-aos="fade-up"
+          data-aos-delay="600"
+        >
           <div className="flex flex-col md:flex-row justify-between items-center text-center md:text-left gap-4 md:gap-0">
             <p className="text-gray-400 text-sm">
               © {new Date().getFullYear()} RootFarming. All rights reserved.

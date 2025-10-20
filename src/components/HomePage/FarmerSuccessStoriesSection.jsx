@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   ChevronLeft,
   ChevronRight,
@@ -8,8 +8,9 @@ import {
   DollarSign,
   Zap,
 } from 'lucide-react';
-import CountUp from 'react-countup';
 import { useTheme } from '../../hooks/useTheme';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const FarmerSuccessStoriesSection = () => {
   const { theme } = useTheme();
@@ -65,9 +66,20 @@ const FarmerSuccessStoriesSection = () => {
     },
   ];
 
+  useEffect(() => {
+    AOS.init({
+      duration: 900,
+      once: true,
+      easing: 'ease-in-out',
+      offset: 100,
+    });
+    AOS.refresh();
+  }, []);
+
   const nextStory = () => setCurrentStory(prev => (prev + 1) % stories.length);
   const prevStory = () =>
     setCurrentStory(prev => (prev - 1 + stories.length) % stories.length);
+
   const currentFarmer = stories[currentStory];
 
   return (
@@ -77,11 +89,15 @@ const FarmerSuccessStoriesSection = () => {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold  mb-4">
+        <div
+          className="text-center mb-16"
+          data-aos="fade-up"
+          data-aos-duration="900"
+        >
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
             Farmer Success Stories
           </h2>
-          <p className="text-base sm:text-lg lg:text-xl  max-w-3xl mx-auto">
+          <p className="text-base sm:text-lg lg:text-xl max-w-3xl mx-auto">
             Real farmers, real results. Discover how Root Farming is
             transforming agricultural businesses across the country.
           </p>
@@ -89,11 +105,17 @@ const FarmerSuccessStoriesSection = () => {
 
         {/* Story Card */}
         <div
-          className={` rounded-2xl shadow-xl p-6 md:p-12 ${themeForegroundStyle} border border-gray-200`}
+          className={`rounded-2xl shadow-xl p-6 md:p-12 ${themeForegroundStyle} border border-gray-200`}
+          data-aos="fade-up"
+          data-aos-duration="900"
         >
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             {/* Left: Farmer Info */}
-            <div className="text-center lg:text-left">
+            <div
+              className="text-center lg:text-left"
+              data-aos="fade-right"
+              data-aos-duration="900"
+            >
               <div className="flex flex-col lg:flex-row items-center lg:items-start mb-6">
                 <img
                   src={currentFarmer.photo}
@@ -104,7 +126,7 @@ const FarmerSuccessStoriesSection = () => {
                   <h3 className="text-2xl font-bold mb-1">
                     {currentFarmer.name}
                   </h3>
-                  <p className=" mb-1">{currentFarmer.location}</p>
+                  <p className="mb-1">{currentFarmer.location}</p>
                   <p className="text-green-600 font-semibold">
                     {currentFarmer.specialty}
                   </p>
@@ -148,12 +170,15 @@ const FarmerSuccessStoriesSection = () => {
                   <div
                     key={index}
                     className={`${themeForegroundStyle} rounded-xl shadow-lg p-4 sm:p-6 text-center hover:shadow-xl transition-shadow duration-300`}
+                    data-aos="zoom-in"
+                    data-aos-delay={index * 100}
+                    data-aos-duration="900"
                   >
                     <div className="bg-green-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3">
                       <Icon className="h-6 w-6 text-green-600" />
                     </div>
-                    <p className="text-2xl font-bold  mb-1">{result.value}</p>
-                    <p className=" text-sm">{result.metric}</p>
+                    <p className="text-2xl font-bold mb-1">{result.value}</p>
+                    <p className="text-sm">{result.metric}</p>
                   </div>
                 );
               })}
@@ -161,7 +186,11 @@ const FarmerSuccessStoriesSection = () => {
           </div>
 
           {/* Dots Navigation */}
-          <div className="flex justify-center mt-8">
+          <div
+            className="flex justify-center mt-8"
+            data-aos="fade-up"
+            data-aos-duration="900"
+          >
             {stories.map((_, index) => (
               <button
                 key={index}
