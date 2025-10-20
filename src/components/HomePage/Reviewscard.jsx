@@ -1,11 +1,31 @@
 import React from 'react';
 import { Star } from 'lucide-react';
+import { useTheme } from '../../hooks/useTheme';
 
 const Reviewscard = ({ r }) => {
+  const { theme } = useTheme();
+  const isDark = theme === 'dark';
+
   return (
-    <div className="w-60 mx-5 h-[22rem] relative group flex-shrink-0 rounded-2xl overflow-hidden bg-white transition-all duration-500 transform hover:-translate-y-2 hover:shadow-2xl">
+    <div
+      className={`w-60 mx-5 h-[22rem] relative group flex-shrink-0 rounded-2xl overflow-hidden 
+      transition-all duration-500 transform hover:-translate-y-2 hover:shadow-2xl
+      ${
+        isDark
+          ? 'bg-[#1b1c1e] text-gray-100 border border-neutral-800'
+          : 'bg-white text-gray-800 border border-gray-100'
+      }`}
+    >
       {/* User Info (default visible) */}
-      <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-5 bg-gradient-to-b from-green-600 via-green-700 to-green-800 text-white transition-opacity duration-700 group-hover:opacity-0">
+      <div
+        className={`absolute inset-0 flex flex-col items-center justify-center text-center px-5 
+  transition-opacity duration-700 group-hover:opacity-0
+  ${
+    isDark
+      ? 'bg-gradient-to-b from-emerald-900 via-green-900 to-green-950 text-gray-100'
+      : 'bg-gradient-to-b from-green-600 via-green-700 to-green-800 text-white'
+  }`}
+      >
         <img
           src={r.user?.photo}
           alt={r.user?.name}
