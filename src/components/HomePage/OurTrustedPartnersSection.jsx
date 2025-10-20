@@ -1,14 +1,9 @@
 import React from 'react';
-const partners = [
+ const partners = [
   {
     name: 'John Deere',
     logo: 'https://i.ibb.co.com/PGxjcYcJ/john-Deere.png',
     description: 'Global leader in agricultural machinery and technology.',
-  },
-  {
-    name: 'AGCO',
-    logo: 'https://i.ibb.co.com/zWPNzyL5/Agco.png',
-    description: 'Manufacturer of innovative agricultural solutions worldwide.',
   },
   {
     name: 'Bayer Crop Science',
@@ -26,22 +21,15 @@ const partners = [
     logo: 'https://i.ibb.co.com/hJ0M7MvK/Syngenta-Logo.jpg',
     description: 'Global company dedicated to sustainable agriculture.',
   },
-
   {
     name: 'AGCO',
     logo: 'https://i.ibb.co.com/zWPNzyL5/Agco.png',
     description: 'Manufacturer of innovative agricultural solutions worldwide.',
   },
-
   {
     name: 'CNH Industrial',
     logo: 'https://i.ibb.co.com/CKBb28V9/cnhi.png',
     description: 'Agricultural and construction equipment leader.',
-  },
-  {
-    name: 'Syngenta',
-    logo: 'https://i.ibb.co.com/hJ0M7MvK/Syngenta-Logo.jpg',
-    description: 'Global company dedicated to sustainable agriculture.',
   },
 ];
 

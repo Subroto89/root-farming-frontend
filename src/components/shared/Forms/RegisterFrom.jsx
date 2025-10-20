@@ -51,32 +51,34 @@ const RegisterForm = ({
             )}
           </div>
 
-          <div className="w-9/12 md:w-10/12 ">
+          <div className="w-9/12 md:w-10/12  ">
             {/*-----------------------------------------------------------------------------------
             User Name Field
             ----------------------------------------------------------------------------------- */}
-
-            <InputField
-              label="User Name"
-              name="userName"
-              type="text"
-              placeholder="Enter your user name"
-              icon={FaUser}
-              register={register}
-              errors={errors}
-              validationRules={{
-                required: "User Name is required",
-                minLength: {
-                  value: 3,
-                  message: "User Name must be at least 3 characters long",
-                },
-              }}
-            />
-
+            <div className="mb-2 mr-4">
+              <InputField
+                label="User Name"
+                name="userName"
+                type="text"
+                placeholder="Enter your user name"
+                icon={FaUser}
+                register={register}
+                errors={errors}
+                validationRules={{
+                  required: "User Name is required",
+                  minLength: {
+                    value: 3,
+                    message: "User Name must be at least 3 characters long",
+                  },
+                }}
+              />
+            </div>
             {/*-----------------------------------------------------------------------------------
             User Email Field
             ----------------------------------------------------------------------------------- */}
-
+            <div className="mr-4">
+              
+  
             <InputField
               label="User Email"
               name="userEmail"
@@ -94,8 +96,9 @@ const RegisterForm = ({
               }}
             />
           </div>
+          </div>
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4 mt-2">
             {/*-----------------------------------------------------------------------------------
             Password Field
             ----------------------------------------------------------------------------------- */}
@@ -149,7 +152,7 @@ const RegisterForm = ({
           {/*-----------------------------------------------------------------------------------
             Role Selection Field
             ----------------------------------------------------------------------------------- */}
-          <div className="flex justify-between gap-4">
+          <div className="flex justify-between gap-4 mt-2">
             <div className="w-[50%]">
               <label htmlFor="role" className="block text-sm font-medium mb-1">
                 Role
@@ -218,7 +221,7 @@ const RegisterForm = ({
             User Photo Upload Field
             ----------------------------------------------------------------------------------- */}
 
-          <div className="flex items-center gap-4 mt-4">
+          <div className="flex items-center gap-4 mt-2">
             {/*-----------------------------------------------------------------------------------
             Submit Button
             ----------------------------------------------------------------------------------- */}
