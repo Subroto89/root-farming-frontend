@@ -103,7 +103,7 @@ const Login = () => {
             ----------------------------------------------------------------------------------- */}
         <div className="flex items-center gap-4">
           <GoPasskeyFill size={60} />
-          <h2 className="text-4xl font-bold mb-8 pt-6">Login</h2>
+          <h2 className="text-4xl text-[#F9FAF6] font-bold mb-8 pt-6">Login</h2>
         </div>
         {/*-----------------------------------------------------------------------------------
             Login Form Section
@@ -160,8 +160,7 @@ const Login = () => {
           <div className="text-right mb-4">
             <button onClick={handleForgetPassword}>
               <span
-                className="text-white hover:underline
-               text-xs link"
+                className="text-[#A3B18A] hover:text-[#CDE4B0] hover:underline cursor-pointer text-sm transition-colors duration-300"
               >
                 {" "}
                 Forgot Password?
@@ -174,7 +173,7 @@ const Login = () => {
           <button
             type="submit"
             disabled={isSubmitting}
-            className={`border group cursor-pointer rounded-lg   ${
+            className={`border group cursor-pointer rounded-lg bg-[#3E4B24]/80 hover:bg-[#4E5D2E] text-white   ${
               Icon ? "pl-10" : "pl-4"
             } p-2 w-full   focus:outline-none focus:ring-2 focus:ring-[#3E4B24]   ${
               errors[name]
@@ -200,7 +199,7 @@ const Login = () => {
         {/* -----------------------------------------------------------
         Google Sign In Section
         ----------------------------------------------------------- */}
-        <div className="flex justify-between gap-4">
+        <div className="flex justify-between  gap-4">
           <GoogleLogin />
           <GithubLogin />
         </div>
@@ -208,10 +207,10 @@ const Login = () => {
         {/* -----------------------------------------------------------
         Don't Have Account Suggestion Section
         ----------------------------------------------------------- */}
-        <p className="text-center mt-1">
+        <p className="text-center text-[#E6EAD0]/80 mt-2">
           Don't have an account?
           <Link to="/auth/register">
-            <span className="font-medium link text-white"> Register</span>
+            <span className="font-medium  link text-white hover:underline"> Register</span>
           </Link>
         </p>
       </div>
