@@ -170,7 +170,7 @@ const RegisterForm = ({
               >
                 <option value="">Select a role</option>
                 <option value="farmer">Farmer</option>
-                <option value="Agri-Specialist">Agri-Specialist</option>
+                <option value="agri-specialist">Agri-Specialist</option>
                 <option value="seller">Seller</option>
                 <option value="customer">Customer</option>
               </select>

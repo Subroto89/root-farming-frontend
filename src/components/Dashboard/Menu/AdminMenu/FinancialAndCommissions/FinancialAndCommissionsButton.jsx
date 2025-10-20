@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import NavButton from "../../../../shared/Buttons/NavButton";
 import FinancialsAndCommissionsDropdown from "./FinancialsAndCommissionsDropdown";
 import { ChevronDown, ChevronRight, ReceiptText } from "lucide-react";
+import Button from "../../../../shared/Buttons/Button";
 
 const FinancialAndCommissionsButton = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -12,13 +12,14 @@ const FinancialAndCommissionsButton = () => {
     <>
       {/*  Financials and Commissions Button --------------*/}
       <div onClick={toggleMenu} className="flex items-center justify-between space-x-1">
-        <NavButton label="Financials & Commissions" icon={ ReceiptText } />
-
+        <Button label="Financials Details" icon={ ReceiptText } />
         {!isMenuOpen ? <ChevronRight size={18} /> : <ChevronDown size={18} />}
       </div>
 
       {/* Financials and Commisions Dropdown ------------- */}
-      <div>{isMenuOpen && <FinancialsAndCommissionsDropdown />}</div>
+      <div>
+        {isMenuOpen && <FinancialsAndCommissionsDropdown />}
+      </div>
     </>
   );
 };

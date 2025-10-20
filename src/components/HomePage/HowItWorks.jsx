@@ -33,6 +33,7 @@ const steps = [
 ];
 
 const HowItWorks = () => {
+  
   return (
     <div id="how-it-works" className="bg-gray-50 md:py-24 py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
