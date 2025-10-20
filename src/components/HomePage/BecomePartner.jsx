@@ -1,5 +1,6 @@
 import React from 'react';
 import { Mail, Download, Users, Globe, Zap } from 'lucide-react';
+import { useTheme } from '../../hooks/useTheme';
 
 const partnerBenefits = [
   {
@@ -29,15 +30,18 @@ const partnerBenefits = [
 ];
 
 const BecomePartner = () => {
+  const { theme } = useTheme();
+  const themeBackgroundStyle = theme === 'dark' ? 'bg-dark' : 'bg-light';
+  const themeForegroundStyle = theme === 'dark' ? 'fg-dark' : 'fg-light';
   return (
-    <div className="py-20 md:py-24 bg-gray-50">
+    <div className={`${themeBackgroundStyle} py-20 md:py-24`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Heading */}
         <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
             Become a Partner
           </h2>
-          <p className="text-base sm:text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-base sm:text-lg lg:text-xl  max-w-3xl mx-auto">
             Join our global ecosystem of innovators, organizations, and experts
             dedicated to transforming modern agriculture sustainably.
           </p>
@@ -50,8 +54,8 @@ const BecomePartner = () => {
             return (
               <div
                 key={index}
-                className="group bg-white border border-gray-200 rounded-2xl p-8 shadow-sm 
-                           hover:shadow-xl hover:-translate-y-2 transition-all duration-300"
+                className={`${themeForegroundStyle} border border-gray-200 group rounded-2xl p-8 shadow-sm 
+                           hover:shadow-xl hover:-translate-y-2 transition-all duration-300`}
               >
                 {/* Icon */}
                 <div
@@ -63,16 +67,14 @@ const BecomePartner = () => {
 
                 {/* Title */}
                 <h3
-                  className="text-xl sm:text-2xl font-semibold text-gray-900 mb-3 
+                  className="text-xl sm:text-2xl font-semibold  mb-3 
                                transition-colors duration-300 group-hover:text-green-700"
                 >
                   {benefit.title}
                 </h3>
 
                 {/* Description */}
-                <p className="text-gray-600 text-sm sm:text-base">
-                  {benefit.description}
-                </p>
+                <p className=" text-sm sm:text-base">{benefit.description}</p>
               </div>
             );
           })}

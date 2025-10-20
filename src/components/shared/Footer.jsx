@@ -11,8 +11,11 @@ import {
 } from 'lucide-react';
 import logo from '../../assets/Logo/Rootfarming.png';
 import { Link } from 'react-router';
+import { useTheme } from '../../hooks/useTheme';
 
 const Footer = () => {
+  const { theme } = useTheme();
+  const Style = theme === 'dark' ? ' fg-dark ' : 'bg-[#0F172A] ';
   const [email, setEmail] = useState('');
   const [agreed, setAgreed] = useState(false);
 
@@ -65,7 +68,7 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-[#0F172A] text-white overflow-hidden">
+    <footer className={`${Style}  overflow-hidden`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-8">
         {/* Top Section */}
         <div className="flex flex-col lg:flex-row gap-10 lg:gap-16 items-start">

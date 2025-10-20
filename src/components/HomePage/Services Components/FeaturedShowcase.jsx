@@ -1,11 +1,30 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import StatsCounter from './StatsCounter';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
-const FeaturedShowcase = ({ marketplaceImage, farmersImage }) => {
+const FeaturedShowcase = ({
+  marketplaceImage,
+  farmersImage,
+  themeForegroundStyle,
+}) => {
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+      once: true,
+      easing: 'ease-in-out',
+    });
+    AOS.refresh(); // Refresh to detect new elements
+  }, []);
+
   return (
     <div className="grid lg:grid-cols-2 gap-10 items-center">
       {/* Marketplace Image */}
-      <div className="relative rounded-2xl overflow-hidden shadow-lg">
+      <div
+        className="relative rounded-2xl overflow-hidden shadow-lg"
+        data-aos="fade-right"
+        data-aos-duration="900"
+      >
         <img
           src={marketplaceImage}
           alt="Agricultural Marketplace"
@@ -32,7 +51,11 @@ const FeaturedShowcase = ({ marketplaceImage, farmersImage }) => {
 
       {/* Farmer Success Section */}
       <div className="space-y-10">
-        <div className="relative rounded-2xl overflow-hidden shadow-lg">
+        <div
+          className="relative rounded-2xl overflow-hidden shadow-lg"
+          data-aos="fade-left"
+          data-aos-duration="900"
+        >
           <img
             src={farmersImage}
             alt="Successful Farmers"
@@ -48,8 +71,9 @@ const FeaturedShowcase = ({ marketplaceImage, farmersImage }) => {
             </div>
           </div>
         </div>
-        <div className="space-y-10">
-          <StatsCounter />
+
+        <div className="space-y-10" data-aos="fade-up" data-aos-delay="100">
+          <StatsCounter themeForegroundStyle={themeForegroundStyle} />
         </div>
       </div>
     </div>
