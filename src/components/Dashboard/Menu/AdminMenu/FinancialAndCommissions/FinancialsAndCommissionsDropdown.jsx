@@ -4,23 +4,26 @@ import { useTheme } from '../../../../../hooks/useTheme';
 
 const FinancialsAndCommissionsDropdown = () => {
     const {theme} = useTheme();
-  const dropDownStyle = theme === 'dark' ? 'navbar-dark' : 'navbar-light';
+     const themeForegroundStyle = theme === 'dark' ? "fg-dark" : "fg-light";
     return (
         <>
-            <div className={`${dropDownStyle} flex flex-col items-start border-t border-b border-gray-300`}>
+            <div className={`${themeForegroundStyle} pl-6 flex flex-col items-start border-t border-b border-gray-300`}>
                 <NavButton
                     label="Specialist's Salary"
-                    address="/dashboard/specialist's-salary"
+                    address="/dashboard/specialist's salary"
+                    textSize="xs"
                 />    
 
                 <NavButton
-                    label="Transaction History & Revenue Report"
+                    label="Transaction & Revenue Report"
                     address="/dashboard/transaction-history"
+                    textSize="xs"
                 />
 
                 <NavButton
                     label="Manage Payment Setting"
                     address="/dashboard/manage-payment-setting"
+                    textSize="xs"
                 />
 
 

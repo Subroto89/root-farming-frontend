@@ -4,28 +4,32 @@ import { useTheme } from '../../../../../hooks/useTheme';
 
 const CategoryManagementDropdown = () => {
     const {theme} = useTheme();
-     const dropDownStyle = theme === 'dark' ? 'navbar-dark' : 'navbar-light';
+    const themeForegroundStyle = theme === 'dark' ? "fg-dark" : "fg-light";
     return (
         <>
-         <div  className={`${dropDownStyle} flex flex-col items-start border-t border-b border-gray-300`}>
+         <div  className={`${themeForegroundStyle} pl-6 flex flex-col items-start border-t border-b border-gray-300`}>
             <NavButton
                 label="Manage Product Type"
                 address="/dashboard/manage-product-type"
+                textSize="xs"
             />
 
             <NavButton
                 label="Manage Product Category"
                 address="/dashboard/management-product-category"
+                textSize="xs"
             />
 
             <NavButton
                 label="Manage Product SubCategory"
                 address="/dashboard/manage-product-subCategory"
+                textSize="xs"
             />
 
             <NavButton
                 label="Manage Product Variant"
                 address="/dashboard/manage-product-variant"
+                textSize="xs"
             />
          </div>   
         </>

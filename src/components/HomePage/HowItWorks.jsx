@@ -36,6 +36,7 @@ const steps = [
 ];
 
 const HowItWorks = () => {
+
   const { theme } = useTheme();
 
   useEffect(() => {
