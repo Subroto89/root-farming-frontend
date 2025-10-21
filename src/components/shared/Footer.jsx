@@ -17,7 +17,10 @@ import 'aos/dist/aos.css';
 
 const Footer = () => {
   const { theme } = useTheme();
-  const Style = theme === 'dark' ? ' fg-dark ' : 'bg-[#0F172A] ';
+  const Style =
+    theme === 'dark'
+      ? 'bg-[#2D3748] border-t border-gray-500'
+      : 'bg-[#0F172A] border-t border-gray-800';
   const [email, setEmail] = useState('');
   const [agreed, setAgreed] = useState(false);
 
@@ -51,7 +54,7 @@ const Footer = () => {
   const serviceLinks = [
     { name: 'Crop Management', path: '#' },
     { name: 'Market Analytics', path: '#' },
-    { name: 'Weather Forecasting', path: '#' },
+    { name: 'Weather Forecasting', path: '/dashboard/weather-forecast' },
     { name: 'Expert Consultation', path: '#' },
     { name: 'Payment Processing', path: '#' },
   ];
@@ -80,11 +83,11 @@ const Footer = () => {
   ];
 
   return (
-    <footer className={`${Style} overflow-hidden`}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-8">
+    <footer className={`${Style} border-none text-white overflow-hidden`}>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-8">
         {/* Top Section */}
         <div
-          className="flex flex-col lg:flex-row gap-10 lg:gap-16 items-start"
+          className="flex flex-col lg:flex-row gap-10 lg:gap-12 items-start"
           data-aos="fade-up"
         >
           {/* Company Info */}
@@ -201,7 +204,7 @@ const Footer = () => {
 
         {/* Quick Links */}
         <div
-          className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 border-t border-gray-800 mt-12 pt-12"
+          className={`grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mt-12 pt-12 ${Style}`}
           data-aos="fade-up"
           data-aos-delay="500"
         >
@@ -231,12 +234,12 @@ const Footer = () => {
 
         {/* Bottom Bar */}
         <div
-          className="border-t border-gray-800 mt-12 pt-8"
+          className={`mt-12 pt-8 pb-6 ${Style}`}
           data-aos="fade-up"
           data-aos-delay="600"
         >
           <div className="flex flex-col md:flex-row justify-between items-center text-center md:text-left gap-4 md:gap-0">
-            <p className="text-gray-400 text-sm">
+            <p className="text-gray-300 text-sm">
               © {new Date().getFullYear()} RootFarming. All rights reserved.
             </p>
 
@@ -246,7 +249,7 @@ const Footer = () => {
                   <Link
                     key={i}
                     to="#"
-                    className="text-gray-400 hover:text-green-400 transition-all"
+                    className="text-gray-300 hover:text-green-400 transition-all"
                   >
                     {item}
                   </Link>

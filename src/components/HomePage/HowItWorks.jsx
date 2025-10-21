@@ -16,8 +16,7 @@ const steps = [
     step: 2,
     icon: Sprout,
     title: 'Get Smart Insights',
-    description:
-      'Receive tailored recommendations for crops, fertilizers, & irrigation.',
+    description: 'Receive tailored recommendations for crops, fertilizers.',
   },
   {
     step: 3,
@@ -49,7 +48,10 @@ const HowItWorks = () => {
   }, []);
 
   const themeBackgroundStyle = theme === 'dark' ? 'bg-dark' : 'bg-light';
-  const themeForegroundStyle = theme === 'dark' ? 'fg-dark' : 'fg-light';
+  const themeForegroundStyle =
+    theme === 'dark'
+      ? 'fg-dark border border-gray-500'
+      : 'fg-light border border-gray-200';
 
   return (
     <div
@@ -88,7 +90,7 @@ const HowItWorks = () => {
 
                 {/* Card */}
                 <div
-                  className={`${themeForegroundStyle} rounded-2xl p-6 sm:p-8 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col items-center justify-between border border-gray-200`}
+                  className={`${themeForegroundStyle} rounded-2xl p-6 sm:p-8 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col items-center justify-between`}
                 >
                   {/* Icon */}
                   <div className="mt-8 mb-6 w-20 h-20 sm:w-24 sm:h-24 flex items-center justify-center rounded-2xl border-2 border-green-700 shadow-md group-hover:bg-green-700 transition-colors duration-300">
