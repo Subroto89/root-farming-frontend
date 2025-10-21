@@ -54,7 +54,7 @@ const Footer = () => {
   const serviceLinks = [
     { name: 'Crop Management', path: '#' },
     { name: 'Market Analytics', path: '#' },
-    { name: 'Weather Forecasting', path: '#' },
+    { name: 'Weather Forecasting', path: '/dashboard/weather-forecast' },
     { name: 'Expert Consultation', path: '#' },
     { name: 'Payment Processing', path: '#' },
   ];
