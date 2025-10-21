@@ -10,8 +10,8 @@ const ServiceCard = ({
   themeForegroundStyle,
 }) => (
   <div
-    className={`${themeForegroundStyle} group border border-gray-200 rounded-2xl p-6 sm:p-8 shadow-sm 
-                hover:shadow-xl hover:-translate-y-2 transition-all duration-300 flex flex-col h-full`}
+    className={`${themeForegroundStyle} group rounded-2xl p-6 sm:p-8 shadow-sm 
+                hover:shadow-lg hover:-translate-y-2 transition-all duration-300 flex flex-col h-full`}
     data-aos="fade-up"
   >
     {/* Icon */}

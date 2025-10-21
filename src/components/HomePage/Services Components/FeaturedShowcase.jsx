@@ -21,7 +21,7 @@ const FeaturedShowcase = ({
     <div className="grid lg:grid-cols-2 gap-10 items-center">
       {/* Marketplace Image */}
       <div
-        className="relative rounded-2xl overflow-hidden shadow-lg"
+        className="relative rounded-2xl overflow-hidden shadow-sm hover:shadow-lg"
         data-aos="fade-right"
         data-aos-duration="900"
       >

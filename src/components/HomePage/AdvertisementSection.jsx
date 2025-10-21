@@ -8,7 +8,10 @@ import 'aos/dist/aos.css';
 const AdvertisementSection = () => {
   const { theme } = useTheme();
   const themeBackgroundStyle = theme === 'dark' ? 'bg-dark' : 'bg-light';
-  const themeForegroundStyle = theme === 'dark' ? 'fg-dark' : 'fg-light';
+  const themeForegroundStyle =
+    theme === 'dark'
+      ? 'fg-dark border border-gray-500'
+      : 'fg-light border border-gray-200';
   const { data: products = [], isLoading } = useProducts({});
   const featured = products.slice(0, 4);
 

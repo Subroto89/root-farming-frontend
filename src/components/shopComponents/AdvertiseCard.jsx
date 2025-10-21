@@ -7,7 +7,7 @@ const AdvertiseCard = ({ product, themeForegroundStyle }) => {
 
   return (
     <div
-      className={`${themeForegroundStyle} border border-gray-200 rounded-xl shadow-lg hover:shadow-xl 
+      className={`${themeForegroundStyle}  rounded-xl shadow-lg hover:shadow-xl 
       transition-all duration-300 overflow-hidden group flex flex-col h-full`}
       data-aos="zoom-in"
       data-aos-duration="900"
