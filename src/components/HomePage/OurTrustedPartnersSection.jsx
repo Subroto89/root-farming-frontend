@@ -1,24 +1,15 @@
-<<<<<<< HEAD
-import React from 'react';
- const partners = [
-=======
 import React, { useEffect } from 'react';
 import { useTheme } from '../../hooks/useTheme';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
 const partners = [
->>>>>>> e681e5c99b8eceb7fd6110f7f35f97bdaa2d15e9
   {
     name: 'John Deere',
     logo: 'https://i.ibb.co/N2hB0cjg/john.png',
     description: 'Global leader in agricultural machinery and technology.',
   },
   {
-<<<<<<< HEAD
-    name: 'Bayer Crop Science',
-    logo: 'https://i.ibb.co.com/F4y0PYB4/bayer.png',
-=======
     name: 'AGCO',
     logo: 'https://i.ibb.co/ZR2DFcGM/Agco.png',
     description: 'Manufacturer of innovative agricultural solutions worldwide.',
@@ -26,7 +17,6 @@ const partners = [
   {
     name: 'Aaco',
     logo: 'https://i.ibb.co/gZK07HCt/aaco-logo-Photoroom.png',
->>>>>>> e681e5c99b8eceb7fd6110f7f35f97bdaa2d15e9
     description:
       'AACo is Australias largest integrated cattle and beef producer.',
   },
@@ -41,17 +31,6 @@ const partners = [
     description: 'Global company dedicated to sustainable agriculture.',
   },
   {
-<<<<<<< HEAD
-    name: 'AGCO',
-    logo: 'https://i.ibb.co.com/zWPNzyL5/Agco.png',
-    description: 'Manufacturer of innovative agricultural solutions worldwide.',
-  },
-  {
-    name: 'CNH Industrial',
-    logo: 'https://i.ibb.co.com/CKBb28V9/cnhi.png',
-    description: 'Agricultural and construction equipment leader.',
-  },
-=======
     name: 'Cargill',
     logo: 'https://i.ibb.co/5PTqBmw/cargill.png',
     description: 'Cargill is a family company providing food & ingredients.',
@@ -68,7 +47,6 @@ const partners = [
     description:
       'Nutrien is a leading global provider of crop inputs and services.',
   },
->>>>>>> e681e5c99b8eceb7fd6110f7f35f97bdaa2d15e9
 ];
 
 const OurTrustedPartnersSection = () => {
