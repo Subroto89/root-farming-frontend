@@ -112,7 +112,8 @@ const Register = () => {
 
   // ###########################################################################
   return (
-    <div className="border border-white rounded-lg shadowlg m-4 p-4 bg-gradient-to-bl from-[#1F5591] to-[#80A5AB] opacity-70">
+    <div className="rounded-xl border border-white/20 shadow-lg m-4 p-6 
+             bg-white/10 backdrop-blur-2xl text-white">
       <div className="flex gap-3">
         <FaUserPlus size={60} />
         <h2 className="text-4xl font-bold mb-8 pt-2">Register</h2>
@@ -146,7 +147,7 @@ const Register = () => {
       {/* -----------------------------------------------------------
       Already Account Exist Suggestion Section
       ----------------------------------------------------------- */}
-      <p className="text-center mt-1">
+      <p className="text-center text-[#E6EAD0]/80 mt-2">
         Already have an account?
         <Link to="/auth">
           <span className="text-white font-sm link"> Login</span>
