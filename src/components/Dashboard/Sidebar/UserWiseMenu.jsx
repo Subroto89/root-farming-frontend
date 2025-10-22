@@ -7,10 +7,10 @@ import SellerMenu from '../Menu/SellerMenu/SellerMenu';
 
 const UserWiseMenu = () => {
   // const { userRole } = useUserRole();
-  // const userRole = "admin"
+  // const userRole = 'admin';
   // const userRole = "agri-specialist"
   // const userRole = 'seller';
-  // const userRole = "customer"
+  // const userRole = 'customer';
   const userRole = 'farmer';
 
   return (
