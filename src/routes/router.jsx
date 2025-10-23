@@ -1,3 +1,22 @@
+<<<<<<< HEAD
+import { createBrowserRouter } from "react-router";
+import RootLayout from "../layouts/RootLayout";
+import Home from "../pages/HomePage/Home";
+import AboutUs from "../pages/AboutUsPage/AboutUs";
+import ContactUs from "../pages/ContactUsPage/ContactUs";
+import DashboardLayout from "../layouts/DashboardLayout";
+import DashboardHome from "../pages/DashboardPages/DashboardHome";
+import FieldRegistration from "../pages/DashboardPages/FarmerDashboardPages/FieldRegistration";
+import MyProfile from "../pages/DashboardPages/UserProfile/MyProfile";
+import ActivityLoggingScheduling from "../pages/DashboardPage/FarmerDashboardPage/ActivityLoggingScheduling";
+import ChatwithAgriSpecialist from "../pages/DashboardPage/FarmerDashboardPage/ChatwithAgriSpecialist";
+import WeatherForecast from "../pages/DashboardPage/FarmerDashboardPage/WeatherForecast";
+import DailyToDoList from "../pages/DashboardPage/FarmerDashboardPage/DailyToDoList";
+import AuthLayout from "../layouts/AuthLayout";
+import Register from "../components/AuthComponents/Register";
+import Login from "../components/AuthComponents/Login";
+import ResourceManagement from "../pages/DashboardPage/FarmerDashboardPage/ResourceManagement/ResourceManagement";
+=======
 import { createBrowserRouter } from 'react-router';
 import RootLayout from '../layouts/RootLayout';
 import Home from '../pages/HomePage/Home';
@@ -15,6 +34,7 @@ import AuthLayout from '../layouts/AuthLayout';
 import Register from '../components/AuthComponents/Register';
 import Login from '../components/AuthComponents/Login';
 import ResourceManagement from '../pages/DashboardPage/FarmerDashboardPage/ResourceManagement/ResourceManagement';
+>>>>>>> 0d9575448f7b70dccb5a9160da6f3e92bf2d9b1d
 // import Shop from '../pages/ShopPage/Shop';
 import Cart from '../pages/CartPage/Cart';
 import Blog from '../pages/Blog/Blog';
@@ -81,10 +101,17 @@ const router = createBrowserRouter([
         path: 'blog',
         Component: Blog,
       },
+<<<<<<< HEAD
+      // {
+      //   path: "update-profile/:email",
+      //   Component: MyProfile,
+      // },
+=======
       {
         path: 'update-profile/:email',
         Component: MyProfile,
       },
+>>>>>>> 0d9575448f7b70dccb5a9160da6f3e92bf2d9b1d
     ],
   },
 
@@ -100,10 +127,17 @@ const router = createBrowserRouter([
         index: true,
         Component: DashboardHome,
       },
+<<<<<<< HEAD
+      // {
+      //   path: "my-profile",
+      //   Component: MyProfile,
+      // },
+=======
       {
         path: 'my-profile',
         Component: MyProfile,
       },
+>>>>>>> 0d9575448f7b70dccb5a9160da6f3e92bf2d9b1d
 
       // Admin Dashboard Routes
       {
@@ -114,6 +148,46 @@ const router = createBrowserRouter([
         path: "specialist's-salary",
         Component: SpecialistsSalary,
       },
+      // {
+      //   path: "manage-sellers",
+      //   Component: ManageSellers,
+      // },
+      // {
+      //   path: "manage-customers",
+      //   Component: ManageCustomers,
+      // },
+      // {
+      //   path: "manage-agri-specialists",
+      //   Component: ManageAgriSpecialists,
+      // },
+      // {
+      //   path: "manage-farmers",
+      //   Component: ManageFarmers,
+      // },
+      // {
+      //   path: "manage-product-type",
+      //   Component: ProductTypeManagement,
+      // },
+      {
+        path: "management-product-category",
+        Component: ProductCategoryManagement,
+      },
+      // {
+      //   path: "manage-product-subCategory",
+      //   Component: ProductSubCategoryManagement,
+      // },
+      // {
+      //   path: "manage-product-variant",
+      //   Component: ProductVariantManagement,
+      // },
+      // {
+      //   path: "govt-news-facilites",
+      //   Component: GovtNewsAndFacilities,
+      // },
+      // {
+      //   path: "blogs-management",
+      //   Component: BlogsManagement,
+      // },
       {
         path: 'manage-sellers',
         Component: ManageSellers,
@@ -154,6 +228,8 @@ const router = createBrowserRouter([
         path: 'blogs-management',
         Component: BlogsManagement,
       },
+<<<<<<< HEAD
+=======
       {
         path: 'manage-sellers',
         Component: ManageSellers,
@@ -199,6 +275,7 @@ const router = createBrowserRouter([
         Component: ErrorPage,
       },
 
+>>>>>>> 0d9575448f7b70dccb5a9160da6f3e92bf2d9b1d
       // Farmer Dashboard Routes
 
       {
@@ -262,6 +339,14 @@ const router = createBrowserRouter([
       {
         path: 'track-current-orders',
         Component: OrderTracking,
+      },
+      {
+        path: "update-profile/:email",
+        Component: MyProfile,
+      },
+      {
+        path: "*",
+        Component: ErrorPage,
       },
     ],
   },
