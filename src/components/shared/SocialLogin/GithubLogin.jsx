@@ -44,9 +44,11 @@ const GithubLogin = () => {
     <div className="w-full">
       <button
         onClick={handleGithubSignIn}
-        className="btn bg-white text-black border-[#e5e5e5] shadow-lg w-full"
+        className="group text-[12px] md:text-[17px] flex items-center justify-center w-full gap-1 p-2  bg-white/10 
+               hover:bg-white/20 border border-white/20 text-white rounded-lg 
+               transition duration-300 cursor-pointer"
       >
-        <FaGithub className="text-blue-800" />
+       <img className="transition-transform duration-300 group-hover:scale-110" src="https://i.ibb.co/5hf6csfn/github.png" width={20} alt="Github Icon" />
         Continue with Github
       </button>
     </div>
@@ -54,3 +56,4 @@ const GithubLogin = () => {
 };
 
 export default GithubLogin;
+

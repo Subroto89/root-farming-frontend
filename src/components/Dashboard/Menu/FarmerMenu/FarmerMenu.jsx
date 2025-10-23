@@ -5,17 +5,23 @@ import GuidanceAndSupportButton from './GuidanceAndSupportButton/GuidanceAndSupp
 import { Boxes, House, MessageCircleQuestionMark } from 'lucide-react';
 
 const FarmerMenu = () => {
-    return (
-        <>
-            <div>
+  return (
+    <>
+      <div>
+        <NavButton
+          label="Dashboard Home"
+          address="/dashboard/farmer-dashboard-home"
+          icon={House}
+        />
+
+        <LandManagementButton />
+
+                
                 <NavButton
-                    label="Dashboard Home"
-                    address="/dashboard/farmer-dashboard-home"
-                    icon={House}
+                    label="Activity Route"
+                    address="/dashboard/ActivityRoute"
+                    icon={Boxes }
                 />
-
-                <LandManagementButton/>
-
                 
                 <NavButton
                     label="Resource Management"
@@ -23,19 +29,24 @@ const FarmerMenu = () => {
                     icon={Boxes }
                 />
 
-                <CropManagementButton/>
 
-                <GuidanceAndSupportButton/>
+        <CropManagementButton />
+
+        <GuidanceAndSupportButton />
+
 
                 <NavButton
                     label="Government Info"
                     address="/dashboard/government-info"
                     icon={ MessageCircleQuestionMark }
                 />
+
                 
             </div>
         </>
     );
+
+   
 };
 
 export default FarmerMenu;

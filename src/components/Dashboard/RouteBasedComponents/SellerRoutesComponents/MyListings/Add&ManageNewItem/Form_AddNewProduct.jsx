@@ -211,7 +211,7 @@ const Form_AddNewProduct = ({ handleModalToggle }) => {
                 <InputField
                   type="select"
                   label="Product Type"
-                  name="productType"
+                  name="productTypeId"
                   placeholder={"Select a type"}
                   register={register}
                   errors={errors}
@@ -244,7 +244,7 @@ const Form_AddNewProduct = ({ handleModalToggle }) => {
                 <InputField
                   type="select"
                   label="Sub-Category"
-                  name="subCategoryName"
+                  name="subCategoryId"
                   placeholder={"Enter the sub-category"}
                   register={register}
                   errors={errors}
@@ -264,7 +264,7 @@ const Form_AddNewProduct = ({ handleModalToggle }) => {
                 <InputField
                   type="select"
                   label="Variant"
-                  name="variantName"
+                  name="variantId"
                   placeholder={"Enter the product variant"}
                   register={register}
                   errors={errors}

@@ -17,6 +17,7 @@ import DeliveryMap from "../../../components/Dashboard/RouteBasedComponents/Cust
 import OrderDetails from "../../../components/Dashboard/RouteBasedComponents/CustommerRoutesComponents/OrderTracking/OrderDetails/OrderDetails";
 import OrderStats from "../../../components/Dashboard/RouteBasedComponents/CustommerRoutesComponents/OrderTracking/OrderStats";
 import OrderStatusTimeline from "../../../components/Dashboard/RouteBasedComponents/CustommerRoutesComponents/OrderTracking/OrderStatusTimeline";
+import { useTheme } from "../../../hooks/useTheme";
 
 // Mock order data
 const mockOrders = [
@@ -184,6 +185,11 @@ const mockOrders = [
 ];
 
 const OrderTracking = () => {
+   const {theme} = useTheme();
+    const themeBackgroundStyle = theme === 'dark' ? "bg-dark" : "bg-light";
+    const themeForegroundStyle = theme === 'dark' ? "fg-dark" : "fg-light";
+    const themeFgOfFgStyle = theme === 'dark' ? "fg-of-fg-dark" : "fg-of-fg-light"
+
    const [searchQuery, setSearchQuery] = useState("");
    const [selectedOrder, setSelectedOrder] = useState(null);
    const [orders, setOrders] = useState(mockOrders);
@@ -259,7 +265,7 @@ const OrderTracking = () => {
    };
 
    return (
-      <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50">
+      <div className={`min-h-screen bg-gradient-to-br from-green-50 to-blue-50`}>
          <div className="container mx-auto px-4 py-8">
             {/* Header */}
             <motion.div

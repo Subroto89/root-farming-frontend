@@ -44,9 +44,12 @@ const GoogleLogin = () => {
     <div className="w-full">
       <button
         onClick={handleGoogleSignIn}
-        className="btn bg-white text-black border-[#e5e5e5] shadow-lg w-full"
+        className="group text-[12px] md:text-[17px] flex items-center justify-center w-full gap-1 p-2  bg-white/10 
+               hover:bg-white/20 border border-white/20 text-white rounded-lg 
+               transition duration-300 cursor-pointer"
       >
-        <FaGoogle className="text-blue-800" />
+        {/* <FaGoogle className="" /> */}
+        <img className="transition-transform duration-300 group-hover:scale-110" src="https://i.ibb.co/BHPgXJ7V/google.png" width={20} alt="Google icon png" />
         Continue with Google
       </button>
     </div>

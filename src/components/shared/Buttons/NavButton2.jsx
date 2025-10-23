@@ -29,7 +29,7 @@ const NavButton2 = ({ label, icon: Icon, type, onClick, address, status, spread 
         type={type}
         onClick={onClick}
         to={address}
-        className={`btn ${isSpread} border-0 font-bold btn-color shadow-none ${style}`} 
+        className={`btn ${isSpread} border-0 font-bold btn-color tracking-wider shadow-none ${style}`} 
       >
         {label}
         {Icon && <Icon size={20} />}

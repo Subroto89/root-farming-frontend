@@ -1,7 +1,7 @@
 import React from 'react';
 import CountUp from 'react-countup';
 
-const StatsCounter = () => {
+const StatsCounter = ({ themeForegroundStyle }) => {
   const stats = [
     { value: 85, label: 'Increased Revenue', suffix: '%' },
     { value: 40, label: 'Better Yields', suffix: '%' },
@@ -10,12 +10,21 @@ const StatsCounter = () => {
   ];
 
   return (
-    <div className="bg-white border border-gray-200 rounded-2xl shadow-md p-6">
+    <div
+      className={`${themeForegroundStyle} rounded-2xl shadow-sm hover:shadow-lg p-6`}
+      data-aos="fade-up"
+      data-aos-duration="900"
+    >
       <div className="grid grid-cols-2 gap-6 text-center">
         {stats.map((stat, idx) => (
-          <div key={idx}>
+          <div
+            key={idx}
+            data-aos="zoom-in"
+            data-aos-delay={idx * 150}
+            data-aos-duration="900"
+          >
             {/* Counter */}
-            <div className="text-2xl font-bold text-green-700 mb-1">
+            <div className="text-2xl font-bold mb-1">
               <CountUp
                 start={0}
                 end={stat.value}
@@ -27,7 +36,7 @@ const StatsCounter = () => {
             </div>
 
             {/* Label */}
-            <div className="text-sm  text-gray-600">{stat.label}</div>
+            <div className="text-sm">{stat.label}</div>
           </div>
         ))}
       </div>
