@@ -1,11 +1,55 @@
-import React from 'react'
+  import { useQuery } from "@tanstack/react-query";
+  import useAxiosSecure from "../../../../../../hooks/UseAxiosSecure";
+  import LoadingSpinner from "../../../../../shared/LoadingSpinner";
+  import { Edit, Trash } from "lucide-react";
 
-export const ProductRow = ({product}) => {
-    const {photoductI} = product;
-  return (
-    <div>
-        ProductRow
+  export const ProductRow = ({ product }) => {
+    const axiosSecure = useAxiosSecure();
+    const { subCategoryId, quality, createdAt, accountStatus, isApproved } =
+      product;
+
+    // Fetch for Sub-Category/ Product Name --------------------------------------
+    const {
+      data: subCategoryData = [],
+      isLoading: subCategoryLoading,
+      refetch,
+    } = useQuery({
+      queryKey: ["subCat", subCategoryId],
+      queryFn: async () => {
+        const { data } = await axiosSecure(
+          `/subCategories/get-subCategory/${subCategoryId}`
+        );
+        return data;
+      },
+      enabled: !!subCategoryId,
+    });
+    if (subCategoryLoading) return <LoadingSpinner />;
+
+    return (
+      
+        <tr className="border-b border-gray-500">
+          <td className="py-2 w-12 h-12 overflow-hidden">
+            <img
+              src={subCategoryData.subCategoryPhoto}
+              alt="sub-Category photo"
+              className="w-8 h-8 object-cover mx-auto"
+            />
+          </td>
+          <td className="py-2 px-8">{subCategoryData.subCategoryName}</td>
+          <td className="py-2 px-8">{quality}</td>
+          <td className="py-2 px-8">{new Date(createdAt).toLocaleDateString()}</td>
+          <td className="py-2 px-8">{accountStatus}</td>
+          <td className="py-2 px-8">{isApproved ? "Approved" : "Not-Approved"}</td>
+          <td className="py-2 px-8">
+          { <div className="flex items-center gap-4">
+              <Edit/>
+              <Trash/>
+            </div>}
+            
+          </td>
+        </tr>
     
-    </div>
-  )
-}
+    );
+  };
+
+  export default ProductRow;
