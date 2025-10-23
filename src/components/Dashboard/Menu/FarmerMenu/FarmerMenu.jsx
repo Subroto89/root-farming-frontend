@@ -16,24 +16,41 @@ const FarmerMenu = () => {
 
         <LandManagementButton />
 
-        <NavButton
-          label="Resource Management"
-          address="/dashboard/resource-management"
-          icon={Boxes}
-        />
+                
+                <NavButton
+                    label="Activity Route"
+                    address="/dashboard/ActivityRoute"
+                    icon={Boxes }
+                />
+                
+                <NavButton
+                    label="Resource Management"
+                    address="/dashboard/resource-management"
+                    icon={Boxes }
+                />
+
 
         <CropManagementButton />
 
         <GuidanceAndSupportButton />
 
-        <NavButton
-          label="Government Info"
-          address="/dashboard/government-info"
-          icon={MessageCircleQuestionMark}
-        />
+
+                <NavButton
+                    label="Government Info"
+                    address="/dashboard/government-info"
+                    icon={ MessageCircleQuestionMark }
+                />
+
+                
+            </div>
+        </>
+    );
+
+       
       </div>
     </>
   );
+
 };
 
 export default FarmerMenu;

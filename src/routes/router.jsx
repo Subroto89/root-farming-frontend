@@ -14,7 +14,6 @@ import AuthLayout from '../layouts/AuthLayout';
 import Register from '../components/AuthComponents/Register';
 import Login from '../components/AuthComponents/Login';
 import ResourceManagement from '../pages/DashboardPage/FarmerDashboardPage/ResourceManagement/ResourceManagement';
-
 // import Shop from '../pages/ShopPage/Shop';
 import Cart from '../pages/CartPage/Cart';
 import Blog from '../pages/Blog/Blog';
@@ -40,9 +39,13 @@ import Shop from '../pages/ShopPage/Shop';
 import MyReviews from '../pages/DashboardPages/CustomerDashboardPages/MyReviews';
 import MyWishlist from '../pages/DashboardPages/CustomerDashboardPages/MyWishlist';
 
-import OrderTracking from '../pages/DashboardPages/CustomerDashboardPages/OrderTracking';
-import ChatWithAgriSpecialist from '../pages/DashboardPages/FarmerDashboardPages/GuidanceAndSupport/ChatWithAgriSpecialist';
-import SpecialistChat from '../pages/DashboardPages/AgriSpecialistDashboardPages/Chat/SpecialistChat';
+
+import OrderTracking from "../pages/DashboardPages/CustomerDashboardPages/OrderTracking";
+
+import SpecialistChat from "../pages/DashboardPages/AgriSpecialistDashboardPages/Chat/SpecialistChat";
+import ActivityRoute from "../pages/DashboardPages/FarmerDashboardPages/ActivityRoute";
+
+
 import WeatherForecast from '../pages/DashboardPages/FarmerDashboardPages/WeatherForecast';
 
 const router = createBrowserRouter([
@@ -213,6 +216,11 @@ const router = createBrowserRouter([
       {
         path: 'field-registration',
         Component: FieldRegistration,
+      },
+      {
+        path: "ActivityRoute",
+        loader: ()=> fetch("http://localhost:3000/activities"),
+        Component: ActivityRoute,
       },
 
       {
