@@ -100,7 +100,7 @@ const FieldRegistration = () => {
     >
       {/* Header */}
       <div className={`flex justify-between items-center   p-4 `}>
-        <h2 className="text-2xl font-bold">My Fields</h2>
+        <h2 className="text-2xl font-bold">My Lands Management</h2>
         <button
           onClick={() => setShowForm(true)}
           className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all duration-300 bg-green-700 text-white `}
