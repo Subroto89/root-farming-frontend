@@ -84,10 +84,14 @@ const AddNewProduct = () => {
                       <ProductRow
                         key={product._id}
                         product={product}
+
                       // handleCategoryDelete={handleCategoryDelete}
                       // handleUpdateCategoryModal={handleUpdateCategoryModal}
                       // setCategoryToEdit={setCategoryToEdit}
                       // refetch={refetch}
+
+                      
+
                       />
                     ))}
                   </tbody>
