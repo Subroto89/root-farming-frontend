@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import GuidanceAndSupportButtonDropdown from './GuidanceAndSupportButtonDropdown';
-import NavButton from '../../../../shared/Buttons/NavButton';
 import { ChevronDown, ChevronRight, Info } from 'lucide-react';
+import Button from '../../../../shared/Buttons/Button';
 
 const GuidanceAndSupportButton = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -14,7 +14,7 @@ const GuidanceAndSupportButton = () => {
         <>
             {/* Guidance & Support Button ----------- */}
             <div  onClick={toggleSidebar}  className="flex justify-between items-center space-x-1"> 
-                <NavButton
+                <Button
                     label="Guidance & Support"
                     icon={ Info }
                 />

@@ -30,7 +30,7 @@ const InputField = ({
       {/* ---------------------------------------------------------------------------
         Label of a Input Element
         ---------------------------------------------------------------------------- */}
-      <label htmlFor={name} className={`${themeStyle} border-0 text-sm font-medium`}>
+      <label htmlFor={name} className={`${themeStyle} text-[#E6EAD0]/90 border-0 text-sm font-medium`}>
         {label}
       </label>
 
@@ -62,8 +62,7 @@ const InputField = ({
                 id={name}
                 name={name}
                 {...register(name, validationRules)}
-                className={`${themeStyle} mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm
-                ${errors[name] ? "border-red-500" : "border-gray-300"}
+                className={`${themeStyle} mt-1 text-white block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none  sm:text-sm ${errors[name] ? "border-red-500" : "border-gray-300"}
             `}
             >
                 {/* Default option for select, often "Select a..." */}
@@ -83,10 +82,9 @@ const InputField = ({
                 name={name}
                 placeholder={placeholder}
                 setValue={defaultValue}
-                className={`${themeStyle} w-full border border-gray-300 rounded-lg ${
+                className={`${themeStyle} w-full  bg-white/10 border border-[#3E4B24]/40 text-white rounded-lg p-2  ${
                 Icon ? "pl-10" : "pl-4"
-                } p-2 w-full focus:outline-none focus:ring-2 focus:ring-teal-500 ${
-                errors[name] ? "border-red-500" : "border-gray-300"
+                } focus:outline-none focus:ring-2 focus:ring-[#A3B18A] placeholder:text-white/60 ${ errors[name] ? "border-red-500" : "border-gray-300"
                 }`}
                 {...register(name, validationRules)}
             />

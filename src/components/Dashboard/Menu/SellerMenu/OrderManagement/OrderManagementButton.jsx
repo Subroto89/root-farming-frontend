@@ -1,7 +1,7 @@
 import { useState } from "react";
-import NavButton from "../../../../shared/Buttons/NavButton";
 import OrderManagementDropdown from "./OrderManagementDropdown";
 import { ChevronDown, ChevronRight, SquareMenu } from "lucide-react";
+import Button from "../../../../shared/Buttons/Button";
 
 const OrderManagementButton = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -13,7 +13,7 @@ const OrderManagementButton = () => {
     <>
        {/* Order Management Button -----------------  */}
       <div onClick={toggleMenu} className="w-60 flex justify-between items-center">
-        <NavButton
+        <Button
             label="Order Management"
             icon={SquareMenu}
         />

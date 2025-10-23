@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import NavButton from '../../../../shared/Buttons/NavButton';
 import SalesAndPayoutDropdown from './SalesAndPayoutDropdown';
 import { ChevronDown, ChevronRight, Receipt } from 'lucide-react';
+import Button from '../../../../shared/Buttons/Button';
 
 const SalesAndPayoutsButton = () => {
 
@@ -15,7 +15,7 @@ const SalesAndPayoutsButton = () => {
         <>
         {/* Sales And Payout Button --------------------- */}
          <div onClick={toggleMenu} className="w-60 flex justify-between items-center space-x-1">
-            <NavButton
+            <Button
                 label="Sales & Payouts"
                 icon={ Receipt }
             />

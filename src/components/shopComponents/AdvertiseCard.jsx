@@ -2,105 +2,88 @@ import React from 'react';
 import { ShoppingCart, Star, MapPin } from 'lucide-react';
 import { useNavigate } from 'react-router';
 
-const AdvertiseCard = ({ product, viewMode }) => {
+const AdvertiseCard = ({ product, themeForegroundStyle }) => {
   const navigate = useNavigate();
+
   return (
     <div
-      className={`bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden 
-        ${viewMode === 'list' ? 'flex items-stretch' : 'flex flex-col h-full'}
-      `}
+      className={`${themeForegroundStyle}  rounded-xl shadow-lg hover:shadow-xl 
+      transition-all duration-300 overflow-hidden group flex flex-col h-full`}
+      data-aos="zoom-in"
+      data-aos-duration="900"
     >
       {/* Image Section */}
-      <div
-        className={`relative ${
-          viewMode === 'list' ? 'w-64 flex-shrink-0 h-auto' : 'w-full h-56'
-        }`}
-      >
+      <div className="relative overflow-hidden w-full h-56">
         <img
           src={product.image}
           alt={product.name}
-          className="object-cover w-full h-[200px]"
+          className="object-cover w-full h-full transform group-hover:scale-110 transition-transform duration-700 ease-in-out"
         />
 
-        {/* Advertised Label */}
+        {/* Labels */}
         <div className="absolute top-3 left-3 bg-green-600 text-white text-xs font-semibold px-3 py-1 rounded-full shadow-md">
           Advertised
         </div>
 
-        {/* Quality Label */}
         <div className="absolute top-3 right-3 bg-white text-green-600 text-xs font-semibold px-2 py-1 rounded-full shadow-sm">
           {product.quality}
         </div>
 
-        {/* Stock Label */}
         <div
           className={`absolute bottom-3 right-3 px-2 py-1 rounded-full text-xs font-semibold ${
-            product.inStock
-              ? 'bg-green-500 text-white'
-              : 'bg-red-500 text-white'
-          }`}
+            product.inStock ? 'bg-green-500' : 'bg-red-500'
+          } text-white`}
         >
           {product.inStock ? 'In Stock' : 'Out of Stock'}
         </div>
       </div>
 
       {/* Content Section */}
-      <div
-        className={`flex flex-col justify-between p-4 ${
-          viewMode === 'list' ? 'flex-1' : 'h-full'
-        }`}
-      >
-        <div>
-          {/* Product Title & Rating */}
-          <div className="mb-1">
-            <div className="flex items-center justify-between">
-              <h3 className="text-[18px] font-bold text-gray-900 mb-1 line-clamp-1">
-                {product.name}
-              </h3>
-              <div className="flex items-center text-yellow-400">
-                <Star className="h-4 w-4 fill-current" />
-                <span className="text-sm text-gray-600 ml-1">
-                  {product.rating}
-                </span>
-              </div>
+      <div className="flex flex-col p-4 flex-grow">
+        {/* Top Content */}
+        <div className="flex-grow">
+          {/* Title + Rating */}
+          <div className="flex items-center justify-between mb-1">
+            <h3 className="text-[18px] font-bold line-clamp-1">
+              {product.name}
+            </h3>
+            <div className="flex items-center text-yellow-400">
+              <Star className="h-4 w-4 fill-current" />
+              <span className="text-sm ml-1">{product.rating}</span>
             </div>
-            <p className="text-green-600 font-medium">{product.farmer}</p>
           </div>
 
+          <p className="text-green-600 font-medium mb-0.5">{product.farmer}</p>
+
           {/* Location */}
-          <div className="flex items-center text-gray-600 text-sm mb-2">
-            <MapPin className="h-4 w-4 mr-1" />
+          <div className="flex items-center text-sm mb-2">
+            <MapPin className="h-4 w-4 mr-1 text-green-500" />
             <span>{product.location}</span>
           </div>
 
-          {/* Description */}
-          {/* <p className="text-gray-700 mb-4 line-clamp-2">
-            {product.description}
-          </p> */}
-        </div>
-
-        {/* Price & Quantity */}
-        <div className="flex items-center justify-between mb-2">
-          <div className="flex items-center">
-            <span className="text-xl font-bold text-green-600">
-              ${product.price}
-            </span>
-            <span className="text-sm text-gray-600">{product.unit}</span>
+          {/* Price Section */}
+          <div className="flex items-center justify-between mb-3">
+            <div className="flex items-center">
+              <span className="text-xl font-bold text-green-600">
+                ${product.price}
+              </span>
+              <span className="text-sm ml-1">{product.unit}</span>
+            </div>
+            <span className="text-sm">{product.quantity}</span>
           </div>
-          <span className="text-sm text-gray-600">{product.quantity}</span>
         </div>
 
-        {/* Action Buttons */}
-        <div className="flex justify-between items-center gap-3 mb-2">
+        {/* Buttons */}
+        <div className="flex justify-between items-center gap-3 mb-2 mt-auto">
           <button
-            onClick={() => navigate(`/marketplace/${product._id}`)}
-            className="bg-gray-100 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-200 transition-colors text-sm"
+            onClick={() => navigate(`/shop/${product._id}`)}
+            className="bg-gray-100 text-gray-700 px-2 py-2 rounded-lg hover:bg-gray-200 transition-colors text-sm flex-grow"
           >
             View Details
           </button>
           <button
             disabled={!product.inStock}
-            className={`px-4 py-2 rounded-lg font-medium transition-colors flex items-center text-sm ${
+            className={`px-2 py-2 rounded-lg font-medium transition-colors flex items-center text-sm flex-grow ${
               product.inStock
                 ? 'bg-green-600 text-white hover:bg-green-700'
                 : 'bg-gray-300 text-gray-500 cursor-not-allowed'

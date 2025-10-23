@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import NavButton from "../../../../shared/Buttons/NavButton";
 import MyAccountDropdown from "./MyAccountDropdown";
 import { ChevronDown, ChevronRight, Wallet } from "lucide-react";
+import Button from "../../../../shared/Buttons/Button";
 
 const MyAccountButton = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -13,7 +14,7 @@ const MyAccountButton = () => {
     <>
       {/* My Account Button ------------------------- */}
       <div onClick={toggleIsDropdown}  className="flex justify-between items-center space-x-1">
-        <NavButton
+        <Button
             label="My Account"
             icon={ Wallet }
         />

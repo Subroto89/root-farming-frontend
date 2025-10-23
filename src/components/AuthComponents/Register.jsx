@@ -111,6 +111,7 @@ const Register = () => {
             text: err.message || "Something went wrong!",
          });
       }
+
    };
 
    // ###########################################################################
@@ -120,7 +121,34 @@ const Register = () => {
             <FaUserPlus size={60} />
             <h2 className="text-4xl font-bold mb-8 pt-2">Register</h2>
          </div>
+
          {/* -----------------------------------------------------------
+
+      
+      saveUserToDatabase(userDataToDb);
+
+      //   Step 5: Navigate User to Home Page
+      navigate("/");
+      
+    } catch (err) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: err.message || "Something went wrong!",
+      });
+    }
+  };
+
+  // ###########################################################################
+  return (
+    <div className="rounded-xl border border-white/20 shadow-lg m-4 p-6 
+             bg-white/10 backdrop-blur-2xl text-white">
+      <div className="flex gap-3">
+        <FaUserPlus size={60} />
+        <h2 className="text-4xl font-bold mb-8 pt-2">Register</h2>
+      </div>
+      {/* -----------------------------------------------------------
+
       RegisterForm Component
       This Component Contains All the Input Fields & Submit Button
       ----------------------------------------------------------- */}
@@ -149,14 +177,15 @@ const Register = () => {
          {/* -----------------------------------------------------------
       Already Account Exist Suggestion Section
       ----------------------------------------------------------- */}
-         <p className="text-center mt-1">
-            Already have an account?
-            <Link to="/auth">
-               <span className="text-white font-sm link"> Login</span>
-            </Link>
-         </p>
-      </div>
-   );
+
+      <p className="text-center text-[#E6EAD0]/80 mt-2">
+        Already have an account?
+        <Link to="/auth">
+          <span className="text-white font-sm link"> Login</span>
+        </Link>
+      </p>
+    </div>
+  );
 };
 
 export default Register;

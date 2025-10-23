@@ -2,7 +2,7 @@ import { useTheme } from "../../../hooks/useTheme";
 import { Link } from "react-router";
 
 
-const Button = ({ label, icon: Icon, address, type, onClick, status, spread }) => {
+const Button = ({ label, icon: Icon, address, type, onClick, status, spread, textSize }) => {
     const { theme } = useTheme();
     const isSpread = spread === 'yes' ? 'flex-1' : ''
 
@@ -29,7 +29,7 @@ const Button = ({ label, icon: Icon, address, type, onClick, status, spread }) =
         type={type}
         onClick={onClick}
         to={address}
-        className={`btn ${isSpread} border-0 font-bold btn-color shadow-none ${style}`} 
+        className={`btn ${isSpread} border-0 font-bold btn-color tracking-wider shadow-none ${style} text-${textSize}`} 
       >
         {Icon && <Icon size={20} />}
         {label}

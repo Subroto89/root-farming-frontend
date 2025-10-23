@@ -9,8 +9,15 @@ import ResourceStats from "./Components/ResourceStats";
 import ExpiryAlerts from "./Components/ExpiryAlerts";
 import axios from "axios";
 import LoadingSpinner from "../../../../components/shared/LoadingSpinner";
+import { useTheme } from "../../../../hooks/useTheme";
 
 const ResourceManagement = () => {
+   const {theme} = useTheme();
+
+    const themeBackgroundStyle = theme === 'dark' ? "bg-dark" : "bg-light";
+    const themeForegroundStyle = theme === 'dark' ? "fg-dark" : "fg-light";
+    const themeFgOfFgStyle = theme === 'dark' ? "fg-of-fg-dark" : "fg-of-fg-light";
+
    const [isModalOpen, setIsModalOpen] = useState(false);
    const [searchTerm, setSearchTerm] = useState("");
    const [filterCategory, setFilterCategory] = useState("all");
@@ -58,8 +65,8 @@ const ResourceManagement = () => {
    }
 
    return (
-      <div className="min-h-screen bg-gradient-to-br from-green-50 to-yellow-50">
-         <div className="container mx-auto px-4 py-8">
+      <div className={` min-h-screen bg-gradient-to-br from-green-50 to-yellow-50`}>
+         <div className={`${themeBackgroundStyle} container mx-auto px-4 py-8`}>
             {/* Header */}
             <motion.div
                initial={{ opacity: 0, y: -20 }}
