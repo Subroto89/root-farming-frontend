@@ -5,7 +5,7 @@ import Container from "../../../../components/shared/Container";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../../hooks/UseAxiosSecure";
 
-export const ProductModeration = () => {
+const ProductModeration = () => {
   const axiosSecure = useAxiosSecure();
   const { theme } = useTheme();
   const themeBackgroundStyle = theme === "dark" ? "bg-dark" : "bg-light";
@@ -36,3 +36,5 @@ export const ProductModeration = () => {
     </div>
   );
 };
+
+export default ProductModeration;
