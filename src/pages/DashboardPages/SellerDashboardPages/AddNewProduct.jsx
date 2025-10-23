@@ -9,6 +9,8 @@ import useAxiosSecure from "../../../hooks/UseAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import LoadingSpinner from "../../../components/shared/LoadingSpinner";
 import { FaTools } from "react-icons/fa";
+import DataNotFound from "../../../components/shared/DataNotFound";
+import { ProductRow } from "../../../components/Dashboard/RouteBasedComponents/SellerRoutesComponents/MyListings/Add&ManageNewItem/ProductRow";
 
 const AddNewProduct = () => {
   const axiosSecure = useAxiosSecure();
@@ -17,8 +19,7 @@ const AddNewProduct = () => {
   const { theme } = useTheme();
   const themeBackgroundStyle = theme === "dark" ? "bg-dark" : "bg-light";
   const themeForegroundStyle = theme === "dark" ? "fg-dark" : "fg-light";
-  const themeFgOfFgStyle =
-    theme === "dark" ? "fg-of-fg-dark" : "fg-of-fg-light";
+  const themeFgOfFgStyle = theme === "dark" ? "fg-of-fg-dark" : "fg-of-fg-light";
 
   // State Management ---------------------------------------------------------
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -66,10 +67,11 @@ const AddNewProduct = () => {
                     className={`${themeFgOfFgStyle} h-4 bg-gray-200 uppercase text-sm font-semibold sticky top-0 shadow-xl `}
                   >
                     <tr className="text-left">
-                      <th className="py-2 px-20">Photo</th>
+                      <th className="py-2 px-8">Photo</th>
                       <th className="py-2 px-8">Product Name</th>
-                      <th className="py-2 px-8">Total Products</th>
-                      <th className="py-2 px-8">Created On</th>
+                      <th className="py-2 px-8">Quality</th>
+                      <th className="py-2 px-8">Created on</th>
+                      <th className="py-2 px-8">Activity</th>
                       <th className="py-2 px-8">Status</th>
                       <th className="py-2 px-8 text-center flex items-center gap-2">
                         <FaTools size={16} />
@@ -77,18 +79,18 @@ const AddNewProduct = () => {
                       </th>
                     </tr>
                   </thead>
-                  {/* <tbody>
+                  <tbody>
                     {products.map((product) => (
                       <ProductRow
-                        key={category._id}
-                        category={category}
-                        handleCategoryDelete={handleCategoryDelete}
-                        handleUpdateCategoryModal={handleUpdateCategoryModal}
-                        setCategoryToEdit={setCategoryToEdit}
-                        refetch={refetch}
+                        key={product._id}
+                        product={product}
+                        // handleCategoryDelete={handleCategoryDelete}
+                        // handleUpdateCategoryModal={handleUpdateCategoryModal}
+                        // setCategoryToEdit={setCategoryToEdit}
+                        // refetch={refetch}
                       />
                     ))}
-                  </tbody> */}
+                  </tbody>
                 </table>
               </div>
             ) : (

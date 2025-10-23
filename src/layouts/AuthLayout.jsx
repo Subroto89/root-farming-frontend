@@ -1,5 +1,5 @@
 import { Link, Outlet } from "react-router";
-import LeafButton from "../components/shared/Buttons/LeafButton.jsx"
+// import LeafButton from "../components/shared/Buttons/LeafButton.jsx"
 
 
 const AuthLayout = () => {
@@ -27,7 +27,7 @@ const AuthLayout = () => {
             <br /> Think, Grow, and Sustain with Us!
           </p>
           <Link to="/">
-            <LeafButton></LeafButton>
+            {/* <LeafButton></LeafButton> */}
           </Link>
         </div>
 

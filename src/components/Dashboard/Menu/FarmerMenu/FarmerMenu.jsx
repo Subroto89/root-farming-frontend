@@ -46,11 +46,7 @@ const FarmerMenu = () => {
         </>
     );
 
-       
-      </div>
-    </>
-  );
-
+   
 };
 
 export default FarmerMenu;
