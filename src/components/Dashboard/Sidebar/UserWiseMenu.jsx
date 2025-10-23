@@ -6,12 +6,7 @@ import FarmerMenu from '../Menu/FarmerMenu/FarmerMenu';
 import SellerMenu from '../Menu/SellerMenu/SellerMenu';
 
 const UserWiseMenu = () => {
-  // const { userRole } = useUserRole();
-  const userRole = "admin"
-  // const userRole = "agri-specialist"
-  // const userRole = "seller"
-  // const userRole = "customer"
-  // const userRole = "farmer"
+  const { userRole } = useUserRole();
 
   return (
     <>
@@ -25,12 +20,12 @@ const UserWiseMenu = () => {
         ) : userRole === 'farmer' ? (
           <FarmerMenu />
         ) : userRole === 'agri-specialist' ? (
-          <AgriSpecialistMenu/>
-        ) :  (
+          <AgriSpecialistMenu />
+        ) : (
           <h2>No menu</h2>
         )}
       </div>
     </>
   );
-}
+};
 export default UserWiseMenu;

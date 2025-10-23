@@ -43,10 +43,10 @@ const ServiceCard = ({
     </ul>
 
     {/* Learn More Button */}
-    <button className="mt-6 flex items-center justify-center gap-2 font-semibold hover:text-green-800 transition-colors">
+    {/* <button className="mt-6 flex items-center justify-center gap-2 font-semibold hover:text-green-800 transition-colors">
       Learn More
       <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-    </button>
+    </button> */}
   </div>
 );
 
