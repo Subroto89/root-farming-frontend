@@ -1,31 +1,64 @@
-import { Calendar, CheckCircle, Clock } from 'lucide-react';
-import React, { useState } from 'react'
-import { useTheme } from '../../hooks/useTheme';
+import { Calendar, CheckCircle, Clock } from "lucide-react";
+import React, { useState } from "react";
+import { useTheme } from "../../hooks/useTheme";
+import Swal from "sweetalert2";
 
-const ActivityCardData = ({data}) => {
-    const { theme } = useTheme();
-      const themeBackgroundStyle = theme === "dark" ? "bg-dark" : "bg-light";
-      const themeForegroundStyle = theme === "dark" ? "fg-dark" : "fg-light";
-      const themeFgOfFgStyle =    theme === "dark" ? "fg-of-fg-dark" : "fg-of-fg-light";
-    const {
+const ActivityCardData = ({ data }) => {
+  const { theme } = useTheme();
+  const themeForegroundStyle = theme === "dark" ? "fg-dark" : "fg-light";
+  const themeFgOfFgStyle =
+    theme === "dark" ? "fg-of-fg-dark" : "fg-of-fg-light";
+
+  const {
     _id,
     activityType,
     relatedField,
     activityDate,
-    dueDate,
     cost,
     title,
-    description
+    description,
+    status: initialStatus, 
   } = data;
 
-  const [status, setStatus] = useState("pending");
+  const [status, setStatus] = useState(initialStatus || "pending");
 
-  const handleToggleStatus = () => {
-    setStatus((prev) => (prev === "pending" ? "complete" : "pending"));
+  const handleToggleStatus = async () => {
+    const newStatus = status === "pending" ? "complete" : "pending";
+    setStatus(newStatus);
+
+    try {
+      const res = await fetch(`http://localhost:3000/activities/${_id}`, {
+        method: "PATCH",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({ status: newStatus }),
+      });
+
+      const result = await res.json();
+
+      if (result?.modifiedCount > 0) {
+        Swal.fire({
+          title:
+            newStatus === "complete"
+              ? "Marked as Completed!"
+              : "Marked as Pending",
+          icon: "success",
+          timer: 1200,
+          showConfirmButton: false,
+        });
+      }
+    } catch (err) {
+      console.error("Error updating status:", err);
+      Swal.fire({
+        title: "Error updating activity",
+        icon: "error",
+      });
+    }
   };
+
   return (
-    <div>
-      <div
+    <div
       className={`${themeForegroundStyle} rounded-2xl shadow-sm border border-gray-200 p-4 flex justify-between items-start hover:shadow-md transition`}
     >
       {/* Left section */}
@@ -56,11 +89,11 @@ const ActivityCardData = ({data}) => {
         <button
           onClick={handleToggleStatus}
           className={`flex items-center gap-1 px-2 py-1 text-xs rounded-md font-medium transition
-          ${
-            status === "pending"
-              ? "bg-yellow-100 text-yellow-700 hover:bg-yellow-200"
-              : "bg-green-100 text-green-700 hover:bg-green-200"
-          }`}
+            ${
+              status === "pending"
+                ? "bg-yellow-100 text-yellow-700 hover:bg-yellow-200"
+                : "bg-green-100 text-green-700 hover:bg-green-200"
+            }`}
         >
           {status === "pending" ? (
             <>
@@ -74,8 +107,7 @@ const ActivityCardData = ({data}) => {
         </button>
       </div>
     </div>
-    </div>
-  )
-}
+  );
+};
 
-export default ActivityCardData
+export default ActivityCardData;

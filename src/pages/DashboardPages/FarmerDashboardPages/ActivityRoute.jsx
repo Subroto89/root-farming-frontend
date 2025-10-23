@@ -28,7 +28,6 @@ const ActivityRoute = () => {
     const form = e.target;
     const formData = new FormData(form);
     const activityData = Object.fromEntries(formData.entries());
-    console.log(activityData);
 
     fetch("http://localhost:3000/activities", {
       method: "POST",
@@ -78,7 +77,6 @@ const ActivityRoute = () => {
                 </button>
               </form>
 
-              {/* ................. */}
               <form
                 onSubmit={handleactivity}
                 className=" rounded-2xl   space-y-5"
@@ -118,8 +116,6 @@ const ActivityRoute = () => {
                       {
                         farmerFieldsData.map(fieldData => <option>{fieldData.name}</option>)
                       }
-                      {/* <option>Field A</option>
-                      <option>Field B</option> */}
                     </select>
                   </div>
                 </div>
@@ -196,7 +192,6 @@ const ActivityRoute = () => {
                   Save Activity
                 </button>
               </form>
-              {/* .......................... */}
             </div>
           </dialog>
         </div>
