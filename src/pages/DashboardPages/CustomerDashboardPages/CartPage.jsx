@@ -17,6 +17,24 @@ const CartPage = () => {
 
   const backgroundThemeClass = theme === "dark" ? "bg-dark" : "bg-light";
 
+  // ------------------ FETCH CART DATA ------------------
+  const { data: cartItems = [], isLoading } = useQuery({
+    queryKey: ["cart", user?.email],
+    enabled: !!user?.email,
+    queryFn: async () => {
+      if (!user?.email) return [];
+      const res = await axiosSecure.get(`/cart/get-cart?email=${user.email}`);
+      return res.data;
+    },
+  });
+
+  if (isLoading) return <LoadingSpinner />;
+  if (!cartItems.length)
+    return (
+      <p className="text-center py-10 text-gray-600">Your cart is empty</p>
+    );
+
+
   return (
     <div className={`${backgroundThemeClass}`}>
       <div className="max-w-5xl mx-auto px-4 py-10">
