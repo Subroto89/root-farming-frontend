@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ShoppingBag, Package2, Truck, Sprout } from 'lucide-react';
 import marketplaceImage from '../../assets/Logo/marketplace.jpg';
 import farmersImage from '../../assets/Logo/farmers-success.jpg';
 import ServiceCard from './Services Components/ServiceCard';
 import FeaturedShowcase from './Services Components/FeaturedShowcase';
+import { useTheme } from '../../hooks/useTheme';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const services = [
   {
@@ -56,15 +59,31 @@ const services = [
 ];
 
 const Services = () => {
+  const { theme } = useTheme();
+  const themeBackgroundStyle = theme === 'dark' ? 'bg-dark' : 'bg-light';
+  const themeForegroundStyle =
+    theme === 'dark'
+      ? 'fg-dark border border-gray-500'
+      : 'fg-light border border-gray-200';
+
+  // Initialize AOS
+  useEffect(() => {
+    AOS.init({ duration: 900, once: true, easing: 'ease-in-out', offset: 100 });
+    AOS.refresh();
+  }, []);
+
   return (
-    <div id="services" className="bg-gray-50 md:py-24 py-16 overflow-hidden">
+    <div
+      id="services"
+      className={`${themeBackgroundStyle} md:py-24 py-16 overflow-hidden`}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-12 sm:mb-16">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 leading-snug">
+        <div className="text-center mb-12 sm:mb-16" data-aos="fade-up">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 leading-snug">
             Empowering Every Step of Agriculture
           </h2>
-          <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-sm sm:text-base md:text-lg lg:text-xl max-w-3xl mx-auto">
             From marketplace to smart farming — discover our complete ecosystem
             built for modern agriculture.
           </p>
@@ -73,15 +92,22 @@ const Services = () => {
         {/* Service Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 md:gap-10 mb-20">
           {services.map((service, idx) => (
-            <ServiceCard key={idx} {...service} />
+            <div key={idx} data-aos="zoom-in" data-aos-delay={idx * 150}>
+              <ServiceCard
+                {...service}
+                themeForegroundStyle={themeForegroundStyle}
+              />
+            </div>
           ))}
         </div>
 
         {/* Showcase Section */}
-        <div className="mt-12">
+        <div data-aos="fade-up" data-aos-delay={100}>
           <FeaturedShowcase
             marketplaceImage={marketplaceImage}
             farmersImage={farmersImage}
+            themeForegroundStyle={themeForegroundStyle}
+            theme={theme}
           />
         </div>
       </div>

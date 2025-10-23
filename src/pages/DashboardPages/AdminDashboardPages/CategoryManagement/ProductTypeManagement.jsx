@@ -18,6 +18,13 @@ import Form_UpdateType from "../../../../components/Dashboard/RouteBasedComponen
 const ProductTypeManagement = () => {
   TabTitle("Category Management");
   const { theme } = useTheme();
+
+  const themeBackgroundStyle = theme === 'dark' ? "bg-dark" : "bg-light";
+  const themeForegroundStyle = theme === 'dark' ? "fg-dark" : "fg-light";
+  const themeFgOfFgStyle = theme === 'dark' ? "fg-of-fg-dark" : "fg-of-fg-light"
+
+
+
   const axiosSecure = useAxiosSecure();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -70,7 +77,7 @@ const ProductTypeManagement = () => {
   if (typeLoading) return <LoadingSpinner />;
 
   return (
-    <>
+    <div className={`${themeBackgroundStyle}`}>
       <Container>
         {/* -----------------------------------------------------------------
             Header Section with Add Type Button 
@@ -88,14 +95,12 @@ const ProductTypeManagement = () => {
         {/* --------------------------------------------------------------
             Types Table
         ---------------------------------------------------------------*/}
-        <div>
+        <div className={`${themeForegroundStyle} min-h-[calc(100vh-112px)]`}>
           {types.length > 0 ? (
-            <div className="w-full max-h-[calc(100vh-150px)] overflow-auto rounded-lg mt-10 shadow-lg">
-              <table className={`w-full divider-y divider-gray-500`}>
+            <div className="w-full overflow-auto rounded-lg mt-10 shadow-lg">
+              <table className={`${themeForegroundStyle} w-full divider-y divider-gray-500`}>
                 <thead
-                  className={`h-4 bg-gray-200 uppercase text-sm font-semibold sticky top-0 ${
-                    theme === "dark" ? "category-card" : ""
-                  }`}
+                  className={`${themeFgOfFgStyle} shadow-xl h-4 bg-gray-200 uppercase text-sm font-semibold sticky top-0}`}
                 >
                   <tr className="text-left">
                     <th className="py-2 px-20">Photo</th>
@@ -174,7 +179,7 @@ const ProductTypeManagement = () => {
           )}
         </div>
       </Container>
-    </>
+    </div>
   );
 };
 

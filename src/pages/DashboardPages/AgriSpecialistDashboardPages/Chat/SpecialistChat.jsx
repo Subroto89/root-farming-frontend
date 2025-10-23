@@ -13,25 +13,14 @@ import {
    CheckCheck,
    MoveVertical as MoreVertical,
 } from "lucide-react";
-import { io } from "socket.io-client";
+import useChatSocket from "../../../../hooks/useChatSocket";
 import { AuthContext } from "../../../../contexts/AuthContext";
 import toast from "react-hot-toast";
 
 const CHAT_SERVER =
-   import.meta.env.VITE_SERVER_API_KEY || "http://localhost:3001";
+   import.meta.env.VITE_Server_API_KEY || "http://localhost:3001";
 
-/**
- * SpecialistChat
- * - left column: conversations (other participant = farmer)
- * - right: messages for selected conversation
- *
- * Assumptions:
- * - GET /api/chat/conversations returns conversations where participants is an array of UIDs.
- * - GET /api/chat/conversations/:id/messages returns messages for that conversation.
- * - GET /users/:uid exists and returns basic user profile { uid, name, avatar, location, ... }
- * - Socket events used: "message", "message:ack", "typing", "message:read"
- */
-
+/* SpecialistChat component (unchanged UI, fixed typing names) */
 const SpecialistChat = () => {
    const { user, getToken } = useContext(AuthContext);
    const [conversations, setConversations] = useState([]); // array of conv docs
@@ -40,9 +29,92 @@ const SpecialistChat = () => {
    const [messages, setMessages] = useState({}); // conversationId -> [messages]
    const [newMessage, setNewMessage] = useState("");
    const [typingUsers, setTypingUsers] = useState({}); // conversationId -> boolean
-   const socketRef = useRef(null);
    const messagesEndRef = useRef(null);
    const typingTimeoutRef = useRef(null);
+
+   // ---- SOCKET: handlers passed to the hook ----
+   const handleIncoming = useCallback(
+      (msg) => {
+         const convKey = msg.conversationId;
+         setMessages((prev) => {
+            const list = [...(prev[convKey] || []), msg];
+            return { ...prev, [convKey]: list };
+         });
+
+         const convExists = conversations.some(
+            (c) => String(c._id) === String(convKey)
+         );
+         if (!convExists) {
+            (async () => {
+               try {
+                  const token = await getToken();
+                  const res = await fetch(
+                     `${CHAT_SERVER}/api/chat/conversations`,
+                     {
+                        headers: { Authorization: `Bearer ${token}` },
+                     }
+                  );
+                  if (res.ok) {
+                     const convs = await res.json();
+                     setConversations(convs);
+                  }
+               } catch (err) {
+                  console.warn(
+                     "Failed to refresh conversations after incoming message",
+                     err
+                  );
+               }
+            })();
+         }
+      },
+      [conversations, getToken]
+   );
+
+   const handleAck = useCallback((ack) => {
+      const { tempId, savedMessage } = ack || {};
+      if (!savedMessage || !tempId) return;
+      const convKey = savedMessage.conversationId;
+      setMessages((prev) => {
+         const list = (prev[convKey] || []).map((m) =>
+            m.tempId && m.tempId === tempId ? { ...savedMessage } : m
+         );
+         const exists = list.some(
+            (m) => String(m._id) === String(savedMessage._id)
+         );
+         if (!exists) list.push(savedMessage);
+         return { ...prev, [convKey]: list };
+      });
+   }, []);
+
+   // <-- Renamed incoming typing handler -->
+   const handleTypingRemote = useCallback(
+      ({ conversationId, userId, isTyping }) => {
+         setTypingUsers((prev) => ({ ...prev, [conversationId]: isTyping }));
+      },
+      []
+   );
+
+   // <-- Renamed incoming "read" handler -->
+   const handleRead = useCallback(
+      ({ conversationId, messageIds, readerUid }) => {
+         if (!conversationId || !Array.isArray(messageIds)) return;
+         setMessages((prev) => {
+            const list = (prev[conversationId] || []).map((m) =>
+               messageIds.includes(String(m._id)) ? { ...m, status: "read" } : m
+            );
+            return { ...prev, [conversationId]: list };
+         });
+      },
+      []
+   );
+
+   // use the shared hook — returns a ref
+   const socketRef = useChatSocket(
+      handleIncoming,
+      handleAck,
+      handleTypingRemote,
+      handleRead
+   );
 
    // helper: fetch with token
    const authFetch = useCallback(
@@ -59,85 +131,6 @@ const SpecialistChat = () => {
       },
       [getToken]
    );
-
-   // init socket connection
-   useEffect(() => {
-      if (!user) return;
-      let mounted = true;
-      let socket;
-
-      (async () => {
-         const token = await getToken();
-         if (!token) return;
-
-         socket = io(CHAT_SERVER, {
-            auth: { token },
-            transports: ["websocket"],
-         });
-
-         socket.on("connect", () => {
-            console.log("Specialist socket connected", socket.id);
-            toast.success("Connected to chat server");
-         });
-
-         socket.on("message", (msg) => {
-            // msg contains: _id, conversationId (string), senderUid, senderRole, text, createdAt, ...
-            setMessages((prev) => {
-               const key = msg.conversationId;
-               const list = [...(prev[key] || []), msg];
-               return { ...prev, [key]: list };
-            });
-
-            // if message belongs to a conversation not in list, optionally fetch convs
-         });
-
-         socket.on("message:ack", (ack) => {
-            const { tempId, savedMessage } = ack || {};
-            if (!savedMessage || !tempId) return;
-            const convKey = savedMessage.conversationId;
-            setMessages((prev) => {
-               const list = (prev[convKey] || []).map((m) =>
-                  m.tempId && m.tempId === tempId ? { ...savedMessage } : m
-               );
-               // ensure message present
-               const exists = list.some(
-                  (m) => String(m._id) === String(savedMessage._id)
-               );
-               if (!exists) list.push(savedMessage);
-               return { ...prev, [convKey]: list };
-            });
-         });
-
-         socket.on("typing", ({ conversationId, userId, isTyping }) => {
-            setTypingUsers((prev) => ({ ...prev, [conversationId]: isTyping }));
-         });
-
-         socket.on(
-            "message:read",
-            ({ conversationId, messageIds, readerUid }) => {
-               // update messages' status to 'read'
-               setMessages((prev) => {
-                  const list = (prev[conversationId] || []).map((m) =>
-                     messageIds.includes(String(m._id))
-                        ? { ...m, status: "read" }
-                        : m
-                  );
-                  return { ...prev, [conversationId]: list };
-               });
-            }
-         );
-
-         socketRef.current = socket;
-      })();
-
-      return () => {
-         mounted = false;
-         if (socketRef.current) {
-            socketRef.current.disconnect();
-            socketRef.current = null;
-         }
-      };
-   }, [user, getToken]);
 
    // load conversations (left column)
    useEffect(() => {
@@ -173,6 +166,7 @@ const SpecialistChat = () => {
             );
          } catch (err) {
             console.error("load conversations error", err);
+            toast.error("Failed to load conversations");
          }
       })();
       // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -205,7 +199,7 @@ const SpecialistChat = () => {
             console.error("load messages error", err);
          }
       })();
-   }, [selectedConv, user, authFetch]);
+   }, [selectedConv, user, authFetch, socketRef]);
 
    // scroll to bottom when messages change
    useEffect(() => {
@@ -253,8 +247,8 @@ const SpecialistChat = () => {
       });
    };
 
-   // typing
-   const handleTyping = (value) => {
+   // <-- LOCAL typing handler (input onChange) - renamed so it doesn't clash with remote handler -->
+   const handleTypingLocal = (value) => {
       setNewMessage(value);
       if (!socketRef.current || !selectedConv) return;
 
@@ -308,12 +302,10 @@ const SpecialistChat = () => {
             </motion.div>
 
             <div className="bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden h-[700px] flex">
-               {/* Left: conversations (farmers) */}
+               {/* Left: conversations */}
                <div className="w-1/3 border-r border-gray-200 flex flex-col">
                   <div className="p-4 border-b border-gray-200 bg-blue-50">
-                     <h3 className="font-semibold text-gray-800">
-                        Incoming Messages
-                     </h3>
+                     <h3 className="font-bold text-gray-800 text-xl">Chats</h3>
                      <p className="text-sm text-gray-600">
                         Farmers who contacted you
                      </p>
@@ -510,19 +502,21 @@ const SpecialistChat = () => {
                                  aria-label="Type your reply"
                                  type="text"
                                  value={newMessage}
-                                 onChange={(e) => handleTyping(e.target.value)}
+                                 onChange={(e) =>
+                                    handleTypingLocal(e.target.value)
+                                 }
                                  onKeyDown={(e) =>
                                     e.key === "Enter" && handleSendMessage()
                                  }
                                  placeholder="Write a reply..."
-                                 className="flex-1 px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                 className="flex-1 px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-700"
                               />
                               <motion.button
                                  whileHover={{ scale: 1.05 }}
                                  whileTap={{ scale: 0.95 }}
                                  onClick={handleSendMessage}
                                  disabled={!newMessage.trim()}
-                                 className="px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white rounded-lg font-semibold disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center gap-2"
+                                 className="px-6 py-3 bg-blue-500 hover:bg-blue-600  rounded-lg font-semibold disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center gap-2"
                               >
                                  <Send size={18} /> Send
                               </motion.button>
