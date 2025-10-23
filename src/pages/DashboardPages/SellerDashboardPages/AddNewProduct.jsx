@@ -4,14 +4,18 @@ import { Plus } from "lucide-react";
 import Container from "../../../components/shared/Container";
 import ModalFormat from "../../../components/shared/ModalFormat";
 import Form_AddNewItem from "../../../components/Dashboard/RouteBasedComponents/SellerRoutesComponents/MyListings/Add&ManageNewItem/Form_AddNewProduct"
+import { useTheme } from "../../../hooks/useTheme";
 const AddNewProduct = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const handleModalToggle = () => {
     setIsModalOpen((prev) => !prev);
   };
+  const {theme} = useTheme();
+  const themeBackgroundStyle = theme === 'dark' ? "bg-dark" : "bg-light";
+  const themeForegroundStyle = theme === 'dark' ? "fg-dark" : "fg-light";
   return (
-    <>
-      <Container>
+    < div className={`${themeBackgroundStyle} min-h-screen`} >
+      <Container >
         <div>
           {/* Button for Add New Item Section ----------------------------------- */}
           <div className="flex justify-between items-center">
@@ -42,7 +46,7 @@ const AddNewProduct = () => {
           </div>
         </div>
       </Container>
-    </>
+    </div>
   );
 };
 

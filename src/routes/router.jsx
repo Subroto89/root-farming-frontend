@@ -44,6 +44,9 @@ import OrderTracking from "../pages/DashboardPages/CustomerDashboardPages/OrderT
 import ChatWithAgriSpecialist from "../pages/DashboardPages/FarmerDashboardPages/GuidanceAndSupport/ChatWithAgriSpecialist";
 import SpecialistChat from "../pages/DashboardPages/AgriSpecialistDashboardPages/Chat/SpecialistChat";
 
+
+
+
 const router = createBrowserRouter([
   // -------------------------------------------
   // Root Layout
@@ -248,6 +251,7 @@ const router = createBrowserRouter([
         path: "add-new-item",
         Component: AddNewProduct,
       },
+     
 
       // Customer Dashboard Routes
 

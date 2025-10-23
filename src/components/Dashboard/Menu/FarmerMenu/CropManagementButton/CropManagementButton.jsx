@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import NavButton from '../../../../shared/Buttons/NavButton';
 import CropManagementDropdown from './CropManagementDropdown';
 import { ChevronDown, ChevronRight, Vegan } from 'lucide-react';
+import Button from '../../../../shared/Buttons/Button';
 
 const CropManagementButton = () => {
 
@@ -14,7 +14,7 @@ const CropManagementButton = () => {
     return (
         <>
           <div onClick={toggleSidebar}  className="flex justify-between items-center space-x-1">
-            <NavButton
+            <Button
                 label="Crop Management"
                 icon={ Vegan }
             />

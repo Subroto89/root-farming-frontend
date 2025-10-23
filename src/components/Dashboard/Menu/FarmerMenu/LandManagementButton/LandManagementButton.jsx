@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import NavButton from '../../../../shared/Buttons/NavButton';
 import LandManagementDropdown from './LandManagementDropdown';
 import { ChevronDown, ChevronRight, LandPlot } from 'lucide-react';
+import Button from '../../../../shared/Buttons/Button';
 
 const LandManagementButton = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -11,7 +11,7 @@ const LandManagementButton = () => {
     return (
         <>
             <div onClick={toggleSidebar}  className="flex justify-between items-center space-x-1">
-                <NavButton
+                <Button
                     label="Land Management"
                     icon={ LandPlot }
                 />
