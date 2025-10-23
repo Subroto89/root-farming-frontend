@@ -11,7 +11,7 @@ const StatsCounter = ({ themeForegroundStyle }) => {
 
   return (
     <div
-      className={`${themeForegroundStyle} border border-gray-200 rounded-2xl shadow-md p-6`}
+      className={`${themeForegroundStyle} rounded-2xl shadow-sm hover:shadow-lg p-6`}
       data-aos="fade-up"
       data-aos-duration="900"
     >

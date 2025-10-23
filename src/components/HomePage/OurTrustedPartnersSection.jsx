@@ -52,7 +52,10 @@ const partners = [
 const OurTrustedPartnersSection = () => {
   const { theme } = useTheme();
   const themeBackgroundStyle = theme === 'dark' ? 'bg-dark' : 'bg-light';
-  const themeForegroundStyle = theme === 'dark' ? 'fg-dark' : 'fg-light';
+  const themeForegroundStyle =
+    theme === 'dark'
+      ? 'fg-dark border border-gray-500'
+      : 'fg-light border border-gray-200';
 
   useEffect(() => {
     AOS.init({
@@ -87,7 +90,7 @@ const OurTrustedPartnersSection = () => {
           {partners.map((partner, index) => (
             <div
               key={index}
-              className={`${themeForegroundStyle} border border-gray-200 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 p-6 flex flex-col items-center text-center`}
+              className={`${themeForegroundStyle} rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 p-6 flex flex-col items-center text-center`}
               data-aos="fade-up"
               data-aos-delay={index * 100}
               data-aos-duration="900"

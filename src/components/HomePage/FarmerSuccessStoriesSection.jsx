@@ -15,7 +15,10 @@ import 'aos/dist/aos.css';
 const FarmerSuccessStoriesSection = () => {
   const { theme } = useTheme();
   const themeBackgroundStyle = theme === 'dark' ? 'bg-dark' : 'bg-light';
-  const themeForegroundStyle = theme === 'dark' ? 'fg-dark' : 'fg-light';
+  const themeForegroundStyle =
+    theme === 'dark'
+      ? 'fg-dark border border-gray-500'
+      : 'fg-light border border-gray-200';
   const [currentStory, setCurrentStory] = useState(0);
 
   const stories = [
@@ -105,7 +108,7 @@ const FarmerSuccessStoriesSection = () => {
 
         {/* Story Card */}
         <div
-          className={`rounded-2xl shadow-xl p-6 md:p-12 ${themeForegroundStyle} border border-gray-200`}
+          className={`rounded-2xl shadow-sm hover:shadow-lg p-6 md:p-12 ${themeForegroundStyle}`}
           data-aos="fade-up"
           data-aos-duration="900"
         >
@@ -169,7 +172,7 @@ const FarmerSuccessStoriesSection = () => {
                 return (
                   <div
                     key={index}
-                    className={`${themeForegroundStyle} rounded-xl shadow-lg p-4 sm:p-6 text-center hover:shadow-xl transition-shadow duration-300`}
+                    className={`${themeForegroundStyle} rounded-xl shadow-sm hover:shadow-lg p-4 sm:p-6 text-center  transition-shadow duration-300`}
                     data-aos="zoom-in"
                     data-aos-delay={index * 100}
                     data-aos-duration="900"

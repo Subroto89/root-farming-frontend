@@ -118,13 +118,13 @@ const HeroSection = () => {
               data-aos-delay="200"
             >
               <Link to="/dashboard/farmer">
-                <button className="flex items-center justify-center gap-2 text-white text-lg px-8 py-4 bg-[#F59F0A] hover:bg-[#e09a0b] rounded-lg font-semibold transition-all duration-300">
+                <button className="flex items-center justify-center gap-2 text-white text-lg px-8 py-4 bg-[#F59F0A] hover:bg-[#e09a0b] rounded-lg font-semibold transition-all duration-300 w-full">
                   Start Farming Smart
                   <ArrowRight className="w-5 h-5" />
                 </button>
               </Link>
               <Link to="/shop">
-                <button className="text-white text-lg px-8 py-4 bg-white/10 backdrop-blur-sm border border-white/30 hover:bg-[#F59F0A] hover:text-white rounded-lg transition-all duration-300">
+                <button className="text-white text-lg px-8 py-4 bg-white/10 backdrop-blur-sm border border-white/30 hover:bg-[#F59F0A] hover:text-white rounded-lg transition-all duration-300 w-full">
                   Browse Marketplace
                 </button>
               </Link>

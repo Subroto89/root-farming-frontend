@@ -34,7 +34,10 @@ const partnerBenefits = [
 const BecomePartner = () => {
   const { theme } = useTheme();
   const themeBackgroundStyle = theme === 'dark' ? 'bg-dark' : 'bg-light';
-  const themeForegroundStyle = theme === 'dark' ? 'fg-dark' : 'fg-light';
+  const themeForegroundStyle =
+    theme === 'dark'
+      ? 'fg-dark border border-gray-500'
+      : 'fg-light border border-gray-200';
 
   useEffect(() => {
     AOS.init({
@@ -71,8 +74,8 @@ const BecomePartner = () => {
             return (
               <div
                 key={index}
-                className={`${themeForegroundStyle} border border-gray-200 group rounded-2xl p-8 shadow-sm 
-                           hover:shadow-xl hover:-translate-y-2 transition-all duration-300`}
+                className={`${themeForegroundStyle} group rounded-2xl p-8 shadow-sm 
+                           hover:shadow-lg hover:-translate-y-2 transition-all duration-300`}
                 data-aos="fade-up"
                 data-aos-delay={index * 100}
                 data-aos-duration="900"

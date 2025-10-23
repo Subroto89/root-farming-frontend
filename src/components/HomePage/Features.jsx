@@ -73,7 +73,10 @@ const Features = () => {
 
   const bg =
     theme === 'dark' ? 'bg-dark text-gray-100' : 'bg-light text-gray-900';
-  const card = theme === 'dark' ? 'fg-dark' : 'fg-light';
+  const card =
+    theme === 'dark'
+      ? 'fg-dark border border-gray-500'
+      : 'fg-light border border-gray-200';
 
   const handleClick = (path, e) => {
     e.preventDefault();
@@ -107,7 +110,7 @@ const Features = () => {
               onClick={e => handleClick(path, e)}
               data-aos="zoom-in"
               data-aos-delay={i * 100}
-              className={`${card} cursor-pointer border border-gray-200 rounded-2xl p-6 sm:p-8 shadow-sm 
+              className={`${card} cursor-pointer rounded-2xl p-6 sm:p-8 shadow-sm 
               hover:shadow-lg hover:-translate-y-2 transition-all duration-300 flex flex-col h-full`}
             >
               <div className="w-16 h-16 md:w-20 md:h-20 rounded-xl bg-green-700 flex items-center justify-center mb-5 shadow-md group-hover:scale-110 transition-transform duration-300">

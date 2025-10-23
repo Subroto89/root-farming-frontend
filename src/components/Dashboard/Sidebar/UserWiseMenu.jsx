@@ -20,12 +20,12 @@ const UserWiseMenu = () => {
         ) : userRole === 'farmer' ? (
           <FarmerMenu />
         ) : userRole === 'agri-specialist' ? (
-          <AgriSpecialistMenu/>
-        ) :  (
+          <AgriSpecialistMenu />
+        ) : (
           <h2>No menu</h2>
         )}
       </div>
     </>
   );
-}
+};
 export default UserWiseMenu;
