@@ -18,6 +18,12 @@ const FarmerMenu = () => {
 
                 
                 <NavButton
+                    label="Activity Route"
+                    address="/dashboard/ActivityRoute"
+                    icon={Boxes }
+                />
+                
+                <NavButton
                     label="Resource Management"
                     address="/dashboard/resource-management"
                     icon={Boxes }
@@ -32,6 +38,7 @@ const FarmerMenu = () => {
                     address="/dashboard/government-info"
                     icon={ MessageCircleQuestionMark }
                 />
+
                 
             </div>
         </>

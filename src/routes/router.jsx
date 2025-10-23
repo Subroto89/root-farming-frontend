@@ -43,6 +43,7 @@ import MyWishlist from "../pages/DashboardPages/CustomerDashboardPages/MyWishlis
 import OrderTracking from "../pages/DashboardPages/CustomerDashboardPages/OrderTracking";
 import ChatWithAgriSpecialist from "../pages/DashboardPages/FarmerDashboardPages/GuidanceAndSupport/ChatWithAgriSpecialist";
 import SpecialistChat from "../pages/DashboardPages/AgriSpecialistDashboardPages/Chat/SpecialistChat";
+import ActivityRoute from "../pages/DashboardPages/FarmerDashboardPages/ActivityRoute";
 
 const router = createBrowserRouter([
   // -------------------------------------------
@@ -204,6 +205,11 @@ const router = createBrowserRouter([
       {
         path: "field-registration",
         Component: FieldRegistration,
+      },
+      {
+        path: "ActivityRoute",
+        loader: ()=> fetch("http://localhost:3000/activities"),
+        Component: ActivityRoute,
       },
 
       {
