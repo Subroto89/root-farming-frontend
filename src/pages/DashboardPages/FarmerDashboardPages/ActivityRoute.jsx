@@ -3,19 +3,25 @@ import {
   Calendar,
   DollarSign,
   FileText,
+  Plus,
   StickyNote,
   Trash2,
 } from "lucide-react";
 import Swal from "sweetalert2";
-import ActivityCard from "../../../components/ActivityCard";
+import ActivityCard from "../../../components/FarmarDashboardComponents/ActivityCard";
 import { useTheme } from "../../../hooks/useTheme";
+import { useLoaderData } from "react-router";
 
 const ActivityRoute = () => {
   const { theme } = useTheme();
   const themeBackgroundStyle = theme === "dark" ? "bg-dark" : "bg-light";
   const themeForegroundStyle = theme === "dark" ? "fg-dark" : "fg-light";
-  const themeFgOfFgStyle =
-    theme === "dark" ? "fg-of-fg-dark" : "fg-of-fg-light";
+  const themeFgOfFgStyle =    theme === "dark" ? "fg-of-fg-dark" : "fg-of-fg-light";
+
+  const {farmerFields} = useLoaderData()
+  const farmerFieldsData = farmerFields.data
+  console.log(farmerFieldsData);
+  
 
   const handleactivity = (e) => {
     e.preventDefault();
@@ -53,9 +59,11 @@ const ActivityRoute = () => {
 
         <div>
           <button
-            className="p-2 bg-green-600 text-white rounded-lg mr-3"
+            className="p-2 bg-green-600 text-white rounded-lg mr-3 flex items-center gap-1 cursor-pointer"
             onClick={() => document.getElementById("my_modal_3").showModal()}
           >
+            <Plus/>
+
             Add Activity
           </button>
 
@@ -107,8 +115,11 @@ const ActivityRoute = () => {
                       className={`${themeForegroundStyle} w-full p-2.5 rounded-lg  border `}
                     >
                       <option value="">No specific field</option>
-                      <option>Field A</option>
-                      <option>Field B</option>
+                      {
+                        farmerFieldsData.map(fieldData => <option>{fieldData.name}</option>)
+                      }
+                      {/* <option>Field A</option>
+                      <option>Field B</option> */}
                     </select>
                   </div>
                 </div>
@@ -152,29 +163,30 @@ const ActivityRoute = () => {
                   />
                 </div>
 
+                {/* Activity Title */}
+                <div>
+                  <label className=" mb-1 text-sm font-medium flex items-center gap-1">
+                    <FileText size={16} /> Activity Title
+                  </label>
+                  <input
+                    type="text"
+                    name="title"
+                    required
+                    placeholder="Activity Title"
+                    className="w-full p-2.5 rounded-lg  border  "
+                  />
+                </div>
+
                 {/* Description */}
                 <div>
                   <label className=" mb-1 text-sm font-medium flex items-center gap-1">
-                    <FileText size={16} /> Description
+                    <StickyNote size={16} /> Description
                   </label>
                   <textarea
                     placeholder="Describe the activity..."
                     rows={3}
                     required
                     name="description"
-                    className="w-full p-2.5 rounded-lg  border "
-                  ></textarea>
-                </div>
-
-                {/* Notes */}
-                <div>
-                  <label className=" mb-1 text-sm font-medium flex items-center gap-1">
-                    <StickyNote size={16} /> Notes (Optional)
-                  </label>
-                  <textarea
-                    placeholder="Additional notes..."
-                    rows={2}
-                    name="notes"
                     className="w-full p-2.5 rounded-lg  border "
                   ></textarea>
                 </div>

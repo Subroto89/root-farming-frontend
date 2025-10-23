@@ -7,7 +7,7 @@ import DashboardLayout from "../layouts/DashboardLayout";
 import DashboardHome from "../pages/DashboardPages/DashboardHome";
 import FieldRegistration from "../pages/DashboardPages/FarmerDashboardPages/FieldRegistration";
 import MyProfile from "../pages/DashboardPage/ProfilePage/MyProfile";
-import ActivityLoggingScheduling from "../pages/DashboardPage/FarmerDashboardPage/ActivityLoggingScheduling";
+// import ActivityLoggingScheduling from "../pages/DashboardPage/FarmerDashboardPage/ActivityLoggingScheduling";
 import ChatwithAgriSpecialist from "../pages/DashboardPage/FarmerDashboardPage/ChatwithAgriSpecialist";
 import WeatherForecast from "../pages/DashboardPage/FarmerDashboardPage/WeatherForecast";
 import DailyToDoList from "../pages/DashboardPage/FarmerDashboardPage/DailyToDoList";
@@ -44,7 +44,6 @@ import OrderTracking from "../pages/DashboardPages/CustomerDashboardPages/OrderT
 import ChatWithAgriSpecialist from "../pages/DashboardPages/FarmerDashboardPages/GuidanceAndSupport/ChatWithAgriSpecialist";
 import SpecialistChat from "../pages/DashboardPages/AgriSpecialistDashboardPages/Chat/SpecialistChat";
 import ActivityRoute from "../pages/DashboardPages/FarmerDashboardPages/ActivityRoute";
-
 const router = createBrowserRouter([
   // -------------------------------------------
   // Root Layout
@@ -115,6 +114,46 @@ const router = createBrowserRouter([
         path: "specialist's-salary",
         Component: SpecialistsSalary,
       },
+      // {
+      //   path: "manage-sellers",
+      //   Component: ManageSellers,
+      // },
+      // {
+      //   path: "manage-customers",
+      //   Component: ManageCustomers,
+      // },
+      // {
+      //   path: "manage-agri-specialists",
+      //   Component: ManageAgriSpecialists,
+      // },
+      // {
+      //   path: "manage-farmers",
+      //   Component: ManageFarmers,
+      // },
+      // {
+      //   path: "manage-product-type",
+      //   Component: ProductTypeManagement,
+      // },
+      {
+        path: "management-product-category",
+        Component: ProductCategoryManagement,
+      },
+      // {
+      //   path: "manage-product-subCategory",
+      //   Component: ProductSubCategoryManagement,
+      // },
+      // {
+      //   path: "manage-product-variant",
+      //   Component: ProductVariantManagement,
+      // },
+      // {
+      //   path: "govt-news-facilites",
+      //   Component: GovtNewsAndFacilities,
+      // },
+      // {
+      //   path: "blogs-management",
+      //   Component: BlogsManagement,
+      // },
       {
         path: "manage-sellers",
         Component: ManageSellers,
@@ -208,7 +247,17 @@ const router = createBrowserRouter([
       },
       {
         path: "ActivityRoute",
-        loader: ()=> fetch("http://localhost:3000/activities"),
+        loader: async () => {
+          const [activitiesRes, fieldsRes] = await Promise.all([
+            fetch("http://localhost:3000/activities"),
+            fetch("http://localhost:3000/farmerFields"),
+          ]);
+
+          const activities = await activitiesRes.json();
+          const farmerFields = await fieldsRes.json();
+
+          return { activities, farmerFields };
+        },
         Component: ActivityRoute,
       },
 
@@ -216,10 +265,10 @@ const router = createBrowserRouter([
         path: "new-crop",
         Component: StartNewCrop,
       },
-      {
-        path: "activity-scheduling",
-        Component: ActivityLoggingScheduling,
-      },
+      // {
+      //   path: "activity-scheduling",
+      //   Component: ActivityLoggingScheduling,
+      // },
       {
         path: "chat-specialist",
         Component: ChatwithAgriSpecialist,
@@ -268,6 +317,14 @@ const router = createBrowserRouter([
       {
         path: "track-current-orders",
         Component: OrderTracking,
+      },
+      {
+        path: "update-profile/:email",
+        Component: MyProfile,
+      },
+      {
+        path: "*",
+        Component: ErrorPage,
       },
     ],
   },
