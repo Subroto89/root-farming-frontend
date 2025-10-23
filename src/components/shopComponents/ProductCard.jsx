@@ -14,9 +14,75 @@ const ProductCard = ({ product, viewMode }) => {
   const themeBackgroundStyle = theme === 'dark' ? "bg-dark" : "bg-light";
   const themeForegroundStyle = theme === 'dark' ? "fg-dark" : "fg-light";
   const navigate = useNavigate();
-  
+  const { user } = useAuth();
+  const axiosSecure = useAxiosSecure();
+  const queryClient = useQueryClient();
+  const addToCartMutation = useMutation({
+    mutationFn: async (data) => {
+      const res = await axiosSecure.post('/cart/add-to-cart', data);
+      return res.data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(["cart", user?.email]);
+      // toast.success("Added to cart successfully!");  
+    },
+    onError: (error) => {
+      console.error(error);
+      toast.error("Failed to add product to cart!");
+    }
+  });
+  const handleAddToCart = async () => {
+    if (!user) {
+      toast.error("Please log in to add items to your cart.");
+      navigate("/auth");
+      return;
+    }
 
+    // Fetch full user data
+    let userData;
+    try {
+      const res = await axiosSecure.get(`/users/${user.email}`);
+      userData = res.data;
+    } catch (error) {
+      console.error("Failed to fetch user data:", error);
+      toast.error("Unable to fetch user info. Try again later.");
+      return;
+    }
 
+    // Filter shipping address: only include if all fields exist
+    const address = userData?.shippingAddress;
+    const validAddress = address &&
+      address.addressLine1 &&
+      address.city &&
+      address.country &&
+      address.zipCode
+      ? address
+      : null;
+
+    // Filter userPhone: only include if non-empty
+    const validPhone = userData?.userPhone?.trim() ? userData.userPhone : null;
+
+    const cartItem = {
+      productId: product._id,
+      name: product.name,
+      price: product.price,
+      image: product.image,
+      userEmail: user.email,
+      shippingAddress: validAddress,
+      userPhone: validPhone,
+    };
+
+    try {
+      await toast.promise(addToCartMutation.mutateAsync(cartItem), {
+        loading: "Adding item to your cart...",
+        success: `"${product.name}" has been added to your cart!`,
+        error: "Oops! Something went wrong. Please try again.",
+      });
+    } catch (error) {
+      console.error("Failed to add item to cart:", error);
+      toast.error("Unable to add item right now. Please try again later.");
+    }
+  };
   return (
     <div
       className={`${themeForegroundStyle} rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden 
