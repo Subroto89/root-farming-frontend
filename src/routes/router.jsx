@@ -45,6 +45,7 @@ import MyWishlist from '../pages/DashboardPages/CustomerDashboardPages/MyWishlis
 import OrderTracking from '../pages/DashboardPages/CustomerDashboardPages/OrderTracking';
 import ChatWithAgriSpecialist from '../pages/DashboardPages/FarmerDashboardPages/GuidanceAndSupport/ChatWithAgriSpecialist';
 import SpecialistChat from '../pages/DashboardPages/AgriSpecialistDashboardPages/Chat/SpecialistChat';
+import { ProductModeration } from "../pages/DashboardPages/AdminDashboardPages/ProductModeration/ProductModeration";
 
 const router = createBrowserRouter([
   // -------------------------------------------
@@ -165,45 +166,10 @@ const router = createBrowserRouter([
         Component: BlogsManagement,
       },
       {
-        path: 'manage-sellers',
-        Component: ManageSellers,
+        path: 'product-moderation',
+        Component: ProductModeration
       },
-      {
-        path: 'manage-customers',
-        Component: ManageCustomers,
-      },
-      {
-        path: 'manage-agri-specialists',
-        Component: ManageAgriSpecialists,
-      },
-      {
-        path: 'manage-farmers',
-        Component: ManageFarmers,
-      },
-      {
-        path: 'manage-product-type',
-        Component: ProductTypeManagement,
-      },
-      {
-        path: 'management-product-category',
-        Component: ProductCategoryManagement,
-      },
-      {
-        path: 'manage-product-subCategory',
-        Component: ProductSubCategoryManagement,
-      },
-      {
-        path: 'manage-product-variant',
-        Component: ProductVariantManagement,
-      },
-      {
-        path: 'govt-news-facilites',
-        Component: GovtNewsAndFacilities,
-      },
-      {
-        path: 'blogs-management',
-        Component: BlogsManagement,
-      },
+     
       {
         path: '*',
         Component: ErrorPage,
@@ -249,10 +215,6 @@ const router = createBrowserRouter([
       },
 
       // Seller Dashboard Routes
-      {
-        path: 'add-new-item',
-        Component: AddNewProduct,
-      },
       {
         path: 'add-new-item',
         Component: AddNewProduct,

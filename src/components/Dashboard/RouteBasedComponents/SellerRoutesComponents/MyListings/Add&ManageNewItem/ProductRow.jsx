@@ -5,37 +5,37 @@
 
   export const ProductRow = ({ product }) => {
     const axiosSecure = useAxiosSecure();
-    const { subCategoryId, quality, createdAt, accountStatus, isApproved } =
+    const { variantId, quality, createdAt, accountStatus, isApproved } =
       product;
 
     // Fetch for Sub-Category/ Product Name --------------------------------------
     const {
-      data: subCategoryData = [],
-      isLoading: subCategoryLoading,
+      data: variantData = [],
+      isLoading: variantLoading,
       refetch,
     } = useQuery({
-      queryKey: ["subCat", subCategoryId],
+      queryKey: ["variant", variantId],
       queryFn: async () => {
         const { data } = await axiosSecure(
-          `/subCategories/get-subCategory/${subCategoryId}`
+          `/variants/get-variant/${variantId}`
         );
         return data;
       },
-      enabled: !!subCategoryId,
+      enabled: !!variantId,
     });
-    if (subCategoryLoading) return <LoadingSpinner />;
+    if (variantLoading) return <LoadingSpinner />;
 
     return (
       
         <tr className="border-b border-gray-500">
           <td className="py-2 w-12 h-12 overflow-hidden">
             <img
-              src={subCategoryData.subCategoryPhoto}
-              alt="sub-Category photo"
+              src={variantData.variantPhoto}
+              alt="Variant photo"
               className="w-8 h-8 object-cover mx-auto"
             />
           </td>
-          <td className="py-2 px-8">{subCategoryData.subCategoryName}</td>
+          <td className="py-2 px-8">{variantData.variantName}</td>
           <td className="py-2 px-8">{quality}</td>
           <td className="py-2 px-8">{new Date(createdAt).toLocaleDateString()}</td>
           <td className="py-2 px-8">{accountStatus}</td>

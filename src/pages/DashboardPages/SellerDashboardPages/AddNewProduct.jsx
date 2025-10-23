@@ -67,7 +67,7 @@ const AddNewProduct = () => {
                     className={`${themeFgOfFgStyle} h-4 bg-gray-200 uppercase text-sm font-semibold sticky top-0 shadow-xl `}
                   >
                     <tr className="text-left">
-                      <th className="py-2 px-20">Photo</th>
+                      <th className="py-2 px-8">Photo</th>
                       <th className="py-2 px-8">Product Name</th>
                       <th className="py-2 px-8">Quality</th>
                       <th className="py-2 px-8">Created on</th>
