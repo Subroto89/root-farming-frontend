@@ -5,15 +5,22 @@ const Specialist = ({
    specialist,
    selectedSpecialist,
    setSelectedSpecialist,
+   theme,
 }) => {
    return (
       <div>
          <motion.div
-            whileHover={{ backgroundColor: "#f8fafc" }}
+            whileHover={{
+               backgroundColor: theme === "dark" ? "#374151" : "#f8fafc",
+            }}
             onClick={() => setSelectedSpecialist(specialist)}
-            className={`p-4 border-b border-gray-100 cursor-pointer transition-colors ${
+            className={`p-4 border-b cursor-pointer transition-colors ${
+               theme === "dark" ? "border-gray-600" : "border-gray-100"
+            } ${
                selectedSpecialist?.firebaseUid === specialist.firebaseUid
-                  ? "bg-green-50 border-l-4 border-l-green-500"
+                  ? theme === "dark"
+                     ? "bg-green-900 border-l-4 border-l-green-400"
+                     : "bg-green-50 border-l-4 border-l-green-500"
                   : ""
             }`}
          >
@@ -35,21 +42,45 @@ const Specialist = ({
                   />
                </div>
                <div className="flex-1 min-w-0">
-                  <h4 className="font-semibold text-gray-800 truncate">
+                  <h4
+                     className={`font-semibold truncate ${
+                        theme === "dark" ? "text-gray-100" : "text-gray-800"
+                     }`}
+                  >
                      {specialist.userName}
                   </h4>
-                  <p className="text-sm text-blue-600 truncate">
+                  <p
+                     className={`text-sm truncate ${
+                        theme === "dark" ? "text-blue-400" : "text-blue-600"
+                     }`}
+                  >
                      {specialist.specialty}
                   </p>
                   <div className="flex items-center gap-2 mt-1">
-                     <span className="text-xs text-gray-500">
+                     <span
+                        className={`text-xs ${
+                           theme === "dark" ? "fg-dark" : "text-gray-500"
+                        }`}
+                     >
                         {specialist.experience ?? ""}
                      </span>
                   </div>
                   {specialist.status === "online" ? (
-                     <span className="text-xs text-green-600">Online now</span>
+                     <span
+                        className={`text-xs ${
+                           theme === "dark"
+                              ? "text-green-400"
+                              : "text-green-600"
+                        }`}
+                     >
+                        Online now
+                     </span>
                   ) : (
-                     <span className="text-xs text-gray-500">
+                     <span
+                        className={`text-xs ${
+                           theme === "dark" ? "text-gray-300" : "text-gray-500"
+                        }`}
+                     >
                         Last seen{" "}
                         {specialist.lastSeen
                            ? new Date(specialist.lastSeen).toLocaleString()
