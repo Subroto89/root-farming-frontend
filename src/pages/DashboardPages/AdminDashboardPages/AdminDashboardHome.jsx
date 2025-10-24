@@ -80,7 +80,7 @@ export default function AdminDashboardHome() {
         <div className="grid lg:grid-cols-2 gap-8">
           <div className={`${themeFgOfFgStyle} p-6 rounded-2xl shadow`}>
             <h2 className="text-lg font-semibold mb-4">User Composition</h2>
-            <ResponsiveContainer width="100%" height={300}>
+            <ResponsiveContainer width="100%" height={250}>
               <PieChart>
                 <Pie data={userDistributionData} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={100} label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}>
                   {userDistributionData.map((entry, index) => (<Cell key={index} fill={entry.color} />))}
@@ -93,7 +93,7 @@ export default function AdminDashboardHome() {
 
           <div className={`${themeForegroundStyle} p-6 rounded-2xl shadow`}>
             <h2 className="text-lg font-semibold mb-4">Sales by Crop (Units Sold)</h2>
-            <ResponsiveContainer width="100%" height={300}>
+            <ResponsiveContainer width="100%" height={250}>
               <BarChart data={salesData} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey="crop" />

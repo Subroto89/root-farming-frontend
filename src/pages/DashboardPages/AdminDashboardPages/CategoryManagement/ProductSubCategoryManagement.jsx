@@ -18,6 +18,13 @@ import Form_UpdateSubCategory from "../../../../components/Dashboard/RouteBasedC
 const ProductSubCategoryManagement = () => {
   TabTitle("Category Management");
   const { theme } = useTheme();
+
+ const themeBackgroundStyle = theme === 'dark' ? "bg-dark" : "bg-light";
+    const themeForegroundStyle = theme === 'dark' ? "fg-dark" : "fg-light";
+    const themeFgOfFgStyle = theme === 'dark' ? "fg-of-fg-dark" : "fg-of-fg-light"
+
+
+
   const axiosSecure = useAxiosSecure();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -73,7 +80,7 @@ const ProductSubCategoryManagement = () => {
   if (subCategoryLoading) return <LoadingSpinner />;
 
   return (
-    <>
+    <div className={`${themeBackgroundStyle} min-h-screen`}>
       <Container>
         {/* Header Section with Button -------------------------------------  */}
         <div className="flex justify-between items-center">
@@ -111,17 +118,15 @@ const ProductSubCategoryManagement = () => {
         {/* ------------------------------------------------------------------------- 
           Sub-Categories In Table Section 
         ---------------------------------------------------------------------------*/}
-        <div>
+        <div className={`${themeForegroundStyle }`}>
           {subCategories.length > 0 ? (
-            <div className="w-full max-h-[calc(100vh-150px)] overflow-auto rounded-lg mt-10 shadow-lg">
-              <table className={`w-full divider-y divider-gray-500`}>
+            <div className="w-full min-h-[calc(100vh-120px)] overflow-hidden rounded-lg mt-10 shadow-lg">
+              <table className={`w-full divider-y divider-gray-500 rounded-lg`}>
                 <thead
-                  className={`h-4 bg-gray-200 uppercase text-sm font-semibold sticky top-0 ${
-                    theme === "dark" ? "category-card" : ""
-                  }`}
+                  className={`${themeFgOfFgStyle} shadow-lg h-4 bg-gray-200 uppercase text-sm font-semibold sticky top-0 `}
                 >
                   <tr className="text-left">
-                    <th className="py-2 px-20">Photo</th>
+                    <th className="py-2 px-8">Photo</th>
                     <th className="py-2 px-8">Sub-Category Name</th>
                     <th className="py-2 px-8">Total Products</th>
                     <th className="py-2 px-8">Created On</th>
@@ -179,7 +184,7 @@ const ProductSubCategoryManagement = () => {
           )}
         </div>
       </Container>
-    </>
+    </div>
   );
 };
 
