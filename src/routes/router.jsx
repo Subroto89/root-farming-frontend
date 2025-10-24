@@ -247,17 +247,6 @@ const router = createBrowserRouter([
       },
       {
         path: "ActivityRoute",
-        loader: async () => {
-          const [activitiesRes, fieldsRes] = await Promise.all([
-            fetch("http://localhost:3000/activities"),
-            fetch("http://localhost:3000/farmerFields"),
-          ]);
-
-          const activities = await activitiesRes.json();
-          const farmerFields = await fieldsRes.json();
-
-          return { activities, farmerFields };
-        },
         Component: ActivityRoute,
       },
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Calendar,
   DollarSign,
@@ -11,17 +11,28 @@ import Swal from "sweetalert2";
 import ActivityCard from "../../../components/FarmarDashboardComponents/ActivityCard";
 import { useTheme } from "../../../hooks/useTheme";
 import { useLoaderData } from "react-router";
+import useAxiosSecure from "../../../hooks/UseAxiosSecure";
+import { set } from "date-fns";
 
 const ActivityRoute = () => {
   const { theme } = useTheme();
   const themeBackgroundStyle = theme === "dark" ? "bg-dark" : "bg-light";
   const themeForegroundStyle = theme === "dark" ? "fg-dark" : "fg-light";
-  const themeFgOfFgStyle =    theme === "dark" ? "fg-of-fg-dark" : "fg-of-fg-light";
+  const themeFgOfFgStyle =
+    theme === "dark" ? "fg-of-fg-dark" : "fg-of-fg-light";
 
-  const {farmerFields} = useLoaderData()
-  const farmerFieldsData = farmerFields.data
-  console.log(farmerFieldsData);
-  
+  const axiosSecure = useAxiosSecure();
+  const [reload, setReload] = useState(false);
+  const [farmerFields, setFarmerFields] = useState([]);
+  const fetchData = async () => {
+    const {
+      data: { data },
+    } = await axiosSecure("http://localhost:3000/farmerFields");
+    setFarmerFields(data);
+  };
+  useEffect(() => {
+    fetchData();
+  }, [reload]);
 
   const handleactivity = (e) => {
     e.preventDefault();
@@ -39,20 +50,21 @@ const ActivityRoute = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.insertedId) {
+          fetchData()
+          setReload(!reload)
           document.getElementById("my_modal_3").close();
           Swal.fire({
             title: "New Activities Added",
             icon: "success",
             draggable: true,
           });
-        
         }
       });
     form.reset();
   };
 
   return (
-    <div className={`${themeBackgroundStyle} h-screen text-black p-2`}>
+    <div className={`${themeBackgroundStyle} min-h-screen text-black p-6`}>
       <div className="flex items-center justify-between">
         <h3 className="text-2xl">Activity Login</h3>
 
@@ -61,8 +73,7 @@ const ActivityRoute = () => {
             className="p-2 bg-green-600 text-white rounded-lg mr-3 flex items-center gap-1 cursor-pointer"
             onClick={() => document.getElementById("my_modal_3").showModal()}
           >
-            <Plus/>
-
+            <Plus />
             Add Activity
           </button>
 
@@ -113,9 +124,9 @@ const ActivityRoute = () => {
                       className={`${themeForegroundStyle} w-full p-2.5 rounded-lg  border `}
                     >
                       <option value="">No specific field</option>
-                      {
-                        farmerFieldsData.map(fieldData => <option>{fieldData.name}</option>)
-                      }
+                      {farmerFields.map((fieldData) => (
+                        <option key={fieldData._id}>{fieldData.name}</option>
+                      ))}
                     </select>
                   </div>
                 </div>
@@ -199,7 +210,7 @@ const ActivityRoute = () => {
 
       {/* ----- card ------ */}
 
-      <ActivityCard ></ActivityCard>
+      <ActivityCard></ActivityCard>
     </div>
   );
 };
