@@ -47,6 +47,7 @@ import SpecialistChat from '../pages/DashboardPages/AgriSpecialistDashboardPages
 import ProductModeration  from "../pages/DashboardPages/AdminDashboardPages/ProductModeration/ProductModeration";
 import ActivityRoute from "../pages/DashboardPages/FarmerDashboardPages/ActivityRoute";
 import WeatherForecast from '../pages/DashboardPages/FarmerDashboardPages/WeatherForecast';
+import CartPage from '../pages/DashboardPages/CustomerDashboardPages/CartPage';
 
 const router = createBrowserRouter([
   // -------------------------------------------
@@ -79,7 +80,7 @@ const router = createBrowserRouter([
       },
       {
         path: 'cart',
-        Component: Cart,
+        Component: CartPage,
       },
       {
         path: 'blog',
