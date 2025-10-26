@@ -2,7 +2,9 @@ import React from "react";
 import NavButton from "../../../shared/Buttons/NavButton";
 import { BluetoothSearching, DollarSign, House, MessageCircleMore, Milestone, Rss, Users } from "lucide-react";
 
+
 const AgriSpecialistMenu = () => {
+   
    return (
       <>
          <NavButton
@@ -12,15 +14,15 @@ const AgriSpecialistMenu = () => {
          />
 
          <NavButton
-            label="Crops Wise Instruction"
-            address="/dashboard/crops-wise-instruction"
+            label="Crop Wise Instruction"
+            address="/dashboard/crop-wise-instruction"
             icon={Milestone}
          />
                 
 
          <NavButton
             label="Blogs Management"
-            address="my-blogs"
+            address="/dashboard/blogs-management-byAS"
             icon={Rss}
          />
 
