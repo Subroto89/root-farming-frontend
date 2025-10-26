@@ -22,44 +22,47 @@ const ActivityRoute = () => {
     theme === "dark" ? "fg-of-fg-dark" : "fg-of-fg-light";
 
   const axiosSecure = useAxiosSecure();
-  const [reload, setReload] = useState(false);
   const [farmerFields, setFarmerFields] = useState([]);
-  const fetchData = async () => {
+  const [activities, setActivites] = useState([]);
+
+  const fetchFarmerFields = async () => {
     const {
       data: { data },
     } = await axiosSecure("http://localhost:3000/farmerFields");
     setFarmerFields(data);
   };
-  useEffect(() => {
-    fetchData();
-  }, [reload]);
 
-  const handleactivity = (e) => {
+  const fetchActivities = async () => {
+    const { data } = await axiosSecure("http://localhost:3000/activities");
+    setActivites(data);
+  };
+
+  useEffect(() => {
+    fetchActivities();
+    fetchFarmerFields();
+  }, [activities]);
+
+  const handleactivity = async (e) => {
     e.preventDefault();
     const form = e.target;
     const formData = new FormData(form);
     const activityData = Object.fromEntries(formData.entries());
 
-    fetch("http://localhost:3000/activities", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(activityData),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.insertedId) {
-          fetchData()
-          setReload(!reload)
-          document.getElementById("my_modal_3").close();
-          Swal.fire({
-            title: "New Activities Added",
-            icon: "success",
-            draggable: true,
-          });
-        }
+  const data = await axiosSecure.post(
+      "http://localhost:3000/activities",
+      activityData
+    );
+
+    if (data?.data?.insertedId) { 
+      fetchActivities();
+      document.getElementById("my_modal_3").close();
+      Swal.fire({
+        title: "New Activities Added",
+        icon: "success",
+        draggable: true,
       });
+    }
+
     form.reset();
   };
 
@@ -210,7 +213,7 @@ const ActivityRoute = () => {
 
       {/* ----- card ------ */}
 
-      <ActivityCard></ActivityCard>
+      <ActivityCard fetchData={activities}></ActivityCard>
     </div>
   );
 };

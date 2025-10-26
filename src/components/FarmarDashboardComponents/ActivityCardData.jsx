@@ -88,7 +88,9 @@ const ActivityCardData = ({ data }) => {
         {/* Status Button */}
         <button
           onClick={handleToggleStatus}
-          title="Click If Completed"
+
+          title={status === "pending" ? "Click If Completed" : "Already Completed"}
+
           className={`flex items-center gap-1 px-2 py-1 text-xs rounded-md font-medium transition
             ${
               status === "pending"
