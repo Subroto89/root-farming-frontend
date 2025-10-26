@@ -45,51 +45,53 @@ import SpecialistChat from "../pages/DashboardPages/AgriSpecialistDashboardPages
 import FarmerProfiles from "../pages/DashboardPages/AgriSpecialistDashboardPages/FarmerProfiles";
 import ProductModeration from "../pages/DashboardPages/AdminDashboardPages/ProductModeration/ProductModeration";
 import ActivityRoute from "../pages/DashboardPages/FarmerDashboardPages/ActivityRoute";
-import WeatherForecast from "../pages/DashboardPages/FarmerDashboardPages/WeatherForecast";
+import WeatherForecast from '../pages/DashboardPages/FarmerDashboardPages/WeatherForecast';
+import CartPage from '../pages/DashboardPages/CustomerDashboardPages/CartPage';
 
 const router = createBrowserRouter([
-   // -------------------------------------------
-   // Root Layout
-   // -------------------------------------------
-   {
-      path: "/",
-      Component: RootLayout,
-      children: [
-         {
-            path: "/",
-            index: true,
-            Component: Home,
-         },
-         {
-            path: "about",
-            Component: AboutUs,
-         },
-         {
-            path: "contact",
-            Component: ContactUs,
-         },
-         {
-            path: "shop",
-            Component: Shop,
-         },
-         {
-            path: "shop/:id",
-            Component: ProductDetails,
-         },
-         {
-            path: "cart",
-            Component: Cart,
-         },
-         {
-            path: "blog",
-            Component: Blog,
-         },
-         {
-            path: "update-profile/:email",
-            Component: MyProfile,
-         },
-      ],
-   },
+  // -------------------------------------------
+  // Root Layout
+  // -------------------------------------------
+  {
+    path: '/',
+    Component: RootLayout,
+    children: [
+      {
+        path: '/',
+        index: true,
+        Component: Home,
+      },
+      {
+        path: 'about',
+        Component: AboutUs,
+      },
+      {
+        path: 'contact',
+        Component: ContactUs,
+      },
+      {
+        path: 'shop',
+        Component: Shop,
+      },
+      {
+        path: 'shop/:id',
+        Component: ProductDetails,
+      },
+      {
+        path: 'cart',
+        Component: CartPage,
+      },
+      {
+        path: 'blog',
+        Component: Blog,
+      },
+      {
+        path: 'update-profile/:email',
+        Component: MyProfile,
+      },
+
+    ],
+  },
 
    {
       path: "/dashboard",

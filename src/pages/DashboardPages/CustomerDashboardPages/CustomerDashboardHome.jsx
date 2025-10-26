@@ -52,7 +52,7 @@ const CustomerDashboardHome = () => {
         <div className= {`${themeBackgroundStyle} px-6  space-y-6 pt-4`}>
 
             {/* Header Section */}
-            <div className={`${themeBackgroundStyle} flex flex-col sm:flex-row sm:items-center sm:justify-betwee`}>
+            <div className={`${themeBackgroundStyle} flex flex-col sm:flex-row sm:items-center sm:justify-between`}>
                 <h2 className="text-2xl font-semibold">
                     Welcome: <span className="text-2xl font-semibold">{user?.displayName}</span>
                 </h2>
