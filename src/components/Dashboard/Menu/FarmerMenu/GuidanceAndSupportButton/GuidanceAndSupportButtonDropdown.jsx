@@ -9,8 +9,8 @@ const GuidanceAndSupportButtonDropdown = () => {
       <>
          <div className={`${themeForegroundStyle} pl-6 flex flex-col items-start px-1 rounded-lg bg-green-200`}>
             <NavButton
-               label="Weather Alerts"
-               address="/dashboard/weather-alerts"
+               label="Weather Forecast"
+               address="/dashboard/weather-forecast"
                textSize="xs"
             />
 

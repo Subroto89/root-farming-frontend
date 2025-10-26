@@ -9,9 +9,16 @@ import DataNotFound from "../../../../components/shared/DataNotFound";
 // import { User } from "lucide-react";
 import UsersTable from "../../../../components/Dashboard/RouteBasedComponents/AdminRoutesComponents/UserManagement/UsersTable";
 import Container from "../../../../components/shared/Container";
+import { useTheme } from "../../../../hooks/useTheme";
 
 const ManageFarmers = () => {
   TabTitle("Manage Farmers");
+
+
+  const {theme} = useTheme();
+ const themeBackgroundStyle = theme === 'dark' ? "bg-dark" : "bg-light";
+    const themeForegroundStyle = theme === 'dark' ? "fg-dark" : "fg-light";
+    const themeFgOfFgStyle = theme === 'dark' ? "fg-of-fg-dark" : "fg-of-fg-light"
   const axiosSecure = useAxiosSecure();
   const [isUpdateRoleModal, setIsUpdateRoleModal] = useState(false);
   const [role, setRole] = useState("");
@@ -39,7 +46,7 @@ const ManageFarmers = () => {
   if (isLoading) return <LoadingSpinner />;
 
   return (
-    <>
+    <div className={`${themeBackgroundStyle} min-h-screen`}>
       <Container>
         <div>
           {/* Title Section ----------------------------*/}
@@ -80,7 +87,7 @@ const ManageFarmers = () => {
           </div>
         </div>
       </Container>
-    </>
+    </div>
   );
 };
 

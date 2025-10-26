@@ -10,7 +10,7 @@ import useUserRole from '../../hooks/useUserRole';
 
 const DashboardHome = () => {
   const { user, loading } = useAuth();
-  const {userRole, userRoleLoading} = useUserRole() 
+  const {userRole, userRoleLoading} = useUserRole(); 
 
   if (loading || userRoleLoading) {
     return <LoadingSpinner />;

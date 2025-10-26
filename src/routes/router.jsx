@@ -47,6 +47,8 @@ import SpecialistChat from '../pages/DashboardPages/AgriSpecialistDashboardPages
 import ProductModeration  from "../pages/DashboardPages/AdminDashboardPages/ProductModeration/ProductModeration";
 import ActivityRoute from "../pages/DashboardPages/FarmerDashboardPages/ActivityRoute";
 import WeatherForecast from '../pages/DashboardPages/FarmerDashboardPages/WeatherForecast';
+import SellerDashboardHome from "../pages/DashboardPages/SellerDashboardPages/SellerDashboardHome";
+import FarmerDashboardHome from "../pages/DashboardPages/FarmerDashboardPages/FarmerDashboardHome";
 
 const router = createBrowserRouter([
   // -------------------------------------------
@@ -179,6 +181,10 @@ const router = createBrowserRouter([
       
 
          // Farmer Dashboard Routes
+          {
+        path: 'farmer-dashboard-home',
+        Component: FarmerDashboardHome,
+      },
         
          {
             path: "field-registration",
@@ -225,6 +231,11 @@ const router = createBrowserRouter([
          },
 
          // Seller Dashboard Routes
+        {
+            path: "seller-dashboard-home",
+            Component: SellerDashboardHome,
+         },
+        
          {
             path: "add-new-item",
             Component: AddNewProduct,
