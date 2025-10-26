@@ -113,6 +113,9 @@ const ActivityRoute = () => {
                       <option>Fertilizing</option>
                       <option>Irrigation</option>
                       <option>Harvesting</option>
+                      <option>Pest Control</option>
+                      <option>Weeding</option>
+                      <option>Other</option>
                     </select>
                   </div>
 
@@ -144,7 +147,6 @@ const ActivityRoute = () => {
                       name="activityDate"
                       required
                       className="w-full p-2.5 rounded-lg  border "
-                      defaultValue="2025-10-22"
                     />
                   </div>
                   <div>
