@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import useChatSocket from "../../../../hooks/useChatSocket";
 import { AuthContext } from "../../../../contexts/AuthContext";
+import { useTheme } from "../../../../hooks/useTheme";
 import toast from "react-hot-toast";
 
 const CHAT_SERVER =
@@ -23,6 +24,13 @@ const CHAT_SERVER =
 /* SpecialistChat component (unchanged UI, fixed typing names) */
 const SpecialistChat = () => {
    const { user, getToken } = useContext(AuthContext);
+   const { theme } = useTheme();
+
+   // Theme styles
+   const themeBackgroundStyle = theme === "dark" ? "bg-dark" : "bg-light";
+   const themeForegroundStyle = theme === "dark" ? "fg-dark" : "fg-light";
+   const themeFgOfFgStyle =
+      theme === "dark" ? "fg-of-fg-dark" : "fg-of-fg-light";
    const [conversations, setConversations] = useState([]); // array of conv docs
    const [profiles, setProfiles] = useState({}); // uid -> profile
    const [selectedConv, setSelectedConv] = useState(null); // conversation object
@@ -283,30 +291,71 @@ const SpecialistChat = () => {
       profiles[uid] || { uid, name: uid, avatar: "", location: "" };
 
    return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-green-50">
+      <div className={`min-h-screen ${themeBackgroundStyle}`}>
          <div className="container mx-auto px-4 py-8">
             <motion.div
                initial={{ opacity: 0, y: -20 }}
                animate={{ opacity: 1, y: 0 }}
                className="mb-8"
             >
-               <h1 className="text-4xl font-bold text-gray-800 mb-2 flex items-center gap-3">
-                  <div className="p-2 bg-blue-100 rounded-lg">
-                     <User className="text-blue-600" size={32} />
+               <h1
+                  className={`text-4xl font-bold mb-2 flex items-center gap-3 ${
+                     theme === "dark" ? "text-gray-50" : "text-gray-800"
+                  }`}
+               >
+                  <div
+                     className={`p-2 rounded-lg ${
+                        theme === "dark" ? "bg-blue-900" : "bg-blue-100"
+                     }`}
+                  >
+                     <User
+                        className={`${
+                           theme === "dark" ? "text-blue-300" : "text-blue-600"
+                        }`}
+                        size={32}
+                     />
                   </div>
                   Specialist Dashboard
                </h1>
-               <p className="text-gray-600 text-lg">
+               <p
+                  className={`text-lg ${
+                     theme === "dark" ? "text-gray-100" : "text-gray-600"
+                  }`}
+               >
                   Respond to farmers and manage conversations
                </p>
             </motion.div>
 
-            <div className="bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden h-[700px] flex">
+            <div
+               className={`${themeForegroundStyle} rounded-xl shadow-lg border overflow-hidden h-[700px] flex ${
+                  theme === "dark" ? "border-gray-600" : "border-gray-200"
+               }`}
+            >
                {/* Left: conversations */}
-               <div className="w-1/3 border-r border-gray-200 flex flex-col">
-                  <div className="p-4 border-b border-gray-200 bg-blue-50">
-                     <h3 className="font-bold text-gray-800 text-xl">Chats</h3>
-                     <p className="text-sm text-gray-600">
+               <div
+                  className={`w-1/3 border-r flex flex-col ${
+                     theme === "dark" ? "border-gray-600" : "border-gray-200"
+                  }`}
+               >
+                  <div
+                     className={`p-4 border-b ${
+                        theme === "dark"
+                           ? "bg-blue-900 border-gray-600"
+                           : "bg-blue-50 border-gray-200"
+                     }`}
+                  >
+                     <h3
+                        className={`font-bold text-xl ${
+                           theme === "dark" ? "text-gray-50" : "text-gray-800"
+                        }`}
+                     >
+                        Chats
+                     </h3>
+                     <p
+                        className={`text-sm ${
+                           theme === "dark" ? "text-gray-100" : "text-gray-600"
+                        }`}
+                     >
                         Farmers who contacted you
                      </p>
                   </div>
@@ -318,11 +367,20 @@ const SpecialistChat = () => {
                         return (
                            <motion.div
                               key={String(conv._id)}
-                              whileHover={{ backgroundColor: "#f8fafc" }}
+                              whileHover={{
+                                 backgroundColor:
+                                    theme === "dark" ? "#374151" : "#f8fafc",
+                              }}
                               onClick={() => setSelectedConv(conv)}
-                              className={`p-4 border-b border-gray-100 cursor-pointer transition-colors ${
+                              className={`p-4 border-b cursor-pointer transition-colors ${
+                                 theme === "dark"
+                                    ? "border-gray-600"
+                                    : "border-gray-100"
+                              } ${
                                  selectedConv?._id === conv._id
-                                    ? "bg-blue-50 border-l-4 border-l-blue-500"
+                                    ? theme === "dark"
+                                       ? "bg-blue-900 border-l-4 border-l-blue-400"
+                                       : "bg-blue-50 border-l-4 border-l-blue-500"
                                     : ""
                               }`}
                            >
@@ -339,7 +397,13 @@ const SpecialistChat = () => {
                                  </div>
                                  <div className="flex-1 min-w-0">
                                     <div className="flex items-center justify-between">
-                                       <h4 className="font-semibold text-gray-800 truncate">
+                                       <h4
+                                          className={`font-semibold truncate ${
+                                             theme === "dark"
+                                                ? "text-gray-50"
+                                                : "text-gray-800"
+                                          }`}
+                                       >
                                           {profile.name || otherUid}
                                        </h4>
                                        {conv.unreadCounts &&
@@ -349,10 +413,22 @@ const SpecialistChat = () => {
                                              </span>
                                           )}
                                     </div>
-                                    <p className="text-sm text-green-600 truncate">
+                                    <p
+                                       className={`text-sm truncate ${
+                                          theme === "dark"
+                                             ? "text-green-400"
+                                             : "text-green-600"
+                                       }`}
+                                    >
                                        {profile.location || ""}
                                     </p>
-                                    <p className="text-xs text-gray-400 truncate mt-1">
+                                    <p
+                                       className={`text-xs truncate mt-1 ${
+                                          theme === "dark"
+                                             ? "text-gray-400"
+                                             : "text-gray-400"
+                                       }`}
+                                    >
                                        {conv.lastMessage || ""}
                                     </p>
                                  </div>
@@ -368,7 +444,13 @@ const SpecialistChat = () => {
                   {selectedConv ? (
                      <>
                         {/* Header */}
-                        <div className="p-4 border-b border-gray-200 bg-green-50">
+                        <div
+                           className={`p-4 border-b ${
+                              theme === "dark"
+                                 ? "bg-green-900 border-gray-600"
+                                 : "bg-green-50 border-gray-200"
+                           }`}
+                        >
                            <div className="flex items-center justify-between">
                               <div className="flex items-center gap-3">
                                  <div className="relative">
@@ -386,12 +468,24 @@ const SpecialistChat = () => {
                                     />
                                  </div>
                                  <div>
-                                    <h4 className="font-semibold text-gray-800">
+                                    <h4
+                                       className={`font-semibold ${
+                                          theme === "dark"
+                                             ? "text-gray-50"
+                                             : "text-gray-800"
+                                       }`}
+                                    >
                                        {getProfile(
                                           getOtherParticipantUid(selectedConv)
                                        ).name || "Farmer"}
                                     </h4>
-                                    <p className="text-sm text-green-600">
+                                    <p
+                                       className={`text-sm ${
+                                          theme === "dark"
+                                             ? "text-green-400"
+                                             : "text-green-600"
+                                       }`}
+                                    >
                                        {getProfile(
                                           getOtherParticipantUid(selectedConv)
                                        ).location || ""}
@@ -402,7 +496,11 @@ const SpecialistChat = () => {
                                  <motion.button
                                     whileHover={{ scale: 1.05 }}
                                     whileTap={{ scale: 0.95 }}
-                                    className="p-2 text-gray-600 hover:text-gray-800 hover:bg-gray-50 rounded-lg transition-colors"
+                                    className={`p-2 rounded-lg transition-colors ${
+                                       theme === "dark"
+                                          ? "text-gray-400 hover:text-gray-200 hover:bg-gray-700"
+                                          : "text-gray-600 hover:text-gray-800 hover:bg-gray-50"
+                                    }`}
                                  >
                                     <MoreVertical size={20} />
                                  </motion.button>
@@ -427,7 +525,11 @@ const SpecialistChat = () => {
                                     <div
                                        className={`max-w-xs lg:max-w-md px-4 py-2 rounded-lg ${
                                           message.senderUid === user.uid
-                                             ? "bg-blue-500 text-white"
+                                             ? theme === "dark"
+                                                ? "bg-blue-600 text-white"
+                                                : "bg-blue-500 text-white"
+                                             : theme === "dark"
+                                             ? "bg-gray-700 text-gray-200"
                                              : "bg-gray-100 text-gray-800"
                                        }`}
                                     >
@@ -442,7 +544,11 @@ const SpecialistChat = () => {
                                           <span
                                              className={`text-xs ${
                                                 message.senderUid === user.uid
-                                                   ? "text-blue-100"
+                                                   ? theme === "dark"
+                                                      ? "text-blue-200"
+                                                      : "text-blue-100"
+                                                   : theme === "dark"
+                                                   ? "text-gray-400"
                                                    : "text-gray-500"
                                              }`}
                                           >
@@ -456,7 +562,11 @@ const SpecialistChat = () => {
                                           {message.senderUid === user.uid && (
                                              <CheckCheck
                                                 size={12}
-                                                className="text-blue-100"
+                                                className={
+                                                   theme === "dark"
+                                                      ? "text-blue-200"
+                                                      : "text-blue-100"
+                                                }
                                              />
                                           )}
                                        </div>
@@ -471,20 +581,46 @@ const SpecialistChat = () => {
                                  animate={{ opacity: 1, y: 0 }}
                                  className="flex justify-start"
                               >
-                                 <div className="bg-gray-100 px-4 py-2 rounded-lg">
+                                 <div
+                                    className={`px-4 py-2 rounded-lg ${
+                                       theme === "dark"
+                                          ? "bg-gray-700"
+                                          : "bg-gray-100"
+                                    }`}
+                                 >
                                     <div className="flex items-center gap-1">
                                        <div className="flex gap-1">
-                                          <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" />
                                           <div
-                                             className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
+                                             className={`w-2 h-2 rounded-full animate-bounce ${
+                                                theme === "dark"
+                                                   ? "bg-gray-400"
+                                                   : "bg-gray-400"
+                                             }`}
+                                          />
+                                          <div
+                                             className={`w-2 h-2 rounded-full animate-bounce ${
+                                                theme === "dark"
+                                                   ? "bg-gray-400"
+                                                   : "bg-gray-400"
+                                             }`}
                                              style={{ animationDelay: "0.1s" }}
                                           />
                                           <div
-                                             className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
+                                             className={`w-2 h-2 rounded-full animate-bounce ${
+                                                theme === "dark"
+                                                   ? "bg-gray-400"
+                                                   : "bg-gray-400"
+                                             }`}
                                              style={{ animationDelay: "0.2s" }}
                                           />
                                        </div>
-                                       <span className="text-xs text-gray-500 ml-2">
+                                       <span
+                                          className={`text-xs ml-2 ${
+                                             theme === "dark"
+                                                ? "text-gray-400"
+                                                : "text-gray-500"
+                                          }`}
+                                       >
                                           typing...
                                        </span>
                                     </div>
@@ -496,7 +632,13 @@ const SpecialistChat = () => {
                         </div>
 
                         {/* input */}
-                        <div className="p-4 border-t border-gray-200 bg-gray-50">
+                        <div
+                           className={`p-4 border-t ${
+                              theme === "dark"
+                                 ? "bg-gray-800 border-gray-600"
+                                 : "bg-gray-50 border-gray-200"
+                           }`}
+                        >
                            <div className="flex items-center gap-3">
                               <input
                                  aria-label="Type your reply"
@@ -509,14 +651,22 @@ const SpecialistChat = () => {
                                     e.key === "Enter" && handleSendMessage()
                                  }
                                  placeholder="Write a reply..."
-                                 className="flex-1 px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-700"
+                                 className={`flex-1 px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
+                                    theme === "dark"
+                                       ? "bg-gray-700 border-gray-600 text-gray-200 placeholder-gray-400"
+                                       : "bg-white border-gray-200 text-gray-700 placeholder-gray-500"
+                                 }`}
                               />
                               <motion.button
                                  whileHover={{ scale: 1.05 }}
                                  whileTap={{ scale: 0.95 }}
                                  onClick={handleSendMessage}
                                  disabled={!newMessage.trim()}
-                                 className="px-6 py-3 bg-blue-500 hover:bg-blue-600  rounded-lg font-semibold disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center gap-2"
+                                 className={`px-6 py-3 rounded-lg font-semibold disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center gap-2 ${
+                                    theme === "dark"
+                                       ? "bg-blue-600 hover:bg-blue-700 text-white"
+                                       : "bg-blue-500 hover:bg-blue-600 text-white"
+                                 }`}
                               >
                                  <Send size={18} /> Send
                               </motion.button>
@@ -526,13 +676,28 @@ const SpecialistChat = () => {
                   ) : (
                      <div className="flex-1 flex items-center justify-center">
                         <div className="text-center">
-                           <div className="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                              <User size={40} className="text-gray-400" />
+                           <div
+                              className={`w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-4 ${
+                                 theme === "dark"
+                                    ? "bg-gray-700"
+                                    : "bg-gray-100"
+                              }`}
+                           >
+                              <User
+                                 size={40}
+                                 className={
+                                    theme === "dark"
+                                       ? "text-gray-400"
+                                       : "text-gray-400"
+                                 }
+                              />
                            </div>
-                           <h3 className="text-xl font-semibold text-gray-800 mb-2">
+                           <h3
+                              className={`text-xl font-semibold mb-2 ${themeForegroundStyle}`}
+                           >
                               Select a Conversation
                            </h3>
-                           <p className="text-gray-600">
+                           <p className={themeForegroundStyle}>
                               Choose a farmer from the left to read and reply
                            </p>
                         </div>

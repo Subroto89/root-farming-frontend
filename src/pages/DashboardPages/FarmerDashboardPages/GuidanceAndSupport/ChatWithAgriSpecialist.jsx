@@ -15,6 +15,7 @@ import {
    MoveVertical as MoreVertical,
 } from "lucide-react";
 import { AuthContext } from "../../../../contexts/AuthContext";
+import { useTheme } from "../../../../hooks/useTheme";
 import useChatSocket from "../../../../hooks/useChatSocket";
 import Specialist from "../../../../components/Dashboard/RouteBasedComponents/FarmerRoutesComponents/ChatWithAgriSpecialist/Specialist";
 import toast from "react-hot-toast";
@@ -26,14 +27,18 @@ const PAGE_LIMIT = 50; // use same limit consistently
 
 // ---------- lightweight MessageItem (memoized) ----------
 const MessageItem = React.memo(
-   function MessageItem({ message, currentUid }) {
+   function MessageItem({ message, currentUid, theme }) {
       const isMine = String(message.senderUid) === String(currentUid);
       return (
          <div className={`flex ${isMine ? "justify-end" : "justify-start"}`}>
             <div
                className={`max-w-xs lg:max-w-md px-4 py-2 rounded-lg ${
                   isMine
-                     ? "bg-green-500 text-white"
+                     ? theme === "dark"
+                        ? "bg-green-600 text-white"
+                        : "bg-green-500 text-white"
+                     : theme === "dark"
+                     ? "bg-gray-700 text-gray-200"
                      : "bg-gray-100 text-gray-800"
                }`}
             >
@@ -45,7 +50,13 @@ const MessageItem = React.memo(
                >
                   <span
                      className={`text-xs ${
-                        isMine ? "text-green-100" : "text-gray-500"
+                        isMine
+                           ? theme === "dark"
+                              ? "text-green-200"
+                              : "text-green-100"
+                           : theme === "dark"
+                           ? "text-gray-400"
+                           : "text-gray-500"
                      }`}
                   >
                      {new Date(message.createdAt).toLocaleTimeString([], {
@@ -54,7 +65,14 @@ const MessageItem = React.memo(
                      })}
                   </span>
                   {isMine && (
-                     <CheckCheck size={12} className="text-green-100" />
+                     <CheckCheck
+                        size={12}
+                        className={
+                           theme === "dark"
+                              ? "text-green-200"
+                              : "text-green-100"
+                        }
+                     />
                   )}
                </div>
             </div>
@@ -66,28 +84,129 @@ const MessageItem = React.memo(
       return (
          prev.message._id === next.message._id &&
          prev.message.tempId === next.message.tempId &&
-         prev.message.text === next.message.text
+         prev.message.text === next.message.text &&
+         prev.theme === next.theme
       );
    }
 );
 
 // ---------- MessageList (memoized) ----------
-const MessageList = React.memo(function MessageList({ messages, currentUid }) {
+const MessageList = React.memo(function MessageList({
+   messages,
+   currentUid,
+   theme,
+}) {
    return (
       <>
          {messages.map((m) => (
-            <motion.div
+            <MessageItem
                key={m._id || m.tempId}
-               initial={{ opacity: 0, y: 6 }}
-               animate={{ opacity: 1, y: 0 }}
-            >
-               <MessageItem message={m} currentUid={currentUid} />
-            </motion.div>
+               message={m}
+               currentUid={currentUid}
+               theme={theme}
+            />
          ))}
       </>
    );
 });
 
+/**
+ * InputBox - child component that keeps its own internal state so rapid typing
+ * doesn't re-render parent. It calls onSend(text) when Enter/click Send, and
+ * emits typing using emitTyping(isTyping). It is memoized.
+ */
+const InputBox = React.memo(function InputBox({
+   connected,
+   canSend,
+   onSend,
+   emitTyping,
+   theme,
+}) {
+   const [value, setValue] = useState("");
+   const typingTimeoutRef = useRef(null);
+   const lastEmitRef = useRef(0);
+   const THROTTLE = 700; // ms
+   const STOP_TYPING_DELAY = 900; // ms
+
+   const handleChange = (v) => {
+      setValue(v);
+
+      if (!connected) return;
+
+      const now = Date.now();
+      if (now - lastEmitRef.current > THROTTLE) {
+         lastEmitRef.current = now;
+         try {
+            emitTyping(true);
+         } catch (e) {
+            // swallow
+         }
+      }
+
+      clearTimeout(typingTimeoutRef.current);
+      typingTimeoutRef.current = setTimeout(() => {
+         emitTyping(false);
+      }, STOP_TYPING_DELAY);
+   };
+
+   const send = () => {
+      const trimmed = value.trim();
+      if (!trimmed || !canSend) return;
+      onSend(trimmed);
+      setValue("");
+      // ensure we tell remote we've stopped typing
+      emitTyping(false);
+   };
+
+   return (
+      <div
+         className={`p-4 border-t ${
+            theme === "dark"
+               ? "border-gray-600 bg-gray-800"
+               : "border-gray-200 bg-gray-50"
+         }`}
+      >
+         <div className="flex items-center gap-3">
+            <input
+               aria-label="Type your message"
+               type="text"
+               value={value}
+               onChange={(e) => handleChange(e.target.value)}
+               onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                     e.preventDefault();
+                     send();
+                  }
+               }}
+               placeholder={
+                  connected ? "Type your message..." : "Connecting..."
+               }
+               disabled={!connected}
+               className={`flex-1 px-4 py-3 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent ${
+                  theme === "dark"
+                     ? "bg-gray-700 border-gray-600 text-gray-200 placeholder-gray-400"
+                     : "bg-white border-gray-200 text-gray-700 placeholder-gray-500"
+               }`}
+            />
+            <motion.button
+               whileHover={{ scale: 1.05 }}
+               whileTap={{ scale: 0.95 }}
+               onClick={send}
+               disabled={!value.trim() || !canSend}
+               className={`px-6 py-3 rounded-lg font-semibold disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center gap-2 ${
+                  theme === "dark"
+                     ? "bg-green-600 hover:bg-green-700 text-white"
+                     : "bg-green-500 hover:bg-green-600 text-white"
+               }`}
+            >
+               <Send size={18} /> Send
+            </motion.button>
+         </div>
+      </div>
+   );
+});
+
+/* -------------------- Main component -------------------- */
 const ChatWithAgriSpecialist = () => {
    const prevSelectedRef = useRef(null);
    const [joinedConversations, setJoinedConversations] = useState({}); // optional tracker
@@ -96,12 +215,11 @@ const ChatWithAgriSpecialist = () => {
    const [specialists, setSpecialists] = useState([]);
 
    const { user, getToken } = useContext(AuthContext);
+   const { theme } = useTheme();
    const [selectedSpecialist, setSelectedSpecialist] = useState(null);
    const [messages, setMessages] = useState({}); // keyed by conversationId OR specialistFirebaseUid
-   const [newMessage, setNewMessage] = useState("");
    const [conversationMap, setConversationMap] = useState({}); // specialistFirebaseUid -> conversationId (if exists)
    const [typingUsers, setTypingUsers] = useState({});
-   const typingTimeoutRef = useRef(null);
 
    // --- scroll refs and paging state for each conversation
    const messagesContainerRef = useRef(null);
@@ -110,12 +228,9 @@ const ChatWithAgriSpecialist = () => {
    const hasMoreRef = useRef({}); // convId -> bool
    const pageRef = useRef({}); // convId -> current page number (1 = newest page we already have)
 
-   // For typing emit throttle (avoid heavy socket traffic)
+   // For typing emit throttle (avoid heavy socket traffic) - parent-level emits used only from InputBox via emitTyping
    const lastTypingEmitRef = useRef(0);
-   const TYPING_EMIT_THROTTLE_MS = 700; // at most 4 emits/second
-
-   // Track previous message count for currently visible conversation to decide auto-scroll
-   const prevCountRef = useRef(0);
+   const TYPING_EMIT_THROTTLE_MS = 700; // ms
 
    // helper: determine user's proximity to bottom
    const isUserAtBottom = useCallback((threshold = 120) => {
@@ -144,8 +259,6 @@ const ChatWithAgriSpecialist = () => {
             return { ...prev, [convKey]: list };
          });
 
-         // If server returned a conversationId for a message and it belongs to the selected specialist,
-         // ensure conversationMap maps that specialist's firebaseUid -> conversationId
          if (msg.conversationId && selectedSpecialist) {
             const specUid = selectedSpecialist.firebaseUid;
             if (msg.senderUid === specUid || msg.recipientUid === specUid) {
@@ -223,7 +336,6 @@ const ChatWithAgriSpecialist = () => {
       handleAck,
       handleTypingRemote,
       (payload) => {
-         // onRead handler (optional): update messages to 'read' if payload applies
          if (!payload?.conversationId || !Array.isArray(payload?.messageIds))
             return;
          setMessages((prev) => {
@@ -243,13 +355,11 @@ const ChatWithAgriSpecialist = () => {
       if (!s) return;
       const onPresence = (p) => handlePresence(p);
       const onJoinOk = ({ conversationId } = {}) => {
-         // mark as joined
          if (!conversationId) return;
          setJoinedConversations((prev) => ({
             ...prev,
             [conversationId]: true,
          }));
-         // If current selected conversation matches, mark isJoined true
          const convForSelected =
             selectedSpecialist &&
             conversationMap[selectedSpecialist.firebaseUid];
@@ -261,10 +371,8 @@ const ChatWithAgriSpecialist = () => {
          }
       };
       const onJoinErr = (payload) => {
-         // show toast on join error for debugging
          const err = payload?.error || "Failed to join conversation";
          toast.error(err);
-         // If conversation belongs to selected, mark not joined
          const convForSelected =
             selectedSpecialist &&
             conversationMap[selectedSpecialist.firebaseUid];
@@ -279,7 +387,6 @@ const ChatWithAgriSpecialist = () => {
       s.on("presence", onPresence);
       s.on("join:ok", onJoinOk);
       s.on("join:error", onJoinErr);
-
       return () => {
          s.off("presence", onPresence);
          s.off("join:ok", onJoinOk);
@@ -329,7 +436,6 @@ const ChatWithAgriSpecialist = () => {
    useEffect(() => {
       if (!selectedSpecialist || !user) return;
 
-      // Leave the previous selected specialist's conversation (if any)
       const prevSpec = prevSelectedRef.current;
       if (prevSpec && prevSpec.firebaseUid && socketRef.current) {
          const prevConvId = conversationMap[prevSpec.firebaseUid];
@@ -375,13 +481,13 @@ const ChatWithAgriSpecialist = () => {
                // fetch messages (page 1)
                const resMsgs = await fetch(
                   `${CHAT_SERVER}/api/chat/conversations/${convId}/messages?limit=${PAGE_LIMIT}`,
-                  { headers: { Authorization: `Bearer ${token}` } }
+                  {
+                     headers: { Authorization: `Bearer ${token}` },
+                  }
                );
                if (resMsgs.ok) {
                   const msgs = await resMsgs.json();
-                  // msgs returned oldest-first (per your backend)
                   setMessages((prev) => ({ ...prev, [convId]: msgs }));
-                  // set page state and hasMore flag
                   pageRef.current[convId] = 1;
                   hasMoreRef.current[convId] = msgs.length === PAGE_LIMIT;
                } else {
@@ -389,13 +495,11 @@ const ChatWithAgriSpecialist = () => {
                   hasMoreRef.current[convId] = false;
                }
 
-               // instruct socket to join
                if (socketRef.current) {
                   socketRef.current.emit("joinConversation", {
                      conversationId: convId,
                   });
 
-                  // set a short-lived local listener for join OK / error
                   const onJoinOk = ({ conversationId }) => {
                      if (conversationId === convId) {
                         setIsJoined(true);
@@ -415,15 +519,12 @@ const ChatWithAgriSpecialist = () => {
                   };
                   socketRef.current.on("join:ok", onJoinOk);
                   socketRef.current.on("join:error", onJoinErr);
-
-                  // cleanup local handlers after short timeout (or when user switches)
                   setTimeout(() => {
                      socketRef.current?.off("join:ok", onJoinOk);
                      socketRef.current?.off("join:error", onJoinErr);
                   }, 5000);
                }
             } else {
-               // no conversation yet — prepare empty list keyed by specialist uid
                setMessages((prev) => ({
                   ...prev,
                   [selectedSpecialist.firebaseUid]:
@@ -556,28 +657,25 @@ const ChatWithAgriSpecialist = () => {
       if (!convKey) return;
       const list = messages[convKey] || [];
       if (!list.length) {
-         // nothing to scroll to
          return;
       }
       const lastMsg = list[list.length - 1];
       const userAtBottom = isUserAtBottom();
 
       if (!messagesContainerRef.current) {
-         // fallback: always scroll
          scrollToBottom();
          return;
       }
 
-      // if last message from me OR user was at bottom -> scroll to bottom
       if (
          (lastMsg && String(lastMsg.senderUid) === String(user?.uid)) ||
          userAtBottom
       ) {
-         // after DOM paint
          requestAnimationFrame(() => {
             scrollToBottom();
          });
       }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
    }, [
       messages,
       selectedSpecialist,
@@ -615,140 +713,115 @@ const ChatWithAgriSpecialist = () => {
             throw err;
          }
       },
-      // dependencies: getToken & user (and CHAT_SERVER constant if not module-level)
       [getToken, user]
    );
 
-   // --- send message (optimistic)
-   const handleSendMessage = useCallback(async () => {
-      if (!newMessage.trim() || !selectedSpecialist || !socketRef.current)
-         return;
-      try {
-         let convId = conversationMap[selectedSpecialist.firebaseUid];
-         if (!convId) {
-            const conv = await ensureConversation(
-               selectedSpecialist.firebaseUid
-            );
-            convId = conv._id;
-            setConversationMap((prev) => ({
-               ...prev,
-               [selectedSpecialist.firebaseUid]: convId,
-            }));
-
-            // join the conversation room
-            socketRef.current.emit("joinConversation", {
-               conversationId: convId,
-            });
-
-            // fetch initial messages if any
-            try {
-               const token = await getToken();
-               const msgsRes = await fetch(
-                  `${CHAT_SERVER}/api/chat/conversations/${convId}/messages?limit=${PAGE_LIMIT}`,
-                  { headers: { Authorization: `Bearer ${token}` } }
+   // --- send message (optimistic) - accepts `text` param from InputBox
+   const handleSendMessage = useCallback(
+      async (text) => {
+         if (!text?.trim() || !selectedSpecialist || !socketRef.current) return;
+         try {
+            let convId = conversationMap[selectedSpecialist.firebaseUid];
+            if (!convId) {
+               const conv = await ensureConversation(
+                  selectedSpecialist.firebaseUid
                );
-               if (msgsRes.ok) {
-                  const msgs = await msgsRes.json();
-                  setMessages((prev) => ({ ...prev, [convId]: msgs }));
-                  pageRef.current[convId] = 1;
-                  hasMoreRef.current[convId] = msgs.length === PAGE_LIMIT;
+               convId = conv._id;
+               setConversationMap((prev) => ({
+                  ...prev,
+                  [selectedSpecialist.firebaseUid]: convId,
+               }));
+
+               // join the conversation room
+               socketRef.current.emit("joinConversation", {
+                  conversationId: convId,
+               });
+
+               // fetch initial messages if any
+               try {
+                  const token = await getToken();
+                  const msgsRes = await fetch(
+                     `${CHAT_SERVER}/api/chat/conversations/${convId}/messages?limit=${PAGE_LIMIT}`,
+                     { headers: { Authorization: `Bearer ${token}` } }
+                  );
+                  if (msgsRes.ok) {
+                     const msgs = await msgsRes.json();
+                     setMessages((prev) => ({ ...prev, [convId]: msgs }));
+                     pageRef.current[convId] = 1;
+                     hasMoreRef.current[convId] = msgs.length === PAGE_LIMIT;
+                  }
+               } catch (e) {
+                  console.warn("Failed fetching messages after conv create", e);
                }
-            } catch (e) {
-               console.warn("Failed fetching messages after conv create", e);
             }
-         }
 
-         const tempId = `temp-${Date.now()}`;
-         const optimisticMsg = {
-            tempId,
-            senderUid: user?.uid,
-            senderRole: "farmer",
-            text: newMessage,
-            createdAt: new Date().toISOString(),
-            status: "sending",
-            conversationId: convId,
-            recipientUid: selectedSpecialist.firebaseUid,
-         };
-
-         setMessages((prev) => {
-            const list = [...(prev[convId] || []), optimisticMsg];
-            return { ...prev, [convId]: list };
-         });
-
-         // ensure we scroll to show the newly sent optimistic message
-         requestAnimationFrame(() => {
-            scrollToBottom();
-         });
-
-         socketRef.current.emit("message", {
-            tempId,
-            conversationId: convId,
-            recipientUid: selectedSpecialist.firebaseUid,
-            text: newMessage.trim(),
-            senderRole: "farmer",
-         });
-
-         setNewMessage("");
-         socketRef.current.emit("typing", {
-            conversationId: convId,
-            recipientUid: selectedSpecialist.firebaseUid,
-            isTyping: false,
-         });
-      } catch (err) {
-         console.error("send message error:", err);
-      }
-   }, [
-      socketRef,
-      selectedSpecialist,
-      conversationMap,
-      newMessage,
-      user,
-      getToken,
-      scrollToBottom,
-      ensureConversation,
-   ]);
-
-   // local typing handler (input -> emit typing)
-   const handleTypingLocal = useCallback(
-      (value) => {
-         // update local input immediately (fast)
-         setNewMessage(value);
-
-         // If there's no socket or no selected conversation/specialist, don't emit
-         if (
-            !socketRef?.current ||
-            !socketRef.current.connected ||
-            !selectedSpecialist
-         ) {
-            return;
-         }
-
-         // throttle typing emits to avoid spamming socket and blocking main thread
-         const now = Date.now();
-         if (now - lastTypingEmitRef.current > TYPING_EMIT_THROTTLE_MS) {
-            lastTypingEmitRef.current = now;
-
-            // quick guard for conversation id
-            const convId = conversationMap[selectedSpecialist.firebaseUid];
-            socketRef.current.emit("typing", {
-               conversationId: convId || undefined,
+            const tempId = `temp-${Date.now()}`;
+            const optimisticMsg = {
+               tempId,
+               senderUid: user?.uid,
+               senderRole: "farmer",
+               text,
+               createdAt: new Date().toISOString(),
+               status: "sending",
+               conversationId: convId,
                recipientUid: selectedSpecialist.firebaseUid,
-               isTyping: true,
-            });
-         }
+            };
 
-         // send a final "stop typing" after short pause (already in your logic)
-         clearTimeout(typingTimeoutRef.current);
-         typingTimeoutRef.current = setTimeout(() => {
-            const convId = conversationMap[selectedSpecialist.firebaseUid];
-            socketRef.current?.emit("typing", {
-               conversationId: convId || undefined,
+            setMessages((prev) => {
+               const list = [...(prev[convId] || []), optimisticMsg];
+               return { ...prev, [convId]: list };
+            });
+
+            // ensure we scroll to show the newly sent optimistic message
+            requestAnimationFrame(() => {
+               scrollToBottom();
+            });
+
+            socketRef.current.emit("message", {
+               tempId,
+               conversationId: convId,
+               recipientUid: selectedSpecialist.firebaseUid,
+               text: text.trim(),
+               senderRole: "farmer",
+            });
+
+            // after sending, ensure stop typing is emitted
+            socketRef.current.emit("typing", {
+               conversationId: convId,
                recipientUid: selectedSpecialist.firebaseUid,
                isTyping: false,
             });
-         }, 900);
+         } catch (err) {
+            console.error("send message error:", err);
+         }
       },
-      [socketRef, selectedSpecialist, conversationMap]
+      [
+         socketRef,
+         selectedSpecialist,
+         conversationMap,
+         user,
+         getToken,
+         scrollToBottom,
+         ensureConversation,
+      ]
+   );
+
+   // emitTyping: stable callback passed to InputBox
+   const emitTyping = useCallback(
+      (isTyping) => {
+         try {
+            const convId = conversationMap[selectedSpecialist?.firebaseUid];
+            if (!socketRef.current) return;
+            socketRef.current.emit("typing", {
+               conversationId: convId || undefined,
+               recipientUid: selectedSpecialist?.firebaseUid,
+               isTyping,
+            });
+         } catch (e) {
+            /* swallow */
+         }
+      },
+      [socketRef, conversationMap, selectedSpecialist]
    );
 
    // ---------- Use useMemo to avoid recalculating current conversation messages array on every render ----------
@@ -770,32 +843,81 @@ const ChatWithAgriSpecialist = () => {
       (isJoined || Boolean(conversationMap[selectedSpecialist?.firebaseUid]));
 
    return (
-      <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50">
+      <div
+         className={`min-h-screen ${
+            theme === "dark"
+               ? "bg-dark"
+               : "bg-gradient-to-br from-green-50 to-blue-50"
+         }`}
+      >
          <div className="container mx-auto px-4 py-8">
             <motion.div
                initial={{ opacity: 0, y: -20 }}
                animate={{ opacity: 1, y: 0 }}
                className="mb-8"
             >
-               <h1 className="text-4xl font-bold text-gray-800 mb-2 flex items-center gap-3">
-                  <div className="p-2 bg-green-100 rounded-lg">
-                     <User className="text-green-600" size={32} />
+               <h1
+                  className={`text-4xl font-bold mb-2 flex items-center gap-3 ${
+                     theme === "dark" ? "text-gray-50" : "text-gray-800"
+                  }`}
+               >
+                  <div
+                     className={`p-2 rounded-lg ${
+                        theme === "dark" ? "bg-green-900" : "bg-green-100"
+                     }`}
+                  >
+                     <User
+                        className={
+                           theme === "dark"
+                              ? "text-green-300"
+                              : "text-green-600"
+                        }
+                        size={32}
+                     />
                   </div>
                   Agriculture Specialist Chat
                </h1>
-               <p className="text-gray-600 text-lg">
+               <p
+                  className={`text-lg ${
+                     theme === "dark" ? "text-gray-100" : "text-gray-600"
+                  }`}
+               >
                   Connect with expert agriculture specialists for personalized
                   farming advice
                </p>
             </motion.div>
 
-            <div className="bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden h-[700px] flex">
-               <div className="w-1/3 border-r border-gray-200 flex flex-col">
-                  <div className="p-4 border-b border-gray-200 bg-green-50">
-                     <h3 className="font-semibold text-gray-800">
+            <div
+               className={`rounded-xl shadow-lg border overflow-hidden h-[700px] flex ${
+                  theme === "dark"
+                     ? "fg-dark border-gray-600"
+                     : "bg-white border-gray-200"
+               }`}
+            >
+               <div
+                  className={`w-1/3 border-r flex flex-col ${
+                     theme === "dark" ? "border-gray-600" : "border-gray-200"
+                  }`}
+               >
+                  <div
+                     className={`p-4 border-b ${
+                        theme === "dark"
+                           ? "bg-green-900 border-gray-600"
+                           : "bg-green-50 border-gray-200"
+                     }`}
+                  >
+                     <h3
+                        className={`font-semibold ${
+                           theme === "dark" ? "text-gray-50" : "text-gray-800"
+                        }`}
+                     >
                         Available Specialists
                      </h3>
-                     <p className="text-sm text-gray-600">
+                     <p
+                        className={`text-sm ${
+                           theme === "dark" ? "text-gray-100" : "text-gray-600"
+                        }`}
+                     >
                         Choose a specialist to start chatting
                      </p>
                   </div>
@@ -807,6 +929,7 @@ const ChatWithAgriSpecialist = () => {
                            specialist={specialist}
                            selectedSpecialist={selectedSpecialist}
                            setSelectedSpecialist={setSelectedSpecialist}
+                           theme={theme}
                         />
                      ))}
                   </div>
@@ -815,7 +938,13 @@ const ChatWithAgriSpecialist = () => {
                <div className="flex-1 flex flex-col">
                   {selectedSpecialist ? (
                      <>
-                        <div className="p-4 border-b border-gray-200 bg-blue-50">
+                        <div
+                           className={`p-4 border-b ${
+                              theme === "dark"
+                                 ? "bg-blue-900 border-gray-600"
+                                 : "bg-blue-50 border-gray-200"
+                           }`}
+                        >
                            <div className="flex items-center justify-between">
                               <div className="flex items-center gap-3">
                                  <div className="relative">
@@ -836,10 +965,22 @@ const ChatWithAgriSpecialist = () => {
                                     />
                                  </div>
                                  <div>
-                                    <h4 className="font-semibold text-gray-800 truncate">
+                                    <h4
+                                       className={`font-semibold truncate ${
+                                          theme === "dark"
+                                             ? "text-gray-100"
+                                             : "text-gray-800"
+                                       }`}
+                                    >
                                        {selectedSpecialist.userName}
                                     </h4>
-                                    <p className="text-xs text-gray-500 truncate">
+                                    <p
+                                       className={`text-xs truncate ${
+                                          theme === "dark"
+                                             ? "text-gray-300"
+                                             : "text-gray-500"
+                                       }`}
+                                    >
                                        {selectedSpecialist.status === "online"
                                           ? "Online now"
                                           : `Last seen ${
@@ -856,7 +997,11 @@ const ChatWithAgriSpecialist = () => {
                                  <motion.button
                                     whileHover={{ scale: 1.05 }}
                                     whileTap={{ scale: 0.95 }}
-                                    className="p-2 text-gray-600 hover:text-gray-800 hover:bg-gray-50 rounded-lg transition-colors"
+                                    className={`p-2 rounded-lg transition-colors ${
+                                       theme === "dark"
+                                          ? "text-gray-400 hover:text-gray-200 hover:bg-gray-700"
+                                          : "text-gray-600 hover:text-gray-800 hover:bg-gray-50"
+                                    }`}
                                  >
                                     <MoreVertical size={20} />
                                  </motion.button>
@@ -869,56 +1014,11 @@ const ChatWithAgriSpecialist = () => {
                            ref={messagesContainerRef}
                            className="flex-1 overflow-y-auto p-4 space-y-4"
                         >
-                           {currentMessages.map((message) => (
-                              <motion.div
-                                 key={message._id || message.tempId}
-                                 initial={{ opacity: 0, y: 20 }}
-                                 animate={{ opacity: 1, y: 0 }}
-                                 className={`flex ${
-                                    message.senderRole === "farmer"
-                                       ? "justify-end"
-                                       : "justify-start"
-                                 }`}
-                              >
-                                 <div
-                                    className={`max-w-xs lg:max-w-md px-4 py-2 rounded-lg ${
-                                       message.senderRole === "farmer"
-                                          ? "bg-green-500 text-white"
-                                          : "bg-gray-100 text-gray-800"
-                                    }`}
-                                 >
-                                    <p className="text-sm">{message.text}</p>
-                                    <div
-                                       className={`flex items-center gap-1 mt-1 ${
-                                          message.senderRole === "farmer"
-                                             ? "justify-end"
-                                             : "justify-start"
-                                       }`}
-                                    >
-                                       <span
-                                          className={`text-xs ${
-                                             message.senderRole === "farmer"
-                                                ? "text-green-100"
-                                                : "text-gray-500"
-                                          }`}
-                                       >
-                                          {new Date(
-                                             message.createdAt
-                                          ).toLocaleTimeString([], {
-                                             hour: "2-digit",
-                                             minute: "2-digit",
-                                          })}
-                                       </span>
-                                       {message.senderRole === "farmer" && (
-                                          <CheckCheck
-                                             size={12}
-                                             className="text-green-100"
-                                          />
-                                       )}
-                                    </div>
-                                 </div>
-                              </motion.div>
-                           ))}
+                           <MessageList
+                              messages={currentMessages}
+                              currentUid={user?.uid}
+                              theme={theme}
+                           />
 
                            {typingUsers[currentConvKey] && (
                               <motion.div
@@ -926,20 +1026,46 @@ const ChatWithAgriSpecialist = () => {
                                  animate={{ opacity: 1, y: 0 }}
                                  className="flex justify-start"
                               >
-                                 <div className="bg-gray-100 px-4 py-2 rounded-lg">
+                                 <div
+                                    className={`px-4 py-2 rounded-lg ${
+                                       theme === "dark"
+                                          ? "bg-gray-700"
+                                          : "bg-gray-100"
+                                    }`}
+                                 >
                                     <div className="flex items-center gap-1">
                                        <div className="flex gap-1">
-                                          <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" />
                                           <div
-                                             className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
+                                             className={`w-2 h-2 rounded-full animate-bounce ${
+                                                theme === "dark"
+                                                   ? "bg-gray-400"
+                                                   : "bg-gray-400"
+                                             }`}
+                                          />
+                                          <div
+                                             className={`w-2 h-2 rounded-full animate-bounce ${
+                                                theme === "dark"
+                                                   ? "bg-gray-400"
+                                                   : "bg-gray-400"
+                                             }`}
                                              style={{ animationDelay: "0.1s" }}
                                           />
                                           <div
-                                             className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
+                                             className={`w-2 h-2 rounded-full animate-bounce ${
+                                                theme === "dark"
+                                                   ? "bg-gray-400"
+                                                   : "bg-gray-400"
+                                             }`}
                                              style={{ animationDelay: "0.2s" }}
                                           />
                                        </div>
-                                       <span className="text-xs text-gray-500 ml-2">
+                                       <span
+                                          className={`text-xs ml-2 ${
+                                             theme === "dark"
+                                                ? "text-gray-400"
+                                                : "text-gray-500"
+                                          }`}
+                                       >
                                           typing...
                                        </span>
                                     </div>
@@ -950,54 +1076,46 @@ const ChatWithAgriSpecialist = () => {
                            <div ref={messagesEndRef} />
                         </div>
 
-                        <div className="p-4 border-t border-gray-200 bg-gray-50">
-                           <div className="flex items-center gap-3">
-                              <input
-                                 aria-label="Type your message"
-                                 type="text"
-                                 value={newMessage}
-                                 onChange={(e) =>
-                                    handleTypingLocal(e.target.value)
-                                 }
-                                 onKeyDown={(e) =>
-                                    e.key === "Enter" &&
-                                    canSend &&
-                                    handleSendMessage()
-                                 }
-                                 placeholder={
-                                    socketRef.current &&
-                                    socketRef.current.connected
-                                       ? "Type your message..."
-                                       : "Connecting..."
-                                 }
-                                 disabled={
-                                    !socketRef.current ||
-                                    !socketRef.current.connected
-                                 }
-                                 className="flex-1 px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent text-gray-700"
-                              />
-                              <motion.button
-                                 whileHover={{ scale: 1.05 }}
-                                 whileTap={{ scale: 0.95 }}
-                                 onClick={handleSendMessage}
-                                 disabled={!newMessage.trim()}
-                                 className="px-6 py-3 bg-green-500 hover:bg-green-600 text-white rounded-lg font-semibold disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center gap-2"
-                              >
-                                 <Send size={18} /> Send
-                              </motion.button>
-                           </div>
-                        </div>
+                        {/* InputBox: isolated input component (prevents parent re-renders while typing) */}
+                        <InputBox
+                           connected={socketRef.current?.connected}
+                           canSend={canSend}
+                           onSend={handleSendMessage}
+                           emitTyping={emitTyping}
+                           theme={theme}
+                        />
                      </>
                   ) : (
                      <div className="flex-1 flex items-center justify-center">
                         <div className="text-center">
-                           <div className="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                              <User size={40} className="text-gray-400" />
+                           <div
+                              className={`w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-4 ${
+                                 theme === "dark"
+                                    ? "bg-gray-700"
+                                    : "bg-gray-100"
+                              }`}
+                           >
+                              <User
+                                 size={40}
+                                 className={
+                                    theme === "dark"
+                                       ? "text-gray-400"
+                                       : "text-gray-400"
+                                 }
+                              />
                            </div>
-                           <h3 className="text-xl font-semibold text-gray-800 mb-2">
+                           <h3
+                              className={`text-xl font-semibold mb-2 ${
+                                 theme === "dark" ? "fg-dark" : "text-gray-800"
+                              }`}
+                           >
                               Select a Specialist
                            </h3>
-                           <p className="text-gray-600">
+                           <p
+                              className={
+                                 theme === "dark" ? "fg-dark" : "text-gray-600"
+                              }
+                           >
                               Choose a specialist from the left to start
                               chatting
                            </p>
