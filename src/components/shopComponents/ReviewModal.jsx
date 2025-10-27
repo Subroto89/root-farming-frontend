@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Star } from 'lucide-react';
 import Swal from 'sweetalert2';
-import useAuth from '../../hooks/useAuth';
+import {useAuth} from '../../hooks/useAuth';
 import { useProduct } from '../../allProductsApi/UseProducts';
 import {
   useAddReview,

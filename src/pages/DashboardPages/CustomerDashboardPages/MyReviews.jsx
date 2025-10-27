@@ -6,7 +6,7 @@ import {
   useDeleteReview,
   useUserReviews,
 } from '../../../allProductsApi/UseReviews';
-import useAuth from '../../../hooks/useAuth';
+import {useAuth} from '../../../hooks/useAuth';
 
 const MyReviews = () => {
   const { user } = useAuth();

@@ -4,7 +4,7 @@ import { GoPasskeyFill } from "react-icons/go";
 import { FaEnvelope, FaGoogle, FaLock, FaSignInAlt } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router";
 import { BounceLoader } from "react-spinners";
-import useAuth from "../../hooks/useAuth";
+import {useAuth} from "../../hooks/useAuth";
 import Swal from "sweetalert2";
 import { Icon } from "lucide-react";
 import { useRef } from "react";

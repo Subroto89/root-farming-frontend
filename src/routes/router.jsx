@@ -47,10 +47,13 @@ import ActivityRoute from "../pages/DashboardPages/FarmerDashboardPages/Activity
 import WeatherForecast from "../pages/DashboardPages/FarmerDashboardPages/WeatherForecast";
 import SellerDashboardHome from "../pages/DashboardPages/SellerDashboardPages/SellerDashboardHome";
 import FarmerDashboardHome from "../pages/DashboardPages/FarmerDashboardPages/FarmerDashboardHome";
-import CropWiseInstruction from "../pages/DashboardPages/AgriSpecialistDashboardPages/CropWiseInstruction"; 
+import CropWiseInstruction from "../pages/DashboardPages/AgriSpecialistDashboardPages/CropWiseInstruction";
+import NewCultivationRequestForm from "../components/FarmarDashboardComponents/NewCultivationRequestForm";
+import MyCultivationsPage from "../components/FarmarDashboardComponents/MyCultivationsPage";
 import BlogsManagementByAS from "../pages/DashboardPages/AgriSpecialistDashboardPages/BlogsManagementByAS";
 import FarmersProfiles from "../pages/DashboardPages/AgriSpecialistDashboardPages/FarmersProfiles";
 import MyEarnings from "../pages/DashboardPages/AgriSpecialistDashboardPages/MyEarnings";
+import ChatBot from "../pages/DashboardPages/FarmerDashboardPages/ChatBot";
 
 const router = createBrowserRouter([
   // -------------------------------------------
@@ -186,6 +189,14 @@ const router = createBrowserRouter([
         Component: FieldRegistration,
       },
       {
+        path: "my-cultivations",
+        Component: MyCultivationsPage,
+      },
+      {
+        path: "new-cultivation-request",
+        Component: NewCultivationRequestForm,
+      },
+      {
         path: "ActivityRoute",
         loader: () => fetch("http://localhost:3000/activities"),
         Component: ActivityRoute,
@@ -222,6 +233,10 @@ const router = createBrowserRouter([
       {
         path: "chat-specialist",
         Component: SpecialistChat,
+      },
+      {
+        path: "chat-bot",
+        Component: ChatBot,
       },
 
       // Seller Dashboard Routes

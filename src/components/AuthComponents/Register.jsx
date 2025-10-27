@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { FaUserPlus } from "react-icons/fa";
 import { Link, useNavigate } from "react-router";
 import GoogleLogin from "../../components/shared/SocialLogin/GoogleLogin";
-import useAuth from "../../hooks/useAuth";
+import {useAuth} from "../../hooks/useAuth";
 import Swal from "sweetalert2";
 import {
    imageUpload,

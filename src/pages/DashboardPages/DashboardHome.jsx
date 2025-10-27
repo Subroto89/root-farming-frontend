@@ -1,4 +1,4 @@
-import useAuth from '../../hooks/useAuth';
+import {useAuth} from '../../hooks/useAuth';
 import LoadingSpinner from '../../components/shared/LoadingSpinner';
 import AdminDashboardHome from '../../pages/DashboardPages/AdminDashboardPages/AdminDashboardHome';
 import FarmerDashboardHome from '../../pages/DashboardPages/FarmerDashboardPages/FarmerDashboardHome';

@@ -1,4 +1,5 @@
-import useAuth from "../../../hooks/useAuth";
+
+import { useAuth } from "../../../hooks/useAuth";
 import NavButton from "../../shared/Buttons/NavButton";
 
 
