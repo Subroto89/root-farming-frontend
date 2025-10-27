@@ -4,7 +4,7 @@ import Select from "react-select";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 // 🔹 Suppose you have email from useAuth
-import useAuth  from "../../../hooks/useAuth"; // example
+import {useAuth}  from "../../../hooks/useAuth"; // example
 import useAxiosSecure from "../../../hooks/useAxiosSecure"; // example
 import toast from "react-hot-toast";
 

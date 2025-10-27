@@ -1,7 +1,7 @@
 import { useState } from "react";
 // import { useQuery } from "@tanstack/react-query";
 // import useAxiosSecure from "../../../hooks/useAxiosSecure";
-import useAuth from "../../../hooks/useAuth";
+import {useAuth} from "../../../hooks/useAuth";
 import { useTheme } from "../../../hooks/useTheme";
 
 const CustomerDashboardHome = () => {

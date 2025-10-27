@@ -3,7 +3,7 @@ import { useForm, Controller } from "react-hook-form";
 import Select from "react-select";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import Swal from "sweetalert2";
-import useAuth from "../../../../hooks/useAuth";
+import {useAuth} from "../../../../hooks/useAuth";
 import axios from "axios";
 import InputField from "../../../../components/shared/InputField/InputField";
 import LoadingPage from "../../../../components/shared/LoadingSpinner";

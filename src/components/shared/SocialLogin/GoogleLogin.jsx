@@ -1,5 +1,5 @@
 import { FaGoogle } from "react-icons/fa";
-import useAuth from "../../../hooks/useAuth";
+import {useAuth} from "../../../hooks/useAuth";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router";
 import { saveUserToDatabase } from "../../../utils/utilities";

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import useAuth from "../../../hooks/useAuth";
+import {useAuth} from "../../../hooks/useAuth";
 import { Menu, UserRound, X } from "lucide-react";
 import HamburgerSidebar from "./HamburgerSidebar";
 
