@@ -41,7 +41,7 @@ const AddNewProduct = () => {
   });
   if (isProductsLoading) return <LoadingSpinner />;
 
-  console.log(products) 
+  console.log(products)
   return (
     <div className={`${themeBackgroundStyle} min-h-screen`}>
       <Container>
@@ -60,7 +60,7 @@ const AddNewProduct = () => {
 
           {/* Table of Added Item Section --------------------------------------- */}
           <div>
-             {products.length > 0 ? (
+            {products.length > 0 ? (
               <div className={`${themeForegroundStyle} min-h-[calc(100vh-116px)] w-full overflow-auto rounded-lg mt-10 shadow-lg`}>
                 <table className={`${themeForegroundStyle} w-full divider-y divider-gray-500`}>
                   <thead
@@ -84,10 +84,14 @@ const AddNewProduct = () => {
                       <ProductRow
                         key={product._id}
                         product={product}
-                        // handleCategoryDelete={handleCategoryDelete}
-                        // handleUpdateCategoryModal={handleUpdateCategoryModal}
-                        // setCategoryToEdit={setCategoryToEdit}
-                        // refetch={refetch}
+
+                      // handleCategoryDelete={handleCategoryDelete}
+                      // handleUpdateCategoryModal={handleUpdateCategoryModal}
+                      // setCategoryToEdit={setCategoryToEdit}
+                      // refetch={refetch}
+
+                      
+
                       />
                     ))}
                   </tbody>

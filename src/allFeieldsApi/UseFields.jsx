@@ -1,7 +1,7 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import useAxiosSecure from '../hooks/UseAxiosSecure';
 
-// ✅ Fetch all fields
+// Fetch all fields
 export const useFields = () => {
   const axiosSecure = useAxiosSecure();
   return useQuery({
@@ -13,7 +13,7 @@ export const useFields = () => {
   });
 };
 
-// ✅ Add a new field
+// Add a new field
 export const useAddField = () => {
   const axiosSecure = useAxiosSecure();
   const queryClient = useQueryClient();
@@ -27,7 +27,7 @@ export const useAddField = () => {
   });
 };
 
-// ✅ Update a field
+// Update a field
 export const useUpdateField = () => {
   const axiosSecure = useAxiosSecure();
   const queryClient = useQueryClient();
@@ -41,7 +41,7 @@ export const useUpdateField = () => {
   });
 };
 
-// ✅ Delete a field
+// Delete a field
 export const useDeleteField = () => {
   const axiosSecure = useAxiosSecure();
   const queryClient = useQueryClient();

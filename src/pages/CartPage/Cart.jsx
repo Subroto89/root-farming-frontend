@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useTheme } from "../../hooks/useTheme";
 import { TabTitle } from "../../utils/utilities";
-import useAuth from "../../hooks/useAuth";
+import {useAuth} from "../../hooks/useAuth";
 import { useNavigate } from "react-router";
 import useAxiosSecure from "../../hooks/UseAxiosSecure";
 import { useQuery } from "@tanstack/react-query";

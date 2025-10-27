@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router";
-import useAuth from "../../../hooks/useAuth";
+import {useAuth} from "../../../hooks/useAuth";
 import { LogOut } from "lucide-react";
 
 const LogoutButton = () => {
