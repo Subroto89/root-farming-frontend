@@ -2,24 +2,98 @@ import React from 'react';
 import { ShoppingCart, Star, MapPin } from 'lucide-react';
 import { useNavigate } from 'react-router';
 import { useTheme } from '../../hooks/useTheme';
+import {useAuth} from '../../hooks/useAuth';
+import useAxiosSecure from '../../hooks/UseAxiosSecure';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 
 const ProductCard = ({ product, viewMode }) => {
-   const {theme} = useTheme();
-  
-      const themeBackgroundStyle = theme === 'dark' ? "bg-dark" : "bg-light";
-      const themeForegroundStyle = theme === 'dark' ? "fg-dark" : "fg-light";
+  const { theme } = useTheme();
+  const themeBackgroundStyle = theme === 'dark' ? "bg-dark" : "bg-light";
+  const themeForegroundStyle = theme === 'dark' ? "fg-dark" : "fg-light";
   const navigate = useNavigate();
+  const { user } = useAuth();
+  const axiosSecure = useAxiosSecure();
+  const queryClient = useQueryClient();
+  const addToCartMutation = useMutation({
+    mutationFn: async (data) => {
+      const res = await axiosSecure.post('/cart/add-to-cart', data);
+      return res.data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(["cart", user?.email]);
+      // toast.success("Added to cart successfully!");  
+    },
+    onError: (error) => {
+      console.error(error);
+      toast.error("Failed to add product to cart!");
+    }
+  });
+  const handleAddToCart = async () => {
+    if (!user) {
+      toast.error("Please log in to add items to your cart.");
+      navigate("/auth");
+      return;
+    }
+
+    // Fetch full user data
+    let userData;
+    try {
+      const res = await axiosSecure.get(`/users/${user.email}`);
+      userData = res.data;
+    } catch (error) {
+      console.error("Failed to fetch user data:", error);
+      toast.error("Unable to fetch user info. Try again later.");
+      return;
+    }
+
+    // Filter shipping address: only include if all fields exist
+    const address = userData?.shippingAddress;
+    const validAddress = address &&
+      address.addressLine1 &&
+      address.city &&
+      address.country &&
+      address.zipCode
+      ? address
+      : null;
+
+    // Filter userPhone: only include if non-empty
+    const validPhone = userData?.userPhone?.trim() ? userData.userPhone : null;
+
+    const cartItem = {
+      productId: product._id,
+      name: product.name,
+      price: product.price,
+      image: product.image,
+      userEmail: user.email,
+      shippingAddress: validAddress,
+      userPhone: validPhone,
+    };
+
+    try {
+      await toast.promise(addToCartMutation.mutateAsync(cartItem), {
+        loading: "Adding item to your cart...",
+        success: `"${product.name}" has been added to your cart!`,
+        error: "Oops! Something went wrong. Please try again.",
+      });
+    } catch (error) {
+      console.error("Failed to add item to cart:", error);
+      toast.error("Unable to add item right now. Please try again later.");
+    }
+  };
   return (
     <div
       className={`${themeForegroundStyle} rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden 
         ${viewMode === 'list' ? 'flex items-stretch' : 'flex flex-col h-full'}
       `}
     >
+      <ToastContainer />
       {/* Image Section */}
       <div
-        className={`relative ${
-          viewMode === 'list' ? 'w-64 flex-shrink-0 h-auto' : 'w-full h-56'
-        }`}
+        className={`relative ${viewMode === 'list' ? 'w-64 flex-shrink-0 h-auto' : 'w-full h-56'
+          }`}
       >
         <img
           src={product.image}
@@ -32,13 +106,12 @@ const ProductCard = ({ product, viewMode }) => {
           {product.badges?.map((badge, i) => (
             <span
               key={i}
-              className={`px-2 py-1 rounded-full text-xs font-semibold ${
-                badge === 'Organic'
-                  ? 'bg-green-500 text-white'
-                  : badge === 'Best Seller'
+              className={`px-2 py-1 rounded-full text-xs font-semibold ${badge === 'Organic'
+                ? 'bg-green-500 text-white'
+                : badge === 'Best Seller'
                   ? 'bg-red-500 text-white'
                   : 'bg-purple-500 text-white'
-              }`}
+                }`}
             >
               {badge}
             </span>
@@ -47,11 +120,10 @@ const ProductCard = ({ product, viewMode }) => {
 
         {/* Stock Label */}
         <div
-          className={`absolute top-3 right-3 px-2 py-1 rounded-full text-xs font-semibold ${
-            product.inStock
-              ? 'bg-green-500 text-white'
-              : 'bg-red-500 text-white'
-          }`}
+          className={`absolute top-3 right-3 px-2 py-1 rounded-full text-xs font-semibold ${product.inStock
+            ? 'bg-green-500 text-white'
+            : 'bg-red-500 text-white'
+            }`}
         >
           {product.inStock ? 'In Stock' : 'Out of Stock'}
         </div>
@@ -59,9 +131,8 @@ const ProductCard = ({ product, viewMode }) => {
 
       {/* Content Section */}
       <div
-        className={`flex flex-col justify-between p-4 ${
-          viewMode === 'list' ? 'flex-1' : 'h-full'
-        }`}
+        className={`flex flex-col justify-between p-4 ${viewMode === 'list' ? 'flex-1' : 'h-full'
+          }`}
       >
         <div>
           {/* Product Title & Rating */}
@@ -78,7 +149,7 @@ const ProductCard = ({ product, viewMode }) => {
               </div>
             </div>
 
-          <p className="font-medium">{product.farmer}</p>
+            <p className="font-medium">{product.farmer}</p>
           </div>
 
           {/* Location */}
@@ -114,11 +185,11 @@ const ProductCard = ({ product, viewMode }) => {
           </button>
           <button
             disabled={!product.inStock}
-            className={`px-4 py-2 rounded-lg font-medium transition-colors flex items-center text-sm ${
-              product.inStock
-                ? 'bg-green-600 text-white hover:bg-green-700'
-                : 'bg-gray-300 text-gray-500 cursor-not-allowed'
-            }`}
+            onClick={handleAddToCart}
+            className={`px-4 py-2 rounded-lg font-medium transition-colors flex items-center text-sm ${product.inStock
+              ? 'bg-green-600 text-white hover:bg-green-700'
+              : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+              }`}
           >
             <ShoppingCart className="h-4 w-4 mr-1" />
             {product.inStock ? 'Add to Cart' : 'Out of Stock'}

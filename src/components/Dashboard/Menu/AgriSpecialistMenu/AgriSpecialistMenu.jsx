@@ -1,4 +1,3 @@
-import React from "react";
 import NavButton from "../../../shared/Buttons/NavButton";
 import { BluetoothSearching, DollarSign, House, MessageCircleMore, Milestone, Rss, Users } from "lucide-react";
 
@@ -45,7 +44,8 @@ const AgriSpecialistMenu = () => {
             icon={DollarSign}
 
          />
-      </>
+
+</>
    );
 };
 

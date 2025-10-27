@@ -8,15 +8,11 @@ import DashboardHome from "../pages/DashboardPages/DashboardHome";
 import FieldRegistration from "../pages/DashboardPages/FarmerDashboardPages/FieldRegistration";
 import MyProfile from "../pages/DashboardPages/UserProfile/MyProfile";
 import ActivityLoggingScheduling from "../pages/DashboardPage/FarmerDashboardPage/ActivityLoggingScheduling";
-import ChatwithAgriSpecialist from "../pages/DashboardPage/FarmerDashboardPage/ChatwithAgriSpecialist";
-
 import DailyToDoList from "../pages/DashboardPage/FarmerDashboardPage/DailyToDoList";
 import AuthLayout from "../layouts/AuthLayout";
 import Register from "../components/AuthComponents/Register";
 import Login from "../components/AuthComponents/Login";
 import ResourceManagement from "../pages/DashboardPage/FarmerDashboardPage/ResourceManagement/ResourceManagement";
-
-// import Shop from '../pages/ShopPage/Shop';
 import Cart from "../pages/CartPage/Cart";
 import Blog from "../pages/Blog/Blog";
 import ErrorPage from "../pages/DashboardPages/ErrorPage";
@@ -35,7 +31,6 @@ import AddNewProduct from "../pages/DashboardPages/SellerDashboardPages/AddNewPr
 import ProductTypeManagement from "../pages/DashboardPages/AdminDashboardPages/CategoryManagement/ProductTypeManagement";
 import ProductSubCategoryManagement from "../pages/DashboardPages/AdminDashboardPages/CategoryManagement/ProductSubCategoryManagement";
 import ProductVariantManagement from "../pages/DashboardPages/AdminDashboardPages/CategoryManagement/ProductVariantManagement";
-// import AddNewProduct from '../pages/DashboardPages/SellerDashboardPages/AddNewItem';
 import Shop from "../pages/ShopPage/Shop";
 import MyReviews from "../pages/DashboardPages/CustomerDashboardPages/MyReviews";
 import MyWishlist from "../pages/DashboardPages/CustomerDashboardPages/MyWishlist";
@@ -54,6 +49,8 @@ import BlogsManagementByAS from "../pages/DashboardPages/AgriSpecialistDashboard
 import FarmersProfiles from "../pages/DashboardPages/AgriSpecialistDashboardPages/FarmersProfiles";
 import MyEarnings from "../pages/DashboardPages/AgriSpecialistDashboardPages/MyEarnings";
 import ChatBot from "../pages/DashboardPages/FarmerDashboardPages/ChatBot";
+import CartPage from '../pages/DashboardPages/CustomerDashboardPages/CartPage';
+
 
 const router = createBrowserRouter([
   // -------------------------------------------
@@ -84,14 +81,16 @@ const router = createBrowserRouter([
         path: "shop/:id",
         Component: ProductDetails,
       },
+      // Conflict resolved: Using CartPage component for 'cart' path.
       {
-        path: "cart",
-        Component: Cart,
+        path: 'cart',
+        Component: CartPage, 
       },
       {
         path: "blog",
         Component: Blog,
       },
+      // Note: This route exists under both RootLayout and DashboardLayout.
       {
         path: "update-profile/:email",
         Component: MyProfile,
@@ -99,6 +98,9 @@ const router = createBrowserRouter([
     ],
   },
 
+  // -------------------------------------------
+  // Dashboard Layout
+  // -------------------------------------------
   {
     path: "/dashboard",
     Component: DashboardLayout,
@@ -113,7 +115,7 @@ const router = createBrowserRouter([
         Component: MyProfile,
       },
 
-      // Admin Dashboard Routes
+      // === Admin Dashboard Routes ===
       {
         path: "management-instructional-guides",
         Component: ManagementInstructionalGuides,
@@ -123,6 +125,7 @@ const router = createBrowserRouter([
         Component: SpecialistsSalary,
       },
 
+      // Duplicate removed: Kept the first 'management-product-category'
       {
         path: "management-product-category",
         Component: ProductCategoryManagement,
@@ -149,10 +152,6 @@ const router = createBrowserRouter([
         Component: ProductTypeManagement,
       },
       {
-        path: "management-product-category",
-        Component: ProductCategoryManagement,
-      },
-      {
         path: "manage-product-subCategory",
         Component: ProductSubCategoryManagement,
       },
@@ -172,18 +171,12 @@ const router = createBrowserRouter([
         path: "product-moderation",
         Component: ProductModeration,
       },
-
-      {
-        path: "*",
-        Component: ErrorPage,
-      },
-
-      // Farmer Dashboard Routes
+      
+      // === Farmer Dashboard Routes ===
       {
         path: "farmer-dashboard-home",
         Component: FarmerDashboardHome,
       },
-
       {
         path: "field-registration",
         Component: FieldRegistration,
@@ -201,7 +194,6 @@ const router = createBrowserRouter([
         loader: () => fetch("http://localhost:3000/activities"),
         Component: ActivityRoute,
       },
-
       {
         path: "new-crop",
         Component: StartNewCrop,
@@ -210,9 +202,14 @@ const router = createBrowserRouter([
         path: "activity-scheduling",
         Component: ActivityLoggingScheduling,
       },
+      // Chat route conflict resolved: Kept 'live-chat' and 'chat-bot'
       {
-        path: "chat-specialist",
-        Component: ChatwithAgriSpecialist,
+        path: "live-chat",
+        Component: ChatWithAgriSpecialist,
+      },
+      {
+        path: "chat-bot",
+        Component: ChatBot,
       },
       {
         path: "resource-management",
@@ -226,31 +223,18 @@ const router = createBrowserRouter([
         path: "daily-todo-list",
         Component: DailyToDoList,
       },
-      {
-        path: "live-chat",
-        Component: ChatWithAgriSpecialist,
-      },
-      {
-        path: "chat-specialist",
-        Component: SpecialistChat,
-      },
-      {
-        path: "chat-bot",
-        Component: ChatBot,
-      },
 
-      // Seller Dashboard Routes
+      // === Seller Dashboard Routes ===
       {
         path: "seller-dashboard-home",
         Component: SellerDashboardHome,
       },
-
       {
         path: "add-new-item",
         Component: AddNewProduct,
       },
 
-      // Customer Dashboard Routes
+      // === Customer Dashboard Routes ===
       {
         path: "review-rating",
         Component: MyReviews,
@@ -263,9 +247,8 @@ const router = createBrowserRouter([
         path: "track-current-orders",
         Component: OrderTracking,
       },
-      { path: "update-profile/:email", Component: MyProfile },
-
-      // agri Specialist Dashboard Routes
+      
+      // === Agri Specialist Dashboard Routes ===
       {
         path: "crop-wise-instruction",
         Component: CropWiseInstruction,
@@ -285,7 +268,13 @@ const router = createBrowserRouter([
       {
         path: "my-earnings",
         Component: MyEarnings,
-      }
+      },
+
+      // Catch-all route for errors
+      {
+        path: "*",
+        Component: ErrorPage,
+      },
     ],
   },
 
@@ -308,5 +297,4 @@ const router = createBrowserRouter([
   },
   // -------------------------------------------
 ]);
-
 export default router;
