@@ -1,56 +1,42 @@
-import { useState } from "react";
-import Button from "../../../components/shared/Buttons/Button";
+import React from "react";
+import useAxiosSecure from "../../../hooks/UseAxiosSecure";
+import { useNavigate } from "react-router";
+import toast from "react-hot-toast";
+
 import Container from "../../../components/shared/Container";
-import { useTheme } from "../../../hooks/useTheme";
-import ModalFormat from "../../../components/shared/ModalFormat";
 import InstructionEditor from "../../../components/AgriSpecialist/InstructionEditor";
 
 const CropWiseInstruction = () => {
-  // Theme Application
-  const { theme } = useTheme();
-  const themeBackground = theme === "dark" ? "bg-dark" : "bg-light";
-  const themeForeground = theme === "dark" ? "fg-dark" : "fg-light";
+   const axiosSecure = useAxiosSecure();
+   const navigate = useNavigate();
 
-  // Modal State  
-  const [isModal, setIsModal] = useState(false);
-  const handleModalToggle = () => {
-    setIsModal(prev => !prev);
-  }
+   // onSave will be passed to InstructionEditor
+   const handleSave = async (payload) => {
+      // POST to backend
+      console.log(payload);
+      const res = await axiosSecure.post("/api/instructions", payload);
+      return res.data; // return saved document to caller if they expect it
+   };
 
-
-
-  return (
-    <div className={`${themeBackground} min-h-screen`}>
-       <Container>
-        {/* Header Part with Button------------------------------------------- */}
-        <div className="flex items-center justify-between">
-          <h2>Instruction for Crops</h2>
-          <Button
-            label="Add Instruction"
-            status="success"
-            onClick={handleModalToggle}
-          />
-        </div>
-
-
-      <InstructionEditor/>
-
-
-        {/* Modal for Taking Instructions Addition ---------------------------- */}
-        <div className="overflow-auto">
-          {isModal && (
-            <ModalFormat
-              width="w-[700px]"
-              height="h-[600px]"
-              headerText="Crop Wise Instruction"
-              modalClosingFunction={handleModalToggle}
-              form={<InstructionEditor/>}
-            />
-          )}
-        </div>
-       </Container>
-    </div>
-  )
+   return (
+      <div className={"min-h-screen"}>
+         <InstructionEditor
+            onSave={async (payload) => {
+               try {
+                  const saved = await handleSave(payload);
+                  toast.success("Saved on server");
+                  // Optionally navigate or show the created instruction
+                  navigate(`/instructions/${saved._id}`);
+                  return saved;
+               } catch (err) {
+                  console.error("Save failed", err);
+                  // rethrow so InstructionEditor can also catch if it wants
+                  throw err;
+               }
+            }}
+         />
+      </div>
+   );
 };
 
 export default CropWiseInstruction;

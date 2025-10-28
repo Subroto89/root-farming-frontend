@@ -105,7 +105,6 @@ const AuthProvider = ({ children }) => {
                setIdToken(token);
                try {
                   localStorage.setItem("token", token);
-                  console.log("Token stored in localStorage", token);
                } catch (e) {
                   console.error("Failed to set token in localStorage", e);
                }
