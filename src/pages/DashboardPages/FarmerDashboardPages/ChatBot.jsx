@@ -165,7 +165,7 @@ const ChatBot = () => {
   return (
     <div className={`${themeBackground} h-screen flex`}>
       {/* Left Section (Sidebar) */}
-      <div className="w-1/5 h-screen border-r border-gray-700 p-4 flex flex-col">
+      <div className={`${themeBackground} w-1/5 h-screen border-r border-gray-700 p-4 flex flex-col`}>
         <h2 className="text-xl font-bold mb-4">Chat History</h2>
         <button 
           onClick={handleNewChat} 
@@ -192,7 +192,7 @@ const ChatBot = () => {
       </div>
 
       {/* Right Section (Chat Area) */}
-      <div className={`w-4/5 h-screen flex flex-col ${chatContainerBg}`}>
+      <div className={`w-4/5 h-screen flex flex-col ${themeBackground}`}>
         <div className="flex-grow p-6 overflow-auto">
           {activeChat && activeChat.messages.map((chat, index) => (
             <div key={index} className={`chat ${chat.sender === 'user' ? 'chat-end' : 'chat-start'}`}>

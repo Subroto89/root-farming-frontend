@@ -50,6 +50,7 @@ import FarmersProfiles from "../pages/DashboardPages/AgriSpecialistDashboardPage
 import MyEarnings from "../pages/DashboardPages/AgriSpecialistDashboardPages/MyEarnings";
 import ChatBot from "../pages/DashboardPages/FarmerDashboardPages/ChatBot";
 import CartPage from '../pages/DashboardPages/CustomerDashboardPages/CartPage';
+import GovernmentInfo from "../pages/DashboardPages/FarmerDashboardPages/GovernmentInfo";
 
 
 const router = createBrowserRouter([
@@ -206,6 +207,10 @@ const router = createBrowserRouter([
       {
         path: "live-chat",
         Component: ChatWithAgriSpecialist,
+      },
+      {
+        path:"government-info",
+        Component: GovernmentInfo,
       },
       {
         path: "chat-bot",
