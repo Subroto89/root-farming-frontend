@@ -28,24 +28,24 @@ const FarmerMenu = () => {
                     address="/dashboard/resource-management"
                     icon={Boxes }
                 />
-        <NavButton
-          label="Resource Management"
-          address="/dashboard/resource-management"
-          icon={Boxes}
-        />
 
         <CropManagementButton />
 
         <GuidanceAndSupportButton />
 
-        <NavButton
-          label="Government Info"
-          address="/dashboard/government-info"
-          icon={MessageCircleQuestionMark}
-        />
-      </div>
-    </>
-  );
+
+                <NavButton
+                    label="Government Info"
+                    address="/dashboard/government-info"
+                    icon={ MessageCircleQuestionMark }
+                />
+
+                
+            </div>
+        </>
+    );
+
+   
 };
 
 export default FarmerMenu;

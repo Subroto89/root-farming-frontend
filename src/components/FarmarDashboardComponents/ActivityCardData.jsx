@@ -59,7 +59,7 @@ const ActivityCardData = ({ data }) => {
 
   return (
     <div
-      className={`${themeForegroundStyle} rounded-2xl shadow-sm border border-gray-200 p-4 flex justify-between items-start hover:shadow-md transition`}
+      className={`${themeForegroundStyle} rounded-2xl mb-3 shadow-sm border border-gray-200 p-4 flex justify-between items-start hover:shadow-md transition`}
     >
       {/* Left section */}
       <div>

@@ -10,7 +10,7 @@ import {
   ArrowRight,
 } from 'lucide-react';
 import logo from '../../assets/Logo/Rootfarming.png';
-import { Link } from 'react-router';
+import { href, Link } from 'react-router';
 import { useTheme } from '../../hooks/useTheme';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
@@ -52,15 +52,15 @@ const Footer = () => {
   ];
 
   const serviceLinks = [
-    { name: 'Crop Management', path: '#' },
+    { name: 'Crop Management', path: '/dashboard/new-crop' },
     { name: 'Market Analytics', path: '#' },
     { name: 'Weather Forecasting', path: '/dashboard/weather-forecast' },
-    { name: 'Expert Consultation', path: '#' },
+    { name: 'Expert Consultation', path: '/dashboard/chat-specialist' },
     { name: 'Payment Processing', path: '#' },
   ];
 
   const companyLinks = [
-    { name: 'About Us', path: '#' },
+    { name: 'About Us', path: '/about' },
     { name: 'Our Story', path: '#' },
     { name: 'Careers', path: '#' },
     { name: 'Press & Media', path: '#' },
@@ -68,7 +68,7 @@ const Footer = () => {
   ];
 
   const resourceLinks = [
-    { name: 'Farming Guides', path: '#' },
+    { name: 'Farming Guides', path: '/dashboard/instructional-guides' },
     { name: 'Best Practices', path: '#' },
     { name: 'Success Stories', path: '#' },
     { name: 'Research & Reports', path: '#' },
@@ -193,6 +193,8 @@ const Footer = () => {
                       aria-label={social.label}
                       className="bg-gray-800 hover:bg-green-600 p-3 rounded-full transition-all"
                     >
+                    <a href={href}></a>
+
                       <Icon className="h-5 w-5 sm:h-6 sm:w-6" />
                     </Link>
                   );

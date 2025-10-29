@@ -18,8 +18,7 @@ const ActivityRoute = () => {
   const { theme } = useTheme();
   const themeBackgroundStyle = theme === "dark" ? "bg-dark" : "bg-light";
   const themeForegroundStyle = theme === "dark" ? "fg-dark" : "fg-light";
-  const themeFgOfFgStyle =
-    theme === "dark" ? "fg-of-fg-dark" : "fg-of-fg-light";
+  const themeFgOfFgStyle =    theme === "dark" ? "fg-of-fg-dark" : "fg-of-fg-light";
 
   const axiosSecure = useAxiosSecure();
   const [farmerFields, setFarmerFields] = useState([]);
@@ -48,12 +47,12 @@ const ActivityRoute = () => {
     const formData = new FormData(form);
     const activityData = Object.fromEntries(formData.entries());
 
-  const data = await axiosSecure.post(
+    const data = await axiosSecure.post(
       "http://localhost:3000/activities",
       activityData
     );
 
-    if (data?.data?.insertedId) { 
+    if (data?.data?.insertedId) {
       fetchActivities();
       document.getElementById("my_modal_3").close();
       Swal.fire({
@@ -67,7 +66,9 @@ const ActivityRoute = () => {
   };
 
   return (
-    <div className={`${themeBackgroundStyle} min-h-screen text-black p-6`}>
+    <div
+      className={`${themeBackgroundStyle} h-screen overflow-hidden text-black p-6`}
+    >
       <div className="flex items-center justify-between">
         <h3 className="text-2xl">Activity Login</h3>
 
@@ -214,8 +215,9 @@ const ActivityRoute = () => {
       </div>
 
       {/* ----- card ------ */}
-
-      <ActivityCard fetchData={activities}></ActivityCard>
+      <div className="h-full overflow-auto pb-3 mb-6">
+        <ActivityCard fetchData={activities}></ActivityCard>
+      </div>
     </div>
   );
 };

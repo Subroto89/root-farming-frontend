@@ -1,49 +1,50 @@
-import React, { useEffect } from 'react';
-import { Mail, Download, Users, Globe, Zap } from 'lucide-react';
-import { useTheme } from '../../hooks/useTheme';
-import AOS from 'aos';
-import 'aos/dist/aos.css';
+import React, { useEffect } from "react";
+import { Mail, Download, Users, Globe, Zap } from "lucide-react";
+import { useTheme } from "../../hooks/useTheme";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import { Link } from "react-router";
 
 const partnerBenefits = [
   {
     icon: Globe,
-    title: 'Global Network',
+    title: "Global Network",
     description:
-      'Access our worldwide community of farmers, agri-tech innovators, and experts for growth and learning.',
+      "Access our worldwide community of farmers, agri-tech innovators, and experts for growth and learning.",
   },
   {
     icon: Users,
-    title: 'Premium Support',
+    title: "Premium Support",
     description:
-      'Enjoy dedicated partner support and priority technical assistance from our expert team.',
+      "Enjoy dedicated partner support and priority technical assistance from our expert team.",
   },
   {
     icon: Zap,
-    title: 'Co-Innovation',
+    title: "Co-Innovation",
     description:
-      'Collaborate with us on pioneering agricultural technologies and data-driven solutions.',
+      "Collaborate with us on pioneering agricultural technologies and data-driven solutions.",
   },
   {
     icon: Mail,
-    title: 'Sustainable Practices',
+    title: "Sustainable Practices",
     description:
-      'Be part of initiatives promoting eco-friendly and sustainable farming methods worldwide.',
+      "Be part of initiatives promoting eco-friendly and sustainable farming methods worldwide.",
   },
 ];
 
 const BecomePartner = () => {
   const { theme } = useTheme();
-  const themeBackgroundStyle = theme === 'dark' ? 'bg-dark' : 'bg-light';
+  const themeBackgroundStyle = theme === "dark" ? "bg-dark" : "bg-light";
   const themeForegroundStyle =
-    theme === 'dark'
-      ? 'fg-dark border border-gray-500'
-      : 'fg-light border border-gray-200';
+    theme === "dark"
+      ? "fg-dark border border-gray-500"
+      : "fg-light border border-gray-200";
 
   useEffect(() => {
     AOS.init({
       duration: 900,
       once: true,
-      easing: 'ease-in-out',
+      easing: "ease-in-out",
       offset: 100,
     });
     AOS.refresh();
@@ -110,14 +111,18 @@ const BecomePartner = () => {
           data-aos-delay="400"
           data-aos-duration="900"
         >
-          <button className="inline-flex items-center justify-center bg-green-700 text-white px-8 py-3 rounded-lg font-semibold shadow-lg hover:shadow-xl hover:bg-green-800 transition-all duration-300">
-            <Mail className="h-5 w-5 mr-2" />
-            Partner With Us
-          </button>
-          <button className="inline-flex items-center justify-center bg-transparent border-2 border-green-700 text-green-700 px-8 py-3 rounded-lg font-semibold hover:bg-green-700 hover:text-white transition-all duration-300">
-            <Download className="h-5 w-5 mr-2" />
-            Partnership Guide
-          </button>
+          <Link to={"/becomeapartner"}>
+            <button className="inline-flex cursor-pointer items-center justify-center bg-green-700 text-white px-8 py-3 rounded-lg font-semibold shadow-lg hover:shadow-xl hover:bg-green-800 transition-all duration-300">
+              <Mail className="h-5 w-5 mr-2" />
+              Partner With Us
+            </button>
+          </Link>
+          <a target="_blank" href="https://docs.google.com/document/d/1-WuqQc-7C38YRggcXVPBQA7oUIBi9OdnWthofsOqb3s/edit?usp=sharing">
+            <button className="inline-flex items-center cursor-pointer justify-center bg-transparent border-2 border-green-700 text-green-700 px-8 py-3 rounded-lg font-semibold hover:bg-green-700 hover:text-white transition-all duration-300">
+              <Download className="h-5 w-5 mr-2" />
+              Partnership Guide
+            </button>
+          </a>
         </div>
       </div>
     </div>

@@ -9,7 +9,7 @@ import FieldRegistration from "../pages/DashboardPages/FarmerDashboardPages/Fiel
 import MyProfile from "../pages/DashboardPage/ProfilePage/MyProfile";
 // import ActivityLoggingScheduling from "../pages/DashboardPage/FarmerDashboardPage/ActivityLoggingScheduling";
 import ChatwithAgriSpecialist from "../pages/DashboardPage/FarmerDashboardPage/ChatwithAgriSpecialist";
-import WeatherForecast from "../pages/DashboardPage/FarmerDashboardPage/WeatherForecast";
+
 import DailyToDoList from "../pages/DashboardPage/FarmerDashboardPage/DailyToDoList";
 import AuthLayout from "../layouts/AuthLayout";
 import Register from "../components/AuthComponents/Register";
@@ -35,15 +35,19 @@ import ProductTypeManagement from "../pages/DashboardPages/AdminDashboardPages/C
 import ProductSubCategoryManagement from "../pages/DashboardPages/AdminDashboardPages/CategoryManagement/ProductSubCategoryManagement";
 import ProductVariantManagement from "../pages/DashboardPages/AdminDashboardPages/CategoryManagement/ProductVariantManagement";
 // import AddNewProduct from '../pages/DashboardPages/SellerDashboardPages/AddNewItem';
-
 import Shop from "../pages/ShopPage/Shop";
 import MyReviews from "../pages/DashboardPages/CustomerDashboardPages/MyReviews";
 import MyWishlist from "../pages/DashboardPages/CustomerDashboardPages/MyWishlist";
-
 import OrderTracking from "../pages/DashboardPages/CustomerDashboardPages/OrderTracking";
 import ChatWithAgriSpecialist from "../pages/DashboardPages/FarmerDashboardPages/GuidanceAndSupport/ChatWithAgriSpecialist";
 import SpecialistChat from "../pages/DashboardPages/AgriSpecialistDashboardPages/Chat/SpecialistChat";
+import FarmerProfiles from "../pages/DashboardPages/AgriSpecialistDashboardPages/FarmerProfiles";
+import ProductModeration from "../pages/DashboardPages/AdminDashboardPages/ProductModeration/ProductModeration";
 import ActivityRoute from "../pages/DashboardPages/FarmerDashboardPages/ActivityRoute";
+import WeatherForecast from "../pages/DashboardPages/FarmerDashboardPages/WeatherForecast";
+import CartPage from "../pages/DashboardPages/CustomerDashboardPages/CartPage";
+import BecomeAPartner from "../pages/BecomeAPartner/BecomeAPartner";
+
 const router = createBrowserRouter([
   // -------------------------------------------
   // Root Layout
@@ -75,7 +79,7 @@ const router = createBrowserRouter([
       },
       {
         path: "cart",
-        Component: Cart,
+        Component: CartPage,
       },
       {
         path: "blog",
@@ -85,12 +89,12 @@ const router = createBrowserRouter([
         path: "update-profile/:email",
         Component: MyProfile,
       },
+      {
+        path: "becomeapartner",
+        Component: BecomeAPartner
+      }
     ],
   },
-
-  // -------------------------------------------
-  // Dashboard Layout
-  // -------------------------------------------
 
   {
     path: "/dashboard",
@@ -100,6 +104,7 @@ const router = createBrowserRouter([
         index: true,
         Component: DashboardHome,
       },
+
       {
         path: "my-profile",
         Component: MyProfile,
@@ -114,46 +119,12 @@ const router = createBrowserRouter([
         path: "specialist's-salary",
         Component: SpecialistsSalary,
       },
-      // {
-      //   path: "manage-sellers",
-      //   Component: ManageSellers,
-      // },
-      // {
-      //   path: "manage-customers",
-      //   Component: ManageCustomers,
-      // },
-      // {
-      //   path: "manage-agri-specialists",
-      //   Component: ManageAgriSpecialists,
-      // },
-      // {
-      //   path: "manage-farmers",
-      //   Component: ManageFarmers,
-      // },
-      // {
-      //   path: "manage-product-type",
-      //   Component: ProductTypeManagement,
-      // },
+
       {
         path: "management-product-category",
         Component: ProductCategoryManagement,
       },
-      // {
-      //   path: "manage-product-subCategory",
-      //   Component: ProductSubCategoryManagement,
-      // },
-      // {
-      //   path: "manage-product-variant",
-      //   Component: ProductVariantManagement,
-      // },
-      // {
-      //   path: "govt-news-facilites",
-      //   Component: GovtNewsAndFacilities,
-      // },
-      // {
-      //   path: "blogs-management",
-      //   Component: BlogsManagement,
-      // },
+
       {
         path: "manage-sellers",
         Component: ManageSellers,
@@ -195,45 +166,10 @@ const router = createBrowserRouter([
         Component: BlogsManagement,
       },
       {
-        path: "manage-sellers",
-        Component: ManageSellers,
+        path: "product-moderation",
+        Component: ProductModeration,
       },
-      {
-        path: "manage-customers",
-        Component: ManageCustomers,
-      },
-      {
-        path: "manage-agri-specialists",
-        Component: ManageAgriSpecialists,
-      },
-      {
-        path: "manage-farmers",
-        Component: ManageFarmers,
-      },
-      {
-        path: "manage-product-type",
-        Component: ProductTypeManagement,
-      },
-      {
-        path: "management-product-category",
-        Component: ProductCategoryManagement,
-      },
-      {
-        path: "manage-product-subCategory",
-        Component: ProductSubCategoryManagement,
-      },
-      {
-        path: "manage-product-variant",
-        Component: ProductVariantManagement,
-      },
-      {
-        path: "govt-news-facilites",
-        Component: GovtNewsAndFacilities,
-      },
-      {
-        path: "blogs-management",
-        Component: BlogsManagement,
-      },
+
       {
         path: "*",
         Component: ErrorPage,
@@ -254,10 +190,10 @@ const router = createBrowserRouter([
         path: "new-crop",
         Component: StartNewCrop,
       },
-      // {
-      //   path: "activity-scheduling",
-      //   Component: ActivityLoggingScheduling,
-      // },
+      //  {
+      //     path: "activity-scheduling",
+      //     Component: ActivityLoggingScheduling,
+      //  },
       {
         path: "chat-specialist",
         Component: ChatwithAgriSpecialist,
@@ -288,13 +224,8 @@ const router = createBrowserRouter([
         path: "add-new-item",
         Component: AddNewProduct,
       },
-      {
-        path: "add-new-item",
-        Component: AddNewProduct,
-      },
 
       // Customer Dashboard Routes
-
       {
         path: "review-rating",
         Component: MyReviews,
@@ -307,13 +238,16 @@ const router = createBrowserRouter([
         path: "track-current-orders",
         Component: OrderTracking,
       },
+      { path: "update-profile/:email", Component: MyProfile },
+
+      // agri Specialist Dashboard Routes
       {
-        path: "update-profile/:email",
-        Component: MyProfile,
+        path: "chat-with-farmers",
+        Component: SpecialistChat,
       },
       {
-        path: "*",
-        Component: ErrorPage,
+        path: "farmers-profiles",
+        Component: FarmerProfiles,
       },
     ],
   },
