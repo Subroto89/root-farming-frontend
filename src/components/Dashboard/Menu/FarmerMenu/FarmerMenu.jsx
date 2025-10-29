@@ -22,11 +22,13 @@ const FarmerMenu = () => {
           icon={Boxes}
         />
 
+
         <NavButton
           label="Resource Management"
           address="/dashboard/resource-management"
           icon={Boxes}
         />
+
 
         <CropManagementButton />
 

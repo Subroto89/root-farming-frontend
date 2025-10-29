@@ -1,13 +1,19 @@
-import React from 'react';
-import { User, Calendar, ArrowRight } from 'lucide-react';
-import { useNavigate } from 'react-router';
+import React from "react";
+import { User, Calendar, ArrowRight } from "lucide-react";
+import { useNavigate } from "react-router";
+import { useTheme } from "../../hooks/useTheme";
 
 const FeaturedPostCard = ({ post }) => {
+  const { theme } = useTheme();
+  const themeForegroundStyle = theme === "dark" ? "fg-dark" : "fg-light";
+
   const navigate = useNavigate();
   if (!post) return null;
 
   return (
-    <div className="bg-white rounded-lg shadow-lg overflow-hidden mb-12">
+    <div
+      className={`${themeForegroundStyle}  rounded-lg shadow-lg overflow-hidden mb-12`}
+    >
       <div className="grid grid-cols-1 lg:grid-cols-2">
         <div className="relative">
           <img
@@ -28,9 +34,7 @@ const FeaturedPostCard = ({ post }) => {
             </span>
             <span className="text-gray-500 text-sm ml-4">{post.readTime}</span>
           </div>
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">
-            {post.title}
-          </h2>
+          <h2 className="text-2xl font-bold  mb-4">{post.title}</h2>
           <p className="text-gray-600 mb-6">{post.excerpt}</p>
           <div className="flex items-center justify-between">
             <div className="flex items-center">

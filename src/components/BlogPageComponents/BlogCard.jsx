@@ -1,11 +1,18 @@
-import React from 'react';
-import { User, Calendar, ArrowRight } from 'lucide-react';
-import { useNavigate } from 'react-router';
+import React from "react";
+import { User, Calendar, ArrowRight } from "lucide-react";
+import { useNavigate } from "react-router";
+import { useTheme } from "../../hooks/useTheme";
 
 const BlogCard = ({ post }) => {
+
+  const { theme } = useTheme();
+  const themeBackgroundStyle = theme === "dark" ? "bg-dark" : "bg-light";
+  const themeForegroundStyle = theme === "dark" ? "fg-dark" : "fg-light";
+  const themeFgOfFgStyle = theme === "dark" ? "fg-of-fg-dark" : "fg-of-fg-light";
+
   const navigate = useNavigate();
   return (
-    <article className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+    <article className={`${themeForegroundStyle} bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1`}>
       <div className="relative">
         <img
           src={post.image}
@@ -13,7 +20,7 @@ const BlogCard = ({ post }) => {
           className="w-full h-48 object-cover"
         />
         <div className="absolute top-4 left-4">
-          <span className="bg-white bg-opacity-90 text-gray-800 px-2 py-1 rounded-full text-xs font-medium">
+          <span className={`${themeFgOfFgStyle} bg-white bg-opacity-90  px-2 py-1 rounded-full text-xs font-medium`}>
             {post.category}
           </span>
         </div>
@@ -24,7 +31,7 @@ const BlogCard = ({ post }) => {
           <span className="mr-4">{post.date}</span>
           <span>{post.readTime}</span>
         </div>
-        <h3 className="text-lg font-semibold text-gray-900 mb-3 line-clamp-2">
+        <h3 className="text-lg font-semibold  mb-3 line-clamp-2">
           {post.title}
         </h3>
         <p className="text-gray-600 mb-4 line-clamp-3">{post.excerpt}</p>

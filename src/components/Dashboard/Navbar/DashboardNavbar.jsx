@@ -10,9 +10,7 @@ const DashboardNavbar = ({isSideBarOpen, toggleMenu}) => {
       <nav className="h-14 relative flex items-center justify-between gap-4 bg-gray-600 text-xl bg-gradient-to-b from-teal-50 to-gray-400 p-4 shadow-lg">
         {/* Logo Section */}
         <div className="w-40 rounded-lg overflow-hidden">
-          <Link to="/">
             <RFLogo />
-          </Link>
         </div>
 
         <div className="flex items-center justify-between gap-4">
