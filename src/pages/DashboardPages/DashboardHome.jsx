@@ -1,4 +1,4 @@
-import useAuth from '../../hooks/useAuth';
+import {useAuth} from '../../hooks/useAuth';
 import LoadingSpinner from '../../components/shared/LoadingSpinner';
 import AdminDashboardHome from '../../pages/DashboardPages/AdminDashboardPages/AdminDashboardHome';
 import FarmerDashboardHome from '../../pages/DashboardPages/FarmerDashboardPages/FarmerDashboardHome';
@@ -10,7 +10,7 @@ import useUserRole from '../../hooks/useUserRole';
 
 const DashboardHome = () => {
   const { user, loading } = useAuth();
-  const {userRole, userRoleLoading} = useUserRole() 
+  const {userRole, userRoleLoading} = useUserRole(); 
 
   if (loading || userRoleLoading) {
     return <LoadingSpinner />;

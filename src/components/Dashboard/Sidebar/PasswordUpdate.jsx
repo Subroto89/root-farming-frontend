@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import useAuth from "../../../hooks/useAuth";
+import {useAuth} from "../../../hooks/useAuth";
 import Swal from "sweetalert2";
 import { BounceLoader } from "react-spinners";
 import { FaKey, FaLock } from "react-icons/fa";

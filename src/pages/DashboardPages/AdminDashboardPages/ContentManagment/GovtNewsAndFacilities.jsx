@@ -6,8 +6,13 @@ import GovtNewsForm from '../../../../components/Dashboard/GovtNewsComponents/Go
 import GovtNewsModal from '../../../../components/Dashboard/GovtNewsComponents/GovtNewsModal';
 import useAxiosSecure from '../../../../hooks/UseAxiosSecure';
 import LoadingSpinner from '../../../../components/shared/LoadingSpinner';
+import { useTheme } from '../../../../hooks/useTheme';
 
 const GovtNewsAndFacilities = () => {
+  const {theme} = useTheme();
+ const themeBackgroundStyle = theme === 'dark' ? "bg-dark" : "bg-light";
+    const themeForegroundStyle = theme === 'dark' ? "fg-dark" : "fg-light";
+    const themeFgOfFgStyle = theme === 'dark' ? "fg-of-fg-dark" : "fg-of-fg-light"
   const axiosSecure = useAxiosSecure();
   const queryClient = useQueryClient();
   const [isOpen, setIsOpen] = useState(false);

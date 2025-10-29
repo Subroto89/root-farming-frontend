@@ -6,7 +6,7 @@ import AddressUpdateForm from "../../../components/Dashboard/Sidebar/AddressUpda
 import Button from "../../../components/shared/Buttons/Button";
 import PasswordUpdateForm from "../../../components/Dashboard/Sidebar/PasswordUpdate";
 import PasswordUpdate from "../../../components/Dashboard/Sidebar/PasswordUpdate";
-import useAuth from "../../../hooks/useAuth";
+import {useAuth} from "../../../hooks/useAuth";
 
 const MyProfile = () => {
   const {user, loading} = useAuth();

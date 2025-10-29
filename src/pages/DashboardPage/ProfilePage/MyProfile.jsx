@@ -1,5 +1,5 @@
 import React from 'react';
-import useAuth from '../../../hooks/useAuth';
+import {useAuth} from '../../../hooks/useAuth';
 import useUserRole from '../../../hooks/useUserRole';
 import LoadingSpinner from '../../../components/LoadingSpinner';
 import defaultCoverImg from '../../../assets/Logo/defaultCoverImg.jpg';

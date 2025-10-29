@@ -21,6 +21,10 @@ const InputField = ({
   const {theme} = useTheme();
   const themeStyle = theme === 'dark' ? "border border-gray-200 text-white" : "border border-gray-800 text-gray-800"
 
+   const themeBackgroundStyle = theme === 'dark' ? "bg-dark" : "bg-light";
+    const themeForegroundStyle = theme === 'dark' ? "fg-dark" : "fg-light";
+    const themeFgOfFgStyle = theme === 'dark' ? "fg-of-fg-dark" : "fg-of-fg-light"
+
 
   const isTextArea = type === "textarea";
   const isSelect = type === "select";
@@ -53,7 +57,7 @@ const InputField = ({
                 placeholder={placeholder}
                 rows={rows}
                 {...register(name, validationRules)}
-                className={`${themeStyle} mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm
+                className={`${themeFgOfFgStyle} mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm
                 ${errors[name] ? "border-red-500" : "border-gray-300"}
             `}
             ></textarea>
@@ -62,7 +66,7 @@ const InputField = ({
                 id={name}
                 name={name}
                 {...register(name, validationRules)}
-                className={`${themeStyle} mt-1 text-white block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none  sm:text-sm ${errors[name] ? "border-red-500" : "border-gray-300"}
+                className={`${themeFgOfFgStyle} mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none  sm:text-sm ${errors[name] ? "border-red-500" : "border-gray-300"}
             `}
             >
                 {/* Default option for select, often "Select a..." */}
@@ -82,7 +86,7 @@ const InputField = ({
                 name={name}
                 placeholder={placeholder}
                 setValue={defaultValue}
-                className={`${themeStyle} w-full  bg-white/10 border border-[#3E4B24]/40 text-white rounded-lg p-2  ${
+                className={`${themeFgOfFgStyle} w-full  bg-white/10 border border-[#3E4B24]/40 text-white rounded-lg p-2  ${
                 Icon ? "pl-10" : "pl-4"
                 } focus:outline-none focus:ring-2 focus:ring-[#A3B18A] placeholder:text-white/60 ${ errors[name] ? "border-red-500" : "border-gray-300"
                 }`}

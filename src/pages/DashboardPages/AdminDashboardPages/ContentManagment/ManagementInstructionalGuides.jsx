@@ -8,12 +8,19 @@ import { Pencil, Trash2, FilePlus } from "lucide-react";
 import InputField from "../../../../components/shared/InputField/InputField";
 import LoadingPage from "../../../../components/shared/LoadingSpinner";
 import useAxiosSecure from "../../../../hooks/UseAxiosSecure";
+import { useTheme } from "../../../../hooks/useTheme";
 
 const ManagementInstructionalGuides = () => {
     const queryClient = useQueryClient();
     const [editGuide, setEditGuide] = useState(null);
     const [uploading, setUploading] = useState(false);
     const axiosSecure=useAxiosSecure()
+   
+    // Theme Setup 
+    const {theme} = useTheme();
+    const themeBackgroundStyle = theme === 'dark' ? "bg-dark" : "bg-light";
+    const themeForegroundStyle = theme === 'dark' ? "fg-dark" : "fg-light";
+    const themeFgOfFgStyle = theme === 'dark' ? "fg-of-fg-dark" : "fg-of-fg-light"
 
     // React Hook Form setup
     const {
@@ -125,11 +132,11 @@ const ManagementInstructionalGuides = () => {
     if (isLoading) return  <LoadingPage />;
 
     return (
-        <div className="p-8 bg-gray-100 min-h-screen">
-            <div className="max-w-6xl mx-auto bg-white rounded-2xl shadow-lg p-8 border border-gray-300">
+        <div className={`p-6 min-h-screen ${themeBackgroundStyle} `}>
+            <div className={`max-w-6xl mx-auto bg-white rounded-2xl shadow-lg p-8 border border-gray-300 ${themeForegroundStyle}`}>
                 {/* HEADER */}
                 <div className="flex justify-between items-center mb-8">
-                    <h2 className="text-2xl font-semibold text-gray-800 flex items-center gap-2">
+                    <h2 className="text-2xl font-semibold flex items-center gap-2">
                         <FilePlus className="text-green-600" /> Manage Instructional Guides
                     </h2>
                 </div>
@@ -137,7 +144,7 @@ const ManagementInstructionalGuides = () => {
                 {/* FORM */}
                 <form
                     onSubmit={handleSubmit(onSubmit)}
-                    className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10"
+                    className={`grid grid-cols-1 md:grid-cols-2 gap-4 mb-10 `}
                 >
                     <InputField
                         name="title"
@@ -155,10 +162,10 @@ const ManagementInstructionalGuides = () => {
                         type="select"
                         placeholder="Select Role"
                         options={[
-                            { value: "Farmer", label: "Farmer" },
-                            { value: "Seller", label: "Seller" },
-                            { value: "Customer", label: "Customer" },
-                            { value: "Specialist", label: "Agri-Specialist" },
+                            { value: "farmer", label: "Farmer" },
+                            { value: "seller", label: "Seller" },
+                            { value: "customer", label: "Customer" },
+                            { value: "agri-specialist", label: "Agri-Specialist" },
                         ]}
                         register={register}
                         validationRules={{ required: "Role is required" }}
@@ -213,7 +220,7 @@ const ManagementInstructionalGuides = () => {
                     {guides.map((g) => (
                         <div
                             key={g._id}
-                            className="border border-gray-300 rounded-xl shadow-lg hover:shadow-lg transition bg-white p-5 flex flex-col justify-between"
+                            className={`border border-gray-300 rounded-lg p-4 flex flex-col justify-between ${themeFgOfFgStyle}`}
                         >
                             {g.attachment && (
                                 <img
@@ -223,11 +230,11 @@ const ManagementInstructionalGuides = () => {
                                 />
                             )}
                             <div>
-                                <h3 className="font-semibold text-lg text-gray-800 mb-1">{g.title}</h3>
-                                <p className="text-sm text-gray-600 mb-2">
+                                <h3 className="font-semibold text-lg mb-1">{g.title}</h3>
+                                <p className={`${themeFgOfFgStyle} text-sm mb-2`}>
                                     {g.description?.slice(0, 90)}...
                                 </p>
-                                <span className="text-xs text-gray-500 font-medium">Role: {g.role}</span>
+                                <span className="text-xs font-medium">Role: {g.role}</span>
                             </div>
                             <div className="flex gap-3 mt-4 justify-end">
                                 <button

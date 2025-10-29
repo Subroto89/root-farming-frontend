@@ -2,7 +2,7 @@ import React from 'react';
 import { ShoppingCart, Star, MapPin } from 'lucide-react';
 import { useNavigate } from 'react-router';
 import { useTheme } from '../../hooks/useTheme';
-import useAuth from '../../hooks/useAuth';
+import {useAuth} from '../../hooks/useAuth';
 import useAxiosSecure from '../../hooks/UseAxiosSecure';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast, ToastContainer } from "react-toastify";
