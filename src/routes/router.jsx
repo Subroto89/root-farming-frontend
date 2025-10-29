@@ -48,6 +48,10 @@ import ProductModeration  from "../pages/DashboardPages/AdminDashboardPages/Prod
 import ActivityRoute from "../pages/DashboardPages/FarmerDashboardPages/ActivityRoute";
 import WeatherForecast from '../pages/DashboardPages/FarmerDashboardPages/WeatherForecast';
 import CartPage from '../pages/DashboardPages/CustomerDashboardPages/CartPage';
+import SellerDashboardHome from "../pages/DashboardPages/SellerDashboardPages/SellerDashboardHome";
+import ProductManage from "../pages/DashboardPages/AdminDashboardPages/ProductManage";
+import ManageExistingListing from "../pages/DashboardPages/SellerDashboardPages/ManageExistingListings";
+import ManagePaymentSetting from "../pages/DashboardPages/AdminDashboardPages/FinancialsAndCommission/ManagePaymentSetting";
 
 const router = createBrowserRouter([
   // -------------------------------------------
@@ -120,6 +124,10 @@ const router = createBrowserRouter([
         path: "specialist's-salary",
         Component: SpecialistsSalary,
       },
+      {
+        path: "manage-payment-setting",
+        Component: ManagePaymentSetting,
+      },
      
       {
         path: "management-product-category",
@@ -168,7 +176,7 @@ const router = createBrowserRouter([
       },
       {
         path: 'product-moderation',
-        Component: ProductModeration
+        Component: ProductManage
       },
      
       {
@@ -227,11 +235,18 @@ const router = createBrowserRouter([
 
          // Seller Dashboard Routes
          {
+            path: "seller-dashboard-home",
+            Component: SellerDashboardHome,
+         },
+         {
             path: "add-new-item",
             Component: AddNewProduct,
          },
        
-   
+          {
+        path: "manage-existing-listings",
+        Component: ManageExistingListing,
+      },
      
          // Customer Dashboard Routes
          {
@@ -246,7 +261,8 @@ const router = createBrowserRouter([
             path: "track-current-orders",
             Component: OrderTracking,
          },
-         {path: "update-profile/:email",
+         {
+          path: "update-profile/:email",
           Component: MyProfile,
 
          },

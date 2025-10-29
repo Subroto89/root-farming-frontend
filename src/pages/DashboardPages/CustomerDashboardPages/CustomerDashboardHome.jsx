@@ -49,7 +49,7 @@ const CustomerDashboardHome = () => {
     </div>
     )
     return (
-        <div className= {`${themeBackgroundStyle} px-6  space-y-6 pt-4`}>
+        <div className= {`${themeBackgroundStyle} px-6  space-y-6 pt-4 min-h-screen`}>
 
             {/* Header Section */}
             <div className={`${themeBackgroundStyle} flex flex-col sm:flex-row sm:items-center sm:justify-between`}>
