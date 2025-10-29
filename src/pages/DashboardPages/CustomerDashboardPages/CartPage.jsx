@@ -106,15 +106,15 @@ const CartPage = () => {
   );
 
   return (
-    <div className={`${backgroundThemeClass}`}>
+    <div className={`${backgroundThemeClass} min-h-screen `}>
       <div className="max-w-5xl mx-auto px-4 py-10">
         <h2 className="text-3xl font-bold mb-6 text-center text-black"> Your Shopping Cart</h2>
 
         <div className="space-y-5 max-h-[450px] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200">
-          {cartItems?.map((item) => (
+           {cartItems?.map((item) => (
             <div
               key={item._id}
-              className="flex flex-col md:flex-row items-center justify-between bg-green-300 shadow-md rounded-xl p-4"
+              className={`flex flex-col md:flex-row justify-between items-center p-4 rounded-lg shadow-md ${foregroundThemeClass} `}
             >
               {/* Product Info */}
               <div className="flex items-center gap-4 w-full md:w-1/2">
@@ -125,13 +125,11 @@ const CartPage = () => {
                 />
                 <div>
                   <h3 className="text-lg font-semibold">{item.name}</h3>
-                  <p className="text-gray-600">Price: ${item.price.toFixed(2)}</p>
+                  <p className="text-gray-600">Price: ${item?.price}</p>
                   <p className="text-gray-400 text-sm">
-                    Added:{new Date(item.createdAt).toLocaleDateString()}
+                      Added:{new Date(item.createdAt).toLocaleDateString()}
                   </p>
-                </div>
-              </div>
-              {/* Shipping Address */}
+                  {/* Shipping Address */}
               {item.shippingAddress ? (
                 <div className="text-gray-700 text-sm mt-1">
                   <p><span className="font-semibold">Address:</span> {item.shippingAddress.addressLine1}, {item.shippingAddress.addressLine2 && `${item.shippingAddress.addressLine2},`} {item.shippingAddress.city}, {item.shippingAddress.stateProvince}, {item.shippingAddress.country} - {item.shippingAddress.zipCode}</p>
@@ -148,6 +146,10 @@ const CartPage = () => {
               ) : (
                 <p className="text-red-500 text-sm mt-1">No phone number provided</p>
               )}
+                </div>
+                
+              </div>
+              
               {/* Quantity & Remove */}
               <div className="flex items-center gap-4 mt-3 md:mt-0">
                 <div className="flex items-center gap-2 border rounded-lg px-2 py-1">

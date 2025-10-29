@@ -8,14 +8,12 @@ import SellerMenu from '../Menu/SellerMenu/SellerMenu';
 const UserWiseMenu = () => {
   const { userRole } = useUserRole();
 
-
-
   return (
     <>
       <div>
         {userRole === 'admin' ? (
           <AdminMenu />
-        ) : userRole === 'seller' ? (
+       ) : userRole === 'seller' ? (
           <SellerMenu />
         ) : userRole === 'customer' ? (
           <CustomerMenu />

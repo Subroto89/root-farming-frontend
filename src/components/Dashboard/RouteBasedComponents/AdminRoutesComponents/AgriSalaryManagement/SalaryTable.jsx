@@ -1,10 +1,15 @@
 import React from "react";
+import { useTheme } from "../../../../../hooks/useTheme";
 
 export default function SalaryTable({ specialists, calculateNetSalary, handleSelect, handlePay }) {
+  const {theme} = useTheme();
+ const themeBackgroundStyle = theme === 'dark' ? "bg-dark" : "bg-light";
+    const themeForegroundStyle = theme === 'dark' ? "fg-dark" : "fg-light";
+    const themeFgOfFgStyle = theme === 'dark' ? "fg-of-fg-dark" : "fg-of-fg-light"
   return (
     <div className="overflow-x-auto max-h-[400px] overflow-y-auto border rounded-lg">
       <table className="w-full table-auto text-sm border-collapse">
-        <thead className="bg-gray-100 sticky top-0">
+        <thead className={`${themeBackgroundStyle} sticky top-0`}>
           <tr className="text-center">
             <th className="px-3 py-2 min-w-[40px]">SL</th>
             <th className="px-3 py-2 min-w-[150px]">Name</th>
@@ -20,9 +25,9 @@ export default function SalaryTable({ specialists, calculateNetSalary, handleSel
           </tr>
         </thead>
 
-        <tbody>
+        <tbody className={`${themeFgOfFgStyle}`}>
           {specialists.map((s, idx) => (
-            <tr key={s.id} className="border-b hover:bg-gray-50 text-center">
+            <tr key={s.id} className="border-b hover:bg-gray-500 text-center">
               <td className="px-3 py-2">{idx + 1}</td>
               <td className="px-3 py-2">{s.name}</td>
               <td className="px-3 py-2">{s.id}</td>

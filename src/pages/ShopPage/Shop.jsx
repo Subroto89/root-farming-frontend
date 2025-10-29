@@ -8,29 +8,30 @@ import { useTheme } from '../../hooks/useTheme';
 // import CustomChatbot from '../../components/CustomChatbot/CustomChatbot';
 
 const Shop = () => {
-  const {theme} = useTheme();
+  const { theme } = useTheme();
 
-    const themeBackgroundStyle = theme === 'dark' ? "bg-dark" : "bg-light";
-    const themeForegroundStyle = theme === 'dark' ? "fg-dark" : "fg-light";
-
+  const themeBackgroundStyle = theme === 'dark' ? "bg-dark" : "bg-light";
+  const themeForegroundStyle = theme === 'dark' ? "fg-dark" : "fg-light";
 
   const [search, setSearch] = useState('');
-  const [category, setCategory] = useState('All');
-  const [location, setLocation] = useState('All');
+  const [category, setCategory] = useState('All'); // placeholder
+  const [location, setLocation] = useState('All'); // placeholder
   const [viewMode, setViewMode] = useState('grid');
   const [sort, setSort] = useState('featured');
 
   const { data: products = [], refetch } = useProducts({
     search,
-    category,
-    location,
+    // category and location will work later
+    category: category !== 'All' ? category : undefined,
+    location: location !== 'All' ? location : undefined,
     sort,
   });
 
   const { data: categories = ['All'] } = useCategories();
   const { data: locations = ['All'] } = useLocations();
 
-  // ✅ Reset filters
+  
+
   const handleReset = () => {
     setSearch('');
     setCategory('All');
@@ -40,10 +41,15 @@ const Shop = () => {
   };
 
   return (
+<<<<<<< HEAD
     <div className={`${themeBackgroundStyle} min-h-screen bg-gray-50 dark:bg-neutral-900 py-16`}>
       {/* <CustomChatbot /> */}
       {/* Header Section */}
       <div className="max-w-7xl mx-auto mb-8 text-center sm:text-left px-4 sm:px-6 lg:px-8">
+=======
+    <div className={`${themeBackgroundStyle} min-h-screen py-16`}>
+      <div className=" sticky top-20 max-w-7xl mx-auto mb-8 text-center sm:text-left px-4 sm:px-6 lg:px-8 z-1000">
+>>>>>>> 028775654e6547731b46220ef83b253f0fb7e435
         <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-2">
           Shop Now
         </h1>
@@ -52,8 +58,7 @@ const Shop = () => {
         </p>
       </div>
 
-      {/* Filters Section */}
-      <div className="max-w-7xl mx-auto mb-10 px-4 sm:px-6 lg:px-8">
+      <div className=" sticky top-1/4 z-1000 max-w-7xl mx-auto mb-10 px-4 sm:px-6 lg:px-8">
         <Filters
           search={search}
           setSearch={setSearch}
@@ -71,7 +76,6 @@ const Shop = () => {
         />
       </div>
 
-      {/* Products Section */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {products.length ? (
           <div
@@ -94,7 +98,7 @@ const Shop = () => {
           </div>
         )}
       </div>
-    </div>
+   </div>
   );
 };
 
