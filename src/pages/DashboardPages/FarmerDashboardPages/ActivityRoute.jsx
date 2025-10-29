@@ -1,61 +1,83 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Calendar,
   DollarSign,
   FileText,
+  Plus,
   StickyNote,
   Trash2,
 } from "lucide-react";
 import Swal from "sweetalert2";
-import ActivityCard from "../../../components/ActivityCard";
+import ActivityCard from "../../../components/FarmarDashboardComponents/ActivityCard";
 import { useTheme } from "../../../hooks/useTheme";
+import { useLoaderData } from "react-router";
+import useAxiosSecure from "../../../hooks/UseAxiosSecure";
+import { set } from "date-fns";
 
 const ActivityRoute = () => {
   const { theme } = useTheme();
   const themeBackgroundStyle = theme === "dark" ? "bg-dark" : "bg-light";
   const themeForegroundStyle = theme === "dark" ? "fg-dark" : "fg-light";
-  const themeFgOfFgStyle =
-    theme === "dark" ? "fg-of-fg-dark" : "fg-of-fg-light";
+  const themeFgOfFgStyle =    theme === "dark" ? "fg-of-fg-dark" : "fg-of-fg-light";
 
-  const handleactivity = (e) => {
+  const axiosSecure = useAxiosSecure();
+  const [farmerFields, setFarmerFields] = useState([]);
+  const [activities, setActivites] = useState([]);
+
+  const fetchFarmerFields = async () => {
+    const {
+      data: { data },
+    } = await axiosSecure("http://localhost:3000/farmerFields");
+    setFarmerFields(data);
+  };
+
+  const fetchActivities = async () => {
+    const { data } = await axiosSecure("http://localhost:3000/activities");
+    setActivites(data);
+  };
+
+  useEffect(() => {
+    fetchActivities();
+    fetchFarmerFields();
+  }, [activities]);
+
+  const handleactivity = async (e) => {
     e.preventDefault();
     const form = e.target;
     const formData = new FormData(form);
     const activityData = Object.fromEntries(formData.entries());
-    console.log(activityData);
 
-    fetch("http://localhost:3000/activities", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(activityData),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.insertedId) {
-          document.getElementById("my_modal_3").close();
-          Swal.fire({
-            title: "New Activities Added",
-            icon: "success",
-            draggable: true,
-          });
-        
-        }
+    const data = await axiosSecure.post(
+      "http://localhost:3000/activities",
+      activityData
+    );
+
+    if (data?.data?.insertedId) {
+      fetchActivities();
+      document.getElementById("my_modal_3").close();
+      Swal.fire({
+        title: "New Activities Added",
+        icon: "success",
+        draggable: true,
       });
+    }
+
     form.reset();
   };
 
   return (
-    <div className={`${themeBackgroundStyle} h-screen text-black p-2`}>
+    <div
+      className={`${themeBackgroundStyle} h-screen overflow-hidden text-black p-6`}
+    >
       <div className="flex items-center justify-between">
         <h3 className="text-2xl">Activity Login</h3>
 
         <div>
           <button
-            className="p-2 bg-green-600 text-white rounded-lg mr-3"
+            className="p-2 bg-green-600 text-white rounded-lg mr-3 flex items-center gap-1 cursor-pointer"
             onClick={() => document.getElementById("my_modal_3").showModal()}
           >
+            <Plus />
             Add Activity
           </button>
 
@@ -70,7 +92,6 @@ const ActivityRoute = () => {
                 </button>
               </form>
 
-              {/* ................. */}
               <form
                 onSubmit={handleactivity}
                 className=" rounded-2xl   space-y-5"
@@ -93,6 +114,9 @@ const ActivityRoute = () => {
                       <option>Fertilizing</option>
                       <option>Irrigation</option>
                       <option>Harvesting</option>
+                      <option>Pest Control</option>
+                      <option>Weeding</option>
+                      <option>Other</option>
                     </select>
                   </div>
 
@@ -107,8 +131,9 @@ const ActivityRoute = () => {
                       className={`${themeForegroundStyle} w-full p-2.5 rounded-lg  border `}
                     >
                       <option value="">No specific field</option>
-                      <option>Field A</option>
-                      <option>Field B</option>
+                      {farmerFields.map((fieldData) => (
+                        <option key={fieldData._id}>{fieldData.name}</option>
+                      ))}
                     </select>
                   </div>
                 </div>
@@ -123,7 +148,6 @@ const ActivityRoute = () => {
                       name="activityDate"
                       required
                       className="w-full p-2.5 rounded-lg  border "
-                      defaultValue="2025-10-22"
                     />
                   </div>
                   <div>
@@ -152,10 +176,24 @@ const ActivityRoute = () => {
                   />
                 </div>
 
+                {/* Activity Title */}
+                <div>
+                  <label className=" mb-1 text-sm font-medium flex items-center gap-1">
+                    <FileText size={16} /> Activity Title
+                  </label>
+                  <input
+                    type="text"
+                    name="title"
+                    required
+                    placeholder="Activity Title"
+                    className="w-full p-2.5 rounded-lg  border  "
+                  />
+                </div>
+
                 {/* Description */}
                 <div>
                   <label className=" mb-1 text-sm font-medium flex items-center gap-1">
-                    <FileText size={16} /> Description
+                    <StickyNote size={16} /> Description
                   </label>
                   <textarea
                     placeholder="Describe the activity..."
@@ -166,33 +204,20 @@ const ActivityRoute = () => {
                   ></textarea>
                 </div>
 
-                {/* Notes */}
-                <div>
-                  <label className=" mb-1 text-sm font-medium flex items-center gap-1">
-                    <StickyNote size={16} /> Notes (Optional)
-                  </label>
-                  <textarea
-                    placeholder="Additional notes..."
-                    rows={2}
-                    name="notes"
-                    className="w-full p-2.5 rounded-lg  border "
-                  ></textarea>
-                </div>
-
                 {/* Submit */}
                 <button className="w-full py-2.5 bg-green-600 hover:bg-green-700 cursor-pointer text-white rounded-lg font-medium transition">
                   Save Activity
                 </button>
               </form>
-              {/* .......................... */}
             </div>
           </dialog>
         </div>
       </div>
 
       {/* ----- card ------ */}
-
-      <ActivityCard ></ActivityCard>
+      <div className="h-full overflow-auto pb-3 mb-6">
+        <ActivityCard fetchData={activities}></ActivityCard>
+      </div>
     </div>
   );
 };

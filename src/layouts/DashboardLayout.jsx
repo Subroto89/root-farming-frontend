@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Outlet } from "react-router";
+import { useEffect, useState } from "react";
+import { Outlet, useLocation } from "react-router";
 import DashboardNavbar from "../components/Dashboard/Navbar/DashboardNavbar";
 import DashboardSidebar from "../components/Dashboard/Sidebar/DashboardSidebar";
 // import ChatBotComponent from "../components/ChatBot/ChatBot";
@@ -9,6 +9,11 @@ const DashboardLayout = () => {
   const toggleMenu = () => {
     setIsSideBarOpen(!isSideBarOpen);
   };
+
+  const {pathname}=useLocation()
+  useEffect(()=>{
+   window.scrollTo({ top: 0, behavior: "smooth" });
+  },[pathname])
 
   return (
     <>

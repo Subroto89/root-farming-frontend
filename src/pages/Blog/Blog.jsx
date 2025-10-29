@@ -1,27 +1,31 @@
-import React, { useState } from 'react';
-import { useQuery } from '@tanstack/react-query';
-import useAxiosSecure from '../../hooks/UseAxiosSecure';
-import FeaturedPostCard from '../../components/BlogPageComponents/FeaturedPostCard';
-import BlogCategories from '../../components/BlogPageComponents/BlogCategories';
-import BlogCard from '../../components/BlogPageComponents/Blogcard';
-import LoadingSpinner from '../../components/shared/LoadingSpinner';
+import React, { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import useAxiosSecure from "../../hooks/UseAxiosSecure";
+import FeaturedPostCard from "../../components/BlogPageComponents/FeaturedPostCard";
+import BlogCategories from "../../components/BlogPageComponents/BlogCategories";
+import BlogCard from "../../components/BlogPageComponents/Blogcard";
+import LoadingSpinner from "../../components/shared/LoadingSpinner";
+import { useTheme } from "../../hooks/useTheme";
 
 const Blog = () => {
+  const { theme } = useTheme();
+  const themeBackgroundStyle = theme === "dark" ? "bg-dark" : "bg-light";
+
   const axiosSecure = useAxiosSecure();
-  const [selectedCategory, setSelectedCategory] = useState('All Posts');
+  const [selectedCategory, setSelectedCategory] = useState("All Posts");
 
   const { data: featuredPost, isLoading: loadingFeatured } = useQuery({
-    queryKey: ['featuredBlog'],
+    queryKey: ["featuredBlog"],
     queryFn: async () => {
-      const { data } = await axiosSecure.get('/blogs/featured');
+      const { data } = await axiosSecure.get("/blogs/featured");
       return data;
     },
   });
 
   const { data: blogPosts = [], isLoading: loadingBlogs } = useQuery({
-    queryKey: ['blogs'],
+    queryKey: ["blogs"],
     queryFn: async () => {
-      const { data } = await axiosSecure.get('/blogs');
+      const { data } = await axiosSecure.get("/blogs");
       return data;
     },
   });
@@ -30,18 +34,21 @@ const Blog = () => {
     return <LoadingSpinner />;
   }
 
-  const categories = ['All Posts', ...new Set(blogPosts.map(b => b.category))];
+  const categories = [
+    "All Posts",
+    ...new Set(blogPosts.map((b) => b.category)),
+  ];
 
   const filteredPosts =
-    selectedCategory === 'All Posts'
+    selectedCategory === "All Posts"
       ? blogPosts
-      : blogPosts.filter(p => p.category === selectedCategory);
+      : blogPosts.filter((p) => p.category === selectedCategory);
 
   return (
-    <div className="min-h-screen py-20 bg-gray-50">
+    <div className={`${themeBackgroundStyle} min-h-screen py-20 bg-gray-50`}>
       <div className="max-w-7xl mx-auto px-4">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-4">
+          <h1 className="text-3xl font-bold  mb-4">
             Agriculture Blog
           </h1>
           <p className="text-gray-600">
@@ -58,7 +65,7 @@ const Blog = () => {
         />
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {filteredPosts.map(post => (
+          {filteredPosts.map((post) => (
             <BlogCard key={post._id} post={post} />
           ))}
         </div>

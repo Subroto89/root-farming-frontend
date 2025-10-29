@@ -53,6 +53,7 @@ import CartPage from '../pages/DashboardPages/CustomerDashboardPages/CartPage';
 import GovernmentInfo from "../pages/DashboardPages/FarmerDashboardPages/GovernmentInfo";
 import InstructionalGuides from "../pages/DashboardPages/FarmerDashboardPages/GuidanceAndSupport/InstructionalGuides";
 import BecomeAPartner from "../pages/BecomeAPartner/BecomeAPartner";
+import UnderConstructionPage from "../components/shared/UnderConstructionPage";
 
 
 const router = createBrowserRouter([
@@ -102,10 +103,11 @@ const router = createBrowserRouter([
         path: "becomeapartner",
         Component: BecomeAPartner,
       },
-      // {
-      //   path: "underconstructionpage",
-      //   Component: UnderConstructionPage,
-      // }
+      {
+        path: "underconstructionpage",
+        Component: UnderConstructionPage,
+      }
+
     ],
   },
 
@@ -202,7 +204,6 @@ const router = createBrowserRouter([
       },
       {
         path: "ActivityRoute",
-        loader: () => fetch("http://localhost:3000/activities"),
         Component: ActivityRoute,
       },
       {
