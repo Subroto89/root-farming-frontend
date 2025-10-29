@@ -50,6 +50,8 @@ import FarmersProfiles from "../pages/DashboardPages/AgriSpecialistDashboardPage
 import MyEarnings from "../pages/DashboardPages/AgriSpecialistDashboardPages/MyEarnings";
 import ChatBot from "../pages/DashboardPages/FarmerDashboardPages/ChatBot";
 import CartPage from '../pages/DashboardPages/CustomerDashboardPages/CartPage';
+import GovernmentInfo from "../pages/DashboardPages/FarmerDashboardPages/GovernmentInfo";
+import InstructionalGuides from "../pages/DashboardPages/FarmerDashboardPages/GuidanceAndSupport/InstructionalGuides";
 
 
 const router = createBrowserRouter([
@@ -91,10 +93,10 @@ const router = createBrowserRouter([
         Component: Blog,
       },
       // Note: This route exists under both RootLayout and DashboardLayout.
-      {
-        path: "update-profile/:email",
-        Component: MyProfile,
-      },
+      // {
+      //   path: "update-profile/:email",
+      //   Component: MyProfile,
+      // },
     ],
   },
 
@@ -110,8 +112,8 @@ const router = createBrowserRouter([
         Component: DashboardHome,
       },
 
-      {
-        path: "my-profile",
+     {
+        path: "update-profile/:email",
         Component: MyProfile,
       },
 
@@ -202,10 +204,17 @@ const router = createBrowserRouter([
         path: "activity-scheduling",
         Component: ActivityLoggingScheduling,
       },
-      // Chat route conflict resolved: Kept 'live-chat' and 'chat-bot'
+      {
+        path: "instructional-guides",
+        Component: InstructionalGuides, 
+      },
       {
         path: "live-chat",
         Component: ChatWithAgriSpecialist,
+      },
+      {
+        path:"government-info",
+        Component: GovernmentInfo,
       },
       {
         path: "chat-bot",

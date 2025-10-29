@@ -10,7 +10,7 @@ const FinancialsAndCommissionsDropdown = () => {
             <div className={`${themeForegroundStyle} pl-6 flex flex-col items-start border-t border-b border-gray-300`}>
                 <NavButton
                     label="Specialist's Salary"
-                    address="/dashboard/specialist's salary"
+                    address="/dashboard/specialist's-salary"
                     textSize="xs"
                 />    
 

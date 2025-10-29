@@ -61,6 +61,7 @@ const CartPage = () => {
         showConfirmButton: false,
       });
     },
+    
     onError: () => {
       Swal.fire({
         icon: "error",
