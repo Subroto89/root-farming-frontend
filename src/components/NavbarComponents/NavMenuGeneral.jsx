@@ -6,7 +6,7 @@ import AuthenticationButton from "./AuthenticationButton";
 const NavMenuGeneral = () => {
   return (
     <>
-      <div className="flex justify-center items-center gap-2">
+      <div className="flex justify-center items-center gap-5">
         <NavButton label="Home" address="/" />
         <NavButton label="About Us" address="/about" />
         <NavButton label="Contact Us" address="/contact" />

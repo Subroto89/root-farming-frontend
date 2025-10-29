@@ -1,7 +1,7 @@
 import React from 'react';
 import Swal from 'sweetalert2';
 import MyWishilistCard from '../../../components/MyWishilistCard/MyWishilistCard';
-import useAuth from '../../../hooks/useAuth';
+import {useAuth} from '../../../hooks/useAuth';
 import {
   useDeleteWishlist,
   useWishlist,

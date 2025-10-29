@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import useAuth from "../../../../../../hooks/useAuth";
+import {useAuth} from "../../../../../../hooks/useAuth";
 import { useForm } from "react-hook-form";
 import InputField from "../../../../../shared/InputField/InputField";
 import useAxiosSecure from "../../../../../../hooks/UseAxiosSecure";

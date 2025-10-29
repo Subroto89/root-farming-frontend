@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import useAuth from "../../../hooks/useAuth";
+import {useAuth} from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/UseAxiosSecure";
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";

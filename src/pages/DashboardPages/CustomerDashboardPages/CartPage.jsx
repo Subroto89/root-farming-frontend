@@ -3,7 +3,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import { Trash2, Plus, Minus } from "lucide-react";
 import useAxiosSecure from "../../../hooks/UseAxiosSecure";
-import useAuth from "../../../hooks/useAuth";
+import {useAuth} from "../../../hooks/useAuth";
 import LoadingSpinner from "../../../components/LoadingSpinner";
 import Swal from "sweetalert2";
 import { useTheme } from "../../../hooks/useTheme";
@@ -61,6 +61,7 @@ const CartPage = () => {
         showConfirmButton: false,
       });
     },
+    
     onError: () => {
       Swal.fire({
         icon: "error",

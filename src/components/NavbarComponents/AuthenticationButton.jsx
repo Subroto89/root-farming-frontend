@@ -1,4 +1,5 @@
-import useAuth from "../../hooks/useAuth";
+
+import {useAuth} from "../../hooks/useAuth";
 import NavButton2 from "../shared/Buttons/NavButton2";
 
 const AuthenticationButton = () => {

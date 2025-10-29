@@ -1,13 +1,18 @@
 import { GrUpdate } from "react-icons/gr";
 import UserInfoRow from "./UserInfoRow";
+import { useTheme } from "../../../../../hooks/useTheme";
 
 
 const UsersTable = ({ users, refetch, setRole, setUserEmail, handleUpdateRoleModal }) => {
+  const { theme } = useTheme();
+    const themeBackgroundStyle = theme === "dark" ? "bg-dark" : "bg-light";
+    const themeForegroundStyle = theme === "dark" ? "fg-dark" : "fg-light";
+    const themeFgOfFgStyle = theme === "dark" ? "fg-of-fg-dark" : "fg-of-fg-light";
   return (
     <>
-      <div className="w-full max-h-[calc(100vh-120px)] overflow-auto rounded-lg shadow-lg">
-        <table className="min-w-full divide-y divide-gray-500 ">
-          <thead className={` shadow-lg text-sm sticky top-0 bg-gradient-to-b from-green-900 to-green-300 text-gray-200 }`}>
+      <div className={`${themeForegroundStyle} w-full max-h-[calc(100vh-110px)] overflow-scroll rounded-lg shadow-lg`}>
+        <table className={`${themeForegroundStyle} overflow-hidden min-w-full divide-y divide-gray-500 `}>
+          <thead className={`${themeForegroundStyle} shadow-lg text-sm sticky top-0  }`}>
             <tr>
               <th
                 scope="col"

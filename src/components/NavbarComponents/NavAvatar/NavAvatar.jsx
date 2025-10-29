@@ -1,5 +1,5 @@
 import React from "react";
-import useAuth from "../../../hooks/useAuth";
+import {useAuth} from "../../../hooks/useAuth";
 import { UserRound } from "lucide-react";
 import NavAvatarDropdown from "./NavAvatarDropdown";
 

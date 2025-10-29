@@ -2,7 +2,7 @@ import React from 'react';
 import { Heart } from 'lucide-react';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router';
-import useAuth from '../../hooks/useAuth';
+import {useAuth} from '../../hooks/useAuth';
 import { useAddToWishlist } from '../../allProductsApi/UseWishlist';
 
 const WishlistButton = ({ product }) => {

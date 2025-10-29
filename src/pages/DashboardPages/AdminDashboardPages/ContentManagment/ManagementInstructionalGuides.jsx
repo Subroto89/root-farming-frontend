@@ -15,8 +15,11 @@ const ManagementInstructionalGuides = () => {
     const [editGuide, setEditGuide] = useState(null);
     const [uploading, setUploading] = useState(false);
     const axiosSecure=useAxiosSecure()
+
+   
+    // Theme Setup 
     const {theme} = useTheme();
- const themeBackgroundStyle = theme === 'dark' ? "bg-dark" : "bg-light";
+    const themeBackgroundStyle = theme === 'dark' ? "bg-dark" : "bg-light";
     const themeForegroundStyle = theme === 'dark' ? "fg-dark" : "fg-light";
     const themeFgOfFgStyle = theme === 'dark' ? "fg-of-fg-dark" : "fg-of-fg-light"
 
@@ -134,7 +137,7 @@ const ManagementInstructionalGuides = () => {
             <div className={`max-w-6xl mx-auto bg-white rounded-2xl shadow-lg p-8 border border-gray-300 ${themeForegroundStyle}`}>
                 {/* HEADER */}
                 <div className="flex justify-between items-center mb-8">
-                    <h2 className="text-2xl font-semibold text-gray-800 flex items-center gap-2">
+                    <h2 className="text-2xl font-semibold flex items-center gap-2">
                         <FilePlus className="text-green-600" /> Manage Instructional Guides
                     </h2>
                 </div>
@@ -160,10 +163,10 @@ const ManagementInstructionalGuides = () => {
                         type="select"
                         placeholder="Select Role"
                         options={[
-                            { value: "Farmer", label: "Farmer" },
-                            { value: "Seller", label: "Seller" },
-                            { value: "Customer", label: "Customer" },
-                            { value: "Specialist", label: "Agri-Specialist" },
+                            { value: "farmer", label: "Farmer" },
+                            { value: "seller", label: "Seller" },
+                            { value: "customer", label: "Customer" },
+                            { value: "agri-specialist", label: "Agri-Specialist" },
                         ]}
                         register={register}
                         validationRules={{ required: "Role is required" }}
@@ -228,11 +231,11 @@ const ManagementInstructionalGuides = () => {
                                 />
                             )}
                             <div>
-                                <h3 className="font-semibold text-lg text-gray-800 mb-1">{g.title}</h3>
-                                <p className="text-sm text-gray-600 mb-2">
+                                <h3 className="font-semibold text-lg mb-1">{g.title}</h3>
+                                <p className={`${themeFgOfFgStyle} text-sm mb-2`}>
                                     {g.description?.slice(0, 90)}...
                                 </p>
-                                <span className="text-xs text-gray-500 font-medium">Role: {g.role}</span>
+                                <span className="text-xs font-medium">Role: {g.role}</span>
                             </div>
                             <div className="flex gap-3 mt-4 justify-end">
                                 <button
