@@ -47,6 +47,7 @@ import ActivityRoute from "../pages/DashboardPages/FarmerDashboardPages/Activity
 import WeatherForecast from "../pages/DashboardPages/FarmerDashboardPages/WeatherForecast";
 import CartPage from "../pages/DashboardPages/CustomerDashboardPages/CartPage";
 import BecomeAPartner from "../pages/BecomeAPartner/BecomeAPartner";
+import UnderConstructionPage from "../components/shared/UnderConstructionPage";
 
 const router = createBrowserRouter([
   // -------------------------------------------
@@ -92,6 +93,10 @@ const router = createBrowserRouter([
       {
         path: "becomeapartner",
         Component: BecomeAPartner
+      },
+      {
+        path: "underconstructionpage",
+        Component: UnderConstructionPage,
       }
     ],
   },

@@ -16,8 +16,7 @@ const AboutUs = () => {
   const { theme } = useTheme();
   const themeBackgroundStyle = theme === "dark" ? "bg-dark" : "bg-light";
   const themeForegroundStyle = theme === "dark" ? "fg-dark" : "fg-light";
-  const themeFgOfFgStyle =
-    theme === "dark" ? "fg-of-fg-dark" : "fg-of-fg-light";
+  const themeFgOfFgStyle =    theme === "dark" ? "fg-of-fg-dark" : "fg-of-fg-light";
   return (
     <div className={`${themeBackgroundStyle} bg-gray-100 text-gray-800 `}>
       {/* Hero Section */}
