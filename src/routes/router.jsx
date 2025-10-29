@@ -7,7 +7,7 @@ import DashboardLayout from "../layouts/DashboardLayout";
 import DashboardHome from "../pages/DashboardPages/DashboardHome";
 import FieldRegistration from "../pages/DashboardPages/FarmerDashboardPages/FieldRegistration";
 import MyProfile from "../pages/DashboardPages/UserProfile/MyProfile";
-import ActivityLoggingScheduling from "../pages/DashboardPage/FarmerDashboardPage/ActivityLoggingScheduling";
+// import ActivityLoggingScheduling from "../pages/DashboardPage/FarmerDashboardPage/ActivityLoggingScheduling";
 import DailyToDoList from "../pages/DashboardPage/FarmerDashboardPage/DailyToDoList";
 import AuthLayout from "../layouts/AuthLayout";
 import Register from "../components/AuthComponents/Register";
@@ -210,10 +210,10 @@ const router = createBrowserRouter([
         path: "new-crop",
         Component: StartNewCrop,
       },
-      {
-        path: "activity-scheduling",
-        Component: ActivityLoggingScheduling,
-      },
+      // {
+      //   path: "activity-scheduling",
+      //   Component: ActivityLoggingScheduling,
+      // },
       {
         path: "instructional-guides",
         Component: InstructionalGuides, 
