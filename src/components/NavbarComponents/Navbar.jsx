@@ -6,9 +6,6 @@ import { useTheme } from "../../hooks/useTheme";
 
 const Navbar = () => {
   const { theme } = useTheme();
- const themeBackgroundStyle = theme === 'dark' ? "bg-dark" : "bg-light";
-    const themeForegroundStyle = theme === 'dark' ? "fg-dark" : "fg-light";
-    const themeFgOfFgStyle = theme === 'dark' ? "fg-of-fg-dark" : "fg-of-fg-light"
   const navStyle =
     theme === "dark"
       ? "w-full  bg-white/10 backdrop-blur-lg text-white  border-b border-white/20 shadow-lg "

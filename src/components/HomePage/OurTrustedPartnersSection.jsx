@@ -5,52 +5,6 @@ import "aos/dist/aos.css";
 import Marquee from "react-fast-marquee";
 import useAxiosSecure from "../../hooks/UseAxiosSecure";
 
-// const partners = [
-//   {
-//     name: "John Deere",
-//     logo: "https://i.ibb.co/N2hB0cjg/john.png",
-//     description: "Global leader in agricultural machinery and technology.",
-//   },
-//   {
-//     name: "AGCO",
-//     logo: "https://i.ibb.co/ZR2DFcGM/Agco.png",
-//     description: "Manufacturer of innovative agricultural solutions worldwide.",
-//   },
-//   {
-//     name: "Aaco",
-//     logo: "https://i.ibb.co/gZK07HCt/aaco-logo-Photoroom.png",
-//     description:
-//       "AACo is Australias largest integrated cattle and beef producer.",
-//   },
-//   {
-//     name: "Corteva Agriscience",
-//     logo: "https://i.ibb.co/k6w44gdt/corteva.png",
-//     description: "Advancing agriculture with biotechnology and research.",
-//   },
-//   {
-//     name: "Syngenta",
-//     logo: "https://i.ibb.co/nqsM0d46/Syngenta.png",
-//     description: "Global company dedicated to sustainable agriculture.",
-//   },
-//   {
-//     name: "Cargill",
-//     logo: "https://i.ibb.co/5PTqBmw/cargill.png",
-//     description: "Cargill is a family company providing food & ingredients.",
-//   },
-//   {
-//     name: "Gramik",
-//     logo: "https://i.ibb.co/YqZcVd5/gramic-Photoroom.png",
-//     description:
-//       "Gramik aka Agrijunction, supplies various Agri input products and services to farmers.",
-//   },
-//   {
-//     name: "Nutrian",
-//     logo: "https://i.ibb.co/W4PMT5zv/nutrian.png",
-//     description:
-//       "Nutrien is a leading global provider of crop inputs and services.",
-//   },
-// ];
-
 const OurTrustedPartnersSection = () => {
   const { theme } = useTheme();
   const themeBackgroundStyle = theme === "dark" ? "bg-dark" : "bg-light";
@@ -98,7 +52,7 @@ const OurTrustedPartnersSection = () => {
           data-aos="fade-up"
           data-aos-duration="900"
         >
-          <h2 className="text-4xl sm:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500">
+          <h2 className="text-4xl sm:text-5xl font-bold mb-4 ">
             Our Trusted Partners
           </h2>
           <p className="text-base sm:text-lg max-w-2xl mx-auto">

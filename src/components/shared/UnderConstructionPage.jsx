@@ -19,23 +19,10 @@ const UnderConstructionPage = () => {
   };
   return (
     <div className={`${themeBackgroundStyle} flex items-center justify-center min-h-screen  p-4`}>
-      <div className={`${themeForegroundStyle} max-w-5xl w-full bg-white dark:bg-slate-900 shadow-xl rounded-2xl p-8 text-center border border-slate-200 dark:border-slate-700`}>
+      <div className={`${themeForegroundStyle} max-w-5xl w-full bg-white shadow-xl rounded-2xl p-8 text-center`}>
         <div className="flex flex-col items-center space-y-4">
-          <div className="bg-yellow-100 w-16 h-16 rounded-full flex items-center justify-center ring-2 ring-yellow-300">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="w-8 h-8 text-yellow-600"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M3 10h18M12 3v7m0 4v7m-6 0h12M9 21V10m6 0v11"
-              />
-            </svg>
+          <div className="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center ring-2 ring-green-300">
+            <img src="https://i.ibb.co/mC8PSPDr/Gears-Lottie-Animation.gif" alt="underconstruction" />
           </div>
 
           <h1 className="text-2xl md:text-3xl font-bold">
