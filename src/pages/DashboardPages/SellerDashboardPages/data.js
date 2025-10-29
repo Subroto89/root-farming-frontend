@@ -106,4 +106,6 @@ export const customers = [
     totalSpent: "$765",
     status: "Inactive",
   },
+
 ];
+

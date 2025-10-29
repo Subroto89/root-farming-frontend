@@ -54,7 +54,7 @@ const AddressUpdateForm = () => {
       }
     };
 
-    if (!loading) { 
+   if (!loading) { 
       fetchAndSetAddressData();
     }
   }, [user?.email]);
@@ -62,7 +62,7 @@ const AddressUpdateForm = () => {
   // --------------------------------------------------------------
   // Form Submission Handler
   // --------------------------------------------------------------
-  const onSubmit = async (data) => {
+   const onSubmit = async (data) => {
     const updatedAddress = {
       shippingAddress: { 
         addressLine1: data.addressLine1,
@@ -75,7 +75,7 @@ const AddressUpdateForm = () => {
     };
 
     try {
-      const res = await axiosSecure.patch(`users/update-user-address/${user.email}`, updatedAddress);
+      const res = await axiosSecure.patch(`users/update-user-address/${user.email}`,  updatedAddress );
       if (res.data.modifiedCount > 0) {
         Swal.fire({
           icon: 'success',
@@ -108,10 +108,10 @@ const AddressUpdateForm = () => {
 
   return (
     <div>
-      <h3 className="text-xl font-semibold text-gray-800 mb-4 border-b pb-2 flex items-center gap-2">
+       <h3 className="text-xl font-semibold text-gray-800 mb-4 border-b pb-2 flex items-center gap-2">
         <FaMapMarkerAlt /> Shipping Address
       </h3>
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
         {/* Address Line 1 */}
         <InputField
           label="Address Line 1"

@@ -6,8 +6,7 @@ import FarmerMenu from '../Menu/FarmerMenu/FarmerMenu';
 import SellerMenu from '../Menu/SellerMenu/SellerMenu';
 
 const UserWiseMenu = () => {
-  // const { userRole } = useUserRole();
-  const userRole = 'farmer';
+  const { userRole } = useUserRole();
 
 
   return (
@@ -15,7 +14,7 @@ const UserWiseMenu = () => {
       <div>
         {userRole === 'admin' ? (
           <AdminMenu />
-        ) : userRole === 'seller' ? (
+       ) : userRole === 'seller' ? (
           <SellerMenu />
         ) : userRole === 'customer' ? (
           <CustomerMenu />

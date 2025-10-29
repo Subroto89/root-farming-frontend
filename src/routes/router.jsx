@@ -50,9 +50,16 @@ import FarmersProfiles from "../pages/DashboardPages/AgriSpecialistDashboardPage
 import MyEarnings from "../pages/DashboardPages/AgriSpecialistDashboardPages/MyEarnings";
 import ChatBot from "../pages/DashboardPages/FarmerDashboardPages/ChatBot";
 import CartPage from '../pages/DashboardPages/CustomerDashboardPages/CartPage';
+
+import SellerDashboardHome from "../pages/DashboardPages/SellerDashboardPages/SellerDashboardHome";
+import ProductManage from "../pages/DashboardPages/AdminDashboardPages/ProductManage";
+import ManageExistingListing from "../pages/DashboardPages/SellerDashboardPages/ManageExistingListings";
+import ManagePaymentSetting from "../pages/DashboardPages/AdminDashboardPages/FinancialsAndCommission/ManagePaymentSetting";
+
 import GovernmentInfo from "../pages/DashboardPages/FarmerDashboardPages/GovernmentInfo";
 import InstructionalGuides from "../pages/DashboardPages/FarmerDashboardPages/GuidanceAndSupport/InstructionalGuides";
 import BecomeAPartner from "../pages/BecomeAPartner/BecomeAPartner";
+
 
 
 const router = createBrowserRouter([
@@ -135,7 +142,10 @@ const router = createBrowserRouter([
         path: "specialist's-salary",
         Component: SpecialistsSalary,
       },
-
+      {
+        path: "manage-payment-setting",
+        Component: ManagePaymentSetting,
+      },
       // Duplicate removed: Kept the first 'management-product-category'
       {
         path: "management-product-category",
@@ -179,8 +189,8 @@ const router = createBrowserRouter([
         Component: BlogsManagement,
       },
       {
-        path: "product-moderation",
-        Component: ProductModeration,
+        path: 'product-moderation',
+        Component: ProductManage
       },
       
       // === Farmer Dashboard Routes ===
@@ -203,6 +213,74 @@ const router = createBrowserRouter([
       {
         path: "ActivityRoute",
         Component: ActivityRoute,
+
+           },
+
+
+         {
+            path: "new-crop",
+            Component: StartNewCrop,
+         },
+         {
+            path: "activity-scheduling",
+            Component: ActivityLoggingScheduling,
+         },
+         {
+            path: "chat-specialist",
+            Component: ChatwithAgriSpecialist,
+         },
+         {
+            path: "resource-management",
+            Component: ResourceManagement,
+         },
+         {
+            path: "weather-forecast",
+            Component: WeatherForecast,
+         },
+         {
+            path: "daily-todo-list",
+            Component: DailyToDoList,
+         },
+         {
+            path: "live-chat",
+            Component: ChatWithAgriSpecialist,
+         },
+         {
+            path: "chat-specialist",
+            Component: SpecialistChat,
+         },
+
+         // Seller Dashboard Routes
+         {
+            path: "seller-dashboard-home",
+            Component: SellerDashboardHome,
+         },
+         {
+            path: "add-new-item",
+            Component: AddNewProduct,
+         },
+       
+          {
+        path: "manage-existing-listings",
+        Component: ManageExistingListing,
+      },
+     
+         // Customer Dashboard Routes
+         {
+            path: "review-rating",
+            Component: MyReviews,
+         },
+         {
+            path: "wishlist",
+            Component: MyWishlist,
+         },
+         {
+            path: "track-current-orders",
+            Component: OrderTracking,
+         },
+         {
+          path: "update-profile/:email",
+          Component: MyProfile,
       },
       {
         path: "new-crop",
