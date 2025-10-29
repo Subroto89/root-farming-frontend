@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Outlet } from "react-router";
 import DashboardNavbar from "../components/Dashboard/Navbar/DashboardNavbar";
 import DashboardSidebar from "../components/Dashboard/Sidebar/DashboardSidebar";
+// import ChatBotComponent from "../components/ChatBot/ChatBot";
 
 const DashboardLayout = () => {
    const [isSideBarOpen, setIsSideBarOpen] = useState(false);
@@ -12,6 +13,7 @@ const DashboardLayout = () => {
   return (
     <>
       <div className="relative flex flex-col min-h-screen bg-gray-100">
+        {/* <ChatBotComponent /> */}
         {/* ------------------------------------------------------------
             Dashboard Navbar For Small Screen Only Section
             ------------------------------------------------------------ */}
