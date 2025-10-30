@@ -5,7 +5,7 @@ import { useCategories, useLocations } from '../../allProductsApi/UseFilters';
 import Filters from '../../components/shopComponents/Filters';
 import ProductCard from '../../components/shopComponents/ProductCard';
 import { useTheme } from '../../hooks/useTheme';
-// import CustomChatbot from '../../components/CustomChatbot/CustomChatbot';
+import CustomChatbot from '../../components/CustomChatbot/CustomChatbot';
 
 const Shop = () => {
   const { theme } = useTheme();
@@ -43,12 +43,12 @@ const Shop = () => {
   return (
     <div className={`${themeBackgroundStyle} min-h-screen py-16`}>
       <div className=" sticky top-20 max-w-7xl mx-auto mb-8 text-center sm:text-left px-4 sm:px-6 lg:px-8 z-1000">
-        <h1 className="text-3xl sm:text-4xl font-bold dark:text-white mb-2">
+        {/* <h1 className="text-3xl sm:text-4xl font-bold dark:text-white mb-2">
           Shop Now
         </h1>
         <p className="text-base sm:text-lg">
           Fresh produce from trusted farmers — buy locally and grow sustainably.
-        </p>
+        </p> */}
       </div>
 
       <div className=" sticky top-1/4 z-1000 max-w-7xl mx-auto mb-10 px-4 sm:px-6 lg:px-8">
@@ -91,6 +91,7 @@ const Shop = () => {
           </div>
         )}
       </div>
+      <CustomChatbot />
    </div>
   );
 };
