@@ -10,7 +10,7 @@ import Swal from "sweetalert2";
 
 
 const Cart = () => {
-  TabTitle('Cart');
+  // TabTitle('Cart');
 
   const {theme} = useTheme();
   const [selectedItems, setSelectedItems] = useState([])
@@ -22,7 +22,7 @@ const Cart = () => {
   const {data: carts, isLoading, refetch} = useQuery({
     queryKey: ["carts", user?.email ],
     queryFn: async () => {
-      const {data} = await axiosSecure(`carts/get-carts/${user?.uid}`);
+      const {data} = await axiosSecure(`/cart/get-cart?email=${user.email}`);
       return data;
     },
     staleTime: 0,
@@ -36,19 +36,19 @@ const Cart = () => {
 
 
    // --- Selection Handlers ---
-  const handleToggleSelect = (medicineId) => {
+  const handleToggleSelect = (id) => {
     setSelectedItems(prevSelected => 
-      prevSelected.includes(medicineId)
-        ? prevSelected.filter(id => id !== medicineId)
-        : [...prevSelected, medicineId]
+      prevSelected.includes(id)
+        ? prevSelected.filter(id => id !== id)
+        : [...prevSelected, id]
     );
   };
 
   const handleToggleSelectAll = (event) => {
     if (event.target.checked) {
       // Select all items
-      const allMedicineIds = cartItems.map(item => item.medicineId);
-      setSelectedItems(allMedicineIds);
+      const allProductIds = carts.map(item => item.id);
+      setSelectedItems(allProductIds);
     } else {
       // Deselect all items
       setSelectedItems([]);

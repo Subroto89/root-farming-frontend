@@ -41,19 +41,12 @@ const Shop = () => {
   };
 
   return (
-<<<<<<< HEAD
-    <div className={`${themeBackgroundStyle} min-h-screen bg-gray-50 dark:bg-neutral-900 py-16`}>
-      {/* <CustomChatbot /> */}
-      {/* Header Section */}
-      <div className="max-w-7xl mx-auto mb-8 text-center sm:text-left px-4 sm:px-6 lg:px-8">
-=======
     <div className={`${themeBackgroundStyle} min-h-screen py-16`}>
       <div className=" sticky top-20 max-w-7xl mx-auto mb-8 text-center sm:text-left px-4 sm:px-6 lg:px-8 z-1000">
->>>>>>> 028775654e6547731b46220ef83b253f0fb7e435
-        <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-2">
+        <h1 className="text-3xl sm:text-4xl font-bold dark:text-white mb-2">
           Shop Now
         </h1>
-        <p className="text-base sm:text-lg text-gray-600 dark:text-gray-400">
+        <p className="text-base sm:text-lg">
           Fresh produce from trusted farmers — buy locally and grow sustainably.
         </p>
       </div>

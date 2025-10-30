@@ -51,7 +51,6 @@ import MyEarnings from "../pages/DashboardPages/AgriSpecialistDashboardPages/MyE
 import ChatBot from "../pages/DashboardPages/FarmerDashboardPages/ChatBot";
 import CartPage from '../pages/DashboardPages/CustomerDashboardPages/CartPage';
 
-import SellerDashboardHome from "../pages/DashboardPages/SellerDashboardPages/SellerDashboardHome";
 import ProductManage from "../pages/DashboardPages/AdminDashboardPages/ProductManage";
 import ManageExistingListing from "../pages/DashboardPages/SellerDashboardPages/ManageExistingListings";
 import ManagePaymentSetting from "../pages/DashboardPages/AdminDashboardPages/FinancialsAndCommission/ManagePaymentSetting";
@@ -60,6 +59,7 @@ import GovernmentInfo from "../pages/DashboardPages/FarmerDashboardPages/Governm
 import InstructionalGuides from "../pages/DashboardPages/FarmerDashboardPages/GuidanceAndSupport/InstructionalGuides";
 import BecomeAPartner from "../pages/BecomeAPartner/BecomeAPartner";
 import UnderConstructionPage from "../components/shared/UnderConstructionPage";
+// import CheckoutPage from "../pages/PaymentGateway/CheckoutPage";
 
 
 
@@ -97,6 +97,10 @@ const router = createBrowserRouter([
         path: 'cart',
         Component: CartPage, 
       },
+      // {
+      //   path: "/checkout",
+      //   Component: CheckoutPage,
+      // },
       {
         path: "blog",
         Component: Blog,
@@ -223,13 +227,13 @@ const router = createBrowserRouter([
             path: "new-crop",
             Component: StartNewCrop,
          },
-         {
-            path: "activity-scheduling",
-            Component: ActivityLoggingScheduling,
-         },
+        //  {
+        //     path: "activity-scheduling",
+        //     Component: ActivityLoggingScheduling,
+        //  },
          {
             path: "chat-specialist",
-            Component: ChatwithAgriSpecialist,
+            Component: ChatWithAgriSpecialist,
          },
          {
             path: "resource-management",
