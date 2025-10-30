@@ -12,47 +12,61 @@ import {
 } from "lucide-react";
 
 const FarmerMenu = () => {
-   return (
-      <>
-         <div>
-            <NavButton
-               label="Dashboard Home"
-               address="/dashboard/farmer-dashboard-home"
-               icon={House}
-            />
+  return (
+    <>
+      <div>
+        <NavButton
+          label="Dashboard Home"
+          address="/dashboard/farmer-dashboard-home"
+          icon={House}
+        />
 
-            <LandManagementButton />
+        <LandManagementButton />
 
-            <NavButton
-               label="Activity Route"
-               address="/dashboard/ActivityRoute"
-               icon={Boxes}
-            />
+        <NavButton
+          label="Activity Route"
+          address="/dashboard/ActivityRoute"
+          icon={Boxes}
+        />
 
-            <NavButton
-               label="Resource Management"
-               address="/dashboard/resource-management"
-               icon={Boxes}
-            />
 
-            <CropManagementButton />
+        <NavButton
+          label="Resource Management"
+          address="/dashboard/resource-management"
+          icon={Boxes}
+        />
 
-            <GuidanceAndSupportButton />
 
-            <NavButton
-               label="Government Info"
-               address="/dashboard/government-info"
-               icon={MessageCircleQuestionMark}
-            />
+        <CropManagementButton />
 
-            <NavButton
-               label="Chat Bot"
-               address="/dashboard/chat-bot"
-               icon={MessageCircleDashedIcon}
-            />
-         </div>
-      </>
-   );
+        <NavButton
+          label="My Cultivations"
+          address="/dashboard/my-cultivations"
+          icon={Boxes}
+        />
+
+        <NavButton
+          label="New Cultivation"
+          address="/dashboard/new-cultivation-request"
+          icon={Boxes}
+        />
+
+        <GuidanceAndSupportButton />
+
+        <NavButton
+          label="Government Info"
+          address="/dashboard/government-info"
+          icon={MessageCircleQuestionMark}
+        />
+
+        <NavButton
+          label="Chat Bot"
+          address="/dashboard/chat-bot"
+          icon={MessageCircleDashedIcon}
+        />
+      </div>
+    </>
+  );
 };
 
 export default FarmerMenu;

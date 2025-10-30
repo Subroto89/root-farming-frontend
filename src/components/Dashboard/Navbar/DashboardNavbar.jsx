@@ -12,11 +12,14 @@ const DashboardNavbar = ({ isSideBarOpen, toggleMenu }) => {
                <RFLogo />
             </div>
 
-            <div className="flex items-center justify-between gap-4">
-               {/* Dashboard Navigation Content */}
-               <div className="hidden md:block">
-                  <NavbarContent />
-               </div>
+const DashboardNavbar = ({isSideBarOpen, toggleMenu}) => {
+  return (
+    <>
+      <nav className="h-14 relative flex items-center justify-between gap-4 bg-gray-600 text-xl bg-gradient-to-b from-teal-50 to-gray-400 p-4 shadow-lg">
+        {/* Logo Section */}
+        <div className="w-40 rounded-lg overflow-hidden">
+            <RFLogo />
+        </div>
 
                {/* Dashboard Small Screen - Hamburger Icon*/}
                <div

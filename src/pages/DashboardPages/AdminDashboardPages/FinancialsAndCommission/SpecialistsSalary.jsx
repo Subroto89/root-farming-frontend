@@ -6,6 +6,8 @@ import toast, { Toaster } from "react-hot-toast";
 import SalaryTable from "../../../../components/Dashboard/RouteBasedComponents/AdminRoutesComponents/AgriSalaryManagement/SalaryTable";
 import SalaryDetails from "../../../../components/Dashboard/RouteBasedComponents/AdminRoutesComponents/AgriSalaryManagement/SalaryDetails";
 import DownloadPDFButton from "../../../../components/Dashboard/RouteBasedComponents/AdminRoutesComponents/AgriSalaryManagement/DownloadReportButton";
+import { useTheme } from "../../../../hooks/useTheme";
+import Container from "../../../../components/shared/Container";
 
 // Axios instance with base URL (for future use)
 const api = axios.create({
@@ -24,8 +26,12 @@ const calculateNetSalary = ({ fixed = 0, commission = 0, due = 0, deduction = 0 
 export default function SpecialistsSalary() {
   const queryClient = useQueryClient();
   const [selectedId, setSelectedId] = useState(null);
+  const {theme} = useTheme();
+  const themeBackgroundStyle = theme === 'dark' ? "bg-dark" : "bg-light";
+  const themeForegroundStyle = theme === 'dark' ? "fg-dark" : "fg-light";
+  const themeFgOfFgStyle = theme === 'dark' ? "fg-of-fg-dark" : "fg-of-fg-light"
 
-  // 🧾 Dummy Specialists (temporary mock data)
+  //  Dummy Specialists (temporary mock data)
   const dummySpecialists = [
     {
       id: "1",
@@ -99,7 +105,8 @@ export default function SpecialistsSalary() {
   };
 
   return (
-    <div className="p-6 space-y-6">
+    <div className={`${themeBackgroundStyle}  min-h-screen space-y-6`}>
+      <Container>
       <Toaster />
       <div className="flex justify-between items-center">
         <h1 className="text-2xl font-bold">Agri-Specialists' Salary</h1>
@@ -170,6 +177,7 @@ export default function SpecialistsSalary() {
           )}
         </div>
       </div>
+      </Container>
     </div>
   );
 }

@@ -49,71 +49,72 @@ import BlogsManagementByAS from "../pages/DashboardPages/AgriSpecialistDashboard
 import FarmersProfiles from "../pages/DashboardPages/AgriSpecialistDashboardPages/FarmersProfiles";
 import MyEarnings from "../pages/DashboardPages/AgriSpecialistDashboardPages/MyEarnings";
 import ChatBot from "../pages/DashboardPages/FarmerDashboardPages/ChatBot";
-import CartPage from "../pages/DashboardPages/CustomerDashboardPages/CartPage";
-import InstructionList from "../pages/DashboardPages/FarmerDashboardPages/CropManagement/InstructionList";
+import CartPage from '../pages/DashboardPages/CustomerDashboardPages/CartPage';
+
+import SellerDashboardHome from "../pages/DashboardPages/SellerDashboardPages/SellerDashboardHome";
+import ProductManage from "../pages/DashboardPages/AdminDashboardPages/ProductManage";
+import ManageExistingListing from "../pages/DashboardPages/SellerDashboardPages/ManageExistingListings";
+import ManagePaymentSetting from "../pages/DashboardPages/AdminDashboardPages/FinancialsAndCommission/ManagePaymentSetting";
+
+import GovernmentInfo from "../pages/DashboardPages/FarmerDashboardPages/GovernmentInfo";
+import InstructionalGuides from "../pages/DashboardPages/FarmerDashboardPages/GuidanceAndSupport/InstructionalGuides";
+import BecomeAPartner from "../pages/BecomeAPartner/BecomeAPartner";
+
+
 
 const router = createBrowserRouter([
-   // -------------------------------------------
-   // Root Layout
-   // -------------------------------------------
-   {
-      path: "/",
-      Component: RootLayout,
-      children: [
-         {
-            path: "/",
-            index: true,
-            Component: Home,
-         },
-         {
-            path: "about",
-            Component: AboutUs,
-         },
-         {
-            path: "contact",
-            Component: ContactUs,
-         },
-         {
-            path: "shop",
-            Component: Shop,
-         },
-         {
-            path: "shop/:id",
-            Component: ProductDetails,
-         },
-         // Conflict resolved: Using CartPage component for 'cart' path.
-         {
-            path: "cart",
-            Component: CartPage,
-         },
-         {
-            path: "blog",
-            Component: Blog,
-         },
-         // Note: This route exists under both RootLayout and DashboardLayout.
-         {
-            path: "update-profile/:email",
-            Component: MyProfile,
-         },
-      ],
-   },
-
-   // -------------------------------------------
-   // Dashboard Layout
-   // -------------------------------------------
-   {
-      path: "/dashboard",
-      Component: DashboardLayout,
-      children: [
-         {
-            index: true,
-            Component: DashboardHome,
-         },
-
-         {
-            path: "my-profile",
-            Component: MyProfile,
-         },
+  // -------------------------------------------
+  // Root Layout
+  // -------------------------------------------
+  {
+    path: "/",
+    Component: RootLayout,
+    children: [
+      {
+        path: "/",
+        index: true,
+        Component: Home,
+      },
+      {
+        path: "about",
+        Component: AboutUs,
+      },
+      {
+        path: "contact",
+        Component: ContactUs,
+      },
+      {
+        path: "shop",
+        Component: Shop,
+      },
+      {
+        path: "shop/:id",
+        Component: ProductDetails,
+      },
+      // Conflict resolved: Using CartPage component for 'cart' path.
+      {
+        path: 'cart',
+        Component: CartPage, 
+      },
+      {
+        path: "blog",
+        Component: Blog,
+      },
+      // Note: This route exists under both RootLayout and DashboardLayout.
+      // {
+      //   path: "update-profile/:email",
+      //   Component: MyProfile,
+      // },
+      {
+        path: "becomeapartner",
+        Component: BecomeAPartner,
+      },
+      {
+        path: "underconstructionpage",
+        Component: UnderConstructionPage,
+      },
+    ],
+  },
 
          // === Admin Dashboard Routes ===
          {
@@ -125,77 +126,95 @@ const router = createBrowserRouter([
             Component: SpecialistsSalary,
          },
 
-         // Duplicate removed: Kept the first 'management-product-category'
-         {
-            path: "management-product-category",
-            Component: ProductCategoryManagement,
-         },
+     {
+        path: "update-profile/:email",
+        Component: MyProfile,
+      },
 
-         {
-            path: "manage-sellers",
-            Component: ManageSellers,
-         },
-         {
-            path: "manage-customers",
-            Component: ManageCustomers,
-         },
-         {
-            path: "manage-agri-specialists",
-            Component: ManageAgriSpecialists,
-         },
-         {
-            path: "manage-farmers",
-            Component: ManageFarmers,
-         },
-         {
-            path: "manage-product-type",
-            Component: ProductTypeManagement,
-         },
-         {
-            path: "manage-product-subCategory",
-            Component: ProductSubCategoryManagement,
-         },
-         {
-            path: "manage-product-variant",
-            Component: ProductVariantManagement,
-         },
-         {
-            path: "govt-news-facilites",
-            Component: GovtNewsAndFacilities,
-         },
-         {
-            path: "blogs-management",
-            Component: BlogsManagement,
-         },
-         {
-            path: "product-moderation",
-            Component: ProductModeration,
-         },
+      // === Admin Dashboard Routes ===
+      {
+        path: "management-instructional-guides",
+        Component: ManagementInstructionalGuides,
+      },
+      {
+        path: "specialist's-salary",
+        Component: SpecialistsSalary,
+      },
+      {
+        path: "manage-payment-setting",
+        Component: ManagePaymentSetting,
+      },
+      // Duplicate removed: Kept the first 'management-product-category'
+      {
+        path: "management-product-category",
+        Component: ProductCategoryManagement,
+      },
 
-         // === Farmer Dashboard Routes ===
-         {
-            path: "farmer-dashboard-home",
-            Component: FarmerDashboardHome,
-         },
-         {
-            path: "field-registration",
-            Component: FieldRegistration,
-         },
-         {
-            path: "my-cultivations",
-            Component: MyCultivationsPage,
-         },
-         {
-            path: "all-instructions",
-            Component: InstructionList,
-         },
-         {
-            path: "ActivityRoute",
-            loader: () =>
-               fetch(`${import.meta.env.VITE_Server_API_KEY}/activities`),
-            hydrateFallbackElement: <div>Loading activities...</div>,
-            Component: ActivityRoute,
-         },
+      {
+        path: "manage-sellers",
+        Component: ManageSellers,
+      },
+      {
+        path: "manage-customers",
+        Component: ManageCustomers,
+      },
+      {
+        path: "manage-agri-specialists",
+        Component: ManageAgriSpecialists,
+      },
+      {
+        path: "manage-farmers",
+        Component: ManageFarmers,
+      },
+      {
+        path: "manage-product-type",
+        Component: ProductTypeManagement,
+      },
+      {
+        path: "manage-product-subCategory",
+        Component: ProductSubCategoryManagement,
+      },
+      {
+        path: "manage-product-variant",
+        Component: ProductVariantManagement,
+      },
+      {
+        path: "govt-news-facilites",
+        Component: GovtNewsAndFacilities,
+      },
+      {
+        path: "blogs-management",
+        Component: BlogsManagement,
+      },
+      {
+        path: 'product-moderation',
+        Component: ProductManage
+      },
+      
+      // === Farmer Dashboard Routes ===
+      {
+        path: "farmer-dashboard-home",
+        Component: FarmerDashboardHome,
+      },
+      {
+        path: "field-registration",
+        Component: FieldRegistration,
+      },
+      {
+        path: "my-cultivations",
+        Component: MyCultivationsPage,
+      },
+      {
+        path: "new-cultivation-request",
+        Component: NewCultivationRequestForm,
+      },
+      {
+        path: "ActivityRoute",
+        Component: ActivityRoute,
+
+           },
+
+
          {
             path: "new-crop",
             Component: StartNewCrop,
@@ -204,14 +223,9 @@ const router = createBrowserRouter([
             path: "activity-scheduling",
             Component: ActivityLoggingScheduling,
          },
-         // Chat route conflict resolved: Kept 'live-chat' and 'chat-bot'
          {
-            path: "live-chat",
-            Component: ChatWithAgriSpecialist,
-         },
-         {
-            path: "chat-bot",
-            Component: ChatBot,
+            path: "chat-specialist",
+            Component: ChatwithAgriSpecialist,
          },
          {
             path: "resource-management",
@@ -225,8 +239,16 @@ const router = createBrowserRouter([
             path: "daily-todo-list",
             Component: DailyToDoList,
          },
+         {
+            path: "live-chat",
+            Component: ChatWithAgriSpecialist,
+         },
+         {
+            path: "chat-specialist",
+            Component: SpecialistChat,
+         },
 
-         // === Seller Dashboard Routes ===
+         // Seller Dashboard Routes
          {
             path: "seller-dashboard-home",
             Component: SellerDashboardHome,
@@ -235,6 +257,65 @@ const router = createBrowserRouter([
             path: "add-new-item",
             Component: AddNewProduct,
          },
+       
+          {
+        path: "manage-existing-listings",
+        Component: ManageExistingListing,
+      },
+     
+         // Customer Dashboard Routes
+         {
+            path: "review-rating",
+            Component: MyReviews,
+         },
+         {
+            path: "wishlist",
+            Component: MyWishlist,
+         },
+         {
+            path: "track-current-orders",
+            Component: OrderTracking,
+         },
+         {
+          path: "update-profile/:email",
+          Component: MyProfile,
+      },
+      {
+        path: "new-crop",
+        Component: StartNewCrop,
+      },
+      {
+        path: "activity-scheduling",
+        Component: ActivityLoggingScheduling,
+      },
+      {
+        path: "instructional-guides",
+        Component: InstructionalGuides, 
+      },
+      {
+        path: "live-chat",
+        Component: ChatWithAgriSpecialist,
+      },
+      {
+        path:"government-info",
+        Component: GovernmentInfo,
+      },
+      {
+        path: "chat-bot",
+        Component: ChatBot,
+      },
+      {
+        path: "resource-management",
+        Component: ResourceManagement,
+      },
+      {
+        path: "weather-forecast",
+        Component: WeatherForecast,
+      },
+      {
+        path: "daily-todo-list",
+        Component: DailyToDoList,
+      },
 
          // === Customer Dashboard Routes ===
          {

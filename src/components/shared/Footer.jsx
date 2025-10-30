@@ -10,7 +10,7 @@ import {
   ArrowRight,
 } from 'lucide-react';
 import logo from '../../assets/Logo/Rootfarming.png';
-import { Link } from 'react-router';
+import { href, Link } from 'react-router';
 import { useTheme } from '../../hooks/useTheme';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
@@ -44,35 +44,35 @@ const Footer = () => {
   };
 
   const productLinks = [
-    { name: 'Fresh Vegetables', path: '#' },
-    { name: 'Organic Fruits', path: '#' },
-    { name: 'Grains & Cereals', path: '#' },
-    { name: 'Herbs & Spices', path: '#' },
-    { name: 'Dairy Products', path: '#' },
+    { name: 'Fresh Vegetables', path: '/underconstructionpage' },
+    { name: 'Organic Fruits', path: '/underconstructionpage' },
+    { name: 'Grains & Cereals', path: '/underconstructionpage' },
+    { name: 'Herbs & Spices', path: '/underconstructionpage' },
+    { name: 'Dairy Products', path: '/underconstructionpage' },
   ];
 
   const serviceLinks = [
-    { name: 'Crop Management', path: '#' },
-    { name: 'Market Analytics', path: '#' },
+    { name: 'Crop Management', path: '/dashboard/new-crop' },
+    { name: 'Market Analytics', path: '/underconstructionpage' },
     { name: 'Weather Forecasting', path: '/dashboard/weather-forecast' },
-    { name: 'Expert Consultation', path: '#' },
-    { name: 'Payment Processing', path: '#' },
+    { name: 'Expert Consultation', path: '/dashboard/chat-specialist' },
+    { name: 'Payment Processing', path: '/underconstructionpage' },
   ];
 
   const companyLinks = [
-    { name: 'About Us', path: '#' },
-    { name: 'Our Story', path: '#' },
-    { name: 'Careers', path: '#' },
-    { name: 'Press & Media', path: '#' },
-    { name: 'Investor Relations', path: '#' },
+    { name: 'About Us', path: '/about' },
+    { name: 'Our Story', path: '/underconstructionpage' },
+    { name: 'Careers', path: '/underconstructionpage' },
+    { name: 'Press & Media', path: '/underconstructionpage' },
+    { name: 'Investor Relations', path: '/underconstructionpage' },
   ];
 
   const resourceLinks = [
-    { name: 'Farming Guides', path: '#' },
-    { name: 'Best Practices', path: '#' },
-    { name: 'Success Stories', path: '#' },
-    { name: 'Research & Reports', path: '#' },
-    { name: 'Community Forum', path: '#' },
+    { name: 'Farming Guides', path: '/dashboard/instructional-guides' },
+    { name: 'Best Practices', path: '/underconstructionpage' },
+    { name: 'Success Stories', path: '/underconstructionpage' },
+    { name: 'Research & Reports', path: '/underconstructionpage' },
+    { name: 'Community Forum', path: '/underconstructionpage' },
   ];
 
   const socialLinks = [
@@ -193,6 +193,7 @@ const Footer = () => {
                       aria-label={social.label}
                       className="bg-gray-800 hover:bg-green-600 p-3 rounded-full transition-all"
                     >
+
                       <Icon className="h-5 w-5 sm:h-6 sm:w-6" />
                     </Link>
                   );

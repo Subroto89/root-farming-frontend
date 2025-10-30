@@ -22,6 +22,7 @@ const Filters = ({
       const themeBackgroundStyle = theme === 'dark' ? "bg-dark" : "bg-light";
       const themeForegroundStyle = theme === 'dark' ? "fg-dark" : "fg-light";
       const themeFgOfFgStyle = theme === 'dark' ? "fg-of-fg-dark" : "fg-of-fg-light";
+     
   return (
     <div className={`${themeForegroundStyle} rounded-2xl shadow-lg p-6 mb-8`}>
       <div className="grid lg:grid-cols-6 gap-6 items-end">
@@ -52,7 +53,7 @@ const Filters = ({
             onChange={e => setCategory(e.target.value)}
             className={`${themeFgOfFgStyle} w-full py-3 px-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500`}
           >
-            {categories.map(cat => (
+            {categories?.map(cat => (
               <option key={cat} value={cat}>
                 {cat}
               </option>

@@ -8,11 +8,11 @@ const Navbar = () => {
   const { theme } = useTheme();
   const navStyle =
     theme === "dark"
-      ? "w-full fg-dark border-b border-white"
-      : "w-full navbar-light border-b border-white";
+      ? "w-full  bg-white/10 backdrop-blur-lg text-white  border-b border-white/20 shadow-lg "
+      : "w-full  bg-white/10 backdrop-blur-lg text-gray-900 border-b border-white/20 shadow-lg ";
   return (
     <>
-      <div className={`${navStyle}`}>
+      <div className={` ${navStyle}`}>
         <div className="w-11/12 flex justify-between items-center mx-auto py-2">
           {/*Logo Section ------------------- */}
           <div>
