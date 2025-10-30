@@ -116,17 +116,15 @@ const router = createBrowserRouter([
     ],
   },
 
-  // -------------------------------------------
-  // Dashboard Layout
-  // -------------------------------------------
-  {
-    path: "/dashboard",
-    Component: DashboardLayout,
-    children: [
-      {
-        index: true,
-        Component: DashboardHome,
-      },
+         // === Admin Dashboard Routes ===
+         {
+            path: "management-instructional-guides",
+            Component: ManagementInstructionalGuides,
+         },
+         {
+            path: "specialist's-salary",
+            Component: SpecialistsSalary,
+         },
 
      {
         path: "update-profile/:email",
@@ -319,77 +317,67 @@ const router = createBrowserRouter([
         Component: DailyToDoList,
       },
 
-      // === Seller Dashboard Routes ===
-      {
-        path: "seller-dashboard-home",
-        Component: SellerDashboardHome,
-      },
-      {
-        path: "add-new-item",
-        Component: AddNewProduct,
-      },
+         // === Customer Dashboard Routes ===
+         {
+            path: "review-rating",
+            Component: MyReviews,
+         },
+         {
+            path: "wishlist",
+            Component: MyWishlist,
+         },
+         {
+            path: "track-current-orders",
+            Component: OrderTracking,
+         },
 
-      // === Customer Dashboard Routes ===
-      {
-        path: "review-rating",
-        Component: MyReviews,
-      },
-      {
-        path: "wishlist",
-        Component: MyWishlist,
-      },
-      {
-        path: "track-current-orders",
-        Component: OrderTracking,
-      },
-      
-      // === Agri Specialist Dashboard Routes ===
-      {
-        path: "crop-wise-instruction",
-        Component: CropWiseInstruction,
-      },
-      {
-        path: "blogs-management-ByAS",
-        Component: BlogsManagementByAS,
-      },
-      {
-        path: "farmers-profiles",
-        Component: FarmersProfiles,
-      },
-      {
-        path: "chat-with-farmers",
-        Component: SpecialistChat,
-      },
-      {
-        path: "my-earnings",
-        Component: MyEarnings,
-      },
+         // === Agri Specialist Dashboard Routes ===
+         {
+            path: "crop-wise-instruction",
+            Component: CropWiseInstruction,
+         },
+         {
+            path: "blogs-management-ByAS",
+            Component: BlogsManagementByAS,
+         },
+         {
+            path: "farmers-profiles",
+            Component: FarmersProfiles,
+         },
+         {
+            path: "chat-with-farmers",
+            Component: SpecialistChat,
+         },
+         {
+            path: "my-earnings",
+            Component: MyEarnings,
+         },
 
-      // Catch-all route for errors
-      {
-        path: "*",
-        Component: ErrorPage,
-      },
-    ],
-  },
+         // Catch-all route for errors
+         {
+            path: "*",
+            Component: ErrorPage,
+         },
+      ],
+   },
 
-  // -------------------------------------------
-  // Auth Layout
-  // -------------------------------------------
-  {
-    path: "/auth",
-    Component: AuthLayout,
-    children: [
-      {
-        index: true,
-        Component: Login,
-      },
-      {
-        path: "register",
-        Component: Register,
-      },
-    ],
-  },
-  // -------------------------------------------
+   // -------------------------------------------
+   // Auth Layout
+   // -------------------------------------------
+   {
+      path: "/auth",
+      Component: AuthLayout,
+      children: [
+         {
+            index: true,
+            Component: Login,
+         },
+         {
+            path: "register",
+            Component: Register,
+         },
+      ],
+   },
+   // -------------------------------------------
 ]);
 export default router;

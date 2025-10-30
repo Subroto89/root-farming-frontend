@@ -4,15 +4,18 @@ import useAxiosSecure from "../../../../../hooks/UseAxiosSecure";
 import { useForm } from "react-hook-form";
 import { imageUpload } from "../../../../../utils/utilities";
 import Swal from "sweetalert2";
-import { CloudUpload, FileType, Shapes } from "lucide-react";
+import { CloudUpload, Shapes } from "lucide-react";
 import { PuffLoader } from "react-spinners";
 import InputField from "../../../../shared/InputField/InputField";
 
-const FormInAddType = ({ handleModalToggle, refetch }) => {
+const AddCategoryForm = ({ handleCategoryModal, refetch }) => {
    const axiosSecure = useAxiosSecure();
    const { user } = useAuth();
 
-   const [uploadedTypePhoto, setUploadedTypePhoto] = useState(null);
+   //--------------------------------------------------------------
+   //  Necessary State Variables
+   // --------------------------------------------------------------
+   const [uploadedCategoryPhoto, setUploadedCategoryPhoto] = useState(null);
    const [uploadingPhoto, setUploadingPhoto] = useState(false);
    const [photoUploadError, setPhotoUploadError] = useState(null);
    const {
@@ -22,52 +25,54 @@ const FormInAddType = ({ handleModalToggle, refetch }) => {
       formState: { errors, isSubmitting },
    } = useForm();
 
-   const typePhoto = watch("typePhoto");
+   const categoryPhoto = watch("categoryPhoto");
 
    useEffect(() => {
       const uploadFile = async () => {
-         if (typePhoto && typePhoto.length > 0) {
-            setUploadedTypePhoto(null);
+         if (categoryPhoto && categoryPhoto.length > 0) {
+            setUploadedCategoryPhoto(null);
             setPhotoUploadError(null);
             setUploadingPhoto(true);
             try {
-               const imageUrl = await imageUpload(typePhoto[0]);
-               setUploadedTypePhoto(imageUrl);
+               const imageUrl = await imageUpload(categoryPhoto[0]);
+               setUploadedCategoryPhoto(imageUrl);
             } catch (error) {
                console.error("Image upload failed:", error);
                setPhotoUploadError("Image upload failed. Please try again.");
-               setUploadedTypePhoto(null);
+               setUploadedCategoryPhoto(null);
             } finally {
                setUploadingPhoto(false);
             }
          }
       };
       uploadFile();
-   }, [typePhoto]);
+   }, [categoryPhoto]);
 
    const onSubmit = async (data) => {
-      data.typePhoto = uploadedTypePhoto;
+      data.categoryPhoto = uploadedCategoryPhoto;
       data.createdBy = user?.email;
 
       try {
+         // 1. Send the POST request
          const { data: info } = await axiosSecure.post(
-            "/types/save-type",
+            "/categories/save-category",
             data
          );
 
+         // 2. Check for successful insertion (backend sends 201 Created and insertedId)
          if (info.insertedId) {
             Swal.fire({
                icon: "success",
                title: "Success",
-               text: "Product Type Added Successfully",
+               text: "Category Added Successfully",
                timer: 1500,
             });
+            // Refresh list and close modal
             refetch();
-            handleModalToggle();
+            handleCategoryModal();
          }
       } catch (error) {
-         let errorMessage =
-            "Product type addition failed due to a server error.";
+         let errorMessage = "Category addition failed due to a server error.";
 
          if (error.response) {
             if (
@@ -76,7 +81,7 @@ const FormInAddType = ({ handleModalToggle, refetch }) => {
             ) {
                errorMessage =
                   error.response.data.error ||
-                  "A product type with this name already exists.";
+                  "A category with this name already exists.";
             } else {
                errorMessage = `Request failed with status ${error.response.status}.`;
             }
@@ -94,40 +99,42 @@ const FormInAddType = ({ handleModalToggle, refetch }) => {
          });
       }
    };
-
    return (
-      <div className="px-8 py-6">
-         <form className="space-y-5" onSubmit={handleSubmit(onSubmit)}>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-               <div className="space-y-5">
+      <div className="mx-8">
+         <form
+            className="flex flex-col gap-3 mt-6"
+            onSubmit={handleSubmit(onSubmit)}
+         >
+            <div className="flex items-center gap-3">
+               <div className=" space-y-3">
                   <InputField
-                     label="Product Type Name"
-                     name="typeName"
+                     label="Category Name"
+                     name="categoryName"
                      type="text"
-                     placeholder="Enter the product type name"
-                     icon={FileType}
+                     placeholder="Enter the category name"
+                     icon={Shapes}
                      register={register}
                      errors={errors}
                      validationRules={{
-                        required: "Product Type Name is required",
+                        required: "Category Name is required",
                         minLength: {
-                           value: 3,
+                           value: 5,
                            message:
-                              "Product Type Name must be at least 3 characters long",
+                              "Category Name must be at least 5 characters long",
                         },
                      }}
                   />
 
                   <InputField
-                     label="Product Type Photo"
-                     name="typePhoto"
+                     label=""
+                     name="categoryPhoto"
                      type="file"
-                     placeholder="Select the product type photo"
+                     placeholder="Select the category photo"
                      icon={CloudUpload}
                      register={register}
                      errors={errors}
                      validationRules={{
-                        required: "Product type photo is required",
+                        required: "category photo is required",
                         validate: (value) => {
                            if (value.length === 0)
                               return "Please upload a photo";
@@ -148,66 +155,43 @@ const FormInAddType = ({ handleModalToggle, refetch }) => {
                      }}
                   />
                   {photoUploadError && (
-                     <p className="text-red-500 text-sm flex items-center gap-1">
-                        <span className="inline-block w-1 h-1 rounded-full bg-red-500"></span>
-                        {photoUploadError}
-                     </p>
+                     <p className="text-red-500 text-sm">{photoUploadError}</p>
                   )}
                </div>
 
-               <div className="w-full h-64 rounded-lg overflow-hidden border-2 border-dashed border-gray-300 flex items-center justify-center bg-gray-50">
-                  {uploadedTypePhoto ? (
+               <div className="w-28 h-24 rounded-md overflow-hidden border-2 border-gray-300 mb-1 mt-5 flex items-center justify-end">
+                  {uploadedCategoryPhoto ? (
                      <img
-                        src={uploadedTypePhoto}
-                        alt="Product Type Photo"
-                        className="w-full h-full object-contain"
+                        src={uploadedCategoryPhoto}
+                        alt="User Photo"
+                        className="w-full h-full object-cover"
                      />
                   ) : (
-                     <div className="flex flex-col items-center justify-center gap-3">
+                     <div className="flex items-center pr-2">
                         {uploadingPhoto ? (
-                           <>
-                              <PuffLoader size={60} color="#3B82F6" />
-                              <p className="text-sm text-gray-500 font-medium">
-                                 Uploading...
-                              </p>
-                           </>
+                           <PuffLoader size={56} />
                         ) : (
-                           <>
-                              <FileType size={48} className="text-gray-400" />
-                              <p className="text-sm text-gray-500">
-                                 Photo preview will appear here
-                              </p>
-                           </>
+                           <Shapes size={40} />
                         )}
                      </div>
                   )}
                </div>
             </div>
 
-            <div className="pt-4">
+            {/* --------------------------------------------------------------
+                Action Button For Adding Category & Cancel Button
+        -------------------------------------------------------------- */}
+
+            <div>
                <button
                   disabled={isSubmitting || uploadingPhoto}
                   type="submit"
-                  className={`w-full py-3.5 px-6 rounded-lg font-semibold text-white text-sm transition-all duration-200
-              ${
-                 isSubmitting || uploadingPhoto
-                    ? "bg-gray-400 cursor-not-allowed"
-                    : "bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 shadow-md hover:shadow-lg"
-              }
-            `}
+                  className="btn bg-green-500 rounded-lg w-full"
                >
                   {uploadingPhoto ? (
-                     <span className="flex items-center justify-center gap-2">
-                        <PuffLoader size={20} color="#ffffff" />
-                        Photo Uploading...
-                     </span>
-                  ) : isSubmitting ? (
-                     <span className="flex items-center justify-center gap-2">
-                        <PuffLoader size={20} color="#ffffff" />
-                        Adding Type...
-                     </span>
+                     <h2 className="text-green-500">Photo Uploading ...</h2>
                   ) : (
-                     "Add Product Type"
+                     "Add Category"
                   )}
                </button>
             </div>
@@ -216,4 +200,4 @@ const FormInAddType = ({ handleModalToggle, refetch }) => {
    );
 };
 
-export default FormInAddType;
+export default AddCategoryForm;
