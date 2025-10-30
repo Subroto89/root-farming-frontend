@@ -82,16 +82,22 @@ const ResourceStats = ({ resources }) => {
                      <p className="text-sm font-medium text-gray-600 mb-1">
                         {stat.title}
                      </p>
+
+                     {/* ✅ FIXED: Wrap CountUp in a span to ensure it has a valid DOM target */}
                      <p className={`text-3xl font-bold ${stat.color}`}>
-                        {stat.prefix && stat.prefix}
-                        <CountUp
-                           end={stat.value}
-                           duration={2}
-                           decimals={stat.decimals || 0}
-                           separator=","
-                        />
+                        <span>
+                           {stat.prefix || ""}
+                           <CountUp
+                              end={stat.value}
+                              duration={2}
+                              decimals={stat.decimals || 0}
+                              separator=","
+                              enableScrollSpy={false} // ✅ Disable to prevent hydration issues
+                           />
+                        </span>
                      </p>
                   </div>
+
                   <div
                      className={`p-3 rounded-lg ${stat.bgColor.replace(
                         "50",

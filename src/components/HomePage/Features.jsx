@@ -75,8 +75,8 @@ const Features = () => {
     theme === 'dark' ? 'bg-dark text-gray-100' : 'bg-light text-gray-900';
   const card =
     theme === 'dark'
-      ? 'fg-dark border border-gray-500'
-      : 'fg-light border border-gray-200';
+      ? 'fg-dark '
+      : 'fg-light';
 
   const handleClick = (path, e) => {
     e.preventDefault();

@@ -9,7 +9,7 @@ const Reviewscard = ({ r }) => {
   return (
     <div
       className={`w-60 mx-5 h-[22rem] relative group flex-shrink-0 rounded-2xl overflow-hidden 
-      transition-all duration-500 transform hover:-translate-y-2 hover:shadow-2xl
+       transform +hover:-translate-y-1 hover:shadow-2xl group-hover:opacity-80 group-hover:brightness-110 transition-all duration-700
       ${
         isDark
           ? 'bg-[#1b1c1e] text-gray-100 border border-neutral-800'

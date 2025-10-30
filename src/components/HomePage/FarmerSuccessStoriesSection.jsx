@@ -17,8 +17,8 @@ const FarmerSuccessStoriesSection = () => {
   const themeBackgroundStyle = theme === 'dark' ? 'bg-dark' : 'bg-light';
   const themeForegroundStyle =
     theme === 'dark'
-      ? 'fg-dark border border-gray-500'
-      : 'fg-light border border-gray-200';
+      ? 'fg-dark '
+      : 'fg-light ';
   const [currentStory, setCurrentStory] = useState(0);
 
   const stories = [
@@ -172,7 +172,8 @@ const FarmerSuccessStoriesSection = () => {
                 return (
                   <div
                     key={index}
-                    className={`${themeForegroundStyle} rounded-xl shadow-sm hover:shadow-lg p-4 sm:p-6 text-center  transition-shadow duration-300`}
+                     className={`${themeForegroundStyle} rounded-xl  shadow-[0_4px_12px_rgba(0,0,0,0.06)] hover:shadow-[0_6px_18px_rgba(0,0,0,0.1)]
+ p-4 sm:p-6 text-center border border-gray-700  transition-shadow duration-300`}
                     data-aos="zoom-in"
                     data-aos-delay={index * 100}
                     data-aos-duration="900"

@@ -13,7 +13,7 @@ import AuthLayout from "../layouts/AuthLayout";
 import Register from "../components/AuthComponents/Register";
 import Login from "../components/AuthComponents/Login";
 import ResourceManagement from "../pages/DashboardPage/FarmerDashboardPage/ResourceManagement/ResourceManagement";
-import Cart from "../pages/CartPage/Cart";
+// import Cart from "../pages/CartPage/Cart";
 import Blog from "../pages/Blog/Blog";
 import ErrorPage from "../pages/DashboardPages/ErrorPage";
 import ProductCategoryManagement from "../pages/DashboardPages/AdminDashboardPages/CategoryManagement/ProductCategoryManagement";
@@ -59,7 +59,7 @@ import GovernmentInfo from "../pages/DashboardPages/FarmerDashboardPages/Governm
 import InstructionalGuides from "../pages/DashboardPages/FarmerDashboardPages/GuidanceAndSupport/InstructionalGuides";
 import BecomeAPartner from "../pages/BecomeAPartner/BecomeAPartner";
 import UnderConstructionPage from "../components/shared/UnderConstructionPage";
-// import CheckoutPage from "../pages/PaymentGateway/CheckoutPage";
+import CheckoutPage from "../pages/PaymentGateway/CheckoutPage";
 
 
 
@@ -92,15 +92,14 @@ const router = createBrowserRouter([
         path: "shop/:id",
         Component: ProductDetails,
       },
-      // Conflict resolved: Using CartPage component for 'cart' path.
       {
         path: 'cart',
         Component: CartPage, 
       },
-      // {
-      //   path: "/checkout",
-      //   Component: CheckoutPage,
-      // },
+       {
+        path: "/checkout",
+        Component: CheckoutPage,
+      },
       {
         path: "blog",
         Component: Blog,
@@ -122,17 +121,33 @@ const router = createBrowserRouter([
     ],
   },
 
-  // -------------------------------------------
-  // Dashboard Layout
-  // -------------------------------------------
-  {
-    path: "/dashboard",
-    Component: DashboardLayout,
-    children: [
-      {
-        index: true,
-        Component: DashboardHome,
-      },
+  
+   // -------------------------------------------
+   // Dashboard Layout
+   // -------------------------------------------
+   {
+      path: "/dashboard",
+      Component: DashboardLayout,
+      children: [
+         {
+            index: true,
+            Component: DashboardHome,
+         },
+
+         {
+            path: "my-profile",
+            Component: MyProfile,
+         },
+
+         // === Admin Dashboard Routes ===
+         {
+            path: "management-instructional-guides",
+            Component: ManagementInstructionalGuides,
+         },
+         {
+            path: "specialist's-salary",
+            Component: SpecialistsSalary,
+         },
 
      {
         path: "update-profile/:email",
@@ -152,7 +167,6 @@ const router = createBrowserRouter([
         path: "manage-payment-setting",
         Component: ManagePaymentSetting,
       },
-      // Duplicate removed: Kept the first 'management-product-category'
       {
         path: "management-product-category",
         Component: ProductCategoryManagement,
@@ -220,21 +234,21 @@ const router = createBrowserRouter([
         path: "ActivityRoute",
         Component: ActivityRoute,
 
-           },
+      },
 
 
-         {
-            path: "new-crop",
-            Component: StartNewCrop,
-         },
+      {
+        path: "new-crop",
+        Component: StartNewCrop,
+      },
         //  {
         //     path: "activity-scheduling",
         //     Component: ActivityLoggingScheduling,
         //  },
-         {
-            path: "chat-specialist",
-            Component: ChatWithAgriSpecialist,
-         },
+      {
+        path: "chat-specialist",
+        Component: ChatWithAgriSpecialist,
+      },
          {
             path: "resource-management",
             Component: ResourceManagement,
@@ -324,78 +338,70 @@ const router = createBrowserRouter([
         path: "daily-todo-list",
         Component: DailyToDoList,
       },
+     
 
-      // === Seller Dashboard Routes ===
-      {
-        path: "seller-dashboard-home",
-        Component: SellerDashboardHome,
-      },
-      {
-        path: "add-new-item",
-        Component: AddNewProduct,
-      },
 
-      // === Customer Dashboard Routes ===
-      {
-        path: "review-rating",
-        Component: MyReviews,
-      },
-      {
-        path: "wishlist",
-        Component: MyWishlist,
-      },
-      {
-        path: "track-current-orders",
-        Component: OrderTracking,
-      },
-      
-      // === Agri Specialist Dashboard Routes ===
-      {
-        path: "crop-wise-instruction",
-        Component: CropWiseInstruction,
-      },
-      {
-        path: "blogs-management-ByAS",
-        Component: BlogsManagementByAS,
-      },
-      {
-        path: "farmers-profiles",
-        Component: FarmersProfiles,
-      },
-      {
-        path: "chat-with-farmers",
-        Component: SpecialistChat,
-      },
-      {
-        path: "my-earnings",
-        Component: MyEarnings,
-      },
+         // === Customer Dashboard Routes ===
+         {
+            path: "review-rating",
+            Component: MyReviews,
+         },
+         {
+            path: "wishlist",
+            Component: MyWishlist,
+         },
+         {
+            path: "track-current-orders",
+            Component: OrderTracking,
+         },
 
-      // Catch-all route for errors
-      {
-        path: "*",
-        Component: ErrorPage,
-      },
-    ],
-  },
+         // === Agri Specialist Dashboard Routes ===
+         {
+            path: "crop-wise-instruction",
+            Component: CropWiseInstruction,
+         },
+         {
+            path: "blogs-management-ByAS",
+            Component: BlogsManagementByAS,
+         },
+         {
+            path: "farmers-profiles",
+            Component: FarmersProfiles,
+         },
+         {
+            path: "chat-with-farmers",
+            Component: SpecialistChat,
+         },
+         {
+            path: "my-earnings",
+            Component: MyEarnings,
+         },
 
-  // -------------------------------------------
-  // Auth Layout
-  // -------------------------------------------
-  {
-    path: "/auth",
-    Component: AuthLayout,
-    children: [
-      {
-        index: true,
-        Component: Login,
-      },
-      {
-        path: "register",
-        Component: Register,
-      },
-    ],
-  },
-  // -------------------------------------------
+         // Catch-all route for errors
+         {
+            path: "*",
+            Component: ErrorPage,
+         },
+      ],
+    },
+
+   // -------------------------------------------
+   // Auth Layout
+   // -------------------------------------------
+   {
+      path: "/auth",
+      Component: AuthLayout,
+      children: [
+         {
+            index: true,
+            Component: Login,
+         },
+         {
+            path: "register",
+            Component: Register,
+         },
+      ],
+   },
+   // -------------------------------------------
 ]);
 export default router;

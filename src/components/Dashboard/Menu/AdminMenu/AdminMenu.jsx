@@ -10,11 +10,13 @@ const AdminMenu = () => {
         <>
             <div>
 
-                <NavButton
+                <div className='pl-4'> 
+                    <NavButton
                     label="Dashboard Home"
                     address="/dashboard"
                     icon={House}
                 />
+                </div>
 
                 <CategoryManagementButton/>
 
@@ -24,7 +26,8 @@ const AdminMenu = () => {
 
                 <FinancialAndCommissionsButton/>
                 
-                <NavButton 
+                <div className="pl-4 space-y-2">
+                      <NavButton 
                     label="Product Moderation"
                     address="/dashboard/product-moderation"
                     icon={ ShieldCheck }
@@ -47,6 +50,8 @@ const AdminMenu = () => {
                     icon={ Rss }    
                 />
 
+
+                </div>
                 
                 
             </div>

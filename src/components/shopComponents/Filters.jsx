@@ -15,8 +15,7 @@ const Filters = ({
   onReset,
 }) => {
   const { theme } = useTheme();
-
-  const themeBackgroundStyle = theme === "dark" ? "bg-dark" : "bg-light";
+  
   const themeForegroundStyle = theme === "dark" ? "fg-dark" : "fg-light";
   const themeFgOfFgStyle =
     theme === "dark" ? "fg-of-fg-dark" : "fg-of-fg-light";
