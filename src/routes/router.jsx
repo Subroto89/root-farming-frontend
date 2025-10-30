@@ -7,13 +7,13 @@ import DashboardLayout from "../layouts/DashboardLayout";
 import DashboardHome from "../pages/DashboardPages/DashboardHome";
 import FieldRegistration from "../pages/DashboardPages/FarmerDashboardPages/FieldRegistration";
 import MyProfile from "../pages/DashboardPages/UserProfile/MyProfile";
-import ActivityLoggingScheduling from "../pages/DashboardPage/FarmerDashboardPage/ActivityLoggingScheduling";
+// import ActivityLoggingScheduling from "../pages/DashboardPage/FarmerDashboardPage/ActivityLoggingScheduling";
 import DailyToDoList from "../pages/DashboardPage/FarmerDashboardPage/DailyToDoList";
 import AuthLayout from "../layouts/AuthLayout";
 import Register from "../components/AuthComponents/Register";
 import Login from "../components/AuthComponents/Login";
 import ResourceManagement from "../pages/DashboardPage/FarmerDashboardPage/ResourceManagement/ResourceManagement";
-import Cart from "../pages/CartPage/Cart";
+// import Cart from "../pages/CartPage/Cart";
 import Blog from "../pages/Blog/Blog";
 import ErrorPage from "../pages/DashboardPages/ErrorPage";
 import ProductCategoryManagement from "../pages/DashboardPages/AdminDashboardPages/CategoryManagement/ProductCategoryManagement";
@@ -51,7 +51,6 @@ import MyEarnings from "../pages/DashboardPages/AgriSpecialistDashboardPages/MyE
 import ChatBot from "../pages/DashboardPages/FarmerDashboardPages/ChatBot";
 import CartPage from '../pages/DashboardPages/CustomerDashboardPages/CartPage';
 
-import SellerDashboardHome from "../pages/DashboardPages/SellerDashboardPages/SellerDashboardHome";
 import ProductManage from "../pages/DashboardPages/AdminDashboardPages/ProductManage";
 import ManageExistingListing from "../pages/DashboardPages/SellerDashboardPages/ManageExistingListings";
 import ManagePaymentSetting from "../pages/DashboardPages/AdminDashboardPages/FinancialsAndCommission/ManagePaymentSetting";
@@ -59,6 +58,8 @@ import ManagePaymentSetting from "../pages/DashboardPages/AdminDashboardPages/Fi
 import GovernmentInfo from "../pages/DashboardPages/FarmerDashboardPages/GovernmentInfo";
 import InstructionalGuides from "../pages/DashboardPages/FarmerDashboardPages/GuidanceAndSupport/InstructionalGuides";
 import BecomeAPartner from "../pages/BecomeAPartner/BecomeAPartner";
+import UnderConstructionPage from "../components/shared/UnderConstructionPage";
+import CheckoutPage from "../pages/PaymentGateway/CheckoutPage";
 
 
 
@@ -91,10 +92,13 @@ const router = createBrowserRouter([
         path: "shop/:id",
         Component: ProductDetails,
       },
-      // Conflict resolved: Using CartPage component for 'cart' path.
       {
         path: 'cart',
         Component: CartPage, 
+      },
+       {
+        path: "/checkout",
+        Component: CheckoutPage,
       },
       {
         path: "blog",
@@ -112,9 +116,28 @@ const router = createBrowserRouter([
       {
         path: "underconstructionpage",
         Component: UnderConstructionPage,
-      },
+      }
+
     ],
   },
+
+  
+   // -------------------------------------------
+   // Dashboard Layout
+   // -------------------------------------------
+   {
+      path: "/dashboard",
+      Component: DashboardLayout,
+      children: [
+         {
+            index: true,
+            Component: DashboardHome,
+         },
+
+         {
+            path: "my-profile",
+            Component: MyProfile,
+         },
 
          // === Admin Dashboard Routes ===
          {
@@ -144,7 +167,6 @@ const router = createBrowserRouter([
         path: "manage-payment-setting",
         Component: ManagePaymentSetting,
       },
-      // Duplicate removed: Kept the first 'management-product-category'
       {
         path: "management-product-category",
         Component: ProductCategoryManagement,
@@ -212,21 +234,21 @@ const router = createBrowserRouter([
         path: "ActivityRoute",
         Component: ActivityRoute,
 
-           },
+      },
 
 
-         {
-            path: "new-crop",
-            Component: StartNewCrop,
-         },
-         {
-            path: "activity-scheduling",
-            Component: ActivityLoggingScheduling,
-         },
-         {
-            path: "chat-specialist",
-            Component: ChatwithAgriSpecialist,
-         },
+      {
+        path: "new-crop",
+        Component: StartNewCrop,
+      },
+        //  {
+        //     path: "activity-scheduling",
+        //     Component: ActivityLoggingScheduling,
+        //  },
+      {
+        path: "chat-specialist",
+        Component: ChatWithAgriSpecialist,
+      },
          {
             path: "resource-management",
             Component: ResourceManagement,
@@ -284,10 +306,10 @@ const router = createBrowserRouter([
         path: "new-crop",
         Component: StartNewCrop,
       },
-      {
-        path: "activity-scheduling",
-        Component: ActivityLoggingScheduling,
-      },
+      // {
+      //   path: "activity-scheduling",
+      //   Component: ActivityLoggingScheduling,
+      // },
       {
         path: "instructional-guides",
         Component: InstructionalGuides, 
@@ -316,6 +338,8 @@ const router = createBrowserRouter([
         path: "daily-todo-list",
         Component: DailyToDoList,
       },
+     
+
 
          // === Customer Dashboard Routes ===
          {
@@ -359,7 +383,7 @@ const router = createBrowserRouter([
             Component: ErrorPage,
          },
       ],
-   },
+    },
 
    // -------------------------------------------
    // Auth Layout

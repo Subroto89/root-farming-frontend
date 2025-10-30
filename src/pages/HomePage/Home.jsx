@@ -18,7 +18,7 @@ const Home = () => {
       <WeatherForecastSection />
       <Features />
       <HowItWorks />
-      <AdvertisementSection />
+      {/* <AdvertisementSection /> */}
       <Services />
       <LatestReviews />
       <FarmerSuccessStoriesSection />

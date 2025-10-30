@@ -2,11 +2,73 @@ import { useState } from "react";
 import { useTheme } from "../../hooks/useTheme";
 import { TabTitle } from "../../utils/utilities";
 import {useAuth} from "../../hooks/useAuth";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import useAxiosSecure from "../../hooks/UseAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
-// import LoadingSpinner from "../../components/shared/LoadingSpinner";
+import LoadingSpinner from "../../components/shared/LoadingSpinner";
+import { FaShoppingCart, FaTrash, FaTools } from "react-icons/fa";
+import { MdOutlineRemoveShoppingCart } from "react-icons/md";
+import DataNotFound from "../../components/shared/DataNotFound";
+
+const CartDataRow = ({ item, handleQuantityChange, handleRemoveItem, isLoading, isSelected, onToggleSelect, handleCheckout }) => {
+  const { theme } = useTheme();
+  return (
+    <tr className={`border-b ${theme === "dark" ? "border-gray-700" : ""}`}>
+      <td className='px-4 py-2 text-center'>
+        <input
+          type="checkbox"
+          checked={isSelected}
+          onChange={() => onToggleSelect(item.medicineId)}
+          className="form-checkbox h-5 w-5 text-blue-600 rounded focus:ring-blue-500"
+        />
+      </td>
+      <td className='px-4 py-2 text-center'>
+        <img src={item.photo} alt={item.name} className='w-16 h-16 object-cover rounded-md mx-auto' />
+      </td>
+      <td className={`px-4 py-2 text-center font-semibold ${theme === "dark" ? "text-white" : "text-gray-800"}`}>{item.name}</td>
+      <td className={`px-4 py-2 text-center ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}>{item.company}</td>
+      <td className={`px-4 py-2 text-center font-medium ${theme === "dark" ? "text-white" : "text-gray-800"}`}>${item.price.toFixed(2)}</td>
+      <td className='px-4 py-2 text-center'>
+        <div className='flex items-center justify-center gap-2'>
+          <button
+            onClick={() => handleQuantityChange(item.medicineId, item.quantity, 'decrease')}
+            className='px-2 py-1 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300'
+            disabled={isLoading}
+          >
+            -
+          </button>
+          <span className={`font-semibold ${theme === "dark" ? "text-white" : "text-gray-800"}`}>{item.quantity}</span>
+          <button
+            onClick={() => handleQuantityChange(item.medicineId, item.quantity, 'increase')}
+            className='px-2 py-1 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300'
+            disabled={isLoading}
+          >
+            +
+          </button>
+        </div>
+      </td>
+      <td className={`px-4 py-2 text-center font-medium ${theme === "dark" ? "text-white" : "text-gray-800"}`}>${(item.price * item.quantity).toFixed(2)}</td>
+      <td className='px-4 py-2 text-center'>
+        <div className='flex items-center justify-center gap-2'>
+          <button
+            onClick={() => handleRemoveItem(item.medicineId, item.name)}
+            className='text-red-500 hover:text-red-700'
+            disabled={isLoading}
+          >
+            <FaTrash size={20} />
+          </button>
+          <button
+            onClick={() => handleCheckout('single', item)}
+            className='px-4 py-2 bg-green-600 text-white font-semibold rounded-lg shadow-md hover:bg-green-700 transition-colors duration-300'
+          >
+            Purchase
+          </button>
+        </div>
+      </td>
+    </tr>
+  );
+};
 
 
 const Cart = () => {
@@ -22,33 +84,34 @@ const Cart = () => {
   const {data: carts, isLoading, refetch} = useQuery({
     queryKey: ["carts", user?.email ],
     queryFn: async () => {
-      const {data} = await axiosSecure(`carts/get-carts/${user?.uid}`);
+      const {data} = await axiosSecure(`/cart/get-cart?email=${user.email}`);
       return data;
     },
     staleTime: 0,
     cacheTime: 0
   });
 
-  // if(isLoading) return <LoadingSpinner/>
+  if(isLoading) return <LoadingSpinner/>
 
-  // const cartItems = cart[0]?.items || [];
+  const cartItems = carts?.items || [];
+  const totalCartPrice = carts?.totalCartPrice || 0;
 
 
 
    // --- Selection Handlers ---
-  const handleToggleSelect = (medicineId) => {
+  const handleToggleSelect = (id) => {
     setSelectedItems(prevSelected => 
-      prevSelected.includes(medicineId)
-        ? prevSelected.filter(id => id !== medicineId)
-        : [...prevSelected, medicineId]
+      prevSelected.includes(id)
+        ? prevSelected.filter(i => i !== id)
+        : [...prevSelected, id]
     );
   };
 
   const handleToggleSelectAll = (event) => {
     if (event.target.checked) {
       // Select all items
-      const allMedicineIds = cartItems.map(item => item.medicineId);
-      setSelectedItems(allMedicineIds);
+      const allProductIds = cartItems.map(item => item.medicineId);
+      setSelectedItems(allProductIds);
     } else {
       // Deselect all items
       setSelectedItems([]);
@@ -56,16 +119,18 @@ const Cart = () => {
   };
 
   // Check if all current items are selected for the "Select All" checkbox state
-  // const isAllSelected = cartItems.length > 0 && selectedItems.length === cartItems.length;
+  const isAllSelected = cartItems.length > 0 && selectedItems.length === cartItems.length;
 
 // handleCheckOut - now accepts a type argument
-  const handleCheckout = (type) => {
+  const handleCheckout = (type, singleItem) => {
     let itemsToCheckout = [];
 
     if (type === 'all') {
       itemsToCheckout = cartItems;
     } else if (type === 'selected') {
       itemsToCheckout = cartItems.filter(item => selectedItems.includes(item.medicineId));
+    } else if (type === 'single') {
+        itemsToCheckout = [singleItem];
     }
 
     if (itemsToCheckout.length === 0) { 
@@ -251,6 +316,7 @@ const handleRemoveItem = async (medicineId, itemName) => {
                               isLoading={isLoading}
                           isSelected={selectedItems.includes(item.medicineId)}
                           onToggleSelect={handleToggleSelect}
+                          handleCheckout={handleCheckout}
                              />)
                         }
                       </tbody>
@@ -265,7 +331,7 @@ const handleRemoveItem = async (medicineId, itemName) => {
                      */}
                     <div className="flex flex-col md:flex-row justify-between items-center mt-6 pt-4 border-t border-gray-200">
                 <div className={`${theme==="dark" ? "text-white" : "text-green-700"} text-2xl font-bold text-gray-800 mb-4 md:mb-0`}>
-                  Total: <span>${cart?.[0]?.totalCartPrice?.toFixed(2) || '0.00'}</span>
+                  Total: <span>${totalCartPrice.toFixed(2)}</span>
                 </div>
                 <div className="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4 w-full md:w-auto">
                   <button

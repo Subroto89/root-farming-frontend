@@ -12,7 +12,7 @@ const LandManagementButton = () => {
     <>
       <div
         onClick={toggleSidebar}
-        className="flex justify-between items-center space-x-1"
+        className="flex items-center justify-between items-center"
       >
         <Button label="Land Management" icon={LandPlot} />
         {!isMenuOpen ? <ChevronRight size={18} /> : <ChevronDown size={18} />}

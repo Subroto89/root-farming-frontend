@@ -29,7 +29,7 @@ const Button = ({ label, icon: Icon, address, type, onClick, status, spread, tex
         type={type}
         onClick={onClick}
         to={address}
-        className={`btn ${isSpread} border-0 font-bold btn-color tracking-wider shadow-none ${style} text-${textSize}`} 
+        className={`${isSpread} border-0 font-bold btn-color tracking-wider shadow-none ${style} text-${textSize}`} 
       >
         {Icon && <Icon size={20} />}
         {label}

@@ -14,7 +14,7 @@ import {
 const FarmerMenu = () => {
   return (
     <>
-      <div>
+      <div cls>
         <NavButton
           label="Dashboard Home"
           address="/dashboard/farmer-dashboard-home"
@@ -39,17 +39,6 @@ const FarmerMenu = () => {
 
         <CropManagementButton />
 
-        <NavButton
-          label="My Cultivations"
-          address="/dashboard/my-cultivations"
-          icon={Boxes}
-        />
-
-        <NavButton
-          label="New Cultivation"
-          address="/dashboard/new-cultivation-request"
-          icon={Boxes}
-        />
 
         <GuidanceAndSupportButton />
 

@@ -50,8 +50,8 @@ const HowItWorks = () => {
   const themeBackgroundStyle = theme === 'dark' ? 'bg-dark' : 'bg-light';
   const themeForegroundStyle =
     theme === 'dark'
-      ? 'fg-dark border border-gray-500'
-      : 'fg-light border border-gray-200';
+      ? 'fg-dark '
+      : 'fg-light';
 
   return (
     <div
