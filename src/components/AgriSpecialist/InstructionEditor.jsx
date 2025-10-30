@@ -8,8 +8,6 @@ import {
    Clock,
    FileText,
    ChevronDown,
-   Sun,
-   Moon,
 } from "lucide-react";
 import useAxiosSecure from "../../hooks/UseAxiosSecure";
 import { useAuth } from "../../hooks/useAuth";
@@ -23,13 +21,15 @@ const InstructionEditor = ({ onSave, initialData = null }) => {
    // theme use
    const { theme } = useTheme();
    const [loading, setLoading] = useState(false);
-   const [cropCategories, setCropCategories] = useState([]);
-   const [subCategories, setSubCategories] = useState([]);
-   const [variants, setVariants] = useState([]);
+   const [types, setTypes] = useState([]);
+   const [categories, setCategories] = useState([]); // categories for selected type (server-provided)
+   const [subCategories, setSubCategories] = useState([]); // sub-categories for selected category (server-provided)
+   const [variants, setVariants] = useState([]); // variants for selected sub-category (server-provided)
    const [isDarkMode, setIsDarkMode] = useState(false);
 
    const [instruction, setInstruction] = useState({
       title: "",
+      typeId: "",
       categoryId: "",
       subCategoryId: "",
       variantId: "",
@@ -47,75 +47,180 @@ const InstructionEditor = ({ onSave, initialData = null }) => {
 
    // load theme mode
    useEffect(() => {
-      if (theme === "dark") {
-         setIsDarkMode(true);
-      } else {
-         setIsDarkMode(false);
-      }
+      setIsDarkMode(theme === "dark");
    }, [theme]);
 
-   // Load crop categories
+   // -------------------- Fetch Types on mount --------------------
    useEffect(() => {
-      const fetchCategories = async () => {
+      let mounted = true;
+      const fetchTypes = async () => {
          try {
-            const response = await axiosSecure.get(
-               "/categories/get-categories"
-            );
-            setCropCategories(response.data);
-            console.log(response.data);
+            const res = await axiosSecure.get("/types/get-types");
+            if (!mounted) return;
+            const normalized = (res.data || []).map((t) => ({
+               _id: t._id || t.insertedId || t.id,
+               name: t.typeName || t.name || "",
+            }));
+            setTypes(normalized);
          } catch (error) {
-            console.error("Error fetching categories:", error);
-            toast.error("Failed to load crop categories");
+            console.error("Error fetching types:", error);
+            toast.error("Failed to load types");
+            if (mounted) setTypes([]);
          }
       };
-
-      fetchCategories();
+      fetchTypes();
+      return () => {
+         mounted = false;
+      };
    }, [axiosSecure]);
 
-   // Load sub-categories when category changes
+   // -------------------- When type changes, fetch categories for that type (server-side) --------------------
    useEffect(() => {
-      if (!instruction.categoryId) return;
+      if (!instruction.typeId) {
+         setCategories([]);
+         setInstruction((prev) => ({
+            ...prev,
+            categoryId: "",
+            subCategoryId: "",
+            variantId: "",
+         }));
+         setSubCategories([]);
+         setVariants([]);
+         return;
+      }
 
-      const fetchSubCategories = async () => {
+      let mounted = true;
+      const fetchCategoriesByType = async () => {
          try {
-            console.log(instruction.categoryId);
-            const response = await axiosSecure.get(
-               `/subCategories/get-subCategory/${instruction.categoryId}`
+            const res = await axiosSecure.get(
+               `/categories/get-by-type/${instruction.typeId}`
             );
-            setSubCategories(response.data);
-            console.log(response);
+            if (!mounted) return;
+            const normalized = (res.data || []).map((c) => ({
+               _id: c._id || c.insertedId || c.id,
+               categoryName: c.categoryName || c.name || c.category || "",
+               // keep original doc if needed by other logic
+               _raw: c,
+            }));
+            setCategories(normalized);
+            // clear downstream selections
+            setInstruction((prev) => ({
+               ...prev,
+               categoryId: "",
+               subCategoryId: "",
+               variantId: "",
+            }));
+            setSubCategories([]);
+            setVariants([]);
          } catch (error) {
-            console.error("Error fetching sub-categories:", error);
-            toast.error("Failed to load sub-categories");
+            console.error("Error fetching categories by type:", error);
+            toast.error("Failed to load categories");
+            if (mounted) setCategories([]);
          }
       };
 
-      fetchSubCategories();
+      fetchCategoriesByType();
+
+      return () => {
+         mounted = false;
+      };
+   }, [instruction.typeId, axiosSecure]);
+
+   // -------------------- When category changes, fetch sub-categories for that category (server-side) --------------------
+   useEffect(() => {
+      if (!instruction.categoryId) {
+         setSubCategories([]);
+         setInstruction((prev) => ({
+            ...prev,
+            subCategoryId: "",
+            variantId: "",
+         }));
+         setVariants([]);
+         return;
+      }
+
+      let mounted = true;
+      const fetchSubCategoriesByCategory = async () => {
+         try {
+            const res = await axiosSecure.get(
+               `/subCategories/get-by-category/${instruction.categoryId}`
+            );
+            if (!mounted) return;
+            const normalized = (res.data || []).map((s) => ({
+               _id: s._id || s.insertedId || s.id,
+               name: s.subCategoryName || s.name || s.subCategory || "",
+               _raw: s,
+            }));
+            setSubCategories(normalized);
+            // clear downstream
+            setInstruction((prev) => ({
+               ...prev,
+               subCategoryId: "",
+               variantId: "",
+            }));
+            setVariants([]);
+         } catch (error) {
+            console.error("Error fetching sub-categories by category:", error);
+            toast.error("Failed to load sub-categories");
+            if (mounted) setSubCategories([]);
+         }
+      };
+
+      fetchSubCategoriesByCategory();
+
+      return () => {
+         mounted = false;
+      };
    }, [instruction.categoryId, axiosSecure]);
 
-   // Load variants when sub-category changes
+   // -------------------- When sub-category changes, fetch variants for that sub-category (server-side) --------------------
    useEffect(() => {
-      if (!instruction.subCategoryId) return;
+      if (!instruction.subCategoryId) {
+         setVariants([]);
+         setInstruction((prev) => ({ ...prev, variantId: "" }));
+         return;
+      }
 
-      const fetchVariants = async () => {
+      let mounted = true;
+      const fetchVariantsBySubCategory = async () => {
          try {
-            const response = await axiosSecure.get(
-               `/api/crops/variants/${instruction.subCategoryId}`
+            const res = await axiosSecure.get(
+               `/variants/get-by-subcategory/${instruction.subCategoryId}`
             );
-            setVariants(response.data);
+            if (!mounted) return;
+            const normalized = (res.data || []).map((v) => ({
+               _id: v._id || v.insertedId || v.id,
+               name: v.variantName || v.name || v.variant || "",
+               _raw: v,
+            }));
+            setVariants(normalized);
+            // clear downstream selection
+            setInstruction((prev) => ({ ...prev, variantId: "" }));
          } catch (error) {
-            console.error("Error fetching variants:", error);
+            console.error("Error fetching variants by sub-category:", error);
             toast.error("Failed to load variants");
+            if (mounted) setVariants([]);
          }
       };
 
-      fetchVariants();
+      fetchVariantsBySubCategory();
+
+      return () => {
+         mounted = false;
+      };
    }, [instruction.subCategoryId, axiosSecure]);
 
-   // Load existing data if editing
+   // Load existing data if editing — preserve fields and ensure phases exist
    useEffect(() => {
       if (initialData) {
-         setInstruction(initialData);
+         setInstruction((prev) => ({
+            ...prev,
+            ...initialData,
+            phases:
+               initialData.phases && initialData.phases.length > 0
+                  ? initialData.phases
+                  : prev.phases,
+         }));
       }
    }, [initialData]);
 
@@ -168,6 +273,7 @@ const InstructionEditor = ({ onSave, initialData = null }) => {
             createdAt: new Date().toISOString(),
          };
 
+         // typeId, categoryId, subCategoryId, variantId are included in instruction
          await onSave(payload);
          toast.success("Instruction saved successfully");
       } catch (error) {
@@ -181,7 +287,10 @@ const InstructionEditor = ({ onSave, initialData = null }) => {
    const themeClasses = {
       container: isDarkMode
          ? "min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-green-900"
-         : "min-h-screen bg-gradient-to-br from-green-50 via-white to-emerald-50",
+         : "min-h-screen bg-gradient-to-br from_green-50 via-white to-emerald-50".replace(
+              "_",
+              "-"
+           ),
       card: isDarkMode
          ? "bg-gray-800 border-gray-700 shadow-2xl"
          : "bg-white border-gray-200 shadow-xl",
@@ -273,8 +382,38 @@ const InstructionEditor = ({ onSave, initialData = null }) => {
                         />
                      </div>
 
-                     {/* Category Selection */}
-                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                     {/* Type -> Category -> SubCategory -> Variant Selection */}
+                     <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+                        <div>
+                           <label
+                              className={`block mb-3 text-sm font-semibold ${themeClasses.text}`}
+                           >
+                              Type
+                           </label>
+                           <div className="relative">
+                              <select
+                                 value={instruction.typeId}
+                                 onChange={(e) =>
+                                    setInstruction({
+                                       ...instruction,
+                                       typeId: e.target.value,
+                                    })
+                                 }
+                                 className={`w-full px-4 py-3 rounded-xl border-2 appearance-none transition-all duration-300 focus:ring-2 focus:ring-opacity-50 ${themeClasses.input}`}
+                              >
+                                 <option value="">Select Type</option>
+                                 {types.map((t) => (
+                                    <option key={t._id} value={t._id}>
+                                       {t.name}
+                                    </option>
+                                 ))}
+                              </select>
+                              <ChevronDown
+                                 className={`absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 ${themeClasses.textSecondary} pointer-events-none`}
+                              />
+                           </div>
+                        </div>
+
                         <div>
                            <label
                               className={`block mb-3 text-sm font-semibold ${themeClasses.text}`}
@@ -290,11 +429,18 @@ const InstructionEditor = ({ onSave, initialData = null }) => {
                                        categoryId: e.target.value,
                                     })
                                  }
-                                 className={`w-full px-4 py-3 rounded-xl border-2 appearance-none transition-all duration-300 focus:ring-2 focus:ring-opacity-50 ${themeClasses.input}`}
+                                 className={`w-full px-4 py-3 rounded-xl border-2 appearance-none transition-all duration-300 focus:ring-2 focus:ring-opacity-50 ${
+                                    themeClasses.input
+                                 } ${
+                                    !instruction.typeId
+                                       ? "opacity-50 cursor-not-allowed"
+                                       : ""
+                                 }`}
                                  required
+                                 disabled={!instruction.typeId}
                               >
                                  <option value="">Select Category</option>
-                                 {cropCategories.map((category) => (
+                                 {categories.map((category) => (
                                     <option
                                        key={category._id}
                                        value={category._id}

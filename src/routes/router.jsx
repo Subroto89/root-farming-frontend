@@ -50,6 +50,7 @@ import FarmersProfiles from "../pages/DashboardPages/AgriSpecialistDashboardPage
 import MyEarnings from "../pages/DashboardPages/AgriSpecialistDashboardPages/MyEarnings";
 import ChatBot from "../pages/DashboardPages/FarmerDashboardPages/ChatBot";
 import CartPage from "../pages/DashboardPages/CustomerDashboardPages/CartPage";
+import InstructionList from "../pages/DashboardPages/FarmerDashboardPages/CropManagement/InstructionList";
 
 const router = createBrowserRouter([
    // -------------------------------------------
@@ -185,12 +186,13 @@ const router = createBrowserRouter([
             Component: MyCultivationsPage,
          },
          {
-            path: "new-cultivation-request",
-            Component: NewCultivationRequestForm,
+            path: "all-instructions",
+            Component: InstructionList,
          },
          {
             path: "ActivityRoute",
-            loader: () => fetch("http://localhost:3000/activities"),
+            loader: () =>
+               fetch(`${import.meta.env.VITE_Server_API_KEY}/activities`),
             hydrateFallbackElement: <div>Loading activities...</div>,
             Component: ActivityRoute,
          },

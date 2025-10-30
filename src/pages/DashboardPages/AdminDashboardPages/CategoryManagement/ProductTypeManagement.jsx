@@ -16,171 +16,174 @@ import TypeRow from "../../../../components/Dashboard/RouteBasedComponents/Admin
 import Form_UpdateType from "../../../../components/Dashboard/RouteBasedComponents/AdminRoutesComponents/TypeManagement/Form_UpdateType";
 
 const ProductTypeManagement = () => {
-  TabTitle("Category Management");
-  const { theme } = useTheme();
+   TabTitle("Category Management");
+   const { theme } = useTheme();
 
-  const themeBackgroundStyle = theme === 'dark' ? "bg-dark" : "bg-light";
-  const themeForegroundStyle = theme === 'dark' ? "fg-dark" : "fg-light";
-  const themeFgOfFgStyle = theme === 'dark' ? "fg-of-fg-dark" : "fg-of-fg-light"
+   const themeBackgroundStyle = theme === "dark" ? "bg-dark" : "bg-light";
+   const themeForegroundStyle = theme === "dark" ? "fg-dark" : "fg-light";
+   const themeFgOfFgStyle =
+      theme === "dark" ? "fg-of-fg-dark" : "fg-of-fg-light";
 
+   const axiosSecure = useAxiosSecure();
 
+   const [isModalOpen, setIsModalOpen] = useState(false);
+   const [isUpdateTypeModal, setIsUpdateTypeModal] = useState(false);
+   const [typeToEdit, setTypeToEdit] = useState(null);
 
-  const axiosSecure = useAxiosSecure();
+   const handleModalToggle = () => {
+      setIsModalOpen((prev) => !prev);
+   };
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isUpdateTypeModal, setIsUpdateTypeModal] = useState(false);
-  const [typeToEdit, setTypeToEdit] = useState(null);
+   const handleUpdateTypeModal = () => {
+      setIsUpdateTypeModal((prev) => !prev);
+   };
 
-  const handleModalToggle = () => {
-    setIsModalOpen((prev) => !prev);
-  };
+   // --------------------------------------------------------------------
+   // Fetching All Types Using Tanstack Query
+   // --------------------------------------------------------------------
+   const {
+      data: types = [],
+      isLoading: typeLoading,
+      refetch,
+   } = useQuery({
+      queryKey: ["types"],
+      queryFn: async () => {
+         const { data } = await axiosSecure("/types/get-types");
+         return data;
+      },
+   });
 
-  const handleUpdateTypeModal = () => {
-    setIsUpdateTypeModal((prev) => !prev);
-  };
-
-  // --------------------------------------------------------------------
-  // Fetching All Types Using Tanstack Query
-  // --------------------------------------------------------------------
-  const {
-    data: types = [],
-    isLoading: typeLoading,
-    refetch,
-  } = useQuery({
-    queryKey: ["types"],
-    queryFn: async () => {
-      const { data } = await axiosSecure("/types/get-types");
-      return data;
-    },
-  });
-
-  //   ----------------------------------------------------------------------------
-  // Type Delete Function
-  // ------------------------------------------------------------------------------
-  const handleTypeDelete = async (id) => {
-    try {
-      const { data } = await axiosSecure.delete(`/types/delete-type/${id}`);
-      if (data.deletedCount) {
-        Swal.fire({
-          icon: "success",
-          title: "Success",
-          text: "Type Deleted!",
-          timer: 1500,
-        });
-        refetch();
+   //   ----------------------------------------------------------------------------
+   // Type Delete Function
+   // ------------------------------------------------------------------------------
+   const handleTypeDelete = async (id) => {
+      try {
+         const { data } = await axiosSecure.delete(`/types/delete-type/${id}`);
+         if (data.deletedCount) {
+            Swal.fire({
+               icon: "success",
+               title: "Success",
+               text: "Type Deleted!",
+               timer: 1500,
+            });
+            refetch();
+         }
+      } catch (error) {
+         console.log(error);
       }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+   };
 
-  if (typeLoading) return <LoadingSpinner />;
+   if (typeLoading) return <LoadingSpinner />;
 
-  return (
-    <div className={`${themeBackgroundStyle}`}>
-      <Container>
-        {/* -----------------------------------------------------------------
+   return (
+      <div className={`${themeBackgroundStyle}`}>
+         <Container>
+            {/* -----------------------------------------------------------------
             Header Section with Add Type Button 
         ----------------------------------------------------------------  */}
-        <div className="flex justify-between items-center">
-          <h2>Product Type Management</h2>
-          <Button
-            icon={Plus}
-            label="Add Product Type"
-            status="success"
-            onClick={handleModalToggle}
-          />
-        </div>
+            <div className="flex justify-between items-center">
+               <h2>Product Type Management</h2>
+               <Button
+                  icon={Plus}
+                  label="Add Product Type"
+                  status="success"
+                  onClick={handleModalToggle}
+               />
+            </div>
 
-        {/* --------------------------------------------------------------
+            {/* --------------------------------------------------------------
             Types Table
         ---------------------------------------------------------------*/}
-        <div className={`${themeForegroundStyle} min-h-[calc(100vh-112px)]`}>
-          {types.length > 0 ? (
-            <div className="w-full overflow-auto rounded-lg mt-10 shadow-lg">
-              <table className={`${themeForegroundStyle} w-full divider-y divider-gray-500`}>
-                <thead
-                  className={`${themeFgOfFgStyle} shadow-xl h-4 bg-gray-200 uppercase text-sm font-semibold sticky top-0}`}
-                >
-                  <tr className="text-left">
-                    <th className="py-2 px-20">Photo</th>
-                    <th className="py-2 px-8">Type Name</th>
-                    <th className="py-2 px-8">Total Products</th>
-                    <th className="py-2 px-8">Created On</th>
-                    <th className="py-2 px-8">Status</th>
-                    <th className="py-2 px-8 text-center flex items-center gap-2">
-                      <FaTools size={16} />
-                      Action
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {types.map((type) => (
-                    <TypeRow
-                      key={type._id}
-                      type={type}
-                      handleTypeDelete={handleTypeDelete}
-                      handleUpdateTypeModal={handleUpdateTypeModal}
-                      setTypeToEdit={setTypeToEdit}
-                      refetch={refetch}
-                    />
-                  ))}
-                </tbody>
-              </table>
+            <div
+               className={`${themeForegroundStyle} min-h-[calc(100vh-112px)]`}
+            >
+               {types.length > 0 ? (
+                  <div className="w-full overflow-auto rounded-lg mt-10 shadow-lg">
+                     <table
+                        className={`${themeForegroundStyle} w-full divider-y divider-gray-500`}
+                     >
+                        <thead
+                           className={`${themeFgOfFgStyle} shadow-xl h-4 bg-gray-200 uppercase text-sm font-semibold sticky top-0}`}
+                        >
+                           <tr className="text-left">
+                              <th className="py-2 px-20">Photo</th>
+                              <th className="py-2 px-8">Type Name</th>
+                              <th className="py-2 px-8">Total Products</th>
+                              <th className="py-2 px-8">Created On</th>
+                              <th className="py-2 px-8">Status</th>
+                              <th className="py-2 px-8 text-center flex items-center gap-2">
+                                 <FaTools size={16} />
+                                 Action
+                              </th>
+                           </tr>
+                        </thead>
+                        <tbody>
+                           {types.map((type) => (
+                              <TypeRow
+                                 key={type._id}
+                                 type={type}
+                                 handleTypeDelete={handleTypeDelete}
+                                 handleUpdateTypeModal={handleUpdateTypeModal}
+                                 setTypeToEdit={setTypeToEdit}
+                                 refetch={refetch}
+                              />
+                           ))}
+                        </tbody>
+                     </table>
+                  </div>
+               ) : (
+                  <DataNotFound
+                     message={"No Category Added Yet. Please, Add First."}
+                  />
+               )}
             </div>
-          ) : (
-            <DataNotFound
-              message={"No Category Added Yet. Please, Add First."}
-            />
-          )}
-        </div>
 
-        {/* --------------------------------------------------------------
+            {/* --------------------------------------------------------------
                     Modal For Adding New Type
         -------------------------------------------------------------- */}
-        <div>
-          {isModalOpen && (
-            <ModalFormat
-              width="w-[400px]"
-              height="h-[300px]"
-              headerText="Add New Type"
-              modalClosingFunction={handleModalToggle}
-              form={
-                <FormInAddType
-                  handleModalToggle={handleModalToggle}
-                  refetch={refetch}
-                />
-              }
-            />
-          )}
-        </div>
+            <div>
+               {isModalOpen && (
+                  <ModalFormat
+                     width="w-[580px]"
+                     height="h-[480px]"
+                     headerText="Add New Type"
+                     modalClosingFunction={handleModalToggle}
+                     form={
+                        <FormInAddType
+                           handleModalToggle={handleModalToggle}
+                           refetch={refetch}
+                        />
+                     }
+                  />
+               )}
+            </div>
 
-        {/* --------------------------------------------------------------
+            {/* --------------------------------------------------------------
                     Modal for Type Update
         -------------------------------------------------------------- */}
-        <div>
-          {isUpdateTypeModal && (
-            <ModalFormat
-              width="w-[500px]"
-              height="h-[350px]"
-              headerText="Update Type"
-              modalClosingFunction={handleUpdateTypeModal}
-              handleUpdateTypeModal={handleUpdateTypeModal}
-              typeToEdit={typeToEdit}
-              refetch={refetch}
-              form={
-                <Form_UpdateType
-                  handleUpdateTypeModal={handleUpdateTypeModal}
-                  typeToEdit={typeToEdit}
-                  refetch={refetch}
-                />
-              }
-            />
-          )}
-        </div>
-      </Container>
-    </div>
-  );
+            <div>
+               {isUpdateTypeModal && (
+                  <ModalFormat
+                     width="w-[500px]"
+                     height="h-[350px]"
+                     headerText="Update Type"
+                     modalClosingFunction={handleUpdateTypeModal}
+                     handleUpdateTypeModal={handleUpdateTypeModal}
+                     typeToEdit={typeToEdit}
+                     refetch={refetch}
+                     form={
+                        <Form_UpdateType
+                           handleUpdateTypeModal={handleUpdateTypeModal}
+                           typeToEdit={typeToEdit}
+                           refetch={refetch}
+                        />
+                     }
+                  />
+               )}
+            </div>
+         </Container>
+      </div>
+   );
 };
 
 export default ProductTypeManagement;

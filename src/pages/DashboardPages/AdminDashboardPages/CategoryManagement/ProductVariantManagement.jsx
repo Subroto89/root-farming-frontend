@@ -144,7 +144,7 @@ const ProductVariantManagement = () => {
                   <div>
                      <ModalFormat
                         width="w-[580px]"
-                        height="h-[600px]"
+                        height="h-[680px]"
                         headerText="Add New Variant"
                         modalClosingFunction={handleModalToggle}
                         form={
